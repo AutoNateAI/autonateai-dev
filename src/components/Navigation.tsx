@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Menu, X, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { ThemeToggle } from './ThemeToggle';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,10 +48,25 @@ const Navigation = () => {
               Workshops
               <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
             </Link>
+            <Link 
+              to="/about" 
+              className="text-muted-foreground hover:text-primary transition-colors relative group"
+            >
+              About
+              <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+            </Link>
+            <Link 
+              to="/contact" 
+              className="text-muted-foreground hover:text-primary transition-colors relative group"
+            >
+              Contact
+              <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+            </Link>
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
+          {/* Theme Toggle & CTA */}
+          <div className="hidden md:flex items-center space-x-4">
+            <ThemeToggle />
             <Link to="/products" className="btn-primary">
               Explore Solutions
             </Link>
@@ -100,12 +116,29 @@ const Navigation = () => {
                 Workshops
               </Link>
               <Link 
-                to="/products" 
-                className="btn-primary w-full text-center block mt-4"
+                to="/about" 
+                className="block text-muted-foreground hover:text-primary transition-colors py-2"
                 onClick={() => setIsOpen(false)}
               >
-                Explore Solutions
+                About
               </Link>
+              <Link 
+                to="/contact" 
+                className="block text-muted-foreground hover:text-primary transition-colors py-2"
+                onClick={() => setIsOpen(false)}
+              >
+                Contact
+              </Link>
+              <div className="flex items-center justify-between mt-4">
+                <ThemeToggle />
+                <Link 
+                  to="/products" 
+                  className="btn-primary"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Explore Solutions
+                </Link>
+              </div>
             </div>
           </div>
         )}

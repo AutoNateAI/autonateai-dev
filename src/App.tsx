@@ -9,6 +9,7 @@ import Products from "./pages/Products";
 import Blog from "./pages/Blog";
 import Coaching from "./pages/Coaching";
 import Contact from "./pages/Contact";
+import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import AiGrantAssistant from "./pages/AiGrantAssistant";
 import LitReviewAi from "./pages/LitReviewAi";
@@ -33,6 +34,7 @@ const App = () => (
             <Route path="/blog" element={<Blog />} />
             <Route path="/coaching" element={<Coaching />} />
             <Route path="/workshops" element={<Workshops />} />
+            <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
