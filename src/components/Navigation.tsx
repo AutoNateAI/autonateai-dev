@@ -1,0 +1,117 @@
+import { useState } from 'react';
+import { Menu, X, Zap } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
+const Navigation = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <nav className="fixed top-0 w-full z-50 glass-card border-b border-border/10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          <Link to="/" className="flex items-center space-x-2 group">
+            <div className="p-2 rounded-lg bg-gradient-primary animate-pulse-glow">
+              <Zap className="h-6 w-6 text-primary-foreground" />
+            </div>
+            <span className="text-xl font-bold text-gradient">AutoNateAI</span>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            <Link 
+              to="/products" 
+              className="text-muted-foreground hover:text-primary transition-colors relative group"
+            >
+              Products
+              <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+            </Link>
+            <Link 
+              to="/blog" 
+              className="text-muted-foreground hover:text-primary transition-colors relative group"
+            >
+              Blog
+              <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+            </Link>
+            <Link 
+              to="/coaching" 
+              className="text-muted-foreground hover:text-primary transition-colors relative group"
+            >
+              Coaching
+              <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+            </Link>
+            <Link 
+              to="/workshops" 
+              className="text-muted-foreground hover:text-primary transition-colors relative group"
+            >
+              Workshops
+              <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+            </Link>
+          </div>
+
+          {/* CTA Button */}
+          <div className="hidden md:block">
+            <Link to="/products" className="btn-primary">
+              Explore Solutions
+            </Link>
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-muted-foreground hover:text-primary p-2 rounded-lg"
+            >
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Navigation */}
+        {isOpen && (
+          <div className="md:hidden absolute top-full left-0 right-0 glass-card border-t border-border/10 backdrop-blur-xl">
+            <div className="px-4 py-6 space-y-4">
+              <Link 
+                to="/products" 
+                className="block text-muted-foreground hover:text-primary transition-colors py-2"
+                onClick={() => setIsOpen(false)}
+              >
+                Products
+              </Link>
+              <Link 
+                to="/blog" 
+                className="block text-muted-foreground hover:text-primary transition-colors py-2"
+                onClick={() => setIsOpen(false)}
+              >
+                Blog
+              </Link>
+              <Link 
+                to="/coaching" 
+                className="block text-muted-foreground hover:text-primary transition-colors py-2"
+                onClick={() => setIsOpen(false)}
+              >
+                Coaching
+              </Link>
+              <Link 
+                to="/workshops" 
+                className="block text-muted-foreground hover:text-primary transition-colors py-2"
+                onClick={() => setIsOpen(false)}
+              >
+                Workshops
+              </Link>
+              <Link 
+                to="/products" 
+                className="btn-primary w-full text-center block mt-4"
+                onClick={() => setIsOpen(false)}
+              >
+                Explore Solutions
+              </Link>
+            </div>
+          </div>
+        )}
+      </div>
+    </nav>
+  );
+};
+
+export default Navigation;
