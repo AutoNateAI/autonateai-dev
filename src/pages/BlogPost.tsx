@@ -36,12 +36,23 @@ const BlogPost = () => {
   const [post, setPost] = useState<BlogPost | null>(null);
   const [relatedPosts, setRelatedPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     if (slug) {
       fetchBlogPost();
     }
   }, [slug]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const fetchBlogPost = async () => {
     try {
@@ -105,6 +116,8 @@ const BlogPost = () => {
     const renderedContent: JSX.Element[] = [];
     let currentHeadingLevel = 0;
     let headingCount = { h1: 0, h2: 0, h3: 0, h4: 0 };
+    let contentLength = 0;
+    let adInserted = false;
 
     lines.forEach((line, index) => {
       let element: JSX.Element | null = null;
@@ -141,6 +154,22 @@ const BlogPost = () => {
 
       if (element) {
         renderedContent.push(element);
+        contentLength++;
+        
+        // Insert mobile ad after approximately 40% of content on small screens
+        if (!adInserted && contentLength > lines.length * 0.4 && isMobile) {
+          renderedContent.push(
+            <div key={`mobile-ad-${index}`} className="my-8 md:hidden">
+              <AdSpace 
+                position="inline" 
+                category={post?.category}
+                blogSlug={post?.slug}
+                className="mobile-inline-ad"
+              />
+            </div>
+          );
+          adInserted = true;
+        }
         
         // Insert content images after specific headings
         const positionKey = `after_heading_${currentHeadingLevel}`;
@@ -279,8 +308,8 @@ const BlogPost = () => {
               </article>
             </div>
             
-            {/* Sidebar with Ads */}
-            <div className="lg:col-span-1 space-y-8">
+            {/* Sidebar with Ads - Desktop Only */}
+            <div className="lg:col-span-1 space-y-8 hidden lg:block">
               {/* Ad Space - Sidebar */}
               <div className="sticky top-8 space-y-6">
                 <AdSpace 
