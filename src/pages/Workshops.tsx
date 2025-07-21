@@ -109,8 +109,8 @@ const Workshops = () => {
                   </div>
                 </div>
                 <div className="pt-4 border-t">
-                  <p className="text-lg font-semibold text-primary">Starting at $3,499</p>
-                  <p className="text-sm text-muted-foreground">$140 per participant (up to 25)</p>
+                  <p className="text-lg font-semibold text-primary">$140 per participant</p>
+                  <p className="text-sm text-muted-foreground">Up to 25 participants</p>
                   <Button 
                     onClick={() => handleRequestWorkshop('grant')}
                     className="w-full mt-4"
@@ -169,8 +169,8 @@ const Workshops = () => {
                   </div>
                 </div>
                 <div className="pt-4 border-t">
-                  <p className="text-lg font-semibold text-primary">Starting at $1,999</p>
-                  <p className="text-sm text-muted-foreground">$67 per participant (up to 30)</p>
+                  <p className="text-lg font-semibold text-primary">$67 per participant</p>
+                  <p className="text-sm text-muted-foreground">Up to 30 participants</p>
                   <Button 
                     onClick={() => handleRequestWorkshop('literature')}
                     className="w-full mt-4"
@@ -229,8 +229,8 @@ const Workshops = () => {
                   </div>
                 </div>
                 <div className="pt-4 border-t">
-                  <p className="text-lg font-semibold text-primary">Starting at $3,699</p>
-                  <p className="text-sm text-muted-foreground">$148 per participant (up to 25)</p>
+                  <p className="text-lg font-semibold text-primary">$148 per participant</p>
+                  <p className="text-sm text-muted-foreground">Up to 25 participants</p>
                   <Button 
                     onClick={() => handleRequestWorkshop('data')}
                     className="w-full mt-4"
@@ -289,8 +289,8 @@ const Workshops = () => {
                   </div>
                 </div>
                 <div className="pt-4 border-t">
-                  <p className="text-lg font-semibold text-primary">Starting at $6,999</p>
-                  <p className="text-sm text-muted-foreground">$350 per participant (up to 20)</p>
+                  <p className="text-lg font-semibold text-primary">$350 per participant</p>
+                  <p className="text-sm text-muted-foreground">Up to 20 participants</p>
                   <Button 
                     onClick={() => handleRequestWorkshop('custom')}
                     className="w-full mt-4"
