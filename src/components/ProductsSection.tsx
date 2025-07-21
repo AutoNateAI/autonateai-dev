@@ -120,7 +120,7 @@ const ProductsSection = () => {
 
         {/* Bottom CTA */}
         <div className="text-center">
-          <Link to="/products" className="btn-primary text-lg px-8 py-4">
+          <Link to="/products" className="btn-primary text-lg px-8 py-4 flex items-center justify-center max-w-sm mx-auto">
             View All Products
             <ArrowRight className="ml-2 w-5 h-5" />
           </Link>

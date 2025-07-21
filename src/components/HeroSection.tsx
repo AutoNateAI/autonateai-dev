@@ -48,7 +48,7 @@ const HeroSection = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <Link to="/products" className="btn-primary text-lg px-8 py-4">
+            <Link to="/products" className="btn-primary text-lg px-8 py-4 flex items-center">
               Explore Our Solutions
               <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
@@ -65,7 +65,7 @@ const HeroSection = () => {
               <div className="text-muted-foreground">Researchers Trained</div>
             </div>
             <div className="glass-card p-6 text-center">
-              <div className="text-3xl font-bold text-accent mb-2">65%</div>
+              <div className="text-3xl font-bold text-primary mb-2">65%</div>
               <div className="text-muted-foreground">Average Time Saved</div>
             </div>
             <div className="glass-card p-6 text-center">
