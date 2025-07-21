@@ -16,7 +16,7 @@ interface Advertisement {
 }
 
 interface AdSpaceProps {
-  position: 'sidebar' | 'banner' | 'featured' | 'inline';
+  position: 'sidebar' | 'banner' | 'featured' | 'inline' | 'bottom';
   category?: string;
   blogSlug?: string;
   className?: string;
@@ -63,7 +63,8 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
       sidebar: { width: '300px', height: '250px', text: '300x250 Sidebar' },
       banner: { width: '728px', height: '90px', text: '728x90 Banner' },
       featured: { width: '728px', height: '300px', text: '728x300 Featured' },
-      inline: { width: '400px', height: '200px', text: '400x200 Inline' }
+      inline: { width: '400px', height: '200px', text: '400x200 Inline' },
+      bottom: { width: '1200px', height: '400px', text: '1200x400 Bottom' }
     };
 
     const size = sizeMap[position];
