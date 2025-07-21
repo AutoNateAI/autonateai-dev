@@ -21,6 +21,18 @@ const Coaching = () => {
     console.log('Form submitted:', formData);
   };
 
+  const handleRequestCoaching = (serviceType: string) => {
+    const form = document.getElementById('coaching-form');
+    if (form) {
+      form.scrollIntoView({ behavior: 'smooth' });
+      
+      // Pre-fill the service field
+      setTimeout(() => {
+        setFormData(prev => ({ ...prev, service: serviceType }));
+      }, 100);
+    }
+  };
+
   const individualServices = [
     {
       title: 'AI Research Workflow Optimization',
@@ -146,10 +158,13 @@ const Coaching = () => {
                   ))}
                 </ul>
 
-                <Link to="/contact?service=coaching&type=individual" className="w-full btn-primary block text-center">
+                <button 
+                  onClick={() => handleRequestCoaching('workflow')}
+                  className="w-full btn-primary block text-center"
+                >
                   Request Session
                   <ArrowRight className="ml-2 w-5 h-5 inline" />
-                </Link>
+                </button>
               </div>
             ))}
           </div>
@@ -189,10 +204,13 @@ const Coaching = () => {
                   <p className="text-muted-foreground mb-6">
                     {teamService.description}
                   </p>
-                  <Link to="/contact?service=coaching&type=team" className="btn-primary text-lg px-8 py-4 inline-flex items-center">
+                  <button 
+                    onClick={() => handleRequestCoaching('team')}
+                    className="btn-primary text-lg px-8 py-4 inline-flex items-center"
+                  >
                     Request Team Coaching
                     <ArrowRight className="ml-2 w-5 h-5" />
-                  </Link>
+                  </button>
                 </div>
 
                 <div>
@@ -250,7 +268,7 @@ const Coaching = () => {
             </p>
           </div>
 
-          <div className="glass-card p-8">
+          <div id="coaching-form" className="glass-card p-8">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>

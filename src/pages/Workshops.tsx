@@ -10,9 +10,15 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { CheckCircle, Users, Clock, MapPin, Video, Award } from "lucide-react";
 import EmailPopup from "@/components/EmailPopup";
 import { useEmailPopup } from "@/hooks/useEmailPopup";
+import { useState } from "react";
 
 const Workshops = () => {
   const { showPopup, closePopup } = useEmailPopup();
+  const [workshopFormData, setWorkshopFormData] = useState({
+    workshop: '',
+    format: '',
+    timeline: ''
+  });
   
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,15 +30,13 @@ const Workshops = () => {
     if (form) {
       form.scrollIntoView({ behavior: 'smooth' });
       
-      // Pre-fill form fields
+      // Pre-fill form fields using state
       setTimeout(() => {
-        const workshopSelect = document.querySelector('[name="workshop"]') as HTMLSelectElement;
-        const formatSelect = document.querySelector('[name="format"]') as HTMLSelectElement;
-        const timelineSelect = document.querySelector('[name="timeline"]') as HTMLSelectElement;
-        
-        if (workshopSelect) workshopSelect.value = workshopType;
-        if (formatSelect) formatSelect.value = 'in-person';
-        if (timelineSelect) timelineSelect.value = '1-3-months';
+        setWorkshopFormData({
+          workshop: workshopType,
+          format: 'in-person',
+          timeline: '1-3-months'
+        });
       }, 100);
     }
   };
@@ -442,7 +446,12 @@ const Workshops = () => {
                  <div className="grid md:grid-cols-2 gap-6">
                    <div className="space-y-2">
                      <Label htmlFor="workshop">Workshop of Interest *</Label>
-                     <Select name="workshop" required>
+                     <Select 
+                       name="workshop" 
+                       required 
+                       value={workshopFormData.workshop}
+                       onValueChange={(value) => setWorkshopFormData(prev => ({ ...prev, workshop: value }))}
+                     >
                        <SelectTrigger>
                          <SelectValue placeholder="Select a workshop" />
                        </SelectTrigger>
@@ -474,7 +483,12 @@ const Workshops = () => {
                 <div className="grid md:grid-cols-2 gap-6">
                    <div className="space-y-2">
                      <Label htmlFor="format">Preferred Format *</Label>
-                     <Select name="format" required>
+                     <Select 
+                       name="format" 
+                       required 
+                       value={workshopFormData.format}
+                       onValueChange={(value) => setWorkshopFormData(prev => ({ ...prev, format: value }))}
+                     >
                        <SelectTrigger>
                          <SelectValue placeholder="Select format" />
                        </SelectTrigger>
@@ -488,7 +502,12 @@ const Workshops = () => {
                    </div>
                    <div className="space-y-2">
                      <Label htmlFor="timeline">Desired Timeline *</Label>
-                     <Select name="timeline" required>
+                     <Select 
+                       name="timeline" 
+                       required 
+                       value={workshopFormData.timeline}
+                       onValueChange={(value) => setWorkshopFormData(prev => ({ ...prev, timeline: value }))}
+                     >
                        <SelectTrigger>
                          <SelectValue placeholder="Select timeline" />
                        </SelectTrigger>
