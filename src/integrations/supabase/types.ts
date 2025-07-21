@@ -19,9 +19,12 @@ export type Database = {
           author: string
           category: string
           content: string
+          content_images: Json | null
           created_at: string
           excerpt: string
           featured: boolean | null
+          hero_image: string | null
+          hero_image_alt: string | null
           id: string
           published: boolean | null
           read_time: string
@@ -33,9 +36,12 @@ export type Database = {
           author: string
           category: string
           content: string
+          content_images?: Json | null
           created_at?: string
           excerpt: string
           featured?: boolean | null
+          hero_image?: string | null
+          hero_image_alt?: string | null
           id?: string
           published?: boolean | null
           read_time: string
@@ -47,9 +53,12 @@ export type Database = {
           author?: string
           category?: string
           content?: string
+          content_images?: Json | null
           created_at?: string
           excerpt?: string
           featured?: boolean | null
+          hero_image?: string | null
+          hero_image_alt?: string | null
           id?: string
           published?: boolean | null
           read_time?: string

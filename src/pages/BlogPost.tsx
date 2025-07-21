@@ -18,6 +18,16 @@ interface BlogPost {
   featured: boolean;
   published: boolean;
   created_at: string;
+  hero_image?: string;
+  hero_image_alt?: string;
+  content_images?: ContentImage[];
+}
+
+interface ContentImage {
+  url: string;
+  alt: string;
+  caption?: string;
+  position: string;
 }
 
 const BlogPost = () => {
@@ -43,7 +53,16 @@ const BlogPost = () => {
         .single();
 
       if (postError) throw postError;
-      setPost(postData);
+      
+      // Transform the data to match our interface
+      const transformedPost: BlogPost = {
+        ...postData,
+        content_images: Array.isArray(postData.content_images) 
+          ? (postData.content_images as unknown as ContentImage[])
+          : []
+      };
+      
+      setPost(transformedPost);
 
       // Fetch related posts (same category, exclude current post)
       const { data: relatedData, error: relatedError } = await supabase
@@ -55,7 +74,16 @@ const BlogPost = () => {
         .limit(3);
 
       if (relatedError) throw relatedError;
-      setRelatedPosts(relatedData || []);
+      
+      // Transform related posts data
+      const transformedRelated: BlogPost[] = (relatedData || []).map(post => ({
+        ...post,
+        content_images: Array.isArray(post.content_images) 
+          ? (post.content_images as unknown as ContentImage[])
+          : []
+      }));
+      
+      setRelatedPosts(transformedRelated);
     } catch (error) {
       console.error('Error fetching blog post:', error);
     } finally {
@@ -71,32 +99,75 @@ const BlogPost = () => {
     });
   };
 
-  const renderMarkdownContent = (content: string) => {
-    // Simple markdown rendering for headers and paragraphs
-    return content
-      .split('\n')
-      .map((line, index) => {
-        if (line.startsWith('# ')) {
-          return <h1 key={index} className="text-4xl font-bold mb-6 text-foreground">{line.substring(2)}</h1>;
-        } else if (line.startsWith('## ')) {
-          return <h2 key={index} className="text-3xl font-semibold mt-8 mb-4 text-foreground">{line.substring(3)}</h2>;
-        } else if (line.startsWith('### ')) {
-          return <h3 key={index} className="text-2xl font-semibold mt-6 mb-3 text-foreground">{line.substring(4)}</h3>;
-        } else if (line.startsWith('- ')) {
-          return <li key={index} className="ml-6 mb-2 text-muted-foreground list-disc">{line.substring(2)}</li>;
-        } else if (line.match(/^\d+\. /)) {
-          return <li key={index} className="ml-6 mb-2 text-muted-foreground list-decimal">{line.substring(line.indexOf('. ') + 2)}</li>;
-        } else if (line.startsWith('*') && line.endsWith('*')) {
-          return <p key={index} className="italic text-muted-foreground mb-4">{line.slice(1, -1)}</p>;
-        } else if (line.trim() === '') {
-          return <br key={index} />;
-        } else {
-          // Handle bold text
-          const boldRegex = /\*\*(.*?)\*\*/g;
-          const processedLine = line.replace(boldRegex, '<strong>$1</strong>');
-          return <p key={index} className="mb-4 text-muted-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: processedLine }} />;
+  const renderMarkdownContent = (content: string, contentImages: ContentImage[] = []) => {
+    const lines = content.split('\n');
+    const renderedContent: JSX.Element[] = [];
+    let currentHeadingLevel = 0;
+    let headingCount = { h1: 0, h2: 0, h3: 0, h4: 0 };
+
+    lines.forEach((line, index) => {
+      let element: JSX.Element | null = null;
+      
+      if (line.startsWith('# ')) {
+        headingCount.h1++;
+        currentHeadingLevel = 1;
+        element = <h1 key={index} className="text-4xl font-bold mb-6 text-foreground">{line.substring(2)}</h1>;
+      } else if (line.startsWith('## ')) {
+        headingCount.h2++;
+        currentHeadingLevel = 2;
+        element = <h2 key={index} className="text-3xl font-semibold mt-8 mb-4 text-foreground">{line.substring(3)}</h2>;
+      } else if (line.startsWith('### ')) {
+        headingCount.h3++;
+        currentHeadingLevel = 3;
+        element = <h3 key={index} className="text-2xl font-semibold mt-6 mb-3 text-foreground">{line.substring(4)}</h3>;
+      } else if (line.startsWith('#### ')) {
+        headingCount.h4++;
+        currentHeadingLevel = 4;
+        element = <h4 key={index} className="text-xl font-semibold mt-4 mb-2 text-foreground">{line.substring(5)}</h4>;
+      } else if (line.startsWith('- ')) {
+        element = <li key={index} className="ml-6 mb-2 text-muted-foreground list-disc">{line.substring(2)}</li>;
+      } else if (line.match(/^\d+\. /)) {
+        element = <li key={index} className="ml-6 mb-2 text-muted-foreground list-decimal">{line.substring(line.indexOf('. ') + 2)}</li>;
+      } else if (line.startsWith('*') && line.endsWith('*')) {
+        element = <p key={index} className="italic text-muted-foreground mb-4">{line.slice(1, -1)}</p>;
+      } else if (line.trim() === '') {
+        element = <br key={index} />;
+      } else {
+        const boldRegex = /\*\*(.*?)\*\*/g;
+        const processedLine = line.replace(boldRegex, '<strong>$1</strong>');
+        element = <p key={index} className="mb-4 text-muted-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: processedLine }} />;
+      }
+
+      if (element) {
+        renderedContent.push(element);
+        
+        // Insert content images after specific headings
+        const positionKey = `after_heading_${currentHeadingLevel}`;
+        const imageForPosition = contentImages.find(img => 
+          img.position === positionKey && 
+          headingCount[`h${currentHeadingLevel}` as keyof typeof headingCount] === 1
+        );
+        
+        if (imageForPosition && (line.startsWith('#') || line.startsWith('##') || line.startsWith('###') || line.startsWith('####'))) {
+          renderedContent.push(
+            <div key={`image-${index}`} className="my-8">
+              <img 
+                src={imageForPosition.url} 
+                alt={imageForPosition.alt}
+                className="w-full rounded-lg shadow-lg"
+              />
+              {imageForPosition.caption && (
+                <p className="text-sm text-muted-foreground mt-2 text-center italic">
+                  {imageForPosition.caption}
+                </p>
+              )}
+            </div>
+          );
         }
-      });
+      }
+    });
+
+    return renderedContent;
   };
 
   if (loading) {
@@ -145,6 +216,17 @@ const BlogPost = () => {
             Back to Blog
           </Link>
           
+          {/* Hero Image */}
+          {post.hero_image && (
+            <div className="mb-8 rounded-2xl overflow-hidden">
+              <img 
+                src={post.hero_image} 
+                alt={post.hero_image_alt || post.title}
+                className="w-full h-64 md:h-80 object-cover"
+              />
+            </div>
+          )}
+          
           <div className="mb-8">
             <span className="inline-block px-3 py-1 text-sm font-medium bg-primary/10 text-primary rounded-full mb-4">
               {post.category}
@@ -176,19 +258,75 @@ const BlogPost = () => {
 
       {/* Article Content */}
       <div className="container mx-auto px-6 pb-16">
-        <div className="max-w-4xl mx-auto">
-          <article className="prose prose-lg max-w-none">
-            <div className="text-lg leading-relaxed">
-              {renderMarkdownContent(post.content)}
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            {/* Main Content */}
+            <div className="lg:col-span-3">
+              <article className="prose prose-lg max-w-none">
+                <div className="text-lg leading-relaxed">
+                  {renderMarkdownContent(post.content, post.content_images)}
+                </div>
+              </article>
             </div>
-          </article>
+            
+            {/* Sidebar with Ads */}
+            <div className="lg:col-span-1 space-y-8">
+              {/* Ad Space - Sidebar */}
+              <div className="sticky top-8 space-y-6">
+                <div className="glass-card p-6 text-center">
+                  <div className="text-sm text-muted-foreground mb-2">Advertisement</div>
+                  <div className="text-lg font-semibold text-primary mb-2">Your Ad Here</div>
+                  <div className="text-sm text-muted-foreground">300x250 Sidebar</div>
+                  <div className="mt-4 h-32 bg-gradient-to-br from-primary/5 to-accent/5 rounded-lg"></div>
+                </div>
+
+                {/* Newsletter Signup */}
+                <div className="glass-card p-6">
+                  <h3 className="text-lg font-bold mb-4">Stay Updated</h3>
+                  <p className="text-muted-foreground text-sm mb-4">
+                    Get the latest research insights delivered to your inbox.
+                  </p>
+                  <form className="space-y-3">
+                    <input
+                      type="email"
+                      placeholder="Your email"
+                      className="w-full px-3 py-2 rounded-lg bg-background/50 border border-border/20 focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm"
+                    />
+                    <button type="submit" className="w-full btn-primary py-2 text-sm">
+                      Subscribe
+                    </button>
+                  </form>
+                </div>
+
+                {/* Second Ad Space */}
+                <div className="glass-card p-6 text-center">
+                  <div className="text-sm text-muted-foreground mb-2">Advertisement</div>
+                  <div className="text-lg font-semibold text-primary mb-2">Your Ad Here</div>
+                  <div className="text-sm text-muted-foreground">300x600 Sidebar</div>
+                  <div className="mt-4 h-48 bg-gradient-to-br from-accent/5 to-primary/5 rounded-lg"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Banner Ad */}
+      <div className="container mx-auto px-6 py-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="glass-card p-6 text-center">
+            <div className="text-sm text-muted-foreground mb-2">Advertisement</div>
+            <div className="text-lg font-semibold text-primary mb-2">Your Ad Here</div>
+            <div className="text-sm text-muted-foreground">728x90 Banner</div>
+            <div className="mt-4 h-20 bg-gradient-to-r from-primary/5 to-accent/5 rounded-lg"></div>
+          </div>
         </div>
       </div>
 
       {/* Related Posts */}
       {relatedPosts.length > 0 && (
         <div className="container mx-auto px-6 py-16 border-t border-border">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold mb-8 text-foreground">Related Articles</h2>
             <div className="grid md:grid-cols-3 gap-8">
               {relatedPosts.map((relatedPost) => (
@@ -198,6 +336,15 @@ const BlogPost = () => {
                   className="block group hover:scale-[1.02] transition-all duration-300"
                 >
                   <div className="glass-card p-6 h-full hover:shadow-lg transition-all duration-300">
+                    {relatedPost.hero_image && (
+                      <div className="mb-4 rounded-lg overflow-hidden">
+                        <img 
+                          src={relatedPost.hero_image} 
+                          alt={relatedPost.hero_image_alt || relatedPost.title}
+                          className="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+                    )}
                     <span className="inline-block px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full mb-4">
                       {relatedPost.category}
                     </span>

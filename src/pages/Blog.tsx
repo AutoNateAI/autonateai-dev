@@ -21,6 +21,8 @@ interface BlogPost {
   featured: boolean;
   published: boolean;
   created_at: string;
+  hero_image?: string;
+  hero_image_alt?: string;
 }
 
 const Blog = () => {
@@ -42,7 +44,25 @@ const Blog = () => {
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setBlogPosts(data || []);
+      
+      // Transform the data to match our interface
+      const transformedPosts: BlogPost[] = (data || []).map(post => ({
+        id: post.id,
+        title: post.title,
+        excerpt: post.excerpt,
+        content: post.content,
+        category: post.category,
+        author: post.author,
+        read_time: post.read_time,
+        slug: post.slug,
+        featured: post.featured,
+        published: post.published,
+        created_at: post.created_at,
+        hero_image: post.hero_image,
+        hero_image_alt: post.hero_image_alt
+      }));
+      
+      setBlogPosts(transformedPosts);
     } catch (error) {
       console.error('Error fetching blog posts:', error);
     } finally {
@@ -226,6 +246,15 @@ const Blog = () => {
                     className="block group hover:scale-[1.02] transition-all duration-300"
                   >
                     <article className="glass-card h-full">
+                      {post.hero_image && (
+                        <div className="h-48 overflow-hidden rounded-t-xl">
+                          <img 
+                            src={post.hero_image} 
+                            alt={post.hero_image_alt || post.title}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                        </div>
+                      )}
                       <div className="p-6">
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20 mb-4">
                           <Tag className="w-3 h-3" />
