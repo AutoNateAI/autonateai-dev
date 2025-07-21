@@ -84,7 +84,20 @@ const Workshops = () => {
                 </div>
                 <div className="pt-4 border-t">
                   <p className="text-lg font-semibold text-primary">Starting at $3,499</p>
-                  <p className="text-sm text-muted-foreground">for up to 25 participants</p>
+                  <p className="text-sm text-muted-foreground">$140 per participant (up to 25)</p>
+                  <Button 
+                    onClick={() => {
+                      const form = document.getElementById('workshop-form');
+                      if (form) {
+                        form.scrollIntoView({ behavior: 'smooth' });
+                        const workshopSelect = document.getElementById('workshop') as HTMLSelectElement;
+                        if (workshopSelect) workshopSelect.value = 'grant-writing';
+                      }
+                    }}
+                    className="w-full mt-4"
+                  >
+                    Request Workshop
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -134,7 +147,20 @@ const Workshops = () => {
                 </div>
                 <div className="pt-4 border-t">
                   <p className="text-lg font-semibold text-primary">Starting at $1,999</p>
-                  <p className="text-sm text-muted-foreground">for up to 30 participants</p>
+                  <p className="text-sm text-muted-foreground">$67 per participant (up to 30)</p>
+                  <Button 
+                    onClick={() => {
+                      const form = document.getElementById('workshop-form');
+                      if (form) {
+                        form.scrollIntoView({ behavior: 'smooth' });
+                        const workshopSelect = document.getElementById('workshop') as HTMLSelectElement;
+                        if (workshopSelect) workshopSelect.value = 'literature-review';
+                      }
+                    }}
+                    className="w-full mt-4"
+                  >
+                    Request Workshop
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -184,7 +210,20 @@ const Workshops = () => {
                 </div>
                 <div className="pt-4 border-t">
                   <p className="text-lg font-semibold text-primary">Starting at $3,699</p>
-                  <p className="text-sm text-muted-foreground">for up to 25 participants</p>
+                  <p className="text-sm text-muted-foreground">$148 per participant (up to 25)</p>
+                  <Button 
+                    onClick={() => {
+                      const form = document.getElementById('workshop-form');
+                      if (form) {
+                        form.scrollIntoView({ behavior: 'smooth' });
+                        const workshopSelect = document.getElementById('workshop') as HTMLSelectElement;
+                        if (workshopSelect) workshopSelect.value = 'data-pipeline';
+                      }
+                    }}
+                    className="w-full mt-4"
+                  >
+                    Request Workshop
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -234,7 +273,20 @@ const Workshops = () => {
                 </div>
                 <div className="pt-4 border-t">
                   <p className="text-lg font-semibold text-primary">Starting at $6,999</p>
-                  <p className="text-sm text-muted-foreground">for up to 20 participants</p>
+                  <p className="text-sm text-muted-foreground">$350 per participant (up to 20)</p>
+                  <Button 
+                    onClick={() => {
+                      const form = document.getElementById('workshop-form');
+                      if (form) {
+                        form.scrollIntoView({ behavior: 'smooth' });
+                        const workshopSelect = document.getElementById('workshop') as HTMLSelectElement;
+                        if (workshopSelect) workshopSelect.value = 'custom-workflow';
+                      }
+                    }}
+                    className="w-full mt-4"
+                  >
+                    Request Workshop
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -351,7 +403,7 @@ const Workshops = () => {
           
           <Card className="glass-card">
             <CardContent className="p-8">
-              <form onSubmit={handleFormSubmit} className="space-y-6">
+              <form id="workshop-form" onSubmit={handleFormSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="name">Full Name *</Label>

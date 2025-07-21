@@ -154,10 +154,10 @@ const Coaching = () => {
                   ))}
                 </ul>
 
-                <button className="w-full btn-primary">
+                <Link to="/contact?service=coaching&type=individual" className="w-full btn-primary block text-center">
                   Request Session
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </button>
+                  <ArrowRight className="ml-2 w-5 h-5 inline" />
+                </Link>
               </div>
             ))}
           </div>
@@ -197,10 +197,10 @@ const Coaching = () => {
                   <p className="text-muted-foreground mb-6">
                     {teamService.description}
                   </p>
-                  <button className="btn-primary text-lg px-8 py-4">
+                  <Link to="/contact?service=coaching&type=team" className="btn-primary text-lg px-8 py-4 inline-flex items-center">
                     Request Team Coaching
                     <ArrowRight className="ml-2 w-5 h-5" />
-                  </button>
+                  </Link>
                 </div>
 
                 <div>

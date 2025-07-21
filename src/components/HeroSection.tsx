@@ -61,16 +61,16 @@ const HeroSection = () => {
           {/* Social Proof */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             <div className="glass-card p-6 text-center">
-              <div className="text-3xl font-bold text-primary mb-2">60-80%</div>
-              <div className="text-muted-foreground">Time Reduction</div>
+              <div className="text-3xl font-bold text-primary mb-2">300+</div>
+              <div className="text-muted-foreground">Researchers Trained</div>
             </div>
             <div className="glass-card p-6 text-center">
-              <div className="text-3xl font-bold text-accent mb-2">$150K+</div>
-              <div className="text-muted-foreground">Grants Secured</div>
+              <div className="text-3xl font-bold text-accent mb-2">65%</div>
+              <div className="text-muted-foreground">Average Time Saved</div>
             </div>
             <div className="glass-card p-6 text-center">
-              <div className="text-3xl font-bold text-glass-secondary mb-2">1000+</div>
-              <div className="text-muted-foreground">Researchers</div>
+              <div className="text-3xl font-bold text-glass-secondary mb-2">40%</div>
+              <div className="text-muted-foreground">Grant Success Increase</div>
             </div>
           </div>
         </div>

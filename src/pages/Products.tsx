@@ -166,9 +166,17 @@ const Products = () => {
                     </div>
                   </div>
 
-                  {/* Features Card */}
+                  {/* Features Card with Thumbnail Placeholder */}
                   <div className={isEven ? '' : 'lg:col-start-1 lg:row-start-1'}>
                     <div className="glass-card p-8">
+                      {/* Thumbnail Placeholder */}
+                      <div className="w-full h-48 border-2 border-dashed border-primary/30 rounded-xl mb-6 flex items-center justify-center bg-primary/5">
+                        <div className="text-center text-muted-foreground">
+                          <div className="text-lg font-medium mb-2">Product Thumbnail</div>
+                          <div className="text-sm">Add your product image here</div>
+                        </div>
+                      </div>
+                      
                       <h3 className="text-xl font-bold mb-6">What You'll Get:</h3>
                       <ul className="space-y-4">
                         {product.features.map((feature, i) => (

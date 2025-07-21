@@ -1,24 +1,55 @@
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import { Mail, Phone, MapPin, Clock, MessageCircle, ArrowRight } from 'lucide-react';
-import { useState } from 'react';
+
+interface FormData {
+  name: string;
+  email: string;
+  company: string;
+  message: string;
+}
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
+  const [searchParams] = useSearchParams();
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
-    subject: '',
+    company: '',
     message: ''
   });
-
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  useEffect(() => {
+    const service = searchParams.get('service');
+    const type = searchParams.get('type');
+    
+    if (service === 'coaching') {
+      let message = 'I am interested in your coaching services. ';
+      if (type === 'individual') {
+        message += 'Specifically, I would like to schedule an individual coaching session to optimize my research workflow with AI tools.';
+      } else if (type === 'team') {
+        message += 'Specifically, I would like to discuss team coaching for our research group to implement AI-augmented workflows.';
+      }
+      setFormData(prev => ({ ...prev, message }));
+      
+      // Scroll to contact form
+      setTimeout(() => {
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+          contactForm.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, [searchParams]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission
     setIsSubmitted(true);
     setTimeout(() => setIsSubmitted(false), 3000);
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    setFormData({ name: '', email: '', company: '', message: '' });
   };
 
   return (
@@ -50,10 +81,13 @@ const Contact = () => {
               </div>
               <h3 className="text-xl font-bold mb-4">Email Us</h3>
               <p className="text-muted-foreground mb-4">
-                Get in touch for general inquiries, product questions, or technical support.
+                Send us an email and we'll respond within 24 hours.
               </p>
-              <a href="mailto:contact@autonateai.com" className="text-primary hover:text-primary-glow transition-colors font-medium">
-                contact@autonateai.com
+              <a 
+                href="mailto:hello@autonateai.com" 
+                className="text-primary hover:text-primary/80 font-medium"
+              >
+                hello@autonateai.com
               </a>
             </div>
 
@@ -63,10 +97,13 @@ const Contact = () => {
               </div>
               <h3 className="text-xl font-bold mb-4">Call Us</h3>
               <p className="text-muted-foreground mb-4">
-                Speak directly with our team for urgent questions or consultation booking.
+                Speak directly with our research workflow specialists.
               </p>
-              <a href="tel:+15551234567" className="text-primary hover:text-primary-glow transition-colors font-medium">
-                +1 (555) 123-4567
+              <a 
+                href="tel:+1234567890" 
+                className="text-primary hover:text-primary/80 font-medium"
+              >
+                +1 (234) 567-8900
               </a>
             </div>
 
@@ -76,10 +113,10 @@ const Contact = () => {
               </div>
               <h3 className="text-xl font-bold mb-4">Live Chat</h3>
               <p className="text-muted-foreground mb-4">
-                Chat with our support team for immediate assistance with your account or products.
+                Chat with our team during business hours for instant help.
               </p>
-              <button className="text-primary hover:text-primary-glow transition-colors font-medium">
-                Start Chat
+              <button className="text-primary hover:text-primary/80 font-medium">
+                Start Live Chat
               </button>
             </div>
           </div>
@@ -100,7 +137,7 @@ const Contact = () => {
               </p>
 
               {!isSubmitted ? (
-                <div className="glass-card p-8">
+                <div id="contact-form" className="glass-card p-8">
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
@@ -135,25 +172,17 @@ const Contact = () => {
                     </div>
 
                     <div>
-                      <label htmlFor="subject" className="block text-sm font-medium mb-2">
-                        Subject *
+                      <label htmlFor="company" className="block text-sm font-medium mb-2">
+                        Organization/Institution
                       </label>
-                      <select
-                        id="subject"
-                        required
-                        value={formData.subject}
-                        onChange={(e) => setFormData({...formData, subject: e.target.value})}
+                      <input
+                        type="text"
+                        id="company"
+                        value={formData.company}
+                        onChange={(e) => setFormData({...formData, company: e.target.value})}
                         className="w-full px-4 py-3 rounded-xl bg-background/50 border border-border/20 focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20 text-foreground"
-                      >
-                        <option value="">Select a subject</option>
-                        <option value="product-inquiry">Product Inquiry</option>
-                        <option value="technical-support">Technical Support</option>
-                        <option value="coaching-consultation">Coaching Consultation</option>
-                        <option value="workshop-inquiry">Workshop Inquiry</option>
-                        <option value="partnership">Partnership Opportunity</option>
-                        <option value="media-press">Media & Press</option>
-                        <option value="other">Other</option>
-                      </select>
+                        placeholder="Your organization (optional)"
+                      />
                     </div>
 
                     <div>
@@ -167,7 +196,7 @@ const Contact = () => {
                         value={formData.message}
                         onChange={(e) => setFormData({...formData, message: e.target.value})}
                         className="w-full px-4 py-3 rounded-xl bg-background/50 border border-border/20 focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20 text-foreground resize-none"
-                        placeholder="Tell us about your research needs, questions, or how we can help..."
+                        placeholder="Tell us about your research needs or questions..."
                       ></textarea>
                     </div>
 
@@ -179,10 +208,12 @@ const Contact = () => {
                 </div>
               ) : (
                 <div className="glass-card p-8 text-center">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-green-500/10 mb-6">
-                    <MessageCircle className="w-8 h-8 text-green-400" />
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-500/10 mb-6">
+                    <svg className="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
                   </div>
-                  <h3 className="text-xl font-bold text-green-400 mb-4">Message Sent Successfully!</h3>
+                  <h3 className="text-xl font-bold mb-4 text-green-500">Message Sent!</h3>
                   <p className="text-muted-foreground">
                     Thank you for reaching out. We'll get back to you within 24 hours.
                   </p>
@@ -191,78 +222,67 @@ const Contact = () => {
             </div>
 
             {/* Contact Information */}
-            <div>
-              <h2 className="text-3xl font-bold mb-6">
-                Contact <span className="text-gradient">Information</span>
-              </h2>
-              <p className="text-muted-foreground mb-8">
-                We're here to support your research journey. Reach out through any of these channels.
-              </p>
-
-              <div className="space-y-8">
-                {/* Office Information */}
-                <div className="glass-card p-6">
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
+                
+                <div className="space-y-6">
                   <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0">
-                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                        <MapPin className="w-6 h-6 text-primary" />
-                      </div>
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10">
+                      <MapPin className="w-6 h-6 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-semibold mb-2">Headquarters</h3>
+                      <h4 className="font-semibold mb-2">Address</h4>
                       <p className="text-muted-foreground">
-                        123 Research Drive<br />
+                        123 Research Avenue<br />
                         Innovation District<br />
-                        San Francisco, CA 94105<br />
-                        United States
+                        Tech City, TC 12345
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10">
+                      <Clock className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold mb-2">Business Hours</h4>
+                      <p className="text-muted-foreground">
+                        Monday - Friday: 9:00 AM - 6:00 PM EST<br />
+                        Saturday: 10:00 AM - 4:00 PM EST<br />
+                        Sunday: Closed
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10">
+                      <MessageCircle className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold mb-2">Response Times</h4>
+                      <p className="text-muted-foreground">
+                        Email: Within 24 hours<br />
+                        Phone: Same day<br />
+                        Live Chat: Instant during business hours
                       </p>
                     </div>
                   </div>
                 </div>
+              </div>
 
-                {/* Business Hours */}
-                <div className="glass-card p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0">
-                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                        <Clock className="w-6 h-6 text-primary" />
-                      </div>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-2">Business Hours</h3>
-                      <div className="text-muted-foreground space-y-1">
-                        <div>Monday - Friday: 9:00 AM - 6:00 PM PST</div>
-                        <div>Saturday: 10:00 AM - 4:00 PM PST</div>
-                        <div>Sunday: Closed</div>
-                        <div className="text-sm mt-2 text-primary">
-                          Emergency support available 24/7 for coaching clients
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Response Times */}
-                <div className="glass-card p-6">
-                  <h3 className="font-semibold mb-4">Expected Response Times</h3>
-                  <div className="space-y-3 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">General Inquiries:</span>
-                      <span className="text-primary">Within 24 hours</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Technical Support:</span>
-                      <span className="text-primary">Within 4 hours</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Coaching Requests:</span>
-                      <span className="text-primary">Within 1 business day</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Workshop Inquiries:</span>
-                      <span className="text-primary">Within 2 business days</span>
-                    </div>
-                  </div>
+              <div className="glass-card p-6">
+                <h4 className="text-lg font-bold mb-4">Quick Links</h4>
+                <div className="space-y-3">
+                  <a href="/coaching" className="block text-primary hover:text-primary/80 transition-colors">
+                    Schedule a Coaching Session
+                  </a>
+                  <a href="/workshops" className="block text-primary hover:text-primary/80 transition-colors">
+                    Request a Workshop
+                  </a>
+                  <a href="/products" className="block text-primary hover:text-primary/80 transition-colors">
+                    Browse Our Products
+                  </a>
                 </div>
               </div>
             </div>
@@ -271,42 +291,42 @@ const Contact = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-24 bg-muted/10">
+      <section className="py-24 bg-muted/20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold mb-6">
               Frequently Asked <span className="text-gradient">Questions</span>
             </h2>
             <p className="text-xl text-muted-foreground">
-              Quick answers to common questions about our products and services.
+              Quick answers to common questions about our research workflow solutions.
             </p>
           </div>
 
           <div className="space-y-6">
             {[
               {
-                question: "How quickly can I access products after purchase?",
-                answer: "Immediately! After your Stripe payment is processed, you'll be redirected to a page with all materials ready for download."
+                question: "How quickly can I implement your AI workflows?",
+                answer: "Most researchers start seeing benefits within the first week. Our digital products include step-by-step guides that can be implemented immediately, while coaching sessions provide personalized implementation strategies."
               },
               {
-                question: "Do you offer academic or student discounts?",
-                answer: "We offer special pricing for graduate students and bulk packages for departments or institutions. Contact us for details."
+                question: "Do your workflows work with different AI platforms?",
+                answer: "Yes! Our methodologies are platform-agnostic and work with ChatGPT, Claude, NotebookLM, Windsurf, and other major AI platforms. We provide specific prompts and adaptations for each platform."
               },
               {
-                question: "Can I get a refund if I'm not satisfied?",
-                answer: "Yes, we offer a 30-day satisfaction guarantee. If you're not completely satisfied with your purchase, contact us for a full refund."
+                question: "What kind of support is included?",
+                answer: "All digital products include comprehensive documentation and email support. Coaching sessions include follow-up support, and workshops include 30-day implementation assistance."
               },
               {
-                question: "Do I need AI platform subscriptions to use your workflows?",
-                answer: "Yes, you'll need access to at least one AI platform like ChatGPT Plus, Claude, or NotebookLM. Our workflows are designed to work with all major AI tools."
+                question: "Can you work with our specific research domain?",
+                answer: "Absolutely! Our workflows are designed to be adaptable across research domains. Our coaching and custom workshop services specialize in tailoring methodologies to your specific field and requirements."
               },
               {
-                question: "How often are the workflows and prompts updated?",
-                answer: "We update our prompts and guidelines quarterly to reflect changes in AI capabilities and research best practices. Updates are free for existing customers."
+                question: "What's the difference between your products and coaching?",
+                answer: "Our digital products provide complete self-guided workflows you can implement immediately. Coaching offers personalized guidance and adaptation of these workflows to your specific research context and challenges."
               }
             ].map((faq, index) => (
               <div key={index} className="glass-card p-6">
-                <h3 className="font-semibold mb-3">{faq.question}</h3>
+                <h3 className="text-lg font-bold mb-3">{faq.question}</h3>
                 <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
               </div>
             ))}
