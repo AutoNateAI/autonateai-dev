@@ -80,21 +80,9 @@ const Coaching = () => {
 
   const coaches = [
     {
-      name: 'Dr. Sarah Chen',
-      title: 'Research Methodology Specialist',
-      bio: 'Former NIH grant reviewer with expertise in biomedical research workflows and AI integration for clinical studies.',
-      image: '/api/placeholder/300/300'
-    },
-    {
-      name: 'Dr. Marcus Johnson',
-      title: 'AI Prompt Engineering Expert',
-      bio: 'Computational linguist specializing in optimizing AI interactions for academic research contexts.',
-      image: '/api/placeholder/300/300'
-    },
-    {
-      name: 'Dr. Aisha Patel',
-      title: 'Data Workflow Specialist',
-      bio: 'Former research director with expertise in research data management and reproducible pipelines for complex projects.',
+      name: 'AutoNate',
+      title: 'AI Research Methodology Expert',
+      bio: 'Specialized AI coach with extensive experience in research workflow optimization, grant writing strategies, and AI-augmented academic processes.',
       image: '/api/placeholder/300/300'
     }
   ];
@@ -228,14 +216,14 @@ const Coaching = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-              Meet Our <span className="text-gradient">Expert Coaches</span>
+              Meet Your <span className="text-gradient">AI Coach</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Our team combines deep academic expertise with practical AI implementation experience.
+              AutoNate combines deep academic expertise with cutting-edge AI implementation experience to transform your research workflow.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="max-w-md mx-auto">
             {coaches.map((coach, index) => (
               <div key={index} className="glass-card p-8 text-center group hover:scale-105 transition-all duration-500">
                 <div className="w-24 h-24 rounded-full bg-gradient-primary mx-auto mb-6 flex items-center justify-center">

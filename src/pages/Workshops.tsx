@@ -109,7 +109,7 @@ const Workshops = () => {
                   </div>
                 </div>
                 <div className="pt-4 border-t">
-                  <p className="text-lg font-semibold text-primary">$140 per participant</p>
+                  <p className="text-lg font-semibold text-primary">$3,499 per participant</p>
                   <p className="text-sm text-muted-foreground">Up to 25 participants</p>
                   <Button 
                     onClick={() => handleRequestWorkshop('grant')}
@@ -169,7 +169,7 @@ const Workshops = () => {
                   </div>
                 </div>
                 <div className="pt-4 border-t">
-                  <p className="text-lg font-semibold text-primary">$67 per participant</p>
+                  <p className="text-lg font-semibold text-primary">$1,999 per participant</p>
                   <p className="text-sm text-muted-foreground">Up to 30 participants</p>
                   <Button 
                     onClick={() => handleRequestWorkshop('literature')}
@@ -229,7 +229,7 @@ const Workshops = () => {
                   </div>
                 </div>
                 <div className="pt-4 border-t">
-                  <p className="text-lg font-semibold text-primary">$148 per participant</p>
+                  <p className="text-lg font-semibold text-primary">$3,699 per participant</p>
                   <p className="text-sm text-muted-foreground">Up to 25 participants</p>
                   <Button 
                     onClick={() => handleRequestWorkshop('data')}
@@ -289,7 +289,7 @@ const Workshops = () => {
                   </div>
                 </div>
                 <div className="pt-4 border-t">
-                  <p className="text-lg font-semibold text-primary">$350 per participant</p>
+                  <p className="text-lg font-semibold text-primary">$6,999 per participant</p>
                   <p className="text-sm text-muted-foreground">Up to 20 participants</p>
                   <Button 
                     onClick={() => handleRequestWorkshop('custom')}
