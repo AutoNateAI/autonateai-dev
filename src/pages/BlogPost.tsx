@@ -319,16 +319,6 @@ const BlogPost = () => {
         </div>
       </div>
 
-      {/* Banner Ad */}
-      <div className="container mx-auto px-6 py-8">
-        <div className="max-w-4xl mx-auto">
-          <AdSpace 
-            position="banner" 
-            category={post.category}
-            blogSlug={post.slug}
-          />
-        </div>
-      </div>
 
       {/* Related Posts */}
       {relatedPosts.length > 0 && (
