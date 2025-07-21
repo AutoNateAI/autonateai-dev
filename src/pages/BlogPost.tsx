@@ -63,10 +63,6 @@ const BlogPost = () => {
           : []
       };
       
-      console.log('Blog post data:', postData);
-      console.log('Hero image URL:', postData.hero_image);
-      console.log('Transformed post:', transformedPost);
-      
       setPost(transformedPost);
 
       // Fetch related posts (same category, exclude current post)
@@ -268,9 +264,18 @@ const BlogPost = () => {
             {/* Main Content */}
             <div className="lg:col-span-3">
               <article className="prose prose-lg max-w-none">
-                <div className="text-lg leading-relaxed">
-                  {renderMarkdownContent(post.content, post.content_images)}
-                </div>
+                 <div className="text-lg leading-relaxed">
+                   {renderMarkdownContent(post.content, post.content_images)}
+                   
+                   {/* Inline Ad Space within content */}
+                   <div className="my-12">
+                     <AdSpace 
+                       position="inline" 
+                       category={post.category}
+                       blogSlug={post.slug}
+                     />
+                   </div>
+                 </div>
               </article>
             </div>
             

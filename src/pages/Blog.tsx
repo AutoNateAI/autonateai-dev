@@ -46,8 +46,6 @@ const Blog = () => {
 
       if (error) throw error;
       
-      console.log('Blog posts data:', data);
-      
       // Transform the data to match our interface
       const transformedPosts: BlogPost[] = (data || []).map(post => ({
         id: post.id,
@@ -65,7 +63,6 @@ const Blog = () => {
         hero_image_alt: post.hero_image_alt
       }));
       
-      console.log('Transformed posts:', transformedPosts);
       setBlogPosts(transformedPosts);
     } catch (error) {
       console.error('Error fetching blog posts:', error);
