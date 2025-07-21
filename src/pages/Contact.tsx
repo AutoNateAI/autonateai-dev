@@ -84,26 +84,26 @@ const Contact = () => {
                 Send us an email and we'll respond within 24 hours.
               </p>
               <a 
-                href="mailto:hello@autonateai.com" 
+                href="mailto:autonate.ai@gmail.com" 
                 className="text-primary hover:text-primary/80 font-medium"
               >
-                hello@autonateai.com
+                autonate.ai@gmail.com
               </a>
             </div>
 
             <div className="glass-card p-8 text-center group hover:scale-105 transition-all duration-500">
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 mb-6">
-                <Phone className="w-8 h-8 text-primary" />
+                <MessageCircle className="w-8 h-8 text-primary" />
               </div>
-              <h3 className="text-xl font-bold mb-4">Call Us</h3>
+              <h3 className="text-xl font-bold mb-4">Contact Us</h3>
               <p className="text-muted-foreground mb-4">
-                Speak directly with our research workflow specialists.
+                We're here to help with your research workflow needs.
               </p>
               <a 
-                href="tel:+1234567890" 
+                href="mailto:autonate.ai@gmail.com" 
                 className="text-primary hover:text-primary/80 font-medium"
               >
-                +1 (234) 567-8900
+                Send us an email
               </a>
             </div>
 
@@ -234,9 +234,8 @@ const Contact = () => {
                     <div>
                       <h4 className="font-semibold mb-2">Address</h4>
                       <p className="text-muted-foreground">
-                        123 Research Avenue<br />
-                        Innovation District<br />
-                        Tech City, TC 12345
+                        Honolulu, Hawaii<br />
+                        United States
                       </p>
                     </div>
                   </div>
@@ -248,8 +247,8 @@ const Contact = () => {
                     <div>
                       <h4 className="font-semibold mb-2">Business Hours</h4>
                       <p className="text-muted-foreground">
-                        Monday - Friday: 9:00 AM - 6:00 PM EST<br />
-                        Saturday: 10:00 AM - 4:00 PM EST<br />
+                        Monday - Friday: 9:00 AM - 6:00 PM HST<br />
+                        Saturday: 10:00 AM - 4:00 PM HST<br />
                         Sunday: Closed
                       </p>
                     </div>
@@ -263,8 +262,8 @@ const Contact = () => {
                       <h4 className="font-semibold mb-2">Response Times</h4>
                       <p className="text-muted-foreground">
                         Email: Within 24 hours<br />
-                        Phone: Same day<br />
-                        Live Chat: Instant during business hours
+                        Contact Form: Same day<br />
+                        We respond promptly during business hours
                       </p>
                     </div>
                   </div>

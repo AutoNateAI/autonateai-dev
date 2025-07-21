@@ -8,11 +8,33 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { CheckCircle, Users, Clock, MapPin, Video, Award } from "lucide-react";
+import EmailPopup from "@/components/EmailPopup";
+import { useEmailPopup } from "@/hooks/useEmailPopup";
 
 const Workshops = () => {
+  const { showPopup, closePopup } = useEmailPopup();
+  
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Workshop request submitted");
+  };
+
+  const handleRequestWorkshop = (workshopType: string) => {
+    const form = document.getElementById('workshop-form');
+    if (form) {
+      form.scrollIntoView({ behavior: 'smooth' });
+      
+      // Pre-fill form fields
+      setTimeout(() => {
+        const workshopSelect = document.querySelector('[name="workshop"]') as HTMLSelectElement;
+        const formatSelect = document.querySelector('[name="format"]') as HTMLSelectElement;
+        const timelineSelect = document.querySelector('[name="timeline"]') as HTMLSelectElement;
+        
+        if (workshopSelect) workshopSelect.value = workshopType;
+        if (formatSelect) formatSelect.value = 'in-person';
+        if (timelineSelect) timelineSelect.value = '1-3-months';
+      }, 100);
+    }
   };
 
   return (
@@ -90,14 +112,7 @@ const Workshops = () => {
                   <p className="text-lg font-semibold text-primary">Starting at $3,499</p>
                   <p className="text-sm text-muted-foreground">$140 per participant (up to 25)</p>
                   <Button 
-                    onClick={() => {
-                      const form = document.getElementById('workshop-form');
-                      if (form) {
-                        form.scrollIntoView({ behavior: 'smooth' });
-                        const workshopSelect = document.getElementById('workshop') as HTMLSelectElement;
-                        if (workshopSelect) workshopSelect.value = 'grant-writing';
-                      }
-                    }}
+                    onClick={() => handleRequestWorkshop('grant')}
                     className="w-full mt-4"
                   >
                     Request Workshop
@@ -157,14 +172,7 @@ const Workshops = () => {
                   <p className="text-lg font-semibold text-primary">Starting at $1,999</p>
                   <p className="text-sm text-muted-foreground">$67 per participant (up to 30)</p>
                   <Button 
-                    onClick={() => {
-                      const form = document.getElementById('workshop-form');
-                      if (form) {
-                        form.scrollIntoView({ behavior: 'smooth' });
-                        const workshopSelect = document.getElementById('workshop') as HTMLSelectElement;
-                        if (workshopSelect) workshopSelect.value = 'literature-review';
-                      }
-                    }}
+                    onClick={() => handleRequestWorkshop('literature')}
                     className="w-full mt-4"
                   >
                     Request Workshop
@@ -224,14 +232,7 @@ const Workshops = () => {
                   <p className="text-lg font-semibold text-primary">Starting at $3,699</p>
                   <p className="text-sm text-muted-foreground">$148 per participant (up to 25)</p>
                   <Button 
-                    onClick={() => {
-                      const form = document.getElementById('workshop-form');
-                      if (form) {
-                        form.scrollIntoView({ behavior: 'smooth' });
-                        const workshopSelect = document.getElementById('workshop') as HTMLSelectElement;
-                        if (workshopSelect) workshopSelect.value = 'data-pipeline';
-                      }
-                    }}
+                    onClick={() => handleRequestWorkshop('data')}
                     className="w-full mt-4"
                   >
                     Request Workshop
@@ -291,14 +292,7 @@ const Workshops = () => {
                   <p className="text-lg font-semibold text-primary">Starting at $6,999</p>
                   <p className="text-sm text-muted-foreground">$350 per participant (up to 20)</p>
                   <Button 
-                    onClick={() => {
-                      const form = document.getElementById('workshop-form');
-                      if (form) {
-                        form.scrollIntoView({ behavior: 'smooth' });
-                        const workshopSelect = document.getElementById('workshop') as HTMLSelectElement;
-                        if (workshopSelect) workshopSelect.value = 'custom-workflow';
-                      }
-                    }}
+                    onClick={() => handleRequestWorkshop('custom')}
                     className="w-full mt-4"
                   >
                     Request Workshop
@@ -445,22 +439,22 @@ const Workshops = () => {
                   </div>
                 </div>
                 
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="workshop">Workshop of Interest *</Label>
-                    <Select required>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a workshop" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="grant">AI Grant Writing Mastery</SelectItem>
-                        <SelectItem value="literature">Literature Review Revolution</SelectItem>
-                        <SelectItem value="data">Research Data Pipeline Implementation</SelectItem>
-                        <SelectItem value="custom">Custom AI Research Workflow Design</SelectItem>
-                        <SelectItem value="multiple">Multiple Workshops</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
+                 <div className="grid md:grid-cols-2 gap-6">
+                   <div className="space-y-2">
+                     <Label htmlFor="workshop">Workshop of Interest *</Label>
+                     <Select name="workshop" required>
+                       <SelectTrigger>
+                         <SelectValue placeholder="Select a workshop" />
+                       </SelectTrigger>
+                       <SelectContent>
+                         <SelectItem value="grant">AI Grant Writing Mastery</SelectItem>
+                         <SelectItem value="literature">Literature Review Revolution</SelectItem>
+                         <SelectItem value="data">Research Data Pipeline Implementation</SelectItem>
+                         <SelectItem value="custom">Custom AI Research Workflow Design</SelectItem>
+                         <SelectItem value="multiple">Multiple Workshops</SelectItem>
+                       </SelectContent>
+                     </Select>
+                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="participants">Estimated Participants *</Label>
                     <Select required>
@@ -478,34 +472,34 @@ const Workshops = () => {
                 </div>
                 
                 <div className="grid md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="format">Preferred Format *</Label>
-                    <Select required>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select format" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="in-person">In-Person</SelectItem>
-                        <SelectItem value="virtual">Virtual</SelectItem>
-                        <SelectItem value="hybrid">Hybrid</SelectItem>
-                        <SelectItem value="undecided">Undecided</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="timeline">Desired Timeline *</Label>
-                    <Select required>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select timeline" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="1month">Within 1 month</SelectItem>
-                        <SelectItem value="3months">Within 3 months</SelectItem>
-                        <SelectItem value="6months">Within 6 months</SelectItem>
-                        <SelectItem value="exploring">Just exploring options</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
+                   <div className="space-y-2">
+                     <Label htmlFor="format">Preferred Format *</Label>
+                     <Select name="format" required>
+                       <SelectTrigger>
+                         <SelectValue placeholder="Select format" />
+                       </SelectTrigger>
+                       <SelectContent>
+                         <SelectItem value="in-person">In-Person</SelectItem>
+                         <SelectItem value="virtual">Virtual</SelectItem>
+                         <SelectItem value="hybrid">Hybrid</SelectItem>
+                         <SelectItem value="undecided">Undecided</SelectItem>
+                       </SelectContent>
+                     </Select>
+                   </div>
+                   <div className="space-y-2">
+                     <Label htmlFor="timeline">Desired Timeline *</Label>
+                     <Select name="timeline" required>
+                       <SelectTrigger>
+                         <SelectValue placeholder="Select timeline" />
+                       </SelectTrigger>
+                       <SelectContent>
+                         <SelectItem value="1-3-months">Within 1-3 months</SelectItem>
+                         <SelectItem value="3-6-months">Within 3-6 months</SelectItem>
+                         <SelectItem value="6-12-months">Within 6-12 months</SelectItem>
+                         <SelectItem value="exploring">Just exploring options</SelectItem>
+                       </SelectContent>
+                     </Select>
+                   </div>
                 </div>
                 
                 <div className="space-y-2">
@@ -527,6 +521,7 @@ const Workshops = () => {
       </section>
 
       <Footer />
+      <EmailPopup isOpen={showPopup} onClose={closePopup} />
     </div>
   );
 };
