@@ -116,59 +116,51 @@ const BlogPost = () => {
     const renderedContent: JSX.Element[] = [];
     let currentHeadingLevel = 0;
     let headingCount = { h1: 0, h2: 0, h3: 0, h4: 0 };
-    let contentLength = 0;
-    let adInserted = false;
+    let paragraphCount = 0;
 
     lines.forEach((line, index) => {
       let element: JSX.Element | null = null;
       
       if (line.startsWith('# ')) {
-        headingCount.h1++;
+        const content = line.slice(2);
         currentHeadingLevel = 1;
-        element = <h1 key={index} className="text-4xl font-bold mb-6 text-foreground">{line.substring(2)}</h1>;
+        headingCount.h1++;
+        element = <h1 key={index} className="text-4xl font-bold mb-6 text-foreground">{content}</h1>;
       } else if (line.startsWith('## ')) {
-        headingCount.h2++;
+        const content = line.slice(3);
         currentHeadingLevel = 2;
-        element = <h2 key={index} className="text-3xl font-semibold mt-8 mb-4 text-foreground">{line.substring(3)}</h2>;
+        headingCount.h2++;
+        element = <h2 key={index} className="text-3xl font-semibold mb-4 mt-8 text-foreground">{content}</h2>;
       } else if (line.startsWith('### ')) {
-        headingCount.h3++;
+        const content = line.slice(4);
         currentHeadingLevel = 3;
-        element = <h3 key={index} className="text-2xl font-semibold mt-6 mb-3 text-foreground">{line.substring(4)}</h3>;
+        headingCount.h3++;
+        element = <h3 key={index} className="text-2xl font-semibold mb-3 mt-6 text-foreground">{content}</h3>;
       } else if (line.startsWith('#### ')) {
-        headingCount.h4++;
+        const content = line.slice(5);
         currentHeadingLevel = 4;
-        element = <h4 key={index} className="text-xl font-semibold mt-4 mb-2 text-foreground">{line.substring(5)}</h4>;
-      } else if (line.startsWith('- ')) {
-        element = <li key={index} className="ml-6 mb-2 text-muted-foreground list-disc">{line.substring(2)}</li>;
-      } else if (line.match(/^\d+\. /)) {
-        element = <li key={index} className="ml-6 mb-2 text-muted-foreground list-decimal">{line.substring(line.indexOf('. ') + 2)}</li>;
-      } else if (line.startsWith('*') && line.endsWith('*')) {
-        element = <p key={index} className="italic text-muted-foreground mb-4">{line.slice(1, -1)}</p>;
-      } else if (line.trim() === '') {
-        element = <br key={index} />;
-      } else {
-        const boldRegex = /\*\*(.*?)\*\*/g;
-        const processedLine = line.replace(boldRegex, '<strong>$1</strong>');
-        element = <p key={index} className="mb-4 text-muted-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: processedLine }} />;
+        headingCount.h4++;
+        element = <h4 key={index} className="text-xl font-semibold mb-2 mt-4 text-foreground">{content}</h4>;
+      } else if (line.trim() !== '') {
+        paragraphCount++;
+        element = <p key={index} className="mb-4 text-foreground leading-relaxed">{line}</p>;
       }
 
       if (element) {
         renderedContent.push(element);
-        contentLength++;
         
-        // Insert mobile ad after approximately 40% of content on small screens
-        if (!adInserted && contentLength > lines.length * 0.4 && isMobile) {
+        // Insert mobile ads every 4 paragraphs on small screens
+        if (isMobile && paragraphCount > 0 && paragraphCount % 4 === 0) {
           renderedContent.push(
-            <div key={`mobile-ad-${index}`} className="my-8 md:hidden">
+            <div key={`mobile-ad-${paragraphCount}`} className="my-6 md:hidden">
               <AdSpace 
                 position="inline" 
                 category={post?.category}
                 blogSlug={post?.slug}
-                className="mobile-inline-ad"
+                className="w-full max-w-sm mx-auto"
               />
             </div>
           );
-          adInserted = true;
         }
         
         // Insert content images after specific headings
