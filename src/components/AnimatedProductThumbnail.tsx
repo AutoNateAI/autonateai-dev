@@ -3,34 +3,132 @@ import React from 'react';
 interface AnimatedProductThumbnailProps {
   title: string;
   className?: string;
+  imageSrc?: string; // For when you want to use PNG images
 }
 
-const AnimatedProductThumbnail: React.FC<AnimatedProductThumbnailProps> = ({ title, className = '' }) => {
-  const getIconByTitle = (title: string) => {
+const AnimatedProductThumbnail: React.FC<AnimatedProductThumbnailProps> = ({ 
+  title, 
+  className = '', 
+  imageSrc 
+}) => {
+  const getSVGByTitle = (title: string) => {
     if (title.includes('Grant')) {
       return (
-        <svg className="w-16 h-16 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        <svg viewBox="0 0 200 200" className="w-full h-full">
+          <defs>
+            <linearGradient id="grantGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="hsl(var(--accent))" stopOpacity="0.6" />
+            </linearGradient>
+          </defs>
+          {/* Document background */}
+          <rect x="40" y="30" width="120" height="140" rx="8" fill="url(#grantGrad)" className="animate-pulse" />
+          <rect x="45" y="35" width="110" height="130" rx="4" fill="hsl(var(--background))" opacity="0.9" />
+          
+          {/* Document lines */}
+          <rect x="55" y="50" width="90" height="3" rx="1.5" fill="hsl(var(--primary))" opacity="0.7" />
+          <rect x="55" y="60" width="70" height="2" rx="1" fill="hsl(var(--muted-foreground))" opacity="0.5" />
+          <rect x="55" y="70" width="85" height="2" rx="1" fill="hsl(var(--muted-foreground))" opacity="0.5" />
+          <rect x="55" y="80" width="65" height="2" rx="1" fill="hsl(var(--muted-foreground))" opacity="0.5" />
+          
+          {/* Dollar sign */}
+          <circle cx="130" cy="120" r="15" fill="hsl(var(--primary))" className="animate-bounce" style={{animationDelay: '0.5s'}} />
+          <text x="130" y="127" textAnchor="middle" fontSize="16" fontWeight="bold" fill="hsl(var(--primary-foreground))">$</text>
+          
+          {/* Decorative elements */}
+          <circle cx="70" r="2" fill="hsl(var(--accent))" className="animate-ping" style={{animationDelay: '1s'}} />
+          <circle cx="150" cy="40" r="1.5" fill="hsl(var(--primary))" className="animate-ping" style={{animationDelay: '1.5s'}} />
         </svg>
       );
     } else if (title.includes('Literature') || title.includes('Lit Review')) {
       return (
-        <svg className="w-16 h-16 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+        <svg viewBox="0 0 200 200" className="w-full h-full">
+          <defs>
+            <linearGradient id="bookGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="hsl(var(--accent))" stopOpacity="0.6" />
+            </linearGradient>
+          </defs>
+          {/* Book spine */}
+          <rect x="60" y="40" width="15" height="120" rx="7" fill="url(#bookGrad)" />
+          
+          {/* Book pages */}
+          <rect x="75" y="45" width="80" height="110" rx="5" fill="hsl(var(--background))" stroke="hsl(var(--border))" strokeWidth="2" />
+          <rect x="78" y="48" width="74" height="104" rx="3" fill="hsl(var(--muted))" opacity="0.3" />
+          
+          {/* Page content lines */}
+          <rect x="85" y="60" width="60" height="2" rx="1" fill="hsl(var(--muted-foreground))" opacity="0.6" />
+          <rect x="85" y="70" width="55" height="1.5" rx="0.75" fill="hsl(var(--muted-foreground))" opacity="0.4" />
+          <rect x="85" y="80" width="58" height="1.5" rx="0.75" fill="hsl(var(--muted-foreground))" opacity="0.4" />
+          <rect x="85" y="90" width="52" height="1.5" rx="0.75" fill="hsl(var(--muted-foreground))" opacity="0.4" />
+          
+          {/* AI brain icon */}
+          <circle cx="125" cy="120" r="12" fill="hsl(var(--primary))" className="animate-pulse" />
+          <circle cx="122" cy="117" r="2" fill="hsl(var(--primary-foreground))" />
+          <circle cx="128" cy="117" r="2" fill="hsl(var(--primary-foreground))" />
+          <path d="M120 123 Q125 127 130 123" stroke="hsl(var(--primary-foreground))" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+          
+          {/* Floating particles */}
+          <circle cx="50" cy="70" r="1.5" fill="hsl(var(--accent))" className="animate-ping" style={{animationDelay: '0.5s'}} />
+          <circle cx="170" cy="90" r="1" fill="hsl(var(--primary))" className="animate-ping" style={{animationDelay: '1.2s'}} />
         </svg>
       );
     } else if (title.includes('Data Pipeline') || title.includes('Pipeline')) {
       return (
-        <svg className="w-16 h-16 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+        <svg viewBox="0 0 200 200" className="w-full h-full">
+          <defs>
+            <linearGradient id="pipelineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="hsl(var(--accent))" stopOpacity="0.6" />
+            </linearGradient>
+          </defs>
+          
+          {/* Data flow pipeline */}
+          <rect x="30" y="80" width="25" height="40" rx="5" fill="url(#pipelineGrad)" className="animate-pulse" />
+          <rect x="70" y="75" width="25" height="50" rx="5" fill="url(#pipelineGrad)" className="animate-pulse" style={{animationDelay: '0.3s'}} />
+          <rect x="110" y="70" width="25" height="60" rx="5" fill="url(#pipelineGrad)" className="animate-pulse" style={{animationDelay: '0.6s'}} />
+          <rect x="150" y="75" width="25" height="50" rx="5" fill="url(#pipelineGrad)" className="animate-pulse" style={{animationDelay: '0.9s'}} />
+          
+          {/* Connecting arrows */}
+          <path d="M55 100 L70 100" stroke="hsl(var(--primary))" strokeWidth="3" fill="none" strokeLinecap="round" markerEnd="url(#arrowhead)" />
+          <path d="M95 100 L110 100" stroke="hsl(var(--primary))" strokeWidth="3" fill="none" strokeLinecap="round" markerEnd="url(#arrowhead)" />
+          <path d="M135 100 L150 100" stroke="hsl(var(--primary))" strokeWidth="3" fill="none" strokeLinecap="round" markerEnd="url(#arrowhead)" />
+          
+          {/* Arrow marker */}
+          <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+              <polygon points="0 0, 10 3.5, 0 7" fill="hsl(var(--primary))" />
+            </marker>
+          </defs>
+          
+          {/* Data points */}
+          <circle cx="42" cy="60" r="3" fill="hsl(var(--accent))" className="animate-bounce" style={{animationDelay: '0s'}} />
+          <circle cx="82" cy="55" r="3" fill="hsl(var(--accent))" className="animate-bounce" style={{animationDelay: '0.3s'}} />
+          <circle cx="122" cy="50" r="3" fill="hsl(var(--accent))" className="animate-bounce" style={{animationDelay: '0.6s'}} />
+          <circle cx="162" cy="55" r="3" fill="hsl(var(--accent))" className="animate-bounce" style={{animationDelay: '0.9s'}} />
+          
+          {/* Processing indicators */}
+          <rect x="38" y="140" width="12" height="8" rx="2" fill="hsl(var(--primary))" opacity="0.6" />
+          <rect x="78" y="140" width="12" height="8" rx="2" fill="hsl(var(--primary))" opacity="0.6" />
+          <rect x="118" y="140" width="12" height="8" rx="2" fill="hsl(var(--primary))" opacity="0.6" />
+          <rect x="158" y="140" width="12" height="8" rx="2" fill="hsl(var(--primary))" opacity="0.6" />
         </svg>
       );
     }
     
-    // Default AI/tech icon
+    // Default tech/AI icon
     return (
-      <svg className="w-16 h-16 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+      <svg viewBox="0 0 200 200" className="w-full h-full">
+        <defs>
+          <linearGradient id="defaultGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.8" />
+            <stop offset="100%" stopColor="hsl(var(--accent))" stopOpacity="0.6" />
+          </linearGradient>
+        </defs>
+        <circle cx="100" cy="100" r="60" fill="url(#defaultGrad)" className="animate-pulse" />
+        <circle cx="85" cy="85" r="8" fill="hsl(var(--primary-foreground))" />
+        <circle cx="115" cy="85" r="8" fill="hsl(var(--primary-foreground))" />
+        <path d="M70 120 Q100 140 130 120" stroke="hsl(var(--primary-foreground))" strokeWidth="4" fill="none" strokeLinecap="round" />
       </svg>
     );
   };
@@ -49,12 +147,26 @@ const AnimatedProductThumbnail: React.FC<AnimatedProductThumbnailProps> = ({ tit
       
       {/* Content */}
       <div className="relative z-10 p-8 flex flex-col items-center justify-center h-full min-h-[200px]">
-        {/* Icon container with animation */}
-        <div className="mb-4 relative">
-          <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl scale-150 group-hover:scale-200 transition-transform duration-700"></div>
-          <div className="relative transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
-            {getIconByTitle(title)}
-          </div>
+        {/* Main thumbnail area - easily replaceable */}
+        <div className="w-full h-32 mb-4 relative">
+          {imageSrc ? (
+            // PNG image when provided - EASY TO REPLACE
+            <img 
+              src={imageSrc} 
+              alt={title}
+              className="w-full h-full object-cover rounded-lg group-hover:scale-110 transition-transform duration-500"
+            />
+          ) : (
+            // SVG placeholder when no image provided
+            <div className="w-full h-full flex items-center justify-center">
+              <div className="w-24 h-24 transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+                {getSVGByTitle(title)}
+              </div>
+            </div>
+          )}
+          
+          {/* Glow effect */}
+          <div className="absolute inset-0 bg-primary/20 rounded-lg blur-xl scale-150 group-hover:scale-200 transition-transform duration-700 -z-10"></div>
         </div>
         
         {/* Title */}
