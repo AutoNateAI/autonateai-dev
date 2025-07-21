@@ -32,6 +32,8 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
 
   const fetchAds = async () => {
     try {
+      console.log('Fetching ads for position:', position, 'category:', category, 'blogSlug:', blogSlug);
+      
       let query = supabase
         .from('advertisements')
         .select('*')
@@ -42,6 +44,8 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
 
       if (error) throw error;
 
+      console.log('Raw ads data:', data);
+
       // Filter ads based on targeting
       const filteredAds = (data || []).filter(ad => {
         if (ad.target_type === 'all') return true;
@@ -50,6 +54,7 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
         return false;
       });
 
+      console.log('Filtered ads:', filteredAds);
       setAds(filteredAds);
     } catch (error) {
       console.error('Error fetching ads:', error);
