@@ -31,7 +31,8 @@ const Coaching = () => {
         'Personal assessment of your current research workflow',
         'Custom AI integration strategy for your specific research domain',
         'Personalized prompt engineering for your research questions',
-        'Follow-up implementation plan and resource package'
+        'Follow-up implementation plan and resource package',
+        'Access to exclusive Discord community channel'
       ]
     },
     {
@@ -43,7 +44,8 @@ const Coaching = () => {
         'In-depth review of your grant proposal draft',
         'Strategic recommendations for strengthening your application',
         'AI-augmented language optimization for reviewer engagement',
-        '90-minute consultation to address specific concerns'
+        '90-minute consultation to address specific concerns',
+        'Access to exclusive Discord community channel'
       ]
     },
     {
@@ -55,7 +57,8 @@ const Coaching = () => {
         'Structured methodology for your specific literature review',
         'Custom AI prompt development for your research domain',
         'Synthesis strategy for integrating diverse literature',
-        'Framework development for organizing complex findings'
+        'Framework development for organizing complex findings',
+        'Access to exclusive Discord community channel'
       ]
     }
   ];
@@ -70,7 +73,8 @@ const Coaching = () => {
       'Custom workflow development for your team\'s needs',
       'Group training session (3 hours virtual or in-person)',
       'Implementation toolkit with templates and guides',
-      '30-day follow-up session to address challenges'
+      '30-day follow-up session to address challenges',
+      'Access to exclusive Discord community channel'
     ]
   };
 
@@ -254,7 +258,7 @@ const Coaching = () => {
               Request <span className="text-gradient">Coaching Services</span>
             </h2>
             <p className="text-xl text-muted-foreground">
-              Fill out the form below, and we'll contact you within 1 business day to discuss how we can support your research.
+              Fill out the form below, and we'll contact you within 1 business day to discuss how we can support your research. All coaching clients get access to our exclusive Discord community for ongoing support.
             </p>
           </div>
 

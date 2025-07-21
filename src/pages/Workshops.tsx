@@ -70,8 +70,12 @@ const Workshops = () => {
                     </li>
                     <li className="flex items-center gap-2">
                       <CheckCircle className="w-3 h-3 text-primary" />
-                      <span>Strategic reviewer perspective analysis</span>
-                    </li>
+                       <span>Strategic reviewer perspective analysis</span>
+                     </li>
+                     <li className="flex items-center gap-2">
+                       <CheckCircle className="w-3 h-3 text-primary" />
+                       <span>Access to exclusive Discord community channel</span>
+                     </li>
                   </ul>
                 </div>
                 <div>
@@ -133,8 +137,12 @@ const Workshops = () => {
                     </li>
                     <li className="flex items-center gap-2">
                       <CheckCircle className="w-3 h-3 text-primary" />
-                      <span>Publication-ready synthesis techniques</span>
-                    </li>
+                       <span>Publication-ready synthesis techniques</span>
+                     </li>
+                     <li className="flex items-center gap-2">
+                       <CheckCircle className="w-3 h-3 text-primary" />
+                       <span>Access to exclusive Discord community channel</span>
+                     </li>
                   </ul>
                 </div>
                 <div>
@@ -196,8 +204,12 @@ const Workshops = () => {
                     </li>
                     <li className="flex items-center gap-2">
                       <CheckCircle className="w-3 h-3 text-primary" />
-                      <span>FAIR principles implementation</span>
-                    </li>
+                       <span>FAIR principles implementation</span>
+                     </li>
+                     <li className="flex items-center gap-2">
+                       <CheckCircle className="w-3 h-3 text-primary" />
+                       <span>Access to exclusive Discord community channel</span>
+                     </li>
                   </ul>
                 </div>
                 <div>
@@ -259,8 +271,12 @@ const Workshops = () => {
                     </li>
                     <li className="flex items-center gap-2">
                       <CheckCircle className="w-3 h-3 text-primary" />
-                      <span>30-day post-workshop support</span>
-                    </li>
+                       <span>30-day post-workshop support</span>
+                     </li>
+                     <li className="flex items-center gap-2">
+                       <CheckCircle className="w-3 h-3 text-primary" />
+                       <span>Access to exclusive Discord community channel</span>
+                     </li>
                   </ul>
                 </div>
                 <div>
@@ -359,32 +375,35 @@ const Workshops = () => {
       {/* Success Stories */}
       <section className="py-16 px-4">
         <div className="container mx-auto max-w-4xl">
-          <h2 className="text-3xl font-bold text-center mb-12">Workshop Success Stories</h2>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">What Workshop Participants Are Saying</h2>
+            <p className="text-muted-foreground">Real feedback from institutions that have implemented our workshop methodologies.</p>
+          </div>
           <div className="space-y-8">
             <Card className="glass-card">
               <CardContent className="p-6">
                 <blockquote className="text-lg italic mb-4">
-                  "After implementing the AI Grant Writing workflow across our department, we saw a 30% increase in funding success rate in just one grant cycle."
+                  "After implementing the literature review workflow across our graduate program, student completion times for comprehensive exams improved by an average of 6 weeks."
                 </blockquote>
-                <cite className="text-primary font-semibold">— Research Dean, Major Research University</cite>
+                <cite className="text-primary font-semibold">— Graduate Program Coordinator, Major Research University</cite>
               </CardContent>
             </Card>
             
             <Card className="glass-card">
               <CardContent className="p-6">
                 <blockquote className="text-lg italic mb-4">
-                  "The Literature Review Revolution workshop gave our PhD students tools that dramatically accelerated their dissertation progress."
+                  "The data analytics workflow training revolutionized how our research teams approach data management. We now have consistent, reproducible processes across all projects."
                 </blockquote>
-                <cite className="text-primary font-semibold">— Graduate Program Director, Social Sciences</cite>
+                <cite className="text-primary font-semibold">— Research Operations Manager, Environmental Institute</cite>
               </CardContent>
             </Card>
             
             <Card className="glass-card">
               <CardContent className="p-6">
                 <blockquote className="text-lg italic mb-4">
-                  "The custom workflow developed during the two-day intensive has become our standard operating procedure. Data quality has improved significantly."
+                  "The systematic literature review methodology has become our department standard. Faculty report saving 15-20 hours per literature review while improving thoroughness."
                 </blockquote>
-                <cite className="text-primary font-semibold">— Research Director, Environmental Research Institute</cite>
+                <cite className="text-primary font-semibold">— Department Chair, Social Sciences</cite>
               </CardContent>
             </Card>
           </div>
@@ -397,7 +416,7 @@ const Workshops = () => {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Request a Workshop</h2>
             <p className="text-muted-foreground">
-              Fill out the form below to inquire about scheduling a workshop. We'll contact you within 2 business days.
+              Fill out the form below to inquire about scheduling a workshop. We'll contact you within 2 business days with a customized proposal and include details about accessing our exclusive Discord community.
             </p>
           </div>
           

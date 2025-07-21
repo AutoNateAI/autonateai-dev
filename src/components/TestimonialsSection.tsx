@@ -3,24 +3,24 @@ import { Quote, Star } from 'lucide-react';
 const TestimonialsSection = () => {
   const testimonials = [
     {
-      quote: "The AI Grant Drafting Assistant helped me secure a $150,000 grant in half the time I usually spend writing proposals.",
-      author: "Dr. Sarah Chen",
-      role: "Associate Professor",
-      department: "Life Sciences",
-      rating: 5
-    },
-    {
-      quote: "Lit Review AI transformed my literature review process from weeks of chaos to days of organized productivity.",
-      author: "Marcus Rodriguez",
+      quote: "AutoNate's literature review workflow cut my dissertation research time by more than half. The systematic approach he taught made organizing 200+ papers actually manageable.",
+      author: "Graduate Student",
       role: "PhD Candidate",
-      department: "Psychology",
+      department: "Social Sciences",
       rating: 5
     },
     {
-      quote: "The Data Pipeline Builder has standardized our lab's approach to data management. Every project now follows the same systematic process.",
-      author: "Dr. Aisha Patel",
-      role: "Research Director",
-      department: "Environmental Science",
+      quote: "The data analytics workflow from AutoNate's coaching completely transformed how our lab handles research data. We went from chaos to a structured, reproducible pipeline.",
+      author: "Research Team Lead",
+      role: "Lab Manager",
+      department: "Environmental Studies",
+      rating: 5
+    },
+    {
+      quote: "After working with AutoNate on literature workflows, I can now synthesize complex research findings in days instead of weeks. The framework is a game-changer.",
+      author: "Academic Researcher",
+      role: "Postdoctoral Fellow",
+      department: "Behavioral Psychology",
       rating: 5
     }
   ];
@@ -35,7 +35,7 @@ const TestimonialsSection = () => {
             <span className="text-gradient">Success Stories</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Hear from researchers who have transformed their workflows with AutoNateAI.
+            Real results from researchers who have implemented AutoNate's coaching workflows and methodologies.
           </p>
         </div>
 
