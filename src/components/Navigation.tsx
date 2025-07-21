@@ -85,7 +85,7 @@ const Navigation = () => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="lg:hidden absolute top-full left-0 right-0 glass-card border-t border-border/10 backdrop-blur-xl">
+          <div className="lg:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-xl border-t border-border/10 shadow-lg">
             <div className="px-4 py-6 space-y-4">
               <Link 
                 to="/products" 

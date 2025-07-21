@@ -98,7 +98,7 @@ const BlogSection = () => {
 
         {/* View All Blog CTA */}
         <div className="text-center">
-          <Link to="/blog" className="btn-primary text-lg px-8 py-4">
+          <Link to="/blog" className="btn-primary text-lg px-8 py-4 flex items-center justify-center max-w-sm mx-auto">
             View All Articles
             <ArrowRight className="ml-2 w-5 h-5" />
           </Link>
