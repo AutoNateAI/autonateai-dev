@@ -145,9 +145,9 @@ const Products = () => {
                         {product.price.replace('$', '')}
                         <span className="text-base font-normal text-muted-foreground">one-time purchase</span>
                       </div>
-                      <Link to={`/products/${product.id}`} className="btn-primary">
+                      <Link to={`/products/${product.id}`} className="btn-primary flex items-center gap-2 whitespace-nowrap">
                         Learn More
-                        <ArrowRight className="ml-2 w-5 h-5" />
+                        <ArrowRight className="w-5 h-5 flex-shrink-0" />
                       </Link>
                     </div>
 
