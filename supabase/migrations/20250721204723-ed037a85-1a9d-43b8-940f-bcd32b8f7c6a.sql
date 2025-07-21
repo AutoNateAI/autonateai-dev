@@ -1,0 +1,1 @@
+DELETE FROM advertisements WHERE created_at < '2025-07-21 20:40:00+00';
