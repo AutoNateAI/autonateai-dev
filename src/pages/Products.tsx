@@ -174,7 +174,7 @@ const Products = () => {
                       <div className="mb-6">
                         <AnimatedProductThumbnail 
                           title={product.title}
-                          className="w-full h-64"
+                          className="w-full h-128"
                         />
                       </div>
                       
