@@ -67,7 +67,7 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
       bottom: { width: '1200px', height: '400px', text: '1200x400 Bottom' }
     };
 
-    const size = sizeMap[position];
+    const size = sizeMap[position] || { width: '400px', height: '200px', text: '400x200 Default' };
 
     return (
       <div className="glass-card p-6 text-center relative overflow-hidden group">
