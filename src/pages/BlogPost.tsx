@@ -116,7 +116,7 @@ const BlogPost = () => {
     const renderedContent: JSX.Element[] = [];
     let currentHeadingLevel = 0;
     let headingCount = { h1: 0, h2: 0, h3: 0, h4: 0 };
-    let paragraphCount = 0;
+    let sectionCount = 0;
 
     lines.forEach((line, index) => {
       let element: JSX.Element | null = null;
@@ -125,34 +125,37 @@ const BlogPost = () => {
         const content = line.slice(2);
         currentHeadingLevel = 1;
         headingCount.h1++;
+        sectionCount++;
         element = <h1 key={index} className="text-4xl font-bold mb-6 text-foreground">{content}</h1>;
       } else if (line.startsWith('## ')) {
         const content = line.slice(3);
         currentHeadingLevel = 2;
         headingCount.h2++;
+        sectionCount++;
         element = <h2 key={index} className="text-3xl font-semibold mb-4 mt-8 text-foreground">{content}</h2>;
       } else if (line.startsWith('### ')) {
         const content = line.slice(4);
         currentHeadingLevel = 3;
         headingCount.h3++;
+        sectionCount++;
         element = <h3 key={index} className="text-2xl font-semibold mb-3 mt-6 text-foreground">{content}</h3>;
       } else if (line.startsWith('#### ')) {
         const content = line.slice(5);
         currentHeadingLevel = 4;
         headingCount.h4++;
+        sectionCount++;
         element = <h4 key={index} className="text-xl font-semibold mb-2 mt-4 text-foreground">{content}</h4>;
       } else if (line.trim() !== '') {
-        paragraphCount++;
         element = <p key={index} className="mb-4 text-foreground leading-relaxed">{line}</p>;
       }
 
       if (element) {
         renderedContent.push(element);
         
-        // Insert mobile ads every 4 paragraphs on small screens
-        if (isMobile && paragraphCount > 0 && paragraphCount % 4 === 0) {
+        // Insert mobile ads every 2 sections on small screens
+        if (isMobile && sectionCount > 0 && sectionCount % 2 === 0 && (line.startsWith('#'))) {
           renderedContent.push(
-            <div key={`mobile-ad-${paragraphCount}`} className="my-6 md:hidden">
+            <div key={`mobile-ad-${sectionCount}`} className="my-6 md:hidden">
               <AdSpace 
                 position="inline" 
                 category={post?.category}
