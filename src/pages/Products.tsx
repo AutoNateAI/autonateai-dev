@@ -185,6 +185,12 @@ const Products = () => {
                             <span className="text-muted-foreground">{feature}</span>
                           </li>
                         ))}
+                        <li className="flex items-start gap-3 pt-2 border-t border-border/20">
+                          <Check className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
+                          <span className="text-muted-foreground font-medium">
+                            <strong>Exclusive Discord Community Access</strong> - Get real-time support, ask questions as you implement workflows, and connect with other researchers using AutoNateAI systems
+                          </span>
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -264,7 +270,8 @@ const Products = () => {
           </h2>
           <p className="text-xl text-muted-foreground mb-12">
             All purchases are processed securely through Stripe's payment platform. 
-            After completing your purchase, you'll receive immediate access to your chosen workflow system.
+            After completing your purchase, you'll receive immediate access to your chosen workflow system 
+            <strong>plus exclusive access to our Discord community</strong> where you can get real-time help as you implement your workflows.
           </p>
           
           <div className="glass-card p-8 max-w-md mx-auto">

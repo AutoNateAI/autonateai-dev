@@ -34,8 +34,8 @@ const FeaturesSection = () => {
     },
     {
       icon: Users,
-      title: 'Expert Support',
-      description: 'Access to coaching and workshops from experienced research methodology specialists.',
+      title: 'Discord Community Support',
+      description: 'Join our exclusive Discord community for real-time help, Q&A, and collaboration with other researchers using our workflows.',
       color: 'text-pink-400'
     }
   ];
