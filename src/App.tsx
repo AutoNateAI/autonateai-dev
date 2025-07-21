@@ -8,6 +8,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import Index from "./pages/Index";
 import Products from "./pages/Products";
 import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import Coaching from "./pages/Coaching";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
@@ -34,6 +35,7 @@ const App = () => (
             <Route path="/products/lit-review-ai" element={<LitReviewAi />} />
             <Route path="/products/data-pipeline-builder" element={<DataPipelineBuilder />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/coaching" element={<Coaching />} />
             <Route path="/workshops" element={<Workshops />} />
             <Route path="/about" element={<About />} />

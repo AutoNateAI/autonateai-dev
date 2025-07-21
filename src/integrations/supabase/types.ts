@@ -14,7 +14,105 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      blogs: {
+        Row: {
+          author: string
+          category: string
+          content: string
+          created_at: string
+          excerpt: string
+          featured: boolean | null
+          id: string
+          published: boolean | null
+          read_time: string
+          slug: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author: string
+          category: string
+          content: string
+          created_at?: string
+          excerpt: string
+          featured?: boolean | null
+          id?: string
+          published?: boolean | null
+          read_time: string
+          slug: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author?: string
+          category?: string
+          content?: string
+          created_at?: string
+          excerpt?: string
+          featured?: boolean | null
+          id?: string
+          published?: boolean | null
+          read_time?: string
+          slug?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      email_popup_tracking: {
+        Row: {
+          browser_fingerprint: string
+          created_at: string
+          email: string | null
+          email_captured: boolean | null
+          id: string
+          last_shown: string
+        }
+        Insert: {
+          browser_fingerprint: string
+          created_at?: string
+          email?: string | null
+          email_captured?: boolean | null
+          id?: string
+          last_shown?: string
+        }
+        Update: {
+          browser_fingerprint?: string
+          created_at?: string
+          email?: string | null
+          email_captured?: boolean | null
+          id?: string
+          last_shown?: string
+        }
+        Relationships: []
+      }
+      form_submissions: {
+        Row: {
+          created_at: string
+          email: string
+          form_type: string
+          id: string
+          message: string | null
+          name: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          form_type: string
+          id?: string
+          message?: string | null
+          name?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          form_type?: string
+          id?: string
+          message?: string | null
+          name?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

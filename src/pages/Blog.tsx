@@ -1,90 +1,95 @@
-import Navigation from '../components/Navigation';
-import Footer from '../components/Footer';
-import { Calendar, User, Tag, ArrowRight, Search } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
+import { Search, Calendar, User, Tag, ArrowRight } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { supabase } from '@/integrations/supabase/client';
+import EmailPopup from '@/components/EmailPopup';
+import { useEmailPopup } from '@/hooks/useEmailPopup';
+
+interface BlogPost {
+  id: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  category: string;
+  author: string;
+  read_time: string;
+  slug: string;
+  featured: boolean;
+  published: boolean;
+  created_at: string;
+}
 
 const Blog = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
+  const { showPopup, closePopup } = useEmailPopup();
 
-  const blogPosts = [
-    {
-      title: "How We Used Our Data Pipeline to Discover Novel Correlations in Climate Data",
-      excerpt: "A detailed walkthrough of how our workflow system enabled efficient analysis of complex climate datasets, leading to breakthrough discoveries in climate pattern analysis.",
-      category: "Case Studies",
-      date: "July 18, 2025",
-      author: "Dr. Maria Santos",
-      readTime: "8 min read",
-      slug: "climate-data-correlations",
-      featured: true
-    },
-    {
-      title: "5 Ways AI Can Enhance Your Literature Review Process",
-      excerpt: "Practical strategies to leverage AI tools for more efficient and thorough literature reviews without compromising academic rigor or missing key insights.",
-      category: "Tutorials", 
-      date: "July 15, 2025",
-      author: "Dr. James Wilson",
-      readTime: "6 min read",
-      slug: "ai-enhance-lit-review",
-      featured: false
-    },
-    {
-      title: "Grant Writing Trends: What Funders Are Looking For in 2025",
-      excerpt: "Our analysis of recent grant awards reveals shifting priorities across major funding agencies and provides actionable insights for researchers.",
-      category: "Research",
-      date: "July 12, 2025", 
-      author: "Dr. Sarah Chen",
-      readTime: "10 min read",
-      slug: "grant-trends-2025",
-      featured: false
-    },
-    {
-      title: "Case Study: How We Secured a $250K Grant Using Our Own System",
-      excerpt: "Follow our step-by-step journey using the AI Grant Drafting Assistant to secure significant funding for our latest research initiative.",
-      category: "Case Studies",
-      date: "July 10, 2025",
-      author: "AutoNateAI Team",
-      readTime: "12 min read",
-      slug: "grant-success-story",
-      featured: false
-    },
-    {
-      title: "Prompt Engineering for Academic Research: A Beginner's Guide",
-      excerpt: "Learn the fundamentals of crafting effective prompts for AI tools in research contexts, with examples and best practices.",
-      category: "Tutorials",
-      date: "July 8, 2025",
-      author: "Dr. Marcus Johnson",
-      readTime: "7 min read",
-      slug: "prompt-engineering-basics",
-      featured: false
-    },
-    {
-      title: "The Future of Research Workflows: AI Integration Trends",
-      excerpt: "Exploring emerging trends in AI-assisted research and what they mean for the future of academic productivity.",
-      category: "Research",
-      date: "July 5, 2025",
-      author: "Dr. Emily Rodriguez",
-      readTime: "9 min read",
-      slug: "future-research-workflows",
-      featured: false
+  useEffect(() => {
+    fetchBlogPosts();
+  }, []);
+
+  const fetchBlogPosts = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('blogs')
+        .select('*')
+        .eq('published', true)
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setBlogPosts(data || []);
+    } catch (error) {
+      console.error('Error fetching blog posts:', error);
+    } finally {
+      setLoading(false);
     }
-  ];
+  };
 
   const categories = ["All", "Case Studies", "Tutorials", "Research", "Expert Perspectives"];
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const filteredPosts = blogPosts.filter(post => {
-    const matchesCategory = selectedCategory === "All" || post.category === selectedCategory;
     const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         post.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesCategory && matchesSearch;
+                         post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         post.author.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory === "All" || post.category === selectedCategory;
+    return matchesSearch && matchesCategory;
   });
 
-  const featuredPost = blogPosts.find(post => post.featured);
+  const featuredPost = filteredPosts.find(post => post.featured);
   const regularPosts = filteredPosts.filter(post => !post.featured);
 
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navigation />
+        <div className="flex items-center justify-center min-h-[60vh]">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+            <p className="text-muted-foreground">Loading blog posts...</p>
+          </div>
+        </div>
+        <Footer />
+        <EmailPopup isOpen={showPopup} onClose={closePopup} />
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       <Navigation />
       
       {/* Hero Section */}
@@ -172,7 +177,7 @@ const Blog = () => {
                   <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6">
                     <div className="flex items-center gap-1">
                       <Calendar className="w-4 h-4" />
-                      {featuredPost.date}
+                      {formatDate(featuredPost.created_at)}
                     </div>
                     <div className="flex items-center gap-1">
                       <User className="w-4 h-4" />
@@ -214,42 +219,46 @@ const Blog = () => {
             {/* Main Content */}
             <div className="lg:col-span-2">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {regularPosts.map((post, index) => (
-                  <article key={index} className="glass-card group hover:scale-105 transition-all duration-500">
-                    <div className="p-6">
-                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20 mb-4">
-                        <Tag className="w-3 h-3" />
-                        {post.category}
-                      </div>
-                      
-                      <h3 className="text-lg font-bold mb-3 group-hover:text-primary transition-colors leading-tight">
-                        {post.title}
-                      </h3>
-                      
-                      <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
-                        {post.excerpt}
-                      </p>
-
-                      <div className="flex items-center gap-3 text-xs text-muted-foreground mb-4">
-                        <div className="flex items-center gap-1">
-                          <Calendar className="w-3 h-3" />
-                          {post.date}
+                {regularPosts.map((post) => (
+                  <Link 
+                    key={post.id}
+                    to={`/blog/${post.slug}`}
+                    className="block group hover:scale-[1.02] transition-all duration-300"
+                  >
+                    <article className="glass-card h-full">
+                      <div className="p-6">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20 mb-4">
+                          <Tag className="w-3 h-3" />
+                          {post.category}
                         </div>
-                        <div className="flex items-center gap-1">
-                          <User className="w-3 h-3" />
-                          {post.author}
+                        
+                        <h3 className="text-lg font-bold mb-3 group-hover:text-primary transition-colors leading-tight">
+                          {post.title}
+                        </h3>
+                        
+                        <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
+                          {post.excerpt}
+                        </p>
+
+                        <div className="flex items-center gap-3 text-xs text-muted-foreground mb-4">
+                          <div className="flex items-center gap-1">
+                            <Calendar className="w-3 h-3" />
+                            {formatDate(post.created_at)}
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <User className="w-3 h-3" />
+                            {post.author}
+                          </div>
+                          <div>{post.read_time}</div>
+                        </div>
+
+                        <div className="inline-flex items-center gap-2 text-primary hover:text-primary-glow transition-colors font-medium text-sm">
+                          Read Article
+                          <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                         </div>
                       </div>
-
-                      <Link
-                        to={`/blog/${post.slug}`}
-                        className="inline-flex items-center gap-2 text-primary hover:text-primary-glow transition-colors font-medium text-sm"
-                      >
-                        Read Article
-                        <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                      </Link>
-                    </div>
-                  </article>
+                    </article>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -287,13 +296,13 @@ const Blog = () => {
                 <h3 className="text-lg font-bold mb-4">Categories</h3>
                 <div className="space-y-2">
                   {categories.slice(1).map((category) => (
-                    <Link
+                    <button
                       key={category}
-                      to={`/blog/category/${category.toLowerCase().replace(' ', '-')}`}
-                      className="block text-muted-foreground hover:text-primary transition-colors text-sm"
+                      onClick={() => setSelectedCategory(category)}
+                      className="block text-muted-foreground hover:text-primary transition-colors text-sm w-full text-left"
                     >
                       {category}
-                    </Link>
+                    </button>
                   ))}
                 </div>
               </div>
@@ -311,6 +320,7 @@ const Blog = () => {
       </section>
 
       <Footer />
+      <EmailPopup isOpen={showPopup} onClose={closePopup} />
     </div>
   );
 };

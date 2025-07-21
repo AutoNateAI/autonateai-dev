@@ -6,8 +6,12 @@ import TestimonialsSection from '../components/TestimonialsSection';
 import BlogSection from '../components/BlogSection';
 import NewsletterSection from '../components/NewsletterSection';
 import Footer from '../components/Footer';
+import EmailPopup from '@/components/EmailPopup';
+import { useEmailPopup } from '@/hooks/useEmailPopup';
 
 const Index = () => {
+  const { showPopup, closePopup } = useEmailPopup();
+
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -18,6 +22,7 @@ const Index = () => {
       <BlogSection />
       <NewsletterSection />
       <Footer />
+      <EmailPopup isOpen={showPopup} onClose={closePopup} />
     </div>
   );
 };
