@@ -108,9 +108,6 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
     );
   }
 
-  // Debug: Add console log to see state
-  console.log(`AdSpace ${position} - ads.length: ${ads.length}, loading: ${loading}`);
-
   if (ads.length === 0) {
     return <div className={className}>{getPlaceholderContent()}</div>;
   }
