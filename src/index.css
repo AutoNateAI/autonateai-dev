@@ -180,14 +180,16 @@
   .glass-card {
     @apply relative backdrop-blur-md border border-border/20 rounded-2xl;
     background: var(--gradient-glass);
-    box-shadow: var(--shadow-glass);
+    box-shadow: var(--shadow-elegant);
+    border-color: hsl(var(--primary) / 0.3);
+    transform: translateY(-4px);
     transition: var(--transition-smooth);
   }
 
   .glass-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-elegant);
-    border-color: hsl(var(--primary) / 0.3);
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-glow);
+    border-color: hsl(var(--primary) / 0.4);
   }
 
   .glass-card::before {
