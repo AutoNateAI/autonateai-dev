@@ -373,6 +373,17 @@ const BlogPost = () => {
         </div>
       )}
 
+      {/* Bottom Ad Space */}
+      <div className="container mx-auto px-6 py-8 border-t border-border">
+        <div className="max-w-4xl mx-auto">
+          <AdSpace 
+            position="bottom" 
+            category={post.category}
+            blogSlug={post.slug}
+          />
+        </div>
+      </div>
+
       <Footer />
     </div>
   );
