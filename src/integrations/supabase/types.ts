@@ -14,6 +14,60 @@ export type Database = {
   }
   public: {
     Tables: {
+      advertisements: {
+        Row: {
+          alt_text: string | null
+          created_at: string
+          end_date: string | null
+          height: number | null
+          id: string
+          image_url: string | null
+          is_active: boolean | null
+          link_url: string | null
+          position: string
+          start_date: string | null
+          target_type: string
+          target_value: string | null
+          title: string
+          updated_at: string
+          width: number | null
+        }
+        Insert: {
+          alt_text?: string | null
+          created_at?: string
+          end_date?: string | null
+          height?: number | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          link_url?: string | null
+          position: string
+          start_date?: string | null
+          target_type?: string
+          target_value?: string | null
+          title: string
+          updated_at?: string
+          width?: number | null
+        }
+        Update: {
+          alt_text?: string | null
+          created_at?: string
+          end_date?: string | null
+          height?: number | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          link_url?: string | null
+          position?: string
+          start_date?: string | null
+          target_type?: string
+          target_value?: string | null
+          title?: string
+          updated_at?: string
+          width?: number | null
+        }
+        Relationships: []
+      }
       blogs: {
         Row: {
           author: string

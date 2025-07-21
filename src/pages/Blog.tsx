@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
 import EmailPopup from '@/components/EmailPopup';
 import { useEmailPopup } from '@/hooks/useEmailPopup';
+import AdSpace from '@/components/AdSpace';
 
 interface BlogPost {
   id: string;
@@ -171,14 +172,12 @@ const Blog = () => {
             <h2 className="text-2xl font-bold mb-8">Featured Article</h2>
             <div className="glass-card overflow-hidden">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-                {/* Ad Space - Featured Article */}
-                <div className="bg-gradient-to-br from-primary/10 to-accent/10 p-8 flex items-center justify-center border-r border-border/20">
-                  <div className="text-center">
-                    <div className="text-sm text-muted-foreground mb-2">Advertisement</div>
-                    <div className="text-lg font-semibold text-primary">Your Ad Here</div>
-                    <div className="text-sm text-muted-foreground mt-2">728x300 Featured Spot</div>
-                  </div>
-                </div>
+                {/* Featured Ad Space */}
+                <AdSpace 
+                  position="featured" 
+                  category={featuredPost.category}
+                  className="border-r border-border/20"
+                />
 
                 <div className="p-8">
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20 mb-4">
@@ -226,12 +225,9 @@ const Blog = () => {
             <h2 className="text-2xl font-bold">
               {selectedCategory === "All" ? "Recent Posts" : selectedCategory}
             </h2>
-            {/* Ad Space - Banner */}
-            <div className="hidden lg:block glass-card p-4 border border-border/20">
-              <div className="text-center">
-                <div className="text-xs text-muted-foreground mb-1">Advertisement</div>
-                <div className="text-sm font-medium text-primary">728x90 Banner</div>
-              </div>
+            {/* Banner Ad Space */}
+            <div className="hidden lg:block">
+              <AdSpace position="banner" />
             </div>
           </div>
 
@@ -295,12 +291,7 @@ const Blog = () => {
             {/* Sidebar */}
             <div className="space-y-8">
               {/* Ad Space - Sidebar */}
-              <div className="glass-card p-6 text-center">
-                <div className="text-sm text-muted-foreground mb-2">Advertisement</div>
-                <div className="text-lg font-semibold text-primary mb-2">Your Ad Here</div>
-                <div className="text-sm text-muted-foreground">300x250 Sidebar</div>
-                <div className="mt-4 h-32 bg-gradient-to-br from-primary/5 to-accent/5 rounded-lg"></div>
-              </div>
+              <AdSpace position="sidebar" />
 
               {/* Newsletter Signup */}
               <div className="glass-card p-6">
@@ -336,13 +327,8 @@ const Blog = () => {
                 </div>
               </div>
 
-              {/* Ad Space - Second Sidebar */}
-              <div className="glass-card p-6 text-center">
-                <div className="text-sm text-muted-foreground mb-2">Advertisement</div>
-                <div className="text-lg font-semibold text-primary mb-2">Your Ad Here</div>
-                <div className="text-sm text-muted-foreground">300x600 Sidebar</div>
-                <div className="mt-4 h-48 bg-gradient-to-br from-accent/5 to-primary/5 rounded-lg"></div>
-              </div>
+              {/* Second Ad Space */}
+              <AdSpace position="sidebar" />
             </div>
           </div>
         </div>

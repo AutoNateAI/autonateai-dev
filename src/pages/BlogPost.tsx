@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import { Calendar, User, Clock, ArrowLeft, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
+import AdSpace from '@/components/AdSpace';
 
 interface BlogPost {
   id: string;
@@ -273,12 +274,11 @@ const BlogPost = () => {
             <div className="lg:col-span-1 space-y-8">
               {/* Ad Space - Sidebar */}
               <div className="sticky top-8 space-y-6">
-                <div className="glass-card p-6 text-center">
-                  <div className="text-sm text-muted-foreground mb-2">Advertisement</div>
-                  <div className="text-lg font-semibold text-primary mb-2">Your Ad Here</div>
-                  <div className="text-sm text-muted-foreground">300x250 Sidebar</div>
-                  <div className="mt-4 h-32 bg-gradient-to-br from-primary/5 to-accent/5 rounded-lg"></div>
-                </div>
+                <AdSpace 
+                  position="sidebar" 
+                  category={post.category}
+                  blogSlug={post.slug}
+                />
 
                 {/* Newsletter Signup */}
                 <div className="glass-card p-6">
@@ -299,12 +299,11 @@ const BlogPost = () => {
                 </div>
 
                 {/* Second Ad Space */}
-                <div className="glass-card p-6 text-center">
-                  <div className="text-sm text-muted-foreground mb-2">Advertisement</div>
-                  <div className="text-lg font-semibold text-primary mb-2">Your Ad Here</div>
-                  <div className="text-sm text-muted-foreground">300x600 Sidebar</div>
-                  <div className="mt-4 h-48 bg-gradient-to-br from-accent/5 to-primary/5 rounded-lg"></div>
-                </div>
+                <AdSpace 
+                  position="sidebar" 
+                  category={post.category}
+                  blogSlug={post.slug}
+                />
               </div>
             </div>
           </div>
@@ -314,12 +313,11 @@ const BlogPost = () => {
       {/* Banner Ad */}
       <div className="container mx-auto px-6 py-8">
         <div className="max-w-4xl mx-auto">
-          <div className="glass-card p-6 text-center">
-            <div className="text-sm text-muted-foreground mb-2">Advertisement</div>
-            <div className="text-lg font-semibold text-primary mb-2">Your Ad Here</div>
-            <div className="text-sm text-muted-foreground">728x90 Banner</div>
-            <div className="mt-4 h-20 bg-gradient-to-r from-primary/5 to-accent/5 rounded-lg"></div>
-          </div>
+          <AdSpace 
+            position="banner" 
+            category={post.category}
+            blogSlug={post.slug}
+          />
         </div>
       </div>
 

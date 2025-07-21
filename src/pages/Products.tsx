@@ -2,6 +2,7 @@ import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import { ArrowRight, FileText, BookOpen, Database, DollarSign, Check, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import AnimatedProductThumbnail from '@/components/AnimatedProductThumbnail';
 
 const Products = () => {
   const products = [
@@ -169,12 +170,12 @@ const Products = () => {
                   {/* Features Card with Thumbnail Placeholder */}
                   <div className={isEven ? '' : 'lg:col-start-1 lg:row-start-1'}>
                     <div className="glass-card p-8">
-                      {/* Thumbnail Placeholder */}
-                      <div className="w-full h-48 border-2 border-dashed border-primary/30 rounded-xl mb-6 flex items-center justify-center bg-primary/5">
-                        <div className="text-center text-muted-foreground">
-                          <div className="text-lg font-medium mb-2">Product Thumbnail</div>
-                          <div className="text-sm">Add your product image here</div>
-                        </div>
+                      {/* Animated Product Thumbnail */}
+                      <div className="mb-6">
+                        <AnimatedProductThumbnail 
+                          title={product.title}
+                          className="w-full h-48"
+                        />
                       </div>
                       
                       <h3 className="text-xl font-bold mb-6">What You'll Get:</h3>
