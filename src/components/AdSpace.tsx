@@ -27,6 +27,8 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
+    setAds([]);
     fetchAds();
   }, [position, category, blogSlug]);
 
