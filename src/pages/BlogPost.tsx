@@ -63,6 +63,10 @@ const BlogPost = () => {
           : []
       };
       
+      console.log('Blog post data:', postData);
+      console.log('Hero image URL:', postData.hero_image);
+      console.log('Transformed post:', transformedPost);
+      
       setPost(transformedPost);
 
       // Fetch related posts (same category, exclude current post)
