@@ -152,7 +152,7 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
                     <img 
                       src={ad.image_url} 
                       alt={ad.alt_text || ad.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   ) : (
                     <div className="p-6 text-center w-full">
@@ -170,7 +170,7 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
                     <img 
                       src={ad.image_url} 
                       alt={ad.alt_text || ad.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   ) : (
                     <div className="p-6 text-center w-full">
