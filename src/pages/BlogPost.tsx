@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Calendar, User, Clock, ArrowLeft, ArrowRight } from 'lucide-react';
@@ -112,83 +113,48 @@ const BlogPost = () => {
   };
 
   const renderMarkdownContent = (content: string, contentImages: ContentImage[] = []) => {
-    const lines = content.split('\n');
+    // Split content into sections based on headings
+    const sections = content.split(/(?=^#{1,4}\s)/m).filter(section => section.trim());
     const renderedContent: JSX.Element[] = [];
-    let currentHeadingLevel = 0;
-    let headingCount = { h1: 0, h2: 0, h3: 0, h4: 0 };
-    let sectionCount = 0;
-
-    lines.forEach((line, index) => {
-      let element: JSX.Element | null = null;
+    
+    sections.forEach((section, index) => {
+      // Add the markdown section
+      renderedContent.push(
+        <div key={`section-${index}`} className="mb-6 prose prose-lg max-w-none dark:prose-invert">
+          <ReactMarkdown
+            components={{
+              h1: ({ children }) => <h1 className="text-4xl font-bold mb-6 text-foreground">{children}</h1>,
+              h2: ({ children }) => <h2 className="text-3xl font-semibold mb-4 mt-8 text-foreground">{children}</h2>,
+              h3: ({ children }) => <h3 className="text-2xl font-semibold mb-3 mt-6 text-foreground">{children}</h3>,
+              h4: ({ children }) => <h4 className="text-xl font-semibold mb-2 mt-4 text-foreground">{children}</h4>,
+              p: ({ children }) => <p className="mb-4 text-foreground leading-relaxed">{children}</p>,
+              strong: ({ children }) => <strong className="font-semibold text-foreground">{children}</strong>,
+              em: ({ children }) => <em className="italic text-foreground">{children}</em>,
+              ul: ({ children }) => <ul className="list-disc list-inside mb-4 text-foreground">{children}</ul>,
+              ol: ({ children }) => <ol className="list-decimal list-inside mb-4 text-foreground">{children}</ol>,
+              li: ({ children }) => <li className="mb-1 text-foreground">{children}</li>,
+              blockquote: ({ children }) => <blockquote className="border-l-4 border-primary pl-4 italic mb-4 text-muted-foreground">{children}</blockquote>,
+              code: ({ children }) => <code className="bg-muted px-1 py-0.5 rounded text-sm font-mono">{children}</code>,
+              pre: ({ children }) => <pre className="bg-muted p-4 rounded-lg overflow-x-auto mb-4">{children}</pre>,
+            }}
+          >
+            {section}
+          </ReactMarkdown>
+        </div>
+      );
       
-      if (line.startsWith('# ')) {
-        const content = line.slice(2);
-        currentHeadingLevel = 1;
-        headingCount.h1++;
-        sectionCount++;
-        element = <h1 key={index} className="text-4xl font-bold mb-6 text-foreground">{content}</h1>;
-      } else if (line.startsWith('## ')) {
-        const content = line.slice(3);
-        currentHeadingLevel = 2;
-        headingCount.h2++;
-        sectionCount++;
-        element = <h2 key={index} className="text-3xl font-semibold mb-4 mt-8 text-foreground">{content}</h2>;
-      } else if (line.startsWith('### ')) {
-        const content = line.slice(4);
-        currentHeadingLevel = 3;
-        headingCount.h3++;
-        sectionCount++;
-        element = <h3 key={index} className="text-2xl font-semibold mb-3 mt-6 text-foreground">{content}</h3>;
-      } else if (line.startsWith('#### ')) {
-        const content = line.slice(5);
-        currentHeadingLevel = 4;
-        headingCount.h4++;
-        sectionCount++;
-        element = <h4 key={index} className="text-xl font-semibold mb-2 mt-4 text-foreground">{content}</h4>;
-      } else if (line.trim() !== '') {
-        element = <p key={index} className="mb-4 text-foreground leading-relaxed">{line}</p>;
-      }
-
-      if (element) {
-        renderedContent.push(element);
-        
-        // Insert mobile ads every 2 sections on small screens (only after headings)
-        if (isMobile && sectionCount > 1 && (sectionCount - 1) % 2 === 0 && line.startsWith('#')) {
-          renderedContent.push(
-            <div key={`mobile-ad-${sectionCount}`} className="my-6 md:hidden">
-              <AdSpace 
-                position="inline" 
-                category={post?.category}
-                blogSlug={post?.slug}
-                className="w-full max-w-sm mx-auto"
-              />
-            </div>
-          );
-        }
-        
-        // Insert content images after specific headings
-        const positionKey = `after_heading_${currentHeadingLevel}`;
-        const imageForPosition = contentImages.find(img => 
-          img.position === positionKey && 
-          headingCount[`h${currentHeadingLevel}` as keyof typeof headingCount] === 1
+      // Insert mobile ads every 2 sections on small screens (starting after first section)
+      if (isMobile && index > 0 && index % 2 === 0) {
+        renderedContent.push(
+          <div key={`mobile-ad-${index}`} className="my-8 md:hidden">
+            <AdSpace 
+              position="inline" 
+              category={post?.category}
+              blogSlug={post?.slug}
+              className="w-full max-w-sm mx-auto"
+            />
+          </div>
         );
-        
-        if (imageForPosition && (line.startsWith('#') || line.startsWith('##') || line.startsWith('###') || line.startsWith('####'))) {
-          renderedContent.push(
-            <div key={`image-${index}`} className="my-8">
-              <img 
-                src={imageForPosition.url} 
-                alt={imageForPosition.alt}
-                className="w-full rounded-lg shadow-lg"
-              />
-              {imageForPosition.caption && (
-                <p className="text-sm text-muted-foreground mt-2 text-center italic">
-                  {imageForPosition.caption}
-                </p>
-              )}
-            </div>
-          );
-        }
       }
     });
 
