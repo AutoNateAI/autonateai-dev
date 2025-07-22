@@ -47,7 +47,9 @@ const BlogPost = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 1024); // Include iPad and smaller
+      const mobile = window.innerWidth <= 1024;
+      console.log('Window width:', window.innerWidth, 'isMobile:', mobile);
+      setIsMobile(mobile);
     };
     
     handleResize();
@@ -154,14 +156,18 @@ const BlogPost = () => {
       // Insert mobile ads every 2 major sections (only after major headings)
       // Show after major sections 2, 4, 6, etc.
       if (isMobile && isMajorHeading && majorSectionCount > 1 && majorSectionCount % 2 === 0) {
+        console.log('Rendering mobile ad at section:', majorSectionCount, 'isMobile:', isMobile);
         renderedContent.push(
-          <div key={`mobile-ad-${majorSectionCount}`} className="my-8 lg:hidden w-full relative z-10">
-            <AdSpace 
-              position="inline" 
-              category={post?.category}
-              blogSlug={post?.slug}
-              className="w-full relative z-10"
-            />
+          <div key={`mobile-ad-${majorSectionCount}`} className="my-8 lg:hidden w-full relative z-10" style={{ pointerEvents: 'auto' }}>
+            <div className="bg-red-500/20 p-2 border border-red-500 rounded">
+              <p className="text-xs text-red-500 mb-2">DEBUG: Mobile Ad Section {majorSectionCount}</p>
+              <AdSpace 
+                position="inline" 
+                category={post?.category}
+                blogSlug={post?.slug}
+                className="w-full relative z-10"
+              />
+            </div>
           </div>
         );
       }
