@@ -169,15 +169,35 @@ const Blog = () => {
       {featuredPost && selectedCategory === "All" && !searchTerm && (
         <section className="pb-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Featured Ad Space Above */}
+            <div className="mb-8">
+              <div className="text-xs text-muted-foreground mb-2 text-center">Advertisement</div>
+              <AdSpace 
+                position="featured" 
+                category={featuredPost.category}
+              />
+            </div>
+
             <h2 className="text-2xl font-bold mb-8">Featured Article</h2>
             <div className="glass-card overflow-hidden">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-                {/* Featured Ad Space */}
-                <AdSpace 
-                  position="featured" 
-                  category={featuredPost.category}
-                  className="border-r border-border/20"
-                />
+                {/* Featured Post Hero Image */}
+                <div className="relative overflow-hidden">
+                  {featuredPost.hero_image ? (
+                    <img 
+                      src={featuredPost.hero_image} 
+                      alt={featuredPost.hero_image_alt || featuredPost.title}
+                      className="w-full h-full object-cover min-h-[300px] lg:min-h-[400px]"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center min-h-[300px] lg:min-h-[400px]">
+                      <div className="text-center">
+                        <Tag className="w-12 h-12 text-primary/60 mx-auto mb-4" />
+                        <p className="text-muted-foreground text-sm">Featured Article</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
 
                 <div className="p-8">
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20 mb-4">
