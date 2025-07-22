@@ -30,16 +30,22 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
   const [loading, setLoading] = useState(true);
 
   const getAdLink = (ad: Advertisement) => {
+    console.log('getAdLink called for ad:', ad);
     if (ad.link_type === 'product' && ad.product_id) {
+      console.log('Returning product link:', `/${ad.product_id}`);
       return `/${ad.product_id}`;
     } else if (ad.link_url) {
+      console.log('Returning external link:', ad.link_url);
       return ad.link_url;
     }
+    console.log('No link found for ad');
     return null;
   };
 
   const isExternalLink = (ad: Advertisement) => {
-    return ad.link_url && (ad.link_type === 'external' || ad.link_url.startsWith('http'));
+    const result = ad.link_url && (ad.link_type === 'external' || ad.link_url.startsWith('http'));
+    console.log('isExternalLink for ad:', ad.title, 'result:', result);
+    return result;
   };
 
   useEffect(() => {
@@ -129,7 +135,9 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
 
   return (
     <div className={`w-full ${className}`}>
-      {ads.map((ad) => (
+      {ads.map((ad) => {
+        console.log('Rendering ad:', ad.title, 'link_url:', ad.link_url, 'link_type:', ad.link_type, 'product_id:', ad.product_id);
+        return (
         <div key={ad.id} className="w-full overflow-hidden group hover:shadow-lg transition-all duration-300 rounded-lg">
           {(ad.link_url || ad.product_id) ? (
             <>
@@ -189,7 +197,8 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
             </div>
           )}
         </div>
-      ))}
+        );
+      })}
     </div>
   );
 };
