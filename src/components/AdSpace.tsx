@@ -34,8 +34,8 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
     if (ad.link_type === 'product' && ad.product_id) {
       // Navigate to product page
       navigate(`/${ad.product_id}`);
-    } else if (ad.link_type === 'external' && ad.link_url) {
-      // Open external link in new tab
+    } else if (ad.link_url) {
+      // Open external link in new tab (supports both external type and legacy ads)
       window.open(ad.link_url, '_blank', 'noopener,noreferrer');
     }
   };
@@ -129,7 +129,7 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
     <div className={`w-full ${className}`}>
       {ads.map((ad) => (
         <div key={ad.id} className="w-full overflow-hidden group hover:shadow-lg transition-all duration-300 rounded-lg">
-          {(ad.link_type && (ad.link_url || ad.product_id)) ? (
+          {(ad.link_url || ad.product_id) ? (
             <div 
               onClick={() => handleAdClick(ad)}
               className="block w-full cursor-pointer"
