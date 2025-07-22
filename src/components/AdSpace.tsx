@@ -147,6 +147,10 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="block w-full cursor-pointer"
+                  onClick={(e) => {
+                    console.log('External ad clicked:', ad.title, 'href:', getAdLink(ad));
+                    // Let the default behavior handle the navigation
+                  }}
                 >
                   {ad.image_url ? (
                     <img 
@@ -165,6 +169,9 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
                 <Link 
                   to={getAdLink(ad)!}
                   className="block w-full cursor-pointer"
+                  onClick={(e) => {
+                    console.log('Internal ad clicked:', ad.title, 'to:', getAdLink(ad));
+                  }}
                 >
                   {ad.image_url ? (
                     <img 
