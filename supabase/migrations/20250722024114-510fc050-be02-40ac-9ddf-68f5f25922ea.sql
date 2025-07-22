@@ -1,0 +1,1 @@
+UPDATE blogs SET author = 'AutoNate' WHERE author != 'AutoNate';
