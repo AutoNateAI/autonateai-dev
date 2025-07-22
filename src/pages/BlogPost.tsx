@@ -151,7 +151,20 @@ const BlogPost = () => {
         </div>
       );
       
-      // Mobile ads are now handled outside the prose container
+      // Insert mobile ads every 2 major sections (only after major headings)
+      // Show after major sections 2, 4, 6, etc.
+      if (isMobile && isMajorHeading && majorSectionCount > 1 && majorSectionCount % 2 === 0) {
+        renderedContent.push(
+          <div key={`mobile-ad-${majorSectionCount}`} className="my-8 lg:hidden w-full relative z-10">
+            <AdSpace 
+              position="inline" 
+              category={post?.category}
+              blogSlug={post?.slug}
+              className="w-full relative z-10"
+            />
+          </div>
+        );
+      }
     });
 
     return renderedContent;
@@ -252,17 +265,17 @@ const BlogPost = () => {
               <article className="prose prose-lg max-w-none">
                  <div className="text-lg leading-relaxed">
                    {renderMarkdownContent(post.content, post.content_images)}
+                   
+                   {/* Inline Ad Space within content */}
+                   <div className="my-12">
+                     <AdSpace 
+                       position="inline" 
+                       category={post.category}
+                       blogSlug={post.slug}
+                     />
+                   </div>
                  </div>
               </article>
-              
-              {/* Inline Ad Space within content - OUTSIDE prose */}
-              <div className="my-12">
-                <AdSpace 
-                  position="inline" 
-                  category={post.category}
-                  blogSlug={post.slug}
-                />
-              </div>
             </div>
             
             {/* Sidebar with Ads - Desktop Only */}
