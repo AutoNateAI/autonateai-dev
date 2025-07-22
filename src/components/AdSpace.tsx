@@ -61,6 +61,14 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
   };
 
   const getPlaceholderContent = () => {
+    const placeholderImages = {
+      sidebar: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=300&h=250&fit=crop',
+      banner: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=728&h=90&fit=crop',
+      featured: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=728&h=300&fit=crop',
+      inline: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=200&fit=crop',
+      bottom: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=1200&h=400&fit=crop'
+    };
+
     const sizeMap = {
       sidebar: { width: '300px', height: '250px', text: '300x250 Sidebar' },
       banner: { width: '728px', height: '90px', text: '728x90 Banner' },
@@ -70,27 +78,22 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
     };
 
     const size = sizeMap[position] || { width: '400px', height: '200px', text: '400x200 Default' };
+    const imageUrl = placeholderImages[position] || placeholderImages.inline;
 
     return (
-      <div className="glass-card p-6 text-center relative overflow-hidden group">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-primary/10 animate-pulse"></div>
-        <div className="relative z-10">
-          <div className="text-sm text-muted-foreground mb-2">Advertisement</div>
-          <div className="text-lg font-semibold text-primary mb-2">Your Ad Here</div>
-          <div className="text-sm text-muted-foreground mb-4">{size.text}</div>
-          
-          {/* Animated placeholder content */}
-          <div 
-            className="mx-auto bg-gradient-to-br from-primary/10 to-accent/10 rounded-lg flex items-center justify-center border-2 border-dashed border-primary/20 group-hover:border-primary/40 transition-all duration-300"
+      <div className="glass-card overflow-hidden relative group hover:shadow-lg transition-all duration-300">
+        <div className="relative">
+          <img 
+            src={imageUrl}
+            alt="Advertisement placeholder"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             style={{ width: size.width, height: size.height, maxWidth: '100%' }}
-          >
-            <div className="text-center">
-              <div className="w-12 h-12 mx-auto mb-2 bg-primary/20 rounded-full animate-bounce flex items-center justify-center">
-                <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <div className="text-xs text-muted-foreground">Click to advertise</div>
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end">
+            <div className="p-4 text-white w-full">
+              <div className="text-sm opacity-80 mb-1">Advertisement</div>
+              <div className="font-semibold text-lg">Your Ad Here</div>
+              <div className="text-xs opacity-70">{size.text}</div>
             </div>
           </div>
         </div>
