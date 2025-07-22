@@ -111,7 +111,11 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
   }
 
   if (ads.length === 0) {
-    return null;
+    return (
+      <div className={className}>
+        {getPlaceholderContent()}
+      </div>
+    );
   }
 
   return (

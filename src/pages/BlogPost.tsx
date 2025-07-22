@@ -47,7 +47,7 @@ const BlogPost = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
+      setIsMobile(window.innerWidth <= 1024); // Include iPad and smaller
     };
     
     handleResize();
@@ -143,10 +143,11 @@ const BlogPost = () => {
         </div>
       );
       
-      // Insert mobile ads every 2 sections on small screens (starting after first section)
-      if (isMobile && index > 0 && index % 2 === 0) {
+      // Insert mobile ads every 2 sections on small screens
+      // Show after sections 1, 3, 5, etc. (when index is 1, 3, 5...)
+      if (isMobile && index > 0 && index % 2 === 1) {
         renderedContent.push(
-          <div key={`mobile-ad-${index}`} className="my-8 md:hidden">
+          <div key={`mobile-ad-${index}`} className="my-8 lg:hidden">
             <AdSpace 
               position="inline" 
               category={post?.category}
