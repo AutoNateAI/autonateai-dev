@@ -147,12 +147,12 @@ const BlogPost = () => {
       // Show after sections 1, 3, 5, etc. (when index is 1, 3, 5...)
       if (isMobile && index > 0 && index % 2 === 1) {
         renderedContent.push(
-          <div key={`mobile-ad-${index}`} className="my-8 lg:hidden">
+          <div key={`mobile-ad-${index}`} className="my-8 lg:hidden w-full">
             <AdSpace 
               position="inline" 
               category={post?.category}
               blogSlug={post?.slug}
-              className="w-full max-w-sm mx-auto"
+              className="w-full"
             />
           </div>
         );
