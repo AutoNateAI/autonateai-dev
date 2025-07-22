@@ -104,11 +104,19 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
 
     return (
       <div className="w-full overflow-hidden relative group hover:shadow-lg transition-all duration-300 rounded-lg">
-        <img 
-          src={imageUrl}
-          alt="Advertisement"
-          className={`w-full ${height} object-cover group-hover:scale-105 transition-transform duration-300`}
-        />
+        <a 
+          href="https://autonateai.com/products"
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="block w-full cursor-pointer not-prose"
+          style={{ pointerEvents: 'auto' }}
+        >
+          <img 
+            src={imageUrl}
+            alt="Advertisement"
+            className={`w-full ${height} object-cover group-hover:scale-105 transition-transform duration-300`}
+          />
+        </a>
       </div>
     );
   };
