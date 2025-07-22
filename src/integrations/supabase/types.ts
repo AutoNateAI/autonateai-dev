@@ -23,8 +23,10 @@ export type Database = {
           id: string
           image_url: string | null
           is_active: boolean | null
+          link_type: string | null
           link_url: string | null
           position: string
+          product_id: string | null
           start_date: string | null
           target_type: string
           target_value: string | null
@@ -40,8 +42,10 @@ export type Database = {
           id?: string
           image_url?: string | null
           is_active?: boolean | null
+          link_type?: string | null
           link_url?: string | null
           position: string
+          product_id?: string | null
           start_date?: string | null
           target_type?: string
           target_value?: string | null
@@ -57,8 +61,10 @@ export type Database = {
           id?: string
           image_url?: string | null
           is_active?: boolean | null
+          link_type?: string | null
           link_url?: string | null
           position?: string
+          product_id?: string | null
           start_date?: string | null
           target_type?: string
           target_value?: string | null

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
+import { useNavigate } from 'react-router-dom';
 
 interface Advertisement {
   id: string;
   title: string;
   image_url?: string;
   link_url?: string;
+  link_type?: string;
+  product_id?: string;
   alt_text?: string;
   position: string;
   target_type: string;
@@ -25,6 +28,17 @@ interface AdSpaceProps {
 const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, className = '' }) => {
   const [ads, setAds] = useState<Advertisement[]>([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  const handleAdClick = (ad: Advertisement) => {
+    if (ad.link_type === 'product' && ad.product_id) {
+      // Navigate to product page
+      navigate(`/${ad.product_id}`);
+    } else if (ad.link_type === 'external' && ad.link_url) {
+      // Open external link in new tab
+      window.open(ad.link_url, '_blank', 'noopener,noreferrer');
+    }
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -115,12 +129,10 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
     <div className={`w-full ${className}`}>
       {ads.map((ad) => (
         <div key={ad.id} className="w-full overflow-hidden group hover:shadow-lg transition-all duration-300 rounded-lg">
-          {ad.link_url ? (
-            <a 
-              href={ad.link_url} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="block w-full"
+          {(ad.link_type && (ad.link_url || ad.product_id)) ? (
+            <div 
+              onClick={() => handleAdClick(ad)}
+              className="block w-full cursor-pointer"
             >
               {ad.image_url ? (
                 <img 
@@ -134,7 +146,7 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
                   <div className="text-sm text-muted-foreground">Click to learn more</div>
                 </div>
               )}
-            </a>
+            </div>
           ) : (
             <div className="w-full">
               {ad.image_url ? (
