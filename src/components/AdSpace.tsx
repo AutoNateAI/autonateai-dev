@@ -30,22 +30,16 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
   const [loading, setLoading] = useState(true);
 
   const getAdLink = (ad: Advertisement) => {
-    console.log('getAdLink called for ad:', ad);
     if (ad.link_type === 'product' && ad.product_id) {
-      console.log('Returning product link:', `/${ad.product_id}`);
       return `/${ad.product_id}`;
     } else if (ad.link_url) {
-      console.log('Returning external link:', ad.link_url);
       return ad.link_url;
     }
-    console.log('No link found for ad');
     return null;
   };
 
   const isExternalLink = (ad: Advertisement) => {
-    const result = ad.link_url && (ad.link_type === 'external' || ad.link_url.startsWith('http'));
-    console.log('isExternalLink for ad:', ad.title, 'result:', result);
-    return result;
+    return ad.link_url && (ad.link_type === 'external' || ad.link_url.startsWith('http'));
   };
 
   useEffect(() => {
@@ -136,7 +130,6 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
   return (
     <div className={`w-full ${className}`}>
       {ads.map((ad) => {
-        console.log('Rendering ad:', ad.title, 'link_url:', ad.link_url, 'link_type:', ad.link_type, 'product_id:', ad.product_id);
         return (
         <div key={ad.id} className="w-full overflow-hidden group hover:shadow-lg transition-all duration-300 rounded-lg">
           {(ad.link_url || ad.product_id) ? (
@@ -146,13 +139,17 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
                   href={getAdLink(ad)!}
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="block w-full cursor-pointer"
+                  className="block w-full cursor-pointer touch-manipulation"
                 >
                   {ad.image_url ? (
                     <img 
                       src={ad.image_url} 
                       alt={ad.alt_text || ad.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
+                      style={{
+                        minHeight: position === 'inline' ? '200px' : 'auto',
+                        width: '100%'
+                      }}
                     />
                   ) : (
                     <div className="p-6 text-center w-full">
@@ -164,13 +161,17 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
               ) : (
                 <Link 
                   to={getAdLink(ad)!}
-                  className="block w-full cursor-pointer"
+                  className="block w-full cursor-pointer touch-manipulation"
                 >
                   {ad.image_url ? (
                     <img 
                       src={ad.image_url} 
                       alt={ad.alt_text || ad.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
+                      style={{
+                        minHeight: position === 'inline' ? '200px' : 'auto',
+                        width: '100%'
+                      }}
                     />
                   ) : (
                     <div className="p-6 text-center w-full">
@@ -187,7 +188,11 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
                 <img 
                   src={ad.image_url} 
                   alt={ad.alt_text || ad.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-auto object-cover"
+                  style={{
+                    minHeight: position === 'inline' ? '200px' : 'auto',
+                    width: '100%'
+                  }}
                 />
               ) : (
                 <div className="p-6 text-center w-full">
