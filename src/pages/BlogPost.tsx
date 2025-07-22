@@ -155,12 +155,12 @@ const BlogPost = () => {
       // Show after major sections 2, 4, 6, etc.
       if (isMobile && isMajorHeading && majorSectionCount > 1 && majorSectionCount % 2 === 0) {
         renderedContent.push(
-          <div key={`mobile-ad-${majorSectionCount}`} className="my-8 lg:hidden w-full">
+          <div key={`mobile-ad-${majorSectionCount}`} className="my-8 lg:hidden w-full relative z-10">
             <AdSpace 
               position="inline" 
               category={post?.category}
               blogSlug={post?.slug}
-              className="w-full"
+              className="w-full relative z-10"
             />
           </div>
         );
