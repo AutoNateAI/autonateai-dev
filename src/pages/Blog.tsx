@@ -245,10 +245,6 @@ const Blog = () => {
             <h2 className="text-2xl font-bold">
               {selectedCategory === "All" ? "Recent Posts" : selectedCategory}
             </h2>
-            {/* Banner Ad Space */}
-            <div className="hidden lg:block">
-              <AdSpace position="banner" />
-            </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
