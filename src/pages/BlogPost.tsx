@@ -153,7 +153,7 @@ const BlogPost = () => {
         renderedContent.push(element);
         
         // Insert mobile ads every 2 sections on small screens (only after headings)
-        if (isMobile && sectionCount > 0 && sectionCount % 2 === 0 && line.startsWith('#')) {
+        if (isMobile && sectionCount > 1 && (sectionCount - 1) % 2 === 0 && line.startsWith('#')) {
           renderedContent.push(
             <div key={`mobile-ad-${sectionCount}`} className="my-6 md:hidden">
               <AdSpace 
