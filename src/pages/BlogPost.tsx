@@ -116,8 +116,16 @@ const BlogPost = () => {
     // Split content into sections based on headings
     const sections = content.split(/(?=^#{1,4}\s)/m).filter(section => section.trim());
     const renderedContent: JSX.Element[] = [];
+    let majorSectionCount = 0; // Only count # and ## headings
     
     sections.forEach((section, index) => {
+      // Check if this section starts with a major heading (# or ##)
+      const isMajorHeading = section.match(/^#{1,2}\s/);
+      
+      if (isMajorHeading) {
+        majorSectionCount++;
+      }
+      
       // Add the markdown section
       renderedContent.push(
         <div key={`section-${index}`} className="mb-6 prose prose-lg max-w-none dark:prose-invert">
@@ -143,11 +151,11 @@ const BlogPost = () => {
         </div>
       );
       
-      // Insert mobile ads every 2 sections on small screens
-      // Show after sections 1, 3, 5, etc. (when index is 1, 3, 5...)
-      if (isMobile && index > 0 && index % 2 === 1) {
+      // Insert mobile ads every 2 major sections (only after major headings)
+      // Show after major sections 2, 4, 6, etc.
+      if (isMobile && isMajorHeading && majorSectionCount > 1 && majorSectionCount % 2 === 0) {
         renderedContent.push(
-          <div key={`mobile-ad-${index}`} className="my-8 lg:hidden w-full">
+          <div key={`mobile-ad-${majorSectionCount}`} className="my-8 lg:hidden w-full">
             <AdSpace 
               position="inline" 
               category={post?.category}
