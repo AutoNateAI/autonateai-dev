@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 interface Advertisement {
   id: string;
@@ -28,16 +28,18 @@ interface AdSpaceProps {
 const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, className = '' }) => {
   const [ads, setAds] = useState<Advertisement[]>([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
 
-  const handleAdClick = (ad: Advertisement) => {
+  const getAdLink = (ad: Advertisement) => {
     if (ad.link_type === 'product' && ad.product_id) {
-      // Navigate to product page
-      navigate(`/${ad.product_id}`);
+      return `/${ad.product_id}`;
     } else if (ad.link_url) {
-      // Open external link in new tab (supports both external type and legacy ads)
-      window.open(ad.link_url, '_blank', 'noopener,noreferrer');
+      return ad.link_url;
     }
+    return null;
+  };
+
+  const isExternalLink = (ad: Advertisement) => {
+    return ad.link_url && (ad.link_type === 'external' || ad.link_url.startsWith('http'));
   };
 
   useEffect(() => {
@@ -130,23 +132,47 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
       {ads.map((ad) => (
         <div key={ad.id} className="w-full overflow-hidden group hover:shadow-lg transition-all duration-300 rounded-lg">
           {(ad.link_url || ad.product_id) ? (
-            <div 
-              onClick={() => handleAdClick(ad)}
-              className="block w-full cursor-pointer"
-            >
-              {ad.image_url ? (
-                <img 
-                  src={ad.image_url} 
-                  alt={ad.alt_text || ad.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
+            <>
+              {isExternalLink(ad) ? (
+                <a 
+                  href={getAdLink(ad)!}
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="block w-full cursor-pointer"
+                >
+                  {ad.image_url ? (
+                    <img 
+                      src={ad.image_url} 
+                      alt={ad.alt_text || ad.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  ) : (
+                    <div className="p-6 text-center w-full">
+                      <h3 className="font-semibold text-primary mb-2">{ad.title}</h3>
+                      <div className="text-sm text-muted-foreground">Click to learn more</div>
+                    </div>
+                  )}
+                </a>
               ) : (
-                <div className="p-6 text-center w-full">
-                  <h3 className="font-semibold text-primary mb-2">{ad.title}</h3>
-                  <div className="text-sm text-muted-foreground">Click to learn more</div>
-                </div>
+                <Link 
+                  to={getAdLink(ad)!}
+                  className="block w-full cursor-pointer"
+                >
+                  {ad.image_url ? (
+                    <img 
+                      src={ad.image_url} 
+                      alt={ad.alt_text || ad.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  ) : (
+                    <div className="p-6 text-center w-full">
+                      <h3 className="font-semibold text-primary mb-2">{ad.title}</h3>
+                      <div className="text-sm text-muted-foreground">Click to learn more</div>
+                    </div>
+                  )}
+                </Link>
               )}
-            </div>
+            </>
           ) : (
             <div className="w-full">
               {ad.image_url ? (
