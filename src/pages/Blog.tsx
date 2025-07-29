@@ -138,7 +138,7 @@ const Blog = () => {
             <div className="mb-8">
               <div className="text-xs text-muted-foreground mb-2 text-center">Advertisement</div>
               <AdSpace 
-                position="featured" 
+                position="blog-list-banner" 
                 category={featuredPost.category}
               />
             </div>
@@ -312,7 +312,7 @@ const Blog = () => {
               <ScrollArea className="h-full overflow-hidden">
                 <div className="space-y-8 pr-4 pb-4">
                   {/* Ad Space - Sidebar */}
-                  <AdSpace position="sidebar" />
+                  <AdSpace position="blog-list-sidebar" />
 
                   {/* Newsletter Signup */}
                   <div className="glass-card p-6">
@@ -349,7 +349,7 @@ const Blog = () => {
                   </div>
 
                   {/* Second Ad Space */}
-                  <AdSpace position="sidebar" />
+                  <AdSpace position="blog-list-sidebar" />
                 </div>
               </ScrollArea>
             </div>
