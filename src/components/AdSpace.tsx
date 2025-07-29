@@ -113,18 +113,18 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
 
   const getAdStyles = () => {
     const styles = {
-      sidebar: 'aspect-square', // 1024x1024 - square
-      'sidebar-top': 'aspect-square', // 1024x1024 - square
-      'sidebar-bottom': 'aspect-square', // 1024x1024 - square
-      banner: 'aspect-[4/1]',
-      featured: 'aspect-[3/2]',
-      inline: 'aspect-[3/2]', // 1536x1024 - 3:2 ratio
-      bottom: 'aspect-[3/2]', // 1536x1024 - 3:2 ratio
-      'blog-list-banner': 'aspect-[3/2]', // Same as featured
-      'blog-list-sidebar': 'aspect-square' // Same as sidebar
+      sidebar: 'aspect-square max-w-full', // 1024x1024 - square, responsive
+      'sidebar-top': 'aspect-square max-w-full', // 1024x1024 - square, responsive
+      'sidebar-bottom': 'aspect-square max-w-full', // 1024x1024 - square, responsive
+      banner: 'aspect-[4/1] max-w-4xl mx-auto',
+      featured: 'aspect-[3/2] max-w-2xl mx-auto', // Smaller banner
+      inline: 'aspect-[3/2] max-w-2xl mx-auto', // 1536x1024 - 3:2 ratio, smaller
+      bottom: 'aspect-[3/2] max-w-2xl mx-auto', // 1536x1024 - 3:2 ratio, smaller
+      'blog-list-banner': 'aspect-[3/2] max-w-2xl mx-auto', // 1536x1024 - smaller banner
+      'blog-list-sidebar': 'aspect-square max-w-full' // 1024x1024 - square, responsive
     };
 
-    return styles[position] || 'aspect-[3/2]';
+    return styles[position] || 'aspect-[3/2] max-w-2xl mx-auto';
   };
 
   if (loading) {
@@ -212,6 +212,7 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
                 src={ad.image_url} 
                 alt={ad.alt_text || ad.title}
                 className="w-full h-full object-contain"
+                style={{ objectPosition: 'center' }}
               />
             ) : (
               <div className="p-6 text-center w-full h-full flex flex-col justify-center">
