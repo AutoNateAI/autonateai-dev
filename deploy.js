@@ -1,16 +1,22 @@
 // Simple GitHub Pages deploy script
 // This script will handle creating the required files for proper GitHub Pages deployment
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// ES Module equivalent of __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Create the dist folder if it doesn't exist yet
-if (!fs.existsSync('dist')) {
-  fs.mkdirSync('dist');
+const distPath = path.join(__dirname, 'dist');
+if (!fs.existsSync(distPath)) {
+  fs.mkdirSync(distPath);
 }
 
 // Create .nojekyll file (prevents GitHub from ignoring files that start with underscore)
-fs.writeFileSync('dist/.nojekyll', '');
+fs.writeFileSync(path.join(distPath, '.nojekyll'), '');
 
 // Create a simple redirect index.html in case it's missing
 const redirectHtml = `<!DOCTYPE html>
@@ -29,12 +35,12 @@ const redirectHtml = `<!DOCTYPE html>
 </html>`;
 
 // Make sure original index.html exists
-if (!fs.existsSync('dist/index.html')) {
+if (!fs.existsSync(path.join(distPath, 'index.html'))) {
   console.error('Warning: index.html not found in dist folder. Build may have failed.');
 }
 
 // Copy 404.html that will redirect back to index for SPA routing
-fs.writeFileSync('dist/404.html', `<!DOCTYPE html>
+fs.writeFileSync(path.join(distPath, '404.html'), `<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
