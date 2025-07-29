@@ -314,6 +314,12 @@ const BlogPost = () => {
                     </button>
                   </form>
                 </div>
+
+                <AdSpace 
+                  position="sidebar" 
+                  category={post.category}
+                  blogSlug={post.slug}
+                />
               </div>
             </div>
           </div>
