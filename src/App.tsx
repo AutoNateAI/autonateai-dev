@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import ScrollToTop from "@/components/ScrollToTop";
 import Index from "./pages/Index";
 import Products from "./pages/Products";
+import Product from "./pages/Product";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Coaching from "./pages/Coaching";
@@ -31,9 +32,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/products" element={<Products />} />
-            <Route path="/products/ai-grant-assistant" element={<AiGrantAssistant />} />
-            <Route path="/products/lit-review-ai" element={<LitReviewAi />} />
-            <Route path="/products/data-pipeline-builder" element={<DataPipelineBuilder />} />
+            <Route path="/products/:slug" element={<Product />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/coaching" element={<Coaching />} />

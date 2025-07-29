@@ -1,84 +1,43 @@
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
-import { ArrowRight, FileText, BookOpen, Database, DollarSign, Check, Star } from 'lucide-react';
+import { ArrowRight, FileText, BookOpen, Database, DollarSign, Check, Star, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import AnimatedProductThumbnail from '@/components/AnimatedProductThumbnail';
+import { ProductCarousel } from '@/components/ProductCarousel';
+import { useProducts } from '@/hooks/useProducts';
 
 const Products = () => {
-  const products = [
-    {
-      id: 'ai-grant-assistant',
-      title: 'AI Grant Drafting Assistant',
-      tagline: 'Win More Grants: AI-Powered Workflow for Drafting Compelling, Fundable Proposals',
-      description: 'Are you tired of spending weeks crafting grant proposals with uncertain outcomes? This AI-augmented workflow helps researchers draft compelling, fundable grant proposals in a fraction of the time.',
-      price: '$149',
-      icon: FileText,
-      features: [
-        'Complete Grant Writing Workflow Guide',
-        '25+ AI Prompt Pack for all major AI platforms',
-        'Editable Templates (grant structure, budget spreadsheets)',
-        'Bonus Video Walkthrough'
-      ],
-      benefits: [
-        'Save 15-20 hours on each grant proposal',
-        'Increase your chances of funding with reviewer-optimized language',
-        'Craft more persuasive narratives for your research',
-        'Generate better budget justifications and project timelines'
-      ],
-      testimonial: {
-        quote: "This AI workflow helped me secure a $150,000 grant in half the time I usually spend writing proposals.",
-        author: "Associate Professor, Life Sciences"
-      }
-    },
-    {
-      id: 'lit-review-ai',
-      title: 'Lit Review AI',
-      tagline: 'Transform weeks of literature review chaos into organized, AI-powered research mastery',
-      description: 'Your comprehensive solution to the overwhelming task of literature review, transformed into a structured, systematic, and efficient process using cutting-edge AI integration.',
-      price: '$129',
-      icon: BookOpen,
-      features: [
-        '13-step comprehensive literature review workflow',
-        '24 Specialized AI Prompts across all research phases',
-        'Personalized dashboard with progress analytics',
-        'Multi-Platform AI Integration'
-      ],
-      benefits: [
-        'Reduce literature review time by 60-70%',
-        'Systematic coverage ensures comprehensive analysis',
-        'Publication-ready outputs following academic standards',
-        'Build research confidence through structured approach'
-      ],
-      testimonial: {
-        quote: "Lit Review AI transformed my literature review process from weeks of chaos to days of organized productivity.",
-        author: "PhD Candidate, Psychology"
-      }
-    },
-    {
-      id: 'data-pipeline-builder',
-      title: 'Cloud Data Pipeline Builder',
-      tagline: 'Convert chaotic research data practices into structured, reproducible pipelines',
-      description: 'A comprehensive AI-augmented workflow management platform designed for researchers who struggle with data organization, cleaning, and workflow consistency.',
-      price: '$129',
-      icon: Database,
-      features: [
-        'Complete 8-Phase Workflow Management System',
-        '10+ Expert-Crafted AI Prompts per phase',
-        'Interactive Workflow Builder with time estimates',
-        'Cloud-Based platform accessible anywhere'
-      ],
-      benefits: [
-        '60-80% reduction in data organization time',
-        'Systematic validation prevents common mistakes',
-        'Research becomes fully reproducible and auditable',
-        'Meets funding agency requirements for data management'
-      ],
-      testimonial: {
-        quote: "This platform cut my data preparation time by two-thirds while dramatically improving the quality of my documentation.",
-        author: "Research Scientist, Environmental Science"
-      }
-    }
-  ];
+  const { products, loading, error } = useProducts();
+
+  const getIconComponent = (slug: string) => {
+    const iconMap: Record<string, any> = {
+      'ai-grant-assistant': FileText,
+      'lit-review-ai': BookOpen,
+      'data-pipeline-builder': Database
+    };
+    return iconMap[slug] || FileText;
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="flex items-center gap-2">
+          <Loader2 className="h-6 w-6 animate-spin" />
+          <span>Loading products...</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-xl font-semibold text-destructive mb-2">Error Loading Products</h2>
+          <p className="text-muted-foreground">{error}</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen">
@@ -105,8 +64,9 @@ const Products = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="space-y-24">
             {products.map((product, index) => {
-              const IconComponent = product.icon;
+              const IconComponent = getIconComponent(product.slug);
               const isEven = index % 2 === 0;
+              const primaryTestimonial = product.testimonials[0];
               
               return (
                 <div key={product.id} className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center ${!isEven ? 'lg:grid-flow-col-dense' : ''}`}>
@@ -145,36 +105,38 @@ const Products = () => {
                         {product.price.replace('$', '')}
                         <span className="text-base font-normal text-muted-foreground">one-time purchase</span>
                       </div>
-                      <Link to={`/products/${product.id}`} className="btn-primary flex items-center gap-2 whitespace-nowrap">
+                      <Link to={`/products/${product.slug}`} className="btn-primary flex items-center gap-2 whitespace-nowrap">
                         Learn More
                         <ArrowRight className="w-5 h-5 flex-shrink-0" />
                       </Link>
                     </div>
 
                     {/* Testimonial */}
-                    <div className="glass-card p-6 border-l-4 border-l-primary">
-                      <div className="flex items-center gap-1 mb-3">
-                        {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                        ))}
+                    {primaryTestimonial && (
+                      <div className="glass-card p-6 border-l-4 border-l-primary">
+                        <div className="flex items-center gap-1 mb-3">
+                          {[...Array(5)].map((_, i) => (
+                            <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                          ))}
+                        </div>
+                        <blockquote className="text-muted-foreground mb-3">
+                          "{primaryTestimonial.content}"
+                        </blockquote>
+                        <cite className="text-sm text-primary font-medium">
+                          — {primaryTestimonial.name}, {primaryTestimonial.role}
+                        </cite>
                       </div>
-                      <blockquote className="text-muted-foreground mb-3">
-                        "{product.testimonial.quote}"
-                      </blockquote>
-                      <cite className="text-sm text-primary font-medium">
-                        — {product.testimonial.author}
-                      </cite>
-                    </div>
+                    )}
                   </div>
 
-                  {/* Features Card with Thumbnail Placeholder */}
+                  {/* Features Card with Product Carousel */}
                   <div className={isEven ? '' : 'lg:col-start-1 lg:row-start-1'}>
                     <div className="glass-card p-8">
-                      {/* Animated Product Thumbnail */}
+                      {/* Product Carousel */}
                       <div className="mb-6">
-                        <AnimatedProductThumbnail 
-                          title={product.title}
-                          className="w-full h-192"
+                        <ProductCarousel 
+                          images={product.images}
+                          className="w-full"
                         />
                       </div>
                       
