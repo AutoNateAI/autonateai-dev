@@ -111,7 +111,7 @@ serve(async (req) => {
     const username = purchase.email;
     const password = Math.random().toString(36).substring(2, 15).toUpperCase();
 
-    // Store access credentials
+    // Store access credentials (handle duplicates gracefully)
     const { error: accessError } = await supabaseClient
       .from("product_access")
       .insert({
@@ -124,7 +124,26 @@ serve(async (req) => {
 
     if (accessError) {
       logStep("Error storing access credentials", accessError);
-      throw new Error("Failed to store access credentials");
+      // If it's a duplicate key error, update the existing record instead
+      if (accessError.code === "23505") {
+        logStep("Updating existing access credentials");
+        const { error: updateError } = await supabaseClient
+          .from("product_access")
+          .update({
+            purchase_id: purchase.id,
+            password,
+            access_url: accessUrl,
+            is_active: true
+          })
+          .eq("username", username);
+        
+        if (updateError) {
+          logStep("Error updating access credentials", updateError);
+          throw new Error("Failed to update access credentials");
+        }
+      } else {
+        throw new Error("Failed to store access credentials");
+      }
     }
 
     logStep("Credentials generated", { username });
