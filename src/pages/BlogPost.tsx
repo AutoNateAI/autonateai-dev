@@ -218,7 +218,7 @@ const BlogPost = () => {
           
           {/* Hero Image */}
           {post.hero_image && (
-            <div className="mb-8 rounded-2xl overflow-hidden bg-gradient-to-br from-muted/10 to-muted/5 aspect-[16/9]">
+            <div className="mb-8 rounded-2xl overflow-hidden bg-gradient-to-br from-muted/10 to-muted/5 aspect-[3/2]">
               <img 
                 src={post.hero_image} 
                 alt={post.hero_image_alt || post.title}
