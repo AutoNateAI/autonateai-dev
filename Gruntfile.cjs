@@ -15,7 +15,7 @@ module.exports = function(grunt) {
         stderr: false
       },
       npmBuild: {
-        command: 'npm run build'
+        command: 'npm run build:github'
       }
     }
   });
