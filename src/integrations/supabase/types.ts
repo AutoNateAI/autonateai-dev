@@ -362,6 +362,45 @@ export type Database = {
           },
         ]
       }
+      link_previews: {
+        Row: {
+          blog_id: string | null
+          created_at: string
+          description: string
+          id: string
+          image_url: string
+          page_path: string
+          page_type: string
+          product_id: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          blog_id?: string | null
+          created_at?: string
+          description: string
+          id?: string
+          image_url: string
+          page_path: string
+          page_type?: string
+          product_id?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          blog_id?: string | null
+          created_at?: string
+          description?: string
+          id?: string
+          image_url?: string
+          page_path?: string
+          page_type?: string
+          product_id?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       product_access: {
         Row: {
           access_url: string
