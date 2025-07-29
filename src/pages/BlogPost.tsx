@@ -218,11 +218,11 @@ const BlogPost = () => {
           
           {/* Hero Image */}
           {post.hero_image && (
-            <div className="mb-8">
+            <div className="mb-8 rounded-2xl overflow-hidden bg-muted/20">
               <img 
                 src={post.hero_image} 
                 alt={post.hero_image_alt || post.title}
-                className="w-full h-auto max-h-96 object-contain rounded-2xl"
+                className="w-full h-auto max-h-96 object-contain"
               />
             </div>
           )}
