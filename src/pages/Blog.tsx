@@ -226,7 +226,7 @@ const Blog = () => {
                     placeholder="Search articles..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3 rounded-xl bg-background/50 border border-border/20 focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20 backdrop-blur-sm text-foreground placeholder:text-muted-foreground"
+                    className="w-full pl-12 pr-4 py-3 rounded-xl bg-background/50 border-2 border-primary/30 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 backdrop-blur-sm text-foreground placeholder:text-muted-foreground transition-all duration-200"
                   />
                 </div>
 
@@ -324,7 +324,7 @@ const Blog = () => {
                       <input
                         type="email"
                         placeholder="Your email address"
-                        className="w-full px-3 py-2 rounded-lg bg-background/50 border border-border/20 focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm"
+                        className="w-full px-3 py-2 rounded-lg bg-background/50 border-2 border-primary/30 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm transition-all duration-200"
                       />
                       <button type="submit" className="w-full btn-primary py-2 text-sm">
                         Subscribe

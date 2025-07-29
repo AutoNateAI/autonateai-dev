@@ -310,7 +310,7 @@ const BlogPost = () => {
                     <input
                       type="email"
                       placeholder="Your email"
-                      className="w-full px-3 py-2 rounded-lg bg-background/50 border border-border/20 focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm"
+                      className="w-full px-3 py-2 rounded-lg bg-background/50 border-2 border-primary/30 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm transition-all duration-200"
                     />
                     <button type="submit" className="w-full btn-primary py-2 text-sm">
                       Subscribe
