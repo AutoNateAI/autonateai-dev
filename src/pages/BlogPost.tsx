@@ -291,12 +291,6 @@ const BlogPost = () => {
             <div className="lg:col-span-1 space-y-8 hidden lg:block">
               {/* Ad Space - Sidebar */}
               <div className="sticky top-8 space-y-6">
-                <AdSpace 
-                  position="sidebar" 
-                  category={post.category}
-                  blogSlug={post.slug}
-                />
-
                 {/* Newsletter Signup */}
                 <div className="glass-card p-6">
                   <h3 className="text-lg font-bold mb-4">Stay Updated</h3>
@@ -315,7 +309,6 @@ const BlogPost = () => {
                   </form>
                 </div>
 
-                {/* Second Ad Space */}
                 <AdSpace 
                   position="sidebar" 
                   category={post.category}
