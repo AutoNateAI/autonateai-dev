@@ -41,6 +41,12 @@ export const LoginCredentialsEmail = ({
           Thank you for your purchase! Your payment has been successfully processed and your account is now ready.
         </Text>
 
+        <Section style={autoLoginNotice}>
+          <Text style={noticeText}>
+            <strong>✅ Account Ready:</strong> Your login account has been automatically created and you can access {productTitle} immediately using the credentials below. These same credentials work across all our tools you purchase.
+          </Text>
+        </Section>
+
         <Section style={credentialsBox}>
           <Heading style={h2}>Your Login Credentials</Heading>
           
@@ -283,6 +289,22 @@ const discordButton = {
   display: 'inline-block',
   padding: '14px 28px',
   boxShadow: '0 2px 4px rgba(124, 58, 237, 0.3)',
+}
+
+const autoLoginNotice = {
+  margin: '20px',
+  padding: '16px',
+  backgroundColor: '#dcfce7',
+  borderRadius: '8px',
+  border: '1px solid #16a34a',
+}
+
+const noticeText = {
+  color: '#166534',
+  fontSize: '15px',
+  fontWeight: '500',
+  margin: '0',
+  lineHeight: '1.5',
 }
 
 const footer = {
