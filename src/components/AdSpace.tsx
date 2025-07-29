@@ -19,7 +19,7 @@ interface Advertisement {
 }
 
 interface AdSpaceProps {
-  position: 'sidebar' | 'banner' | 'featured' | 'inline' | 'bottom';
+  position: 'sidebar' | 'sidebar-top' | 'sidebar-bottom' | 'banner' | 'featured' | 'inline' | 'bottom';
   category?: string;
   blogSlug?: string;
   className?: string;
@@ -85,6 +85,8 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
   const getAdStyles = () => {
     const styles = {
       sidebar: 'aspect-square', // 1024x1024 - square
+      'sidebar-top': 'aspect-square', // 1024x1024 - square
+      'sidebar-bottom': 'aspect-square', // 1024x1024 - square
       banner: 'aspect-[4/1]',
       featured: 'aspect-[3/2]',
       inline: 'aspect-[3/2]', // 1536x1024 - 3:2 ratio

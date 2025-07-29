@@ -292,7 +292,7 @@ const BlogPost = () => {
               {/* Ad Space - Sidebar */}
               <div className="sticky top-8 space-y-6">
                 <AdSpace 
-                  position="sidebar" 
+                  position="sidebar-top" 
                   category={post.category}
                   blogSlug={post.slug}
                 />
@@ -316,7 +316,7 @@ const BlogPost = () => {
                 </div>
 
                 <AdSpace 
-                  position="sidebar" 
+                  position="sidebar-bottom" 
                   category={post.category}
                   blogSlug={post.slug}
                 />
