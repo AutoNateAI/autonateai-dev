@@ -312,7 +312,7 @@ const Blog = () => {
               <ScrollArea className="h-full overflow-hidden">
                 <div className="space-y-8 pr-4 pb-4">
                   {/* Ad Space - Sidebar */}
-                  <AdSpace position="blog-list-sidebar" />
+                  <AdSpace position="blog-list-sidebar-top" />
 
                   {/* Newsletter Signup */}
                   <div className="glass-card p-6">
@@ -349,7 +349,7 @@ const Blog = () => {
                   </div>
 
                   {/* Second Ad Space */}
-                  <AdSpace position="blog-list-sidebar" />
+                  <AdSpace position="blog-list-sidebar-bottom" />
                 </div>
               </ScrollArea>
             </div>

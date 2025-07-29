@@ -19,7 +19,7 @@ interface Advertisement {
 }
 
 interface AdSpaceProps {
-  position: 'sidebar' | 'sidebar-top' | 'sidebar-bottom' | 'banner' | 'featured' | 'inline' | 'bottom' | 'blog-list-banner' | 'blog-list-sidebar';
+  position: 'sidebar' | 'sidebar-top' | 'sidebar-bottom' | 'banner' | 'featured' | 'inline' | 'bottom' | 'blog-list-banner' | 'blog-list-sidebar' | 'blog-list-sidebar-top' | 'blog-list-sidebar-bottom';
   category?: string;
   blogSlug?: string;
   className?: string;
@@ -74,18 +74,24 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
         return false;
       });
 
-      // If no ads found for sidebar-top or sidebar-bottom, fall back to general sidebar ads
-      if (filteredAds.length === 0 && (position === 'sidebar-top' || position === 'sidebar-bottom')) {
+      // If no ads found for sidebar-top, sidebar-bottom, blog-list-sidebar-top, or blog-list-sidebar-bottom, fall back to general ads
+      if (filteredAds.length === 0 && (position === 'sidebar-top' || position === 'sidebar-bottom' || position === 'blog-list-sidebar-top' || position === 'blog-list-sidebar-bottom')) {
+        let fallbackPosition = 'sidebar';
+        if (position === 'blog-list-sidebar-top' || position === 'blog-list-sidebar-bottom') {
+          fallbackPosition = 'blog-list-sidebar';
+        }
+        
         const fallbackQuery = supabase
           .from('advertisements')
           .select('*')
-          .eq('position', 'sidebar')
-          .eq('is_active', true);
+          .eq('position', fallbackPosition)
+          .eq('is_active', true)
+          .order('created_at', { ascending: true }); // Order by creation date for consistent ordering
 
         const { data: fallbackData, error: fallbackError } = await fallbackQuery;
 
         if (!fallbackError && fallbackData) {
-          const allSidebarAds = fallbackData.filter(ad => {
+          const allAds = fallbackData.filter(ad => {
             if (ad.target_type === 'all') return true;
             if (ad.target_type === 'category' && category) return ad.target_value === category;
             if (ad.target_type === 'specific_post' && blogSlug) return ad.target_value === blogSlug;
@@ -93,11 +99,11 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
           });
 
           // Assign ads consistently: first ad to top, second ad to bottom
-          if (allSidebarAds.length > 0) {
-            if (position === 'sidebar-top') {
-              filteredAds = [allSidebarAds[0]]; // First ad for top position
-            } else if (position === 'sidebar-bottom') {
-              filteredAds = allSidebarAds.length > 1 ? [allSidebarAds[1]] : []; // Second ad for bottom position
+          if (allAds.length > 0) {
+            if (position === 'sidebar-top' || position === 'blog-list-sidebar-top') {
+              filteredAds = [allAds[0]]; // First ad for top position
+            } else if (position === 'sidebar-bottom' || position === 'blog-list-sidebar-bottom') {
+              filteredAds = allAds.length > 1 ? [allAds[1]] : []; // Second ad for bottom position
             }
           }
         }
@@ -121,7 +127,9 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
       inline: 'aspect-[3/2] max-w-2xl mx-auto', // 1536x1024 - 3:2 ratio, smaller
       bottom: 'aspect-[3/2] max-w-2xl mx-auto', // 1536x1024 - 3:2 ratio, smaller
       'blog-list-banner': 'aspect-[3/2] max-w-2xl mx-auto', // 1536x1024 - smaller banner
-      'blog-list-sidebar': 'aspect-square max-w-full' // 1024x1024 - square, responsive
+      'blog-list-sidebar': 'aspect-square max-w-full', // 1024x1024 - square, responsive
+      'blog-list-sidebar-top': 'aspect-square max-w-full', // 1024x1024 - square, responsive
+      'blog-list-sidebar-bottom': 'aspect-square max-w-full' // 1024x1024 - square, responsive
     };
 
     return styles[position] || 'aspect-[3/2] max-w-2xl mx-auto';
