@@ -78,6 +78,7 @@
     "globals": "^15.9.0",
     "grunt": "^1.6.1",
     "grunt-cli": "^1.4.3",
+    "grunt-env": "^1.0.1",
     "grunt-shell": "^4.0.0",
     "lovable-tagger": "^1.1.7",
     "postcss": "^8.4.47",

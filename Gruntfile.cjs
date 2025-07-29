@@ -2,6 +2,12 @@ module.exports = function(grunt) {
   // Project configuration
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    // For ES Module projects
+    env: {
+      dev: {
+        NODE_ENV: 'development'
+      }
+    },
     
     // Define a simple task to run npm build
     shell: {
@@ -14,9 +20,10 @@ module.exports = function(grunt) {
     }
   });
 
-  // Load the shell task
+  // Load tasks
   grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-env');
 
   // Register default task
-  grunt.registerTask('default', ['shell:npmBuild']);
+  grunt.registerTask('default', ['env:dev', 'shell:npmBuild']);
 };
