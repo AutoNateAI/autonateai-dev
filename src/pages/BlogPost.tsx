@@ -222,7 +222,7 @@ const BlogPost = () => {
               <img 
                 src={post.hero_image} 
                 alt={post.hero_image_alt || post.title}
-                className="w-full h-64 md:h-80 object-cover"
+                className="w-full h-auto object-contain"
               />
             </div>
           )}
