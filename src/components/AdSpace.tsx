@@ -82,43 +82,16 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
     }
   };
 
-  const getPlaceholderContent = () => {
-    const placeholderImages = {
-      sidebar: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=300&h=250&fit=crop',
-      banner: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=1200&h=90&fit=crop',
-      featured: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=300&fit=crop',
-      inline: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=200&fit=crop',
-      bottom: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=1200&h=400&fit=crop'
+  const getAdStyles = () => {
+    const styles = {
+      sidebar: 'aspect-square', // 1024x1024 - square
+      banner: 'aspect-[4/1]',
+      featured: 'aspect-[3/2]',
+      inline: 'aspect-[3/2]', // 1536x1024 - 3:2 ratio
+      bottom: 'aspect-[3/2]' // 1536x1024 - 3:2 ratio
     };
 
-    const heightMap = {
-      sidebar: 'h-[250px]',
-      banner: 'h-[90px]',
-      featured: 'h-[300px]',
-      inline: 'h-[200px]',
-      bottom: 'h-[400px]'
-    };
-
-    const imageUrl = placeholderImages[position] || placeholderImages.inline;
-    const height = heightMap[position] || 'h-[200px]';
-
-    return (
-      <div className="w-full overflow-hidden relative group hover:shadow-lg transition-all duration-300 rounded-lg">
-        <a 
-          href="https://autonateai.com/products"
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="block w-full cursor-pointer not-prose"
-          style={{ pointerEvents: 'auto' }}
-        >
-          <img 
-            src={imageUrl}
-            alt="Advertisement"
-            className={`w-full ${height} object-cover group-hover:scale-105 transition-transform duration-300`}
-          />
-        </a>
-      </div>
-    );
+    return styles[position] || 'aspect-[3/2]';
   };
 
   if (loading) {
@@ -134,11 +107,7 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
   }
 
   if (ads.length === 0) {
-    return (
-      <div className={className}>
-        {getPlaceholderContent()}
-      </div>
-    );
+    return null; // No ads to show
   }
 
   return (
@@ -146,7 +115,7 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
       {ads.map((ad) => {
         console.log('Rendering ad:', ad.title, 'link_url:', ad.link_url, 'link_type:', ad.link_type, 'product_id:', ad.product_id);
         return (
-        <div key={ad.id} className="w-full overflow-hidden group hover:shadow-lg transition-all duration-300 rounded-lg">
+        <div key={ad.id} className={`w-full overflow-hidden group hover:shadow-lg transition-all duration-300 rounded-2xl bg-gradient-to-br from-muted/10 to-muted/5 ${getAdStyles()}`}>
           {(ad.link_url || ad.product_id) ? (
             <>
               {isExternalLink(ad) ? (
@@ -154,7 +123,7 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
                   href={getAdLink(ad)!}
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="block w-full cursor-pointer not-prose"
+                  className="block w-full h-full cursor-pointer not-prose"
                   style={{ pointerEvents: 'auto' }}
                   onClick={(e) => {
                     console.log('External ad clicked:', ad.title, 'href:', getAdLink(ad));
@@ -165,10 +134,10 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
                     <img 
                       src={ad.image_url} 
                       alt={ad.alt_text || ad.title}
-                      className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                     />
                   ) : (
-                    <div className="p-6 text-center w-full">
+                    <div className="p-6 text-center w-full h-full flex flex-col justify-center">
                       <h3 className="font-semibold text-primary mb-2">{ad.title}</h3>
                       <div className="text-sm text-muted-foreground">Click to learn more</div>
                     </div>
@@ -177,7 +146,7 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
               ) : (
                 <Link 
                   to={getAdLink(ad)!}
-                  className="block w-full cursor-pointer not-prose"
+                  className="block w-full h-full cursor-pointer not-prose"
                   style={{ pointerEvents: 'auto' }}
                   onClick={(e) => {
                     console.log('Internal ad clicked:', ad.title, 'to:', getAdLink(ad));
@@ -187,10 +156,10 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
                     <img 
                       src={ad.image_url} 
                       alt={ad.alt_text || ad.title}
-                      className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                     />
                   ) : (
-                    <div className="p-6 text-center w-full">
+                    <div className="p-6 text-center w-full h-full flex flex-col justify-center">
                       <h3 className="font-semibold text-primary mb-2">{ad.title}</h3>
                       <div className="text-sm text-muted-foreground">Click to learn more</div>
                     </div>
@@ -199,15 +168,15 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
               )}
             </>
           ) : (
-            <div className="w-full">
+            <div className="w-full h-full">
               {ad.image_url ? (
                 <img 
                   src={ad.image_url} 
                   alt={ad.alt_text || ad.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                 />
               ) : (
-                <div className="p-6 text-center w-full">
+                <div className="p-6 text-center w-full h-full flex flex-col justify-center">
                   <h3 className="font-semibold text-primary mb-2">{ad.title}</h3>
                 </div>
               )}
