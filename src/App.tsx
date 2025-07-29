@@ -18,6 +18,7 @@ import AiGrantAssistant from "./pages/AiGrantAssistant";
 import LitReviewAi from "./pages/LitReviewAi";
 import DataPipelineBuilder from "./pages/DataPipelineBuilder";
 import Workshops from "./pages/Workshops";
+import PaymentSuccess from "./pages/PaymentSuccess";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +40,7 @@ const App = () => (
             <Route path="/workshops" element={<Workshops />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/payment-success" element={<PaymentSuccess />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

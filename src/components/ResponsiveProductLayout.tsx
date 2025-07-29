@@ -3,7 +3,7 @@ import { ProductCarousel } from './ProductCarousel';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
-import { Check, Star } from 'lucide-react';
+import { Check, Star, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface ProductImage {
@@ -35,12 +35,14 @@ interface Product {
 interface ResponsiveProductLayoutProps {
   product: Product;
   onPurchase?: () => void;
+  isPurchasing?: boolean;
   className?: string;
 }
 
 export const ResponsiveProductLayout: React.FC<ResponsiveProductLayoutProps> = ({
   product,
   onPurchase,
+  isPurchasing = false,
   className
 }) => {
   return (
@@ -62,8 +64,15 @@ export const ResponsiveProductLayout: React.FC<ResponsiveProductLayoutProps> = (
 
           <div className="text-center">
             <div className="text-4xl font-bold text-primary mb-4">{product.price}</div>
-            <Button size="lg" className="w-full md:w-auto" onClick={onPurchase}>
-              Get Started Now
+            <Button size="lg" className="w-full md:w-auto" onClick={onPurchase} disabled={isPurchasing}>
+              {isPurchasing ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Processing...
+                </>
+              ) : (
+                'Get Started Now'
+              )}
             </Button>
           </div>
 
@@ -136,8 +145,15 @@ export const ResponsiveProductLayout: React.FC<ResponsiveProductLayoutProps> = (
 
             <div className="flex items-center gap-6">
               <div className="text-4xl font-bold text-primary">{product.price}</div>
-              <Button size="lg" onClick={onPurchase}>
-                Get Started Now
+              <Button size="lg" onClick={onPurchase} disabled={isPurchasing}>
+                {isPurchasing ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Processing...
+                  </>
+                ) : (
+                  'Get Started Now'
+                )}
               </Button>
             </div>
 
