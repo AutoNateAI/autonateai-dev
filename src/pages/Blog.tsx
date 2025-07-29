@@ -146,15 +146,17 @@ const Blog = () => {
             <div className="glass-card overflow-hidden">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
                 {/* Featured Post Hero Image */}
-                <div className="relative overflow-hidden">
+                <div className="relative overflow-hidden rounded-l-xl">
                   {featuredPost.hero_image ? (
-                    <img 
-                      src={featuredPost.hero_image} 
-                      alt={featuredPost.hero_image_alt || featuredPost.title}
-                      className="w-full h-full object-cover min-h-[300px] lg:min-h-[400px]"
-                    />
+                    <div className="aspect-[3/2] bg-gradient-to-br from-muted/10 to-muted/5">
+                      <img 
+                        src={featuredPost.hero_image} 
+                        alt={featuredPost.hero_image_alt || featuredPost.title}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
                   ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center min-h-[300px] lg:min-h-[400px]">
+                    <div className="aspect-[3/2] bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center">
                       <div className="text-center">
                         <Tag className="w-12 h-12 text-primary/60 mx-auto mb-4" />
                         <p className="text-muted-foreground text-sm">Featured Article</p>
@@ -259,11 +261,11 @@ const Blog = () => {
                   >
                     <article className="glass-card h-full">
                       {post.hero_image && (
-                        <div className="h-48 overflow-hidden rounded-t-xl">
+                        <div className="aspect-[3/2] overflow-hidden rounded-t-xl bg-gradient-to-br from-muted/10 to-muted/5">
                           <img 
                             src={post.hero_image} 
                             alt={post.hero_image_alt || post.title}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                           />
                         </div>
                       )}
