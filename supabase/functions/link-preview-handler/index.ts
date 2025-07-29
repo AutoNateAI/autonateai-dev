@@ -159,7 +159,7 @@ serve(async (req) => {
       linkPreview = homepagePreview || {
         title: 'AutoNateAI - Transform Your Research Process with AI-Augmented Digital Guides',
         description: 'Empower your research with cutting-edge AI workflow management systems. AutoNateAI helps researchers achieve better results faster through intelligent grant writing, literature review, and data pipeline automation.',
-        image_url: `${baseUrl}/lovable-uploads/e5e6f6bc-5528-492d-876a-45dc0f831b5d.png`
+        image_url: 'https://wnxqzeftghgdfcdmdlgw.lovable.app/lovable-uploads/e5e6f6bc-5528-492d-876a-45dc0f831b5d.png'
       };
     }
 
