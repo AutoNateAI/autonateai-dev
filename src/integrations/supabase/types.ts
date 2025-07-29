@@ -362,6 +362,47 @@ export type Database = {
           },
         ]
       }
+      product_access: {
+        Row: {
+          access_url: string
+          created_at: string
+          id: string
+          is_active: boolean | null
+          password: string
+          purchase_id: string
+          updated_at: string
+          username: string
+        }
+        Insert: {
+          access_url: string
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          password: string
+          purchase_id: string
+          updated_at?: string
+          username: string
+        }
+        Update: {
+          access_url?: string
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          password?: string
+          purchase_id?: string
+          updated_at?: string
+          username?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_access_purchase_id_fkey"
+            columns: ["purchase_id"]
+            isOneToOne: false
+            referencedRelation: "purchases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       product_images: {
         Row: {
           alt_text: string | null
@@ -477,6 +518,50 @@ export type Database = {
           username?: string
         }
         Relationships: []
+      }
+      purchases: {
+        Row: {
+          amount: number
+          created_at: string
+          currency: string | null
+          email: string
+          id: string
+          product_id: string
+          status: string | null
+          stripe_session_id: string
+          updated_at: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          currency?: string | null
+          email: string
+          id?: string
+          product_id: string
+          status?: string | null
+          stripe_session_id: string
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          currency?: string | null
+          email?: string
+          id?: string
+          product_id?: string
+          status?: string | null
+          stripe_session_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "purchases_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
