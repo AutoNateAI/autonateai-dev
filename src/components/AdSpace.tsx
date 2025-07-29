@@ -85,12 +85,21 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
         const { data: fallbackData, error: fallbackError } = await fallbackQuery;
 
         if (!fallbackError && fallbackData) {
-          filteredAds = fallbackData.filter(ad => {
+          const allSidebarAds = fallbackData.filter(ad => {
             if (ad.target_type === 'all') return true;
             if (ad.target_type === 'category' && category) return ad.target_value === category;
             if (ad.target_type === 'specific_post' && blogSlug) return ad.target_value === blogSlug;
             return false;
           });
+
+          // Assign ads consistently: first ad to top, second ad to bottom
+          if (allSidebarAds.length > 0) {
+            if (position === 'sidebar-top') {
+              filteredAds = [allSidebarAds[0]]; // First ad for top position
+            } else if (position === 'sidebar-bottom') {
+              filteredAds = allSidebarAds.length > 1 ? [allSidebarAds[1]] : []; // Second ad for bottom position
+            }
+          }
         }
       }
 
