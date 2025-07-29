@@ -18,6 +18,13 @@ if (!fs.existsSync(distPath)) {
 // Create .nojekyll file (prevents GitHub from ignoring files that start with underscore)
 fs.writeFileSync(path.join(distPath, '.nojekyll'), '');
 
+// Copy CNAME file to dist directory for custom domain
+const sourceCNAME = path.join(__dirname, 'public', 'CNAME');
+if (fs.existsSync(sourceCNAME)) {
+  fs.copyFileSync(sourceCNAME, path.join(distPath, 'CNAME'));
+  console.log('Copied CNAME file to dist directory');
+}
+
 // Create a simple redirect index.html in case it's missing
 const redirectHtml = `<!DOCTYPE html>
 <html>
@@ -48,7 +55,8 @@ fs.writeFileSync(path.join(distPath, '404.html'), `<!DOCTYPE html>
     <script type="text/javascript">
       // Single Page Apps for GitHub Pages
       // MIT License - https://github.com/rafgraph/spa-github-pages
-      var pathSegmentsToKeep = 1;
+      // For custom domain, set pathSegmentsToKeep to 0
+      var pathSegmentsToKeep = 0;
 
       var l = window.location;
       l.replace(

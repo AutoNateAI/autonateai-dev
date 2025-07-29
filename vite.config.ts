@@ -5,7 +5,8 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: mode === 'production' ? '/autonateai-dev/' : '/',
+  // Using root path '/' for custom domain (researchers.autonateai.com)
+  base: '/',
   server: {
     host: "::",
     port: 8080,
