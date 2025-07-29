@@ -144,6 +144,15 @@ const BlogPost = () => {
               blockquote: ({ children }) => <blockquote className="border-l-4 border-primary pl-4 italic mb-4 text-muted-foreground">{children}</blockquote>,
               code: ({ children }) => <code className="bg-muted px-1 py-0.5 rounded text-sm font-mono">{children}</code>,
               pre: ({ children }) => <pre className="bg-muted p-4 rounded-lg overflow-x-auto mb-4">{children}</pre>,
+              img: ({ src, alt }) => (
+                <div className="my-6 rounded-2xl overflow-hidden bg-gradient-to-br from-muted/10 to-muted/5 aspect-[3/2]">
+                  <img 
+                    src={src} 
+                    alt={alt || "Blog content image"}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+              ),
             }}
           >
             {section}
