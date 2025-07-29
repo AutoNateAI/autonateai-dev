@@ -309,8 +309,8 @@ const Blog = () => {
 
             {/* Sidebar */}
             <div className="sticky top-4">
-              <ScrollArea className="h-[calc(100vh-2rem)]">
-                <div className="space-y-8 pr-4">
+              <ScrollArea className="h-[calc(100vh-2rem)] overflow-hidden">
+                <div className="space-y-8 pr-4 pb-4">
                   {/* Ad Space - Sidebar */}
                   <AdSpace position="sidebar" />
 
