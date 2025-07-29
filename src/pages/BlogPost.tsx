@@ -5,6 +5,7 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Calendar, User, Clock, ArrowLeft, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { supabase } from '@/integrations/supabase/client';
 import AdSpace from '@/components/AdSpace';
 
@@ -290,7 +291,9 @@ const BlogPost = () => {
             {/* Sidebar with Ads - Desktop Only */}
             <div className="lg:col-span-1 space-y-8 hidden lg:block">
               {/* Ad Space - Sidebar */}
-              <div className="sticky top-8 space-y-6">
+              <div className="sticky top-8 h-[calc(100vh-4rem)]">
+                <ScrollArea className="h-full overflow-hidden">
+                  <div className="space-y-6 pr-4 pb-4">
                 <AdSpace 
                   position="sidebar-top" 
                   category={post.category}
@@ -315,11 +318,13 @@ const BlogPost = () => {
                   </form>
                 </div>
 
-                <AdSpace 
-                  position="sidebar-bottom" 
-                  category={post.category}
-                  blogSlug={post.slug}
-                />
+                    <AdSpace 
+                      position="sidebar-bottom" 
+                      category={post.category}
+                      blogSlug={post.slug}
+                    />
+                  </div>
+                </ScrollArea>
               </div>
             </div>
           </div>
