@@ -12,15 +12,27 @@ const logStep = (step: string, details?: any) => {
   console.log(`[VERIFY-PAYMENT] ${step}${detailsStr}`);
 };
 
-// Generate secure credentials
-const generateCredentials = (productTitle: string) => {
-  const timestamp = Date.now().toString();
-  const randomStr = Math.random().toString(36).substring(2, 15);
+// Product URL mapping
+const getProductUrls = (productSlug: string) => {
+  const urlMap = {
+    'ai-grant-assistant': {
+      accessUrl: 'https://grants.autonateai.com/auth',
+      discordUrl: 'https://discord.gg/AeCEyZTy'
+    },
+    'lit-review-ai': {
+      accessUrl: 'https://lit-review.autonateai.com/auth', 
+      discordUrl: 'https://discord.gg/6vU46Y2P'
+    },
+    'data-pipeline-builder': {
+      accessUrl: 'https://data-pipeline.autonateai.com/auth',
+      discordUrl: 'https://discord.gg/CNMabU8t'
+    }
+  };
   
-  const username = `${productTitle.toLowerCase().replace(/[^a-z0-9]/g, '')}_user_${timestamp.slice(-6)}`;
-  const password = `${randomStr}${timestamp.slice(-4)}`.toUpperCase();
-  
-  return { username, password };
+  return urlMap[productSlug] || {
+    accessUrl: 'https://grants.autonateai.com/auth',
+    discordUrl: 'https://discord.gg/AeCEyZTy'
+  };
 };
 
 serve(async (req) => {
@@ -94,9 +106,10 @@ serve(async (req) => {
       .update({ status: "completed" })
       .eq("id", purchase.id);
 
-    // Generate login credentials
-    const { username, password } = generateCredentials(purchase.products.title);
-    const accessUrl = `${req.headers.get("origin")}/products/${purchase.products.slug}`;
+    // Get product URLs and use email as username
+    const { accessUrl, discordUrl } = getProductUrls(purchase.products.slug);
+    const username = purchase.email;
+    const password = Math.random().toString(36).substring(2, 15).toUpperCase();
 
     // Store access credentials
     const { error: accessError } = await supabaseClient
@@ -124,6 +137,7 @@ serve(async (req) => {
         username,
         password,
         accessUrl,
+        discordUrl,
         purchaseId: purchase.id
       }
     });
