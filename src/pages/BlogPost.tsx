@@ -342,11 +342,11 @@ const BlogPost = () => {
                 >
                   <div className="glass-card p-6 h-full hover:shadow-lg transition-all duration-300">
                     {relatedPost.hero_image && (
-                      <div className="mb-4 rounded-lg overflow-hidden">
+                      <div className="mb-4 rounded-2xl overflow-hidden bg-gradient-to-br from-muted/10 to-muted/5 aspect-[3/2]">
                         <img 
                           src={relatedPost.hero_image} 
                           alt={relatedPost.hero_image_alt || relatedPost.title}
-                          className="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-300"
+                          className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                         />
                       </div>
                     )}
