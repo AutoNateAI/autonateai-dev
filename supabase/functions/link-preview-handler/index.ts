@@ -118,7 +118,7 @@ serve(async (req) => {
           linkPreview = {
             title: `${blog.title} | AutoNateAI Blog`,
             description: blog.excerpt,
-            image_url: blog.hero_image || '/lovable-uploads/e5e6f6bc-5528-492d-876a-45dc0f831b5d.png'
+            image_url: blog.hero_image || `${baseUrl}/lovable-uploads/e5e6f6bc-5528-492d-876a-45dc0f831b5d.png`
           };
         }
       } else if (path.startsWith('/products/')) {
@@ -142,7 +142,7 @@ serve(async (req) => {
           linkPreview = {
             title: `${product.title} | AutoNateAI`,
             description: product.description,
-            image_url: productImage?.image_url || '/lovable-uploads/e5e6f6bc-5528-492d-876a-45dc0f831b5d.png'
+            image_url: productImage?.image_url || `${baseUrl}/lovable-uploads/e5e6f6bc-5528-492d-876a-45dc0f831b5d.png`
           };
         }
       }
