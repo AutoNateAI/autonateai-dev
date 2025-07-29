@@ -74,6 +74,87 @@ export type Database = {
         }
         Relationships: []
       }
+      blog_ads: {
+        Row: {
+          advertisement_id: string
+          blog_id: string
+          created_at: string
+          id: string
+          position_after_heading: number
+        }
+        Insert: {
+          advertisement_id: string
+          blog_id: string
+          created_at?: string
+          id?: string
+          position_after_heading: number
+        }
+        Update: {
+          advertisement_id?: string
+          blog_id?: string
+          created_at?: string
+          id?: string
+          position_after_heading?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "blog_ads_advertisement_id_fkey"
+            columns: ["advertisement_id"]
+            isOneToOne: false
+            referencedRelation: "advertisements"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "blog_ads_blog_id_fkey"
+            columns: ["blog_id"]
+            isOneToOne: false
+            referencedRelation: "blogs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      blog_images: {
+        Row: {
+          blog_id: string
+          created_at: string
+          display_order: number | null
+          id: string
+          image_id: string
+          position: string
+        }
+        Insert: {
+          blog_id: string
+          created_at?: string
+          display_order?: number | null
+          id?: string
+          image_id: string
+          position: string
+        }
+        Update: {
+          blog_id?: string
+          created_at?: string
+          display_order?: number | null
+          id?: string
+          image_id?: string
+          position?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "blog_images_blog_id_fkey"
+            columns: ["blog_id"]
+            isOneToOne: false
+            referencedRelation: "blogs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "blog_images_image_id_fkey"
+            columns: ["image_id"]
+            isOneToOne: false
+            referencedRelation: "images"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       blogs: {
         Row: {
           author: string
@@ -182,12 +263,230 @@ export type Database = {
         }
         Relationships: []
       }
+      generation_sessions: {
+        Row: {
+          batch_id: string
+          completed_images: number
+          created_at: string
+          id: string
+          status: string
+          total_images: number
+          updated_at: string
+        }
+        Insert: {
+          batch_id: string
+          completed_images?: number
+          created_at?: string
+          id?: string
+          status?: string
+          total_images: number
+          updated_at?: string
+        }
+        Update: {
+          batch_id?: string
+          completed_images?: number
+          created_at?: string
+          id?: string
+          status?: string
+          total_images?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      images: {
+        Row: {
+          alt_text: string | null
+          blog_id: string | null
+          blog_section: string | null
+          caption: string | null
+          created_at: string
+          file_size: number | null
+          generation_batch_id: string | null
+          height: number | null
+          id: string
+          mime_type: string | null
+          parent_image_id: string | null
+          title: string
+          updated_at: string
+          url: string
+          width: number | null
+        }
+        Insert: {
+          alt_text?: string | null
+          blog_id?: string | null
+          blog_section?: string | null
+          caption?: string | null
+          created_at?: string
+          file_size?: number | null
+          generation_batch_id?: string | null
+          height?: number | null
+          id?: string
+          mime_type?: string | null
+          parent_image_id?: string | null
+          title: string
+          updated_at?: string
+          url: string
+          width?: number | null
+        }
+        Update: {
+          alt_text?: string | null
+          blog_id?: string | null
+          blog_section?: string | null
+          caption?: string | null
+          created_at?: string
+          file_size?: number | null
+          generation_batch_id?: string | null
+          height?: number | null
+          id?: string
+          mime_type?: string | null
+          parent_image_id?: string | null
+          title?: string
+          updated_at?: string
+          url?: string
+          width?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_parent_image"
+            columns: ["parent_image_id"]
+            isOneToOne: false
+            referencedRelation: "images"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "images_blog_id_fkey"
+            columns: ["blog_id"]
+            isOneToOne: false
+            referencedRelation: "blogs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      product_images: {
+        Row: {
+          alt_text: string | null
+          caption: string | null
+          created_at: string
+          id: string
+          image_url: string
+          is_primary: boolean | null
+          product_id: string
+          sort_order: number | null
+        }
+        Insert: {
+          alt_text?: string | null
+          caption?: string | null
+          created_at?: string
+          id?: string
+          image_url: string
+          is_primary?: boolean | null
+          product_id: string
+          sort_order?: number | null
+        }
+        Update: {
+          alt_text?: string | null
+          caption?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string
+          is_primary?: boolean | null
+          product_id?: string
+          sort_order?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_images_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      products: {
+        Row: {
+          benefits: Json | null
+          created_at: string
+          description: string
+          features: Json | null
+          id: string
+          is_active: boolean | null
+          price: string
+          slug: string
+          sort_order: number | null
+          tagline: string | null
+          testimonials: Json | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          benefits?: Json | null
+          created_at?: string
+          description: string
+          features?: Json | null
+          id?: string
+          is_active?: boolean | null
+          price: string
+          slug: string
+          sort_order?: number | null
+          tagline?: string | null
+          testimonials?: Json | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          benefits?: Json | null
+          created_at?: string
+          description?: string
+          features?: Json | null
+          id?: string
+          is_active?: boolean | null
+          price?: string
+          slug?: string
+          sort_order?: number | null
+          tagline?: string | null
+          testimonials?: Json | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          id: string
+          role: string
+          updated_at: string
+          user_id: string
+          username: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role?: string
+          updated_at?: string
+          user_id: string
+          username: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: string
+          updated_at?: string
+          user_id?: string
+          username?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      rebuild_blog_content_images: {
+        Args: { blog_id_param: string }
+        Returns: Json
+      }
     }
     Enums: {
       [_ in never]: never
