@@ -8,33 +8,24 @@ import { Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
 import { useState } from 'react';
+import { EmailCollectionModal } from '@/components/EmailCollectionModal';
 
 const Product = () => {
   const { slug } = useParams<{ slug: string }>();
   const { product, loading, error } = useProduct(slug || '');
   const [isPurchasing, setIsPurchasing] = useState(false);
+  const [showEmailModal, setShowEmailModal] = useState(false);
 
-  const handlePurchase = async () => {
+  const handlePurchase = () => {
+    setShowEmailModal(true);
+  };
+
+  const handleEmailSubmit = async (email: string) => {
     if (!product) return;
     
     setIsPurchasing(true);
     try {
       console.log('Initiating purchase for product:', product.id);
-      
-      // Get user email from the purchase form
-      const email = prompt('Please enter your email address for purchase confirmation:');
-      if (!email) {
-        setIsPurchasing(false);
-        return;
-      }
-
-      // Validate email format
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        toast.error('Please enter a valid email address');
-        setIsPurchasing(false);
-        return;
-      }
 
       const { data, error } = await supabase.functions.invoke('create-payment', {
         body: {
@@ -51,7 +42,7 @@ const Product = () => {
 
       if (data?.url) {
         console.log('Redirecting to Stripe checkout:', data.url);
-        // Open Stripe checkout in a new tab
+        setShowEmailModal(false);
         window.open(data.url, '_blank');
         toast.success('Redirecting to secure checkout...');
       } else {
@@ -107,6 +98,14 @@ const Product = () => {
           product={product} 
           onPurchase={handlePurchase}
           isPurchasing={isPurchasing}
+        />
+        
+        <EmailCollectionModal
+          isOpen={showEmailModal}
+          onClose={() => setShowEmailModal(false)}
+          onSubmit={handleEmailSubmit}
+          isLoading={isPurchasing}
+          productTitle={product.title}
         />
       </div>
       <Footer />
