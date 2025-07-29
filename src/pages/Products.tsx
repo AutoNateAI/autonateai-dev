@@ -70,8 +70,98 @@ const Products = () => {
               
               return (
                 <div key={product.id} className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center ${!isEven ? 'lg:grid-flow-col-dense' : ''}`}>
-                  {/* Content */}
-                  <div className={isEven ? '' : 'lg:col-start-2'}>
+                  
+                  {/* Mobile/Tablet Layout: Image above title */}
+                  <div className="lg:hidden space-y-6">
+                    {/* Product Carousel - Above title on mobile */}
+                    <div>
+                      <ProductCarousel 
+                        images={product.images}
+                        className="w-full"
+                      />
+                    </div>
+
+                    {/* Product badge and title */}
+                    <div>
+                      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-primary/10 text-primary border border-primary/20 mb-4">
+                        <IconComponent className="w-4 h-4" />
+                        {product.title}
+                      </div>
+                      
+                      <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+                        {product.tagline}
+                      </h2>
+                      
+                      <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+                        {product.description}
+                      </p>
+                    </div>
+
+                    {/* Key Benefits */}
+                    <div>
+                      <h3 className="text-xl font-semibold mb-4">Key Benefits:</h3>
+                      <ul className="space-y-3">
+                        {product.benefits.map((benefit, i) => (
+                          <li key={i} className="flex items-start gap-3">
+                            <Check className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
+                            <span className="text-muted-foreground">{benefit}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Features */}
+                    <div className="glass-card p-6">
+                      <h3 className="text-xl font-bold mb-4">What You'll Get:</h3>
+                      <ul className="space-y-3">
+                        {product.features.map((feature, i) => (
+                          <li key={i} className="flex items-start gap-3">
+                            <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
+                            <span className="text-muted-foreground">{feature}</span>
+                          </li>
+                        ))}
+                        <li className="flex items-start gap-3 pt-2 border-t border-border/20">
+                          <Check className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
+                          <span className="text-muted-foreground font-medium">
+                            <strong>Exclusive Discord Community Access</strong>
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* Price & CTA */}
+                    <div className="flex flex-col sm:flex-row items-center gap-4">
+                      <div className="flex items-center gap-2 text-2xl font-bold text-primary">
+                        <DollarSign className="w-6 h-6" />
+                        {product.price.replace('$', '')}
+                        <span className="text-base font-normal text-muted-foreground">one-time</span>
+                      </div>
+                      <Link to={`/products/${product.slug}`} className="btn-primary flex items-center gap-2 w-full sm:w-auto justify-center">
+                        Learn More
+                        <ArrowRight className="w-5 h-5 flex-shrink-0" />
+                      </Link>
+                    </div>
+
+                    {/* Testimonial */}
+                    {primaryTestimonial && (
+                      <div className="glass-card p-6 border-l-4 border-l-primary">
+                        <div className="flex items-center gap-1 mb-3">
+                          {[...Array(5)].map((_, i) => (
+                            <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                          ))}
+                        </div>
+                        <blockquote className="text-muted-foreground mb-3">
+                          "{primaryTestimonial.content}"
+                        </blockquote>
+                        <cite className="text-sm text-primary font-medium">
+                          — {primaryTestimonial.name}, {primaryTestimonial.role}
+                        </cite>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Desktop Layout: Content */}
+                  <div className={`hidden lg:block ${isEven ? '' : 'lg:col-start-2'}`}>
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-primary/10 text-primary border border-primary/20 mb-6">
                       <IconComponent className="w-4 h-4" />
                       {product.title}
@@ -129,8 +219,8 @@ const Products = () => {
                     )}
                   </div>
 
-                  {/* Features Card with Product Carousel */}
-                  <div className={isEven ? '' : 'lg:col-start-1 lg:row-start-1'}>
+                  {/* Desktop Layout: Features Card with Product Carousel */}
+                  <div className={`hidden lg:block ${isEven ? '' : 'lg:col-start-1 lg:row-start-1'}`}>
                     <div className="glass-card p-8">
                       {/* Product Carousel */}
                       <div className="mb-6">
