@@ -272,17 +272,17 @@ const Products = () => {
                 <thead>
                   <tr className="border-b border-border/20">
                     <th className="text-left p-6 font-semibold">Feature</th>
-                    <th className="text-center p-6 font-semibold">Grant Assistant</th>
-                    <th className="text-center p-6 font-semibold">Lit Review AI</th>
-                    <th className="text-center p-6 font-semibold">Data Pipeline</th>
+                    {products.map((product) => (
+                      <th key={product.id} className="text-center p-6 font-semibold">{product.title}</th>
+                    ))}
                   </tr>
                 </thead>
                 <tbody className="text-sm">
                   <tr className="border-b border-border/10">
                     <td className="p-6 font-medium">One-time Price</td>
-                    <td className="p-6 text-center text-primary font-bold">$149</td>
-                    <td className="p-6 text-center text-primary font-bold">$129</td>
-                    <td className="p-6 text-center text-primary font-bold">$129</td>
+                    {products.map((product) => (
+                      <td key={product.id} className="p-6 text-center text-primary font-bold">{product.price}</td>
+                    ))}
                   </tr>
                   <tr className="border-b border-border/10">
                     <td className="p-6 font-medium">AI Prompts Included</td>
