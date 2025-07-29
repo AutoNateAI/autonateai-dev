@@ -110,81 +110,82 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
     return null; // No ads to show
   }
 
+  // Select a random ad from available ads
+  const selectedAd = ads[Math.floor(Math.random() * ads.length)];
+
+  const ad = selectedAd;
+  console.log('Rendering ad:', ad.title, 'link_url:', ad.link_url, 'link_type:', ad.link_type, 'product_id:', ad.product_id);
+
   return (
     <div className={`w-full ${className}`}>
-      {ads.map((ad) => {
-        console.log('Rendering ad:', ad.title, 'link_url:', ad.link_url, 'link_type:', ad.link_type, 'product_id:', ad.product_id);
-        return (
-        <div key={ad.id} className={`w-full overflow-hidden group hover:shadow-lg transition-all duration-300 rounded-2xl bg-gradient-to-br from-muted/10 to-muted/5 ${getAdStyles()}`}>
-          {(ad.link_url || ad.product_id) ? (
-            <>
-              {isExternalLink(ad) ? (
-                <a 
-                  href={getAdLink(ad)!}
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block w-full h-full cursor-pointer not-prose"
-                  style={{ pointerEvents: 'auto' }}
-                  onClick={(e) => {
-                    console.log('External ad clicked:', ad.title, 'href:', getAdLink(ad));
-                    // Let the default behavior handle the navigation
-                  }}
-                >
-                  {ad.image_url ? (
-                    <img 
-                      src={ad.image_url} 
-                      alt={ad.alt_text || ad.title}
-                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
-                    />
-                  ) : (
-                    <div className="p-6 text-center w-full h-full flex flex-col justify-center">
-                      <h3 className="font-semibold text-primary mb-2">{ad.title}</h3>
-                      <div className="text-sm text-muted-foreground">Click to learn more</div>
-                    </div>
-                  )}
-                </a>
-              ) : (
-                <Link 
-                  to={getAdLink(ad)!}
-                  className="block w-full h-full cursor-pointer not-prose"
-                  style={{ pointerEvents: 'auto' }}
-                  onClick={(e) => {
-                    console.log('Internal ad clicked:', ad.title, 'to:', getAdLink(ad));
-                  }}
-                >
-                  {ad.image_url ? (
-                    <img 
-                      src={ad.image_url} 
-                      alt={ad.alt_text || ad.title}
-                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
-                    />
-                  ) : (
-                    <div className="p-6 text-center w-full h-full flex flex-col justify-center">
-                      <h3 className="font-semibold text-primary mb-2">{ad.title}</h3>
-                      <div className="text-sm text-muted-foreground">Click to learn more</div>
-                    </div>
-                  )}
-                </Link>
-              )}
-            </>
-          ) : (
-            <div className="w-full h-full">
-              {ad.image_url ? (
-                <img 
-                  src={ad.image_url} 
-                  alt={ad.alt_text || ad.title}
-                  className="w-full h-full object-contain"
-                />
-              ) : (
-                <div className="p-6 text-center w-full h-full flex flex-col justify-center">
-                  <h3 className="font-semibold text-primary mb-2">{ad.title}</h3>
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-        );
-      })}
+      <div key={ad.id} className={`w-full overflow-hidden group hover:shadow-lg transition-all duration-300 rounded-2xl bg-gradient-to-br from-muted/10 to-muted/5 ${getAdStyles()}`}>
+        {(ad.link_url || ad.product_id) ? (
+          <>
+            {isExternalLink(ad) ? (
+              <a 
+                href={getAdLink(ad)!}
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="block w-full h-full cursor-pointer not-prose"
+                style={{ pointerEvents: 'auto' }}
+                onClick={(e) => {
+                  console.log('External ad clicked:', ad.title, 'href:', getAdLink(ad));
+                  // Let the default behavior handle the navigation
+                }}
+              >
+                {ad.image_url ? (
+                  <img 
+                    src={ad.image_url} 
+                    alt={ad.alt_text || ad.title}
+                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                  />
+                ) : (
+                  <div className="p-6 text-center w-full h-full flex flex-col justify-center">
+                    <h3 className="font-semibold text-primary mb-2">{ad.title}</h3>
+                    <div className="text-sm text-muted-foreground">Click to learn more</div>
+                  </div>
+                )}
+              </a>
+            ) : (
+              <Link 
+                to={getAdLink(ad)!}
+                className="block w-full h-full cursor-pointer not-prose"
+                style={{ pointerEvents: 'auto' }}
+                onClick={(e) => {
+                  console.log('Internal ad clicked:', ad.title, 'to:', getAdLink(ad));
+                }}
+              >
+                {ad.image_url ? (
+                  <img 
+                    src={ad.image_url} 
+                    alt={ad.alt_text || ad.title}
+                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                  />
+                ) : (
+                  <div className="p-6 text-center w-full h-full flex flex-col justify-center">
+                    <h3 className="font-semibold text-primary mb-2">{ad.title}</h3>
+                    <div className="text-sm text-muted-foreground">Click to learn more</div>
+                  </div>
+                )}
+              </Link>
+            )}
+          </>
+        ) : (
+          <div className="w-full h-full">
+            {ad.image_url ? (
+              <img 
+                src={ad.image_url} 
+                alt={ad.alt_text || ad.title}
+                className="w-full h-full object-contain"
+              />
+            ) : (
+              <div className="p-6 text-center w-full h-full flex flex-col justify-center">
+                <h3 className="font-semibold text-primary mb-2">{ad.title}</h3>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
