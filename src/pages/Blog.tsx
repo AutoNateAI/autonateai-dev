@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import { Search, Calendar, User, Tag, ArrowRight } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { supabase } from '@/integrations/supabase/client';
 import EmailPopup from '@/components/EmailPopup';
 import { useEmailPopup } from '@/hooks/useEmailPopup';
@@ -307,46 +308,50 @@ const Blog = () => {
             </div>
 
             {/* Sidebar */}
-            <div className="space-y-8">
-              {/* Ad Space - Sidebar */}
-              <AdSpace position="sidebar" />
+            <div className="sticky top-4">
+              <ScrollArea className="h-[calc(100vh-2rem)]">
+                <div className="space-y-8 pr-4">
+                  {/* Ad Space - Sidebar */}
+                  <AdSpace position="sidebar" />
 
-              {/* Newsletter Signup */}
-              <div className="glass-card p-6">
-                <h3 className="text-lg font-bold mb-4">Subscribe for Updates</h3>
-                <p className="text-muted-foreground text-sm mb-4">
-                  Get research insights delivered to your inbox. No spam, just valuable content.
-                </p>
-                <form className="space-y-3">
-                  <input
-                    type="email"
-                    placeholder="Your email address"
-                    className="w-full px-3 py-2 rounded-lg bg-background/50 border border-border/20 focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm"
-                  />
-                  <button type="submit" className="w-full btn-primary py-2 text-sm">
-                    Subscribe
-                  </button>
-                </form>
-              </div>
+                  {/* Newsletter Signup */}
+                  <div className="glass-card p-6">
+                    <h3 className="text-lg font-bold mb-4">Subscribe for Updates</h3>
+                    <p className="text-muted-foreground text-sm mb-4">
+                      Get research insights delivered to your inbox. No spam, just valuable content.
+                    </p>
+                    <form className="space-y-3">
+                      <input
+                        type="email"
+                        placeholder="Your email address"
+                        className="w-full px-3 py-2 rounded-lg bg-background/50 border border-border/20 focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm"
+                      />
+                      <button type="submit" className="w-full btn-primary py-2 text-sm">
+                        Subscribe
+                      </button>
+                    </form>
+                  </div>
 
-              {/* Categories */}
-              <div className="glass-card p-6">
-                <h3 className="text-lg font-bold mb-4">Categories</h3>
-                <div className="space-y-2">
-                  {categories.slice(1).map((category) => (
-                    <button
-                      key={category}
-                      onClick={() => setSelectedCategory(category)}
-                      className="block text-muted-foreground hover:text-primary transition-colors text-sm w-full text-left"
-                    >
-                      {category}
-                    </button>
-                  ))}
+                  {/* Categories */}
+                  <div className="glass-card p-6">
+                    <h3 className="text-lg font-bold mb-4">Categories</h3>
+                    <div className="space-y-2">
+                      {categories.slice(1).map((category) => (
+                        <button
+                          key={category}
+                          onClick={() => setSelectedCategory(category)}
+                          className="block text-muted-foreground hover:text-primary transition-colors text-sm w-full text-left"
+                        >
+                          {category}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Second Ad Space */}
+                  <AdSpace position="sidebar" />
                 </div>
-              </div>
-
-              {/* Second Ad Space */}
-              <AdSpace position="sidebar" />
+              </ScrollArea>
             </div>
           </div>
         </div>
