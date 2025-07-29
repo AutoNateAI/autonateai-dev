@@ -67,12 +67,32 @@ const AdSpace: React.FC<AdSpaceProps> = ({ position, category, blogSlug, classNa
       if (error) throw error;
 
       // Filter ads based on targeting
-      const filteredAds = (data || []).filter(ad => {
+      let filteredAds = (data || []).filter(ad => {
         if (ad.target_type === 'all') return true;
         if (ad.target_type === 'category' && category) return ad.target_value === category;
         if (ad.target_type === 'specific_post' && blogSlug) return ad.target_value === blogSlug;
         return false;
       });
+
+      // If no ads found for sidebar-top or sidebar-bottom, fall back to general sidebar ads
+      if (filteredAds.length === 0 && (position === 'sidebar-top' || position === 'sidebar-bottom')) {
+        const fallbackQuery = supabase
+          .from('advertisements')
+          .select('*')
+          .eq('position', 'sidebar')
+          .eq('is_active', true);
+
+        const { data: fallbackData, error: fallbackError } = await fallbackQuery;
+
+        if (!fallbackError && fallbackData) {
+          filteredAds = fallbackData.filter(ad => {
+            if (ad.target_type === 'all') return true;
+            if (ad.target_type === 'category' && category) return ad.target_value === category;
+            if (ad.target_type === 'specific_post' && blogSlug) return ad.target_value === blogSlug;
+            return false;
+          });
+        }
+      }
 
       setAds(filteredAds);
     } catch (error) {
