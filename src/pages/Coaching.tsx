@@ -180,7 +180,7 @@ const Coaching = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
             {individualServices.map((service, index) => (
-              <div key={index} className="glass-card p-8 relative group hover:scale-105 transition-all duration-500">
+              <div key={index} className="glass-card p-8 relative group hover:scale-105 transition-all duration-500 flex flex-col">
                 <div className="text-center mb-6">
                   <h3 className="text-xl font-bold mb-2">{service.title}</h3>
                   <div className="flex items-center justify-center gap-2 text-2xl font-bold text-primary mb-2">
@@ -196,7 +196,7 @@ const Coaching = () => {
                   {service.description}
                 </p>
 
-                <ul className="space-y-3 mb-8">
+                <ul className="space-y-3 mb-8 flex-grow">
                   {service.features.map((feature, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <CheckCircle className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
@@ -207,7 +207,7 @@ const Coaching = () => {
 
                 <button 
                   onClick={() => handleRequestCoaching('workflow')}
-                  className="w-full btn-primary block text-center"
+                  className="w-full btn-primary block text-center mt-auto"
                 >
                   Request Session
                   <ArrowRight className="ml-2 w-5 h-5 inline" />

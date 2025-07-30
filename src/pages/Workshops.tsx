@@ -114,7 +114,7 @@ const Workshops = () => {
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-3xl font-bold text-center mb-12">Available Workshops</h2>
           <div className="grid md:grid-cols-2 gap-8">
-            <Card className="glass-card">
+            <Card className="glass-card flex flex-col">
               <CardHeader>
                 <div className="flex justify-between items-start mb-4">
                   <CardTitle className="text-xl">AI Grant Writing Mastery</CardTitle>
@@ -127,7 +127,7 @@ const Workshops = () => {
                   Transform your institution's grant success rate with systematic AI-augmented grant writing strategies.
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-4 flex flex-col flex-grow">
                 <div>
                   <h4 className="font-semibold mb-2">Participants Will Learn:</h4>
                   <ul className="space-y-1 text-sm">
@@ -161,7 +161,7 @@ const Workshops = () => {
                     <Badge variant="outline">Research institutes</Badge>
                   </div>
                 </div>
-                <div className="pt-4 border-t">
+                <div className="pt-4 border-t mt-auto">
                   <p className="text-lg font-semibold text-primary">$3,499 per participant</p>
                   <p className="text-sm text-muted-foreground">Up to 25 participants</p>
                   <Button 
@@ -174,7 +174,7 @@ const Workshops = () => {
               </CardContent>
             </Card>
 
-            <Card className="glass-card">
+            <Card className="glass-card flex flex-col">
               <CardHeader>
                 <div className="flex justify-between items-start mb-4">
                   <CardTitle className="text-xl">Literature Review Revolution</CardTitle>
@@ -187,7 +187,7 @@ const Workshops = () => {
                   Equip your researchers with systematic methods to accelerate literature reviews while improving quality.
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-4 flex flex-col flex-grow">
                 <div>
                   <h4 className="font-semibold mb-2">Participants Will Learn:</h4>
                   <ul className="space-y-1 text-sm">
@@ -221,7 +221,7 @@ const Workshops = () => {
                     <Badge variant="outline">Academic libraries</Badge>
                   </div>
                 </div>
-                <div className="pt-4 border-t">
+                <div className="pt-4 border-t mt-auto">
                   <p className="text-lg font-semibold text-primary">$1,999 per participant</p>
                   <p className="text-sm text-muted-foreground">Up to 30 participants</p>
                   <Button 
@@ -234,7 +234,7 @@ const Workshops = () => {
               </CardContent>
             </Card>
 
-            <Card className="glass-card">
+            <Card className="glass-card flex flex-col">
               <CardHeader>
                 <div className="flex justify-between items-start mb-4">
                   <CardTitle className="text-xl">Research Data Pipeline Implementation</CardTitle>
@@ -247,7 +247,7 @@ const Workshops = () => {
                   Create standardized, reproducible data management practices across your research organization.
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-4 flex flex-col flex-grow">
                 <div>
                   <h4 className="font-semibold mb-2">Participants Will Learn:</h4>
                   <ul className="space-y-1 text-sm">
@@ -281,7 +281,7 @@ const Workshops = () => {
                     <Badge variant="outline">Clinical research orgs</Badge>
                   </div>
                 </div>
-                <div className="pt-4 border-t">
+                <div className="pt-4 border-t mt-auto">
                   <p className="text-lg font-semibold text-primary">$3,699 per participant</p>
                   <p className="text-sm text-muted-foreground">Up to 25 participants</p>
                   <Button 
@@ -294,7 +294,7 @@ const Workshops = () => {
               </CardContent>
             </Card>
 
-            <Card className="glass-card border-primary/20">
+            <Card className="glass-card border-primary/20 flex flex-col">
               <CardHeader>
                 <div className="flex justify-between items-start mb-4">
                   <CardTitle className="text-xl">Custom AI Research Workflow Design</CardTitle>
@@ -307,7 +307,7 @@ const Workshops = () => {
                   Develop custom AI-augmented workflows specifically designed for your organization's unique research needs.
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-4 flex flex-col flex-grow">
                 <div>
                   <h4 className="font-semibold mb-2">Workshop Includes:</h4>
                   <ul className="space-y-1 text-sm">
@@ -341,7 +341,7 @@ const Workshops = () => {
                     <Badge variant="outline">Multi-disciplinary teams</Badge>
                   </div>
                 </div>
-                <div className="pt-4 border-t">
+                <div className="pt-4 border-t mt-auto">
                   <p className="text-lg font-semibold text-primary">$6,999 per participant</p>
                   <p className="text-sm text-muted-foreground">Up to 20 participants</p>
                   <Button 
