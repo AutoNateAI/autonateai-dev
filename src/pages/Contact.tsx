@@ -3,6 +3,8 @@ import { useSearchParams } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import { Mail, Phone, MapPin, Clock, MessageCircle, ArrowRight } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 interface FormData {
   name: string;
@@ -20,6 +22,8 @@ const Contact = () => {
     message: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
     const service = searchParams.get('service');
@@ -44,12 +48,41 @@ const Contact = () => {
     }
   }, [searchParams]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 3000);
-    setFormData({ name: '', email: '', company: '', message: '' });
+    if (isSubmitting) return;
+    
+    setIsSubmitting(true);
+    
+    try {
+      const { error } = await supabase
+        .from('form_submissions')
+        .insert({
+          form_type: 'contact',
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          message: `Organization: ${formData.company}\nMessage: ${formData.message}`.trim()
+        });
+
+      if (error) throw error;
+      
+      setIsSubmitted(true);
+      setFormData({ name: '', email: '', company: '', message: '' });
+      
+      toast({
+        title: "Message sent!",
+        description: "We'll get back to you within 24 hours.",
+      });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast({
+        title: "Error sending message",
+        description: "Please try again or contact us directly.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

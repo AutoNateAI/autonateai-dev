@@ -11,18 +11,64 @@ import { CheckCircle, Users, Clock, MapPin, Video, Award } from "lucide-react";
 import EmailPopup from "@/components/EmailPopup";
 import { useEmailPopup } from "@/hooks/useEmailPopup";
 import { useState } from "react";
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 const Workshops = () => {
   const { showPopup, closePopup } = useEmailPopup();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const { toast } = useToast();
   const [workshopFormData, setWorkshopFormData] = useState({
     workshop: '',
     format: '',
     timeline: ''
   });
   
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Workshop request submitted");
+    if (isSubmitting) return;
+    
+    setIsSubmitting(true);
+    
+    try {
+      // Get form data from the actual form
+      const form = e.target as HTMLFormElement;
+      const formData = new FormData(form);
+      
+      const { error } = await supabase
+        .from('form_submissions')
+        .insert({
+          form_type: 'workshop',
+          name: formData.get('name')?.toString().trim() || '',
+          email: formData.get('email')?.toString().trim() || '',
+          message: `Organization: ${formData.get('organization')}\nParticipants: ${formData.get('participants')}\nFormat: ${workshopFormData.format}\nTimeline: ${workshopFormData.timeline}\nMessage: ${formData.get('message')}`.trim()
+        });
+
+      if (error) throw error;
+      
+      setIsSubmitted(true);
+      form.reset();
+      setWorkshopFormData({
+        workshop: '',
+        format: '',
+        timeline: ''
+      });
+      
+      toast({
+        title: "Workshop request submitted!",
+        description: "We'll contact you within 1 business day to discuss your workshop needs.",
+      });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast({
+        title: "Error submitting request",
+        description: "Please try again or contact us directly.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleRequestWorkshop = (workshopType: string) => {

@@ -3,8 +3,13 @@ import Footer from '../components/Footer';
 import { Users, Clock, Award, CheckCircle, ArrowRight, DollarSign } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 const Coaching = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -15,10 +20,49 @@ const Coaching = () => {
     timeline: 'flexible'
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
+    if (isSubmitting) return;
+    
+    setIsSubmitting(true);
+    
+    try {
+      const { error } = await supabase
+        .from('form_submissions')
+        .insert({
+          form_type: 'coaching',
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          message: `Institution: ${formData.institution}\nService: ${formData.service}\nResearch Area: ${formData.researchArea}\nTimeline: ${formData.timeline}\nMessage: ${formData.message}`.trim()
+        });
+
+      if (error) throw error;
+      
+      setIsSubmitted(true);
+      setFormData({
+        name: '',
+        email: '',
+        institution: '',
+        service: '',
+        researchArea: '',
+        message: '',
+        timeline: 'flexible'
+      });
+      
+      toast({
+        title: "Request submitted!",
+        description: "We'll contact you within 1 business day to discuss your coaching needs.",
+      });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast({
+        title: "Error submitting request",
+        description: "Please try again or contact us directly.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleRequestCoaching = (serviceType: string) => {

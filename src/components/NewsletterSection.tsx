@@ -1,16 +1,50 @@
 import { Mail, ArrowRight } from 'lucide-react';
 import { useState } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 const NewsletterSection = () => {
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle newsletter signup
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 3000);
-    setEmail('');
+    if (!email || isSubmitting) return;
+    
+    setIsSubmitting(true);
+    
+    try {
+      const { error } = await supabase
+        .from('form_submissions')
+        .insert({
+          form_type: 'newsletter',
+          email: email.trim(),
+          message: 'Newsletter subscription'
+        });
+
+      if (error) throw error;
+      
+      setIsSubmitted(true);
+      setEmail('');
+      
+      toast({
+        title: "Subscribed successfully!",
+        description: "You'll receive the latest research insights in your inbox.",
+      });
+      
+      setTimeout(() => setIsSubmitted(false), 3000);
+    } catch (error) {
+      console.error('Error subscribing:', error);
+      toast({
+        title: "Error subscribing",
+        description: "Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
