@@ -144,7 +144,7 @@ const Blog = () => {
             </div>
 
             <h2 className="text-2xl font-bold mb-8">Featured Article</h2>
-            <div className="glass-card overflow-hidden">
+            <Link to={`/blog/${featuredPost.slug}`} className="glass-card overflow-hidden block hover:bg-muted/5 transition-colors">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
                 {/* Featured Post Hero Image */}
                 <div className="relative overflow-hidden rounded-l-xl">
@@ -191,16 +191,13 @@ const Blog = () => {
                     </div>
                   </div>
 
-                  <Link
-                    to={`/blog/${featuredPost.slug}`}
-                    className="inline-flex items-center gap-2 text-primary hover:text-primary-glow transition-colors font-medium"
-                  >
+                  <div className="inline-flex items-center gap-2 text-primary hover:text-primary-glow transition-colors font-medium">
                     Read Case Study
                     <ArrowRight className="w-4 h-4" />
-                  </Link>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
           </div>
         </section>
       )}
