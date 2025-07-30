@@ -18,6 +18,7 @@ interface LoginCredentialsEmailProps {
   username: string
   password: string
   accessUrl: string
+  discordUrl: string
   purchaseId: string
 }
 
@@ -26,6 +27,7 @@ export const LoginCredentialsEmail = ({
   username,
   password,
   accessUrl,
+  discordUrl,
   purchaseId
 }: LoginCredentialsEmailProps) => (
   <Html>
@@ -38,6 +40,12 @@ export const LoginCredentialsEmail = ({
         <Text style={text}>
           Thank you for your purchase! Your payment has been successfully processed and your account is now ready.
         </Text>
+
+        <Section style={autoLoginNotice}>
+          <Text style={noticeText}>
+            <strong>✅ Account Ready:</strong> Your login account has been automatically created and you can access {productTitle} immediately using the credentials below. These same credentials work across all our tools you purchase.
+          </Text>
+        </Section>
 
         <Section style={credentialsBox}>
           <Heading style={h2}>Your Login Credentials</Heading>
@@ -87,6 +95,21 @@ export const LoginCredentialsEmail = ({
             3. Start exploring all the features of {productTitle}<br/>
             4. Save these credentials for future access
           </Text>
+        </Section>
+
+        <Section style={discordSection}>
+          <Heading style={h3}>Join Our Community</Heading>
+          <Text style={text}>
+            Connect with other users and get support in our Discord community:
+          </Text>
+          <Section style={buttonContainer}>
+            <Link
+              href={discordUrl}
+              style={discordButton}
+            >
+              Join Discord Community
+            </Link>
+          </Section>
         </Section>
 
         <Section style={supportSection}>
@@ -245,6 +268,43 @@ const purchaseCode = {
   borderRadius: '4px',
   fontFamily: 'monospace',
   fontSize: '14px',
+}
+
+const discordSection = {
+  margin: '24px 20px',
+  padding: '20px',
+  backgroundColor: '#f0f4ff',
+  borderRadius: '8px',
+  border: '1px solid #7c3aed',
+}
+
+const discordButton = {
+  backgroundColor: '#7c3aed',
+  borderRadius: '8px',
+  color: '#ffffff',
+  fontSize: '16px',
+  fontWeight: 'bold',
+  textDecoration: 'none',
+  textAlign: 'center' as const,
+  display: 'inline-block',
+  padding: '14px 28px',
+  boxShadow: '0 2px 4px rgba(124, 58, 237, 0.3)',
+}
+
+const autoLoginNotice = {
+  margin: '20px',
+  padding: '16px',
+  backgroundColor: '#dcfce7',
+  borderRadius: '8px',
+  border: '1px solid #16a34a',
+}
+
+const noticeText = {
+  color: '#166534',
+  fontSize: '15px',
+  fontWeight: '500',
+  margin: '0',
+  lineHeight: '1.5',
 }
 
 const footer = {

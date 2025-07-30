@@ -25,9 +25,9 @@ serve(async (req) => {
     const resendKey = Deno.env.get("RESEND_API_KEY");
     if (!resendKey) throw new Error("RESEND_API_KEY is not set");
 
-    const { email, productTitle, username, password, accessUrl, purchaseId } = await req.json();
+    const { email, productTitle, username, password, accessUrl, discordUrl, purchaseId } = await req.json();
 
-    if (!email || !productTitle || !username || !password || !accessUrl) {
+    if (!email || !productTitle || !username || !password || !accessUrl || !discordUrl) {
       throw new Error("Missing required email parameters");
     }
 
@@ -42,6 +42,7 @@ serve(async (req) => {
         username,
         password,
         accessUrl,
+        discordUrl,
         purchaseId
       })
     );

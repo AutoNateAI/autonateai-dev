@@ -12,15 +12,86 @@ const logStep = (step: string, details?: any) => {
   console.log(`[VERIFY-PAYMENT] ${step}${detailsStr}`);
 };
 
-// Generate secure credentials
-const generateCredentials = (productTitle: string) => {
-  const timestamp = Date.now().toString();
-  const randomStr = Math.random().toString(36).substring(2, 15);
+// Product URL mapping
+const getProductUrls = (productSlug: string) => {
+  const urlMap = {
+    'ai-grant-assistant': {
+      accessUrl: 'https://grants.autonateai.com/auth',
+      discordUrl: 'https://discord.gg/AeCEyZTy'
+    },
+    'lit-review-ai': {
+      accessUrl: 'https://lit-review.autonateai.com/auth', 
+      discordUrl: 'https://discord.gg/6vU46Y2P'
+    },
+    'data-pipeline-builder': {
+      accessUrl: 'https://data-pipeline.autonateai.com/auth',
+      discordUrl: 'https://discord.gg/CNMabU8t'
+    }
+  };
   
-  const username = `${productTitle.toLowerCase().replace(/[^a-z0-9]/g, '')}_user_${timestamp.slice(-6)}`;
-  const password = `${randomStr}${timestamp.slice(-4)}`.toUpperCase();
+  return urlMap[productSlug] || {
+    accessUrl: 'https://grants.autonateai.com/auth',
+    discordUrl: 'https://discord.gg/AeCEyZTy'
+  };
+};
+
+// Get Supabase client for specific tool
+const getToolSupabaseClient = (productSlug: string) => {
+  const clientMap = {
+    'ai-grant-assistant': createClient(
+      Deno.env.get("GRANTS_SUPABASE_URL") ?? "",
+      Deno.env.get("GRANTS_SUPABASE_SERVICE_KEY") ?? "",
+      { auth: { persistSession: false } }
+    ),
+    'lit-review-ai': createClient(
+      Deno.env.get("LIT_REVIEW_SUPABASE_URL") ?? "",
+      Deno.env.get("LIT_REVIEW_SUPABASE_SERVICE_KEY") ?? "",
+      { auth: { persistSession: false } }
+    ),
+    'data-pipeline-builder': createClient(
+      Deno.env.get("DATA_PIPELINE_SUPABASE_URL") ?? "",
+      Deno.env.get("DATA_PIPELINE_SUPABASE_SERVICE_KEY") ?? "",
+      { auth: { persistSession: false } }
+    )
+  };
   
-  return { username, password };
+  return clientMap[productSlug];
+};
+
+// Check if user exists in any tool's auth system and get their password
+const findExistingUser = async (email: string) => {
+  const toolSlugs = ['ai-grant-assistant', 'lit-review-ai', 'data-pipeline-builder'];
+  
+  for (const slug of toolSlugs) {
+    const toolClient = getToolSupabaseClient(slug);
+    if (!toolClient) continue;
+    
+    try {
+      const { data: users } = await toolClient.auth.admin.listUsers();
+      const existingUser = users.users?.find(user => user.email === email);
+      
+      if (existingUser) {
+        // Get the password from our product_access table
+        const mainClient = createClient(
+          Deno.env.get("SUPABASE_URL") ?? "",
+          Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
+          { auth: { persistSession: false } }
+        );
+        
+        const { data: access } = await mainClient
+          .from("product_access")
+          .select("password")
+          .eq("username", email)
+          .single();
+        
+        return { existingUser, password: access?.password, foundInTool: slug };
+      }
+    } catch (error) {
+      logStep(`Error checking user in ${slug}`, error);
+    }
+  }
+  
+  return null;
 };
 
 serve(async (req) => {
@@ -94,11 +165,67 @@ serve(async (req) => {
       .update({ status: "completed" })
       .eq("id", purchase.id);
 
-    // Generate login credentials
-    const { username, password } = generateCredentials(purchase.products.title);
-    const accessUrl = `${req.headers.get("origin")}/products/${purchase.products.slug}`;
+    // Get product URLs and use email as username
+    const { accessUrl, discordUrl } = getProductUrls(purchase.products.slug);
+    const username = purchase.email;
+    
+    // Check if user exists in any tool and get their existing password
+    logStep("Checking for existing user", { email: username });
+    const existingUserData = await findExistingUser(username);
+    
+    let password: string;
+    let isExistingUser = false;
+    
+    if (existingUserData && existingUserData.password) {
+      // User exists with password, use existing password
+      password = existingUserData.password;
+      isExistingUser = true;
+      logStep("Using existing password", { foundInTool: existingUserData.foundInTool });
+    } else {
+      // Generate new password for new user
+      password = Math.random().toString(36).substring(2, 15).toUpperCase();
+      logStep("Generated new password for new user");
+    }
 
-    // Store access credentials
+    // Get the tool's Supabase client
+    const toolClient = getToolSupabaseClient(purchase.products.slug);
+    if (!toolClient) {
+      throw new Error(`No Supabase client configured for product: ${purchase.products.slug}`);
+    }
+
+    // Create or update user in the tool's auth system
+    try {
+      if (isExistingUser) {
+        // User exists, check if they're already in this tool's auth system
+        const { data: existingInThisTool } = await toolClient.auth.admin.listUsers();
+        const userInThisTool = existingInThisTool.users?.find(user => user.email === username);
+        
+        if (!userInThisTool) {
+          // User exists in other tools but not this one, create them
+          logStep("Creating user in new tool", { tool: purchase.products.slug });
+          await toolClient.auth.admin.createUser({
+            email: username,
+            password: password,
+            email_confirm: true
+          });
+        } else {
+          logStep("User already exists in this tool", { tool: purchase.products.slug });
+        }
+      } else {
+        // New user, create them in the tool's auth system
+        logStep("Creating new user in tool auth", { tool: purchase.products.slug });
+        await toolClient.auth.admin.createUser({
+          email: username,
+          password: password,
+          email_confirm: true
+        });
+      }
+    } catch (authError) {
+      logStep("Error managing user in tool auth", { error: authError, tool: purchase.products.slug });
+      // Continue even if auth creation fails - user can still access via credentials
+    }
+
+    // Store access credentials (handle duplicates gracefully)
     const { error: accessError } = await supabaseClient
       .from("product_access")
       .insert({
@@ -111,10 +238,29 @@ serve(async (req) => {
 
     if (accessError) {
       logStep("Error storing access credentials", accessError);
-      throw new Error("Failed to store access credentials");
+      // If it's a duplicate key error, update the existing record instead
+      if (accessError.code === "23505") {
+        logStep("Updating existing access credentials");
+        const { error: updateError } = await supabaseClient
+          .from("product_access")
+          .update({
+            purchase_id: purchase.id,
+            password,
+            access_url: accessUrl,
+            is_active: true
+          })
+          .eq("username", username);
+        
+        if (updateError) {
+          logStep("Error updating access credentials", updateError);
+          throw new Error("Failed to update access credentials");
+        }
+      } else {
+        throw new Error("Failed to store access credentials");
+      }
     }
 
-    logStep("Credentials generated", { username });
+    logStep("User management completed", { username, isExistingUser, tool: purchase.products.slug });
 
     // Trigger email sending
     const emailResponse = await supabaseClient.functions.invoke('send-login-credentials', {
@@ -124,6 +270,7 @@ serve(async (req) => {
         username,
         password,
         accessUrl,
+        discordUrl,
         purchaseId: purchase.id
       }
     });
