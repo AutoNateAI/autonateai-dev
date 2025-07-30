@@ -209,6 +209,78 @@ export type Database = {
         }
         Relationships: []
       }
+      coaching_requests: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          institution: string | null
+          message: string | null
+          name: string
+          research_area: string | null
+          service: string | null
+          timeline: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          institution?: string | null
+          message?: string | null
+          name: string
+          research_area?: string | null
+          service?: string | null
+          timeline?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          institution?: string | null
+          message?: string | null
+          name?: string
+          research_area?: string | null
+          service?: string | null
+          timeline?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      contact_inquiries: {
+        Row: {
+          company: string | null
+          created_at: string
+          email: string
+          id: string
+          inquiry_type: string | null
+          message: string
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          company?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          inquiry_type?: string | null
+          message: string
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          company?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          inquiry_type?: string | null
+          message?: string
+          name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       email_popup_tracking: {
         Row: {
           browser_fingerprint: string
@@ -601,6 +673,45 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      workshop_requests: {
+        Row: {
+          created_at: string
+          email: string
+          format: string | null
+          id: string
+          message: string | null
+          name: string
+          organization: string | null
+          participants: string | null
+          timeline: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          format?: string | null
+          id?: string
+          message?: string | null
+          name: string
+          organization?: string | null
+          participants?: string | null
+          timeline?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          format?: string | null
+          id?: string
+          message?: string | null
+          name?: string
+          organization?: string | null
+          participants?: string | null
+          timeline?: string | null
+          updated_at?: string
+        }
+        Relationships: []
       }
     }
     Views: {

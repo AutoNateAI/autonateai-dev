@@ -28,12 +28,15 @@ const Coaching = () => {
     
     try {
       const { error } = await supabase
-        .from('form_submissions')
+        .from('coaching_requests')
         .insert({
-          form_type: 'coaching',
           name: formData.name.trim(),
           email: formData.email.trim(),
-          message: `Institution: ${formData.institution}\nService: ${formData.service}\nResearch Area: ${formData.researchArea}\nTimeline: ${formData.timeline}\nMessage: ${formData.message}`.trim()
+          institution: formData.institution.trim() || null,
+          service: formData.service.trim() || null,
+          research_area: formData.researchArea.trim() || null,
+          timeline: formData.timeline,
+          message: formData.message.trim() || null
         });
 
       if (error) throw error;

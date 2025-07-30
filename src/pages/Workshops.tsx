@@ -37,12 +37,15 @@ const Workshops = () => {
       const formData = new FormData(form);
       
       const { error } = await supabase
-        .from('form_submissions')
+        .from('workshop_requests')
         .insert({
-          form_type: 'workshop',
           name: formData.get('name')?.toString().trim() || '',
           email: formData.get('email')?.toString().trim() || '',
-          message: `Organization: ${formData.get('organization')}\nParticipants: ${formData.get('participants')}\nFormat: ${workshopFormData.format}\nTimeline: ${workshopFormData.timeline}\nMessage: ${formData.get('message')}`.trim()
+          organization: formData.get('organization')?.toString().trim() || null,
+          participants: formData.get('participants')?.toString().trim() || null,
+          format: workshopFormData.format || null,
+          timeline: workshopFormData.timeline || null,
+          message: formData.get('message')?.toString().trim() || null
         });
 
       if (error) throw error;

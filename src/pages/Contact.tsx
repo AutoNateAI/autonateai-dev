@@ -56,12 +56,13 @@ const Contact = () => {
     
     try {
       const { error } = await supabase
-        .from('form_submissions')
+        .from('contact_inquiries')
         .insert({
-          form_type: 'contact',
           name: formData.name.trim(),
           email: formData.email.trim(),
-          message: `Organization: ${formData.company}\nMessage: ${formData.message}`.trim()
+          company: formData.company.trim() || null,
+          inquiry_type: 'general',
+          message: formData.message.trim()
         });
 
       if (error) throw error;
