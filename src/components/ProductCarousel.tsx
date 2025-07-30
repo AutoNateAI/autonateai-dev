@@ -41,7 +41,7 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({ images, classN
 
   if (!images?.length) {
     return (
-      <div className={cn("aspect-[4/3] bg-muted rounded-lg flex items-center justify-center", className)}>
+      <div className={cn("bg-muted rounded-lg flex items-center justify-center p-8", className)}>
         <span className="text-muted-foreground">No images available</span>
       </div>
     );
@@ -53,11 +53,11 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({ images, classN
         <div className="flex">
           {images.map((image, index) => (
             <div key={image.id} className="flex-[0_0_100%] min-w-0">
-              <div className="aspect-[4/3] relative">
+              <div className="relative">
                 <img
                   src={image.image_url}
                   alt={image.alt_text || `Product image ${index + 1}`}
-                  className="w-full h-full object-cover"
+                  className="w-full h-auto object-contain"
                 />
                 {image.caption && (
                   <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white p-2 text-sm">
