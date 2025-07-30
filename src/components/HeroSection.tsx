@@ -53,7 +53,7 @@ const HeroSection = () => {
               <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
             <Link to="/blog" className="btn-glass text-lg px-8 py-4 flex items-center gap-2">
-              <Play className="w-5 h-5" />
+              <BookOpen className="w-5 h-5" />
               Read Our Blog
             </Link>
           </div>
