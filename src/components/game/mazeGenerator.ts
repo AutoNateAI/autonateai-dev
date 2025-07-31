@@ -4,68 +4,27 @@ export const generateMaze = (level: number): MazeCell[][] => {
   const size = 20;
   const maze: MazeCell[][] = [];
 
-  // Initialize maze with walls
+  // Initialize maze with ALL PATHS (traversable tiles)
   for (let y = 0; y < size; y++) {
     maze[y] = [];
     for (let x = 0; x < size; x++) {
-      maze[y][x] = {
-        type: 'wall',
-        position: { x, y },
-        isVisible: true
-      };
-    }
-  }
-
-  // Simple pathfinding - create clear walkable paths
-  const setPath = (x: number, y: number) => {
-    if (x >= 0 && x < size && y >= 0 && y < size) {
       maze[y][x] = {
         type: 'path',
         position: { x, y },
         isVisible: true
       };
     }
-  };
-
-  // Create a simple grid pattern with paths
-  // Horizontal paths
-  for (let y = 2; y < size - 2; y += 4) {
-    for (let x = 1; x < size - 1; x++) {
-      setPath(x, y);
-    }
   }
-  
-  // Vertical paths  
-  for (let x = 2; x < size - 2; x += 4) {
-    for (let y = 1; y < size - 1; y++) {
-      setPath(x, y);
-    }
-  }
-
-  // Add some connecting paths
-  for (let i = 3; i < size - 3; i += 4) {
-    for (let j = 3; j < size - 3; j += 4) {
-      setPath(i, j);
-      setPath(i + 1, j);
-      setPath(i, j + 1);
-    }
-  }
-
-  // Ensure spawn and exit are paths
-  setPath(1, 1); // Spawn point
-  setPath(18, 18); // Exit point
 
   // Add exactly 3 coins in safe spots
   const coinSpots = [
     { x: 6, y: 2 }, { x: 10, y: 6 }, { x: 14, y: 10 }
   ];
   coinSpots.forEach(pos => {
-    setPath(pos.x, pos.y);
     maze[pos.y][pos.x].type = 'coin';
   });
 
   // Add exactly 1 guide
-  setPath(2, 6);
   maze[6][2] = {
     type: 'guide',
     position: { x: 2, y: 6 },
@@ -75,7 +34,6 @@ export const generateMaze = (level: number): MazeCell[][] => {
   // Add exactly 2 monsters
   const monsterSpots = [{ x: 6, y: 10 }, { x: 14, y: 6 }];
   monsterSpots.forEach((pos, index) => {
-    setPath(pos.x, pos.y);
     maze[pos.y][pos.x] = {
       type: 'monster',
       position: pos,
@@ -94,7 +52,6 @@ export const generateMaze = (level: number): MazeCell[][] => {
   });
 
   // Add exactly 1 exit portal
-  setPath(18, 18);
   maze[18][18] = {
     type: 'portal',
     position: { x: 18, y: 18 },

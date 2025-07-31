@@ -88,7 +88,7 @@ const AscensionGame: React.FC = () => {
     setGameState(prev => {
       const newPosition = { ...prev.playerPosition };
       
-      // Calculate new position
+      // Calculate new position (tile-by-tile movement)
       switch (direction) {
         case 'up':
           newPosition.y = Math.max(0, newPosition.y - 1);
@@ -104,9 +104,9 @@ const AscensionGame: React.FC = () => {
           break;
       }
 
-      // Only move if position actually changed and target is not a wall
+      // Only move if position actually changed (simple bounds check only)
       if (newPosition.x === prev.playerPosition.x && newPosition.y === prev.playerPosition.y) {
-        return prev; // No movement
+        return prev; // No movement (hit boundary)
       }
 
       // Record path choice

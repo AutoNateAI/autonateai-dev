@@ -53,66 +53,59 @@ const GameBoard: React.FC<GameBoardProps> = ({ gameState, onMove, onMonsterEncou
   const renderCell = (cell: MazeCell, rowIndex: number, colIndex: number) => {
     const isPlayer = gameState.playerPosition.x === colIndex && gameState.playerPosition.y === rowIndex;
     
-    // Always show cells, but dim distant ones
-    const distance = Math.abs(gameState.playerPosition.x - colIndex) + Math.abs(gameState.playerPosition.y - rowIndex);
-    const isNearby = distance <= 3;
-
     let cellContent = '';
-    let cellClass = 'w-8 h-8 border border-border/20 flex items-center justify-center text-lg font-bold relative transition-all duration-200';
+    let cellClass = 'w-6 h-6 border border-border/30 flex items-center justify-center text-xs font-bold relative transition-all duration-200';
 
-    if (!isNearby) {
-      cellClass += ' bg-muted/30 text-muted-foreground/50';
-    } else {
-      switch (cell.type) {
-        case 'wall':
-          cellClass += ' bg-muted text-muted-foreground';
-          cellContent = '⬛';
-          break;
-        case 'path':
-          cellClass += ' bg-background hover:bg-accent/20';
-          cellContent = '';
-          break;
-        case 'coin':
-          cellClass += ' bg-background hover:bg-accent/20 text-yellow-500';
-          cellContent = '🪙';
-          break;
-        case 'monster':
-          cellClass += ' bg-destructive/20 text-destructive animate-pulse';
-          if (cell.content) {
-            const monster = cell.content as Monster;
-            switch (monster.type) {
-              case 'paper_avalanche':
-                cellContent = '📚';
-                break;
-              case 'grant_gremlin':
-                cellContent = '📝';
-                break;
-              case 'data_beast':
-                cellContent = '📊';
-                break;
-              case 'deadline_dragon':
-                cellContent = '⏰';
-                break;
-            }
+    // Render all cells clearly
+    switch (cell.type) {
+      case 'wall':
+        cellClass += ' bg-muted text-muted-foreground';
+        cellContent = '⬛';
+        break;
+      case 'path':
+        cellClass += ' bg-background hover:bg-accent/20 border-border/50';
+        cellContent = '';
+        break;
+      case 'coin':
+        cellClass += ' bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 border-yellow-300';
+        cellContent = '🪙';
+        break;
+      case 'monster':
+        cellClass += ' bg-red-100 dark:bg-red-900/30 text-red-600 animate-pulse border-red-300';
+        if (cell.content) {
+          const monster = cell.content as Monster;
+          switch (monster.type) {
+            case 'paper_avalanche':
+              cellContent = '📚';
+              break;
+            case 'grant_gremlin':
+              cellContent = '📝';
+              break;
+            case 'data_beast':
+              cellContent = '📊';
+              break;
+            case 'deadline_dragon':
+              cellContent = '⏰';
+              break;
           }
-          break;
-        case 'portal':
-          cellClass += ' bg-primary/20 text-primary animate-pulse';
-          cellContent = '🌀';
-          break;
-        case 'tool':
-          cellClass += ' bg-accent/20 text-accent';
-          cellContent = '🔧';
-          break;
-        case 'guide':
-          cellClass += ' bg-secondary/20 text-secondary animate-pulse';
-          cellContent = '🧙‍♂️';
-          break;
-      }
+        }
+        break;
+      case 'portal':
+        cellClass += ' bg-blue-100 dark:bg-blue-900/30 text-blue-600 animate-pulse border-blue-300';
+        cellContent = '🌀';
+        break;
+      case 'tool':
+        cellClass += ' bg-green-100 dark:bg-green-900/30 text-green-600 border-green-300';
+        cellContent = '🔧';
+        break;
+      case 'guide':
+        cellClass += ' bg-purple-100 dark:bg-purple-900/30 text-purple-600 animate-pulse border-purple-300';
+        cellContent = '🧙‍♂️';
+        break;
     }
 
     if (isPlayer) {
-      cellClass += ' ring-2 ring-primary bg-primary/30 animate-pulse z-10 relative';
+      cellClass += ' ring-2 ring-primary bg-primary/30 z-10 relative';
       cellContent = '🧑‍🔬';
     }
 
