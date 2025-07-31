@@ -192,17 +192,9 @@ const ToolSelector: React.FC<ToolSelectorProps> = ({
 
         {/* Tools List */}
         <div 
-          className="space-y-2 overflow-y-auto pr-2 scrollbar-hide"
-          style={{ 
-            scrollbarWidth: 'none', 
-            msOverflowStyle: 'none',
-            maxHeight: '400px'
-          }}
-          onWheel={(e) => {
-            e.stopPropagation();
-            const container = e.currentTarget;
-            container.scrollTop += e.deltaY;
-          }}
+          className="space-y-2 max-h-60 overflow-y-auto pr-2"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          onScroll={(e) => e.stopPropagation()}
         >
           {availableTools.map((tool) => {
             const affordable = canAfford(tool);

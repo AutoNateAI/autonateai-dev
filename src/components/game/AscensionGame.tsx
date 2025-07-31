@@ -136,11 +136,11 @@ const AscensionGame: React.FC = () => {
         const targetCell = maze[newPosition.y][newPosition.x];
         if (targetCell.type === 'coin') {
           newCoins += 1;
-          // Hide coin temporarily
+          // Remove coin from maze temporarily
           maze[newPosition.y][newPosition.x] = {
-            type: 'coin',
+            type: 'path',
             position: { x: newPosition.x, y: newPosition.y },
-            isVisible: false
+            isVisible: true
           };
           
           // Respawn coin after 5 seconds
@@ -316,6 +316,21 @@ const AscensionGame: React.FC = () => {
             Use AI tools strategically to overcome obstacles and discover your optimal research workflow.
           </p>
           
+          <div className="grid grid-cols-2 gap-3 my-6">
+            <div className="glass-card p-3">
+              <h3 className="font-semibold mb-1 text-sm">🎮 Controls</h3>
+              <p className="text-xs text-muted-foreground">
+                Arrow keys or WASD to move. Strategic thinking wins!
+              </p>
+            </div>
+            <div className="glass-card p-3">
+              <h3 className="font-semibold mb-1 text-sm">⏱️ Time Limit</h3>
+              <p className="text-xs text-muted-foreground">
+                10 minutes to complete the challenge!
+              </p>
+            </div>
+          </div>
+
           <Button 
             onClick={startGame} 
             size="lg" 
@@ -334,7 +349,7 @@ const AscensionGame: React.FC = () => {
       <div className="flex gap-4 p-4 h-full">
         {/* Game Board Container - Responsive width */}
         <div className="flex-1 flex items-start justify-center min-w-0">
-          <div className="w-full aspect-square">
+          <div className="w-full aspect-square max-h-[600px]">
             <GameBoard
               gameState={gameState}
               onMove={movePlayer}

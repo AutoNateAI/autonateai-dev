@@ -68,13 +68,8 @@ const GameBoard: React.FC<GameBoardProps> = ({ gameState, onMove, onMonsterEncou
         cellContent = '';
         break;
       case 'coin':
-        if (cell.isVisible) {
-          cellClass += ' bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 border-yellow-300';
-          cellContent = '🪙';
-        } else {
-          cellClass += ' bg-background hover:bg-accent/20 border-border/50';
-          cellContent = '';
-        }
+        cellClass += ' bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 border-yellow-300';
+        cellContent = '🪙';
         break;
       case 'monster':
         cellClass += ' bg-red-100 dark:bg-red-900/30 text-red-600 border-red-300';
