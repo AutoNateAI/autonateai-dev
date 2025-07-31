@@ -6,11 +6,11 @@ const AscensionProtocol = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
       <Navigation />
-      <main className="container mx-auto px-4 py-2">
-        <div className="max-w-6xl mx-auto">
+      <main className="w-full px-2 py-1">
+        <div className="w-full">
           {/* Game Header */}
-          <div className="text-center mb-8">
-            <h1 className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-4">
+          <div className="text-center mb-4">
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">
               Ascension Protocol
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">

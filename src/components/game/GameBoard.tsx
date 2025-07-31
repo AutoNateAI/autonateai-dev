@@ -129,10 +129,10 @@ const GameBoard: React.FC<GameBoardProps> = ({ gameState, onMove, onMonsterEncou
   };
 
   return (
-    <div className="flex flex-col items-center space-y-4">
+    <div className="w-full flex flex-col items-center space-y-4">
       {/* Game Board */}
       <div 
-        className="glass-card p-4 rounded-xl bg-gradient-to-br from-background/80 to-primary/5 border border-primary/20"
+        className="w-full max-w-none glass-card p-2 rounded-xl bg-gradient-to-br from-background/80 to-primary/5 border border-primary/20"
         onPointerDown={handlePointerDown}
         onPointerUp={handlePointerUp}
         style={{ touchAction: 'none' }}
