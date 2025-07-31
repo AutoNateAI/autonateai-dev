@@ -19,6 +19,7 @@ import LitReviewAi from "./pages/LitReviewAi";
 import DataPipelineBuilder from "./pages/DataPipelineBuilder";
 import Workshops from "./pages/Workshops";
 import PaymentSuccess from "./pages/PaymentSuccess";
+import AscensionProtocol from "./pages/AscensionProtocol";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +41,7 @@ const App = () => (
             <Route path="/workshops" element={<Workshops />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/ascension-protocol" element={<AscensionProtocol />} />
             <Route path="/payment-success" element={<PaymentSuccess />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
