@@ -136,12 +136,23 @@ const AscensionGame: React.FC = () => {
         const targetCell = maze[newPosition.y][newPosition.x];
         if (targetCell.type === 'coin') {
           newCoins += 1;
-          // Remove coin from maze
+          // Remove coin from maze temporarily
           maze[newPosition.y][newPosition.x] = {
             type: 'path',
             position: { x: newPosition.x, y: newPosition.y },
             isVisible: true
           };
+          
+          // Respawn coin after 5 seconds
+          setTimeout(() => {
+            if (maze[newPosition.y] && maze[newPosition.y][newPosition.x]) {
+              maze[newPosition.y][newPosition.x] = {
+                type: 'coin',
+                position: { x: newPosition.x, y: newPosition.y },
+                isVisible: true
+              };
+            }
+          }, 5000);
         } else if (targetCell.type === 'portal') {
           // Player reached the exit portal - win condition
           newIsCompleted = true;
@@ -337,7 +348,7 @@ const AscensionGame: React.FC = () => {
       {/* Main Game Area */}
       <div className="flex gap-4 p-4 h-full">
         {/* Game Board Container - Responsive width */}
-        <div className="flex-1 flex items-center justify-center min-w-0">
+        <div className="flex-1 flex items-start justify-center min-w-0">
           <div className="w-full aspect-square max-h-[600px]">
             <GameBoard
               gameState={gameState}
@@ -349,7 +360,7 @@ const AscensionGame: React.FC = () => {
         </div>
 
         {/* Right Panel - HUD + Tool Shop */}
-        <div className="w-80 hidden lg:flex flex-col gap-4">
+        <div className="w-80 hidden lg:flex flex-col gap-4 items-start">
           {/* Stats HUD */}
           <div className="glass-card p-3 rounded-lg">
             <div className="flex flex-col gap-2 text-sm">

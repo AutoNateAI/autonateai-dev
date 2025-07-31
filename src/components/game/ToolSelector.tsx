@@ -192,7 +192,8 @@ const ToolSelector: React.FC<ToolSelectorProps> = ({
 
         {/* Tools List */}
         <div 
-          className="space-y-2 max-h-60 overflow-y-scroll scrollbar-hide"
+          className="space-y-2 max-h-60 overflow-y-auto pr-2"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           onScroll={(e) => e.stopPropagation()}
         >
           {availableTools.map((tool) => {
