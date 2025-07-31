@@ -95,7 +95,7 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
 
   const [maze, setMaze] = useState<MazeCell[][]>([]);
 
-  // Generate maze when level changes
+  // Generate maze when level changes - memoized to prevent unnecessary regeneration
   useEffect(() => {
     const newMaze = generateMaze(gameState.currentLevel);
     setMaze(newMaze);
@@ -192,7 +192,7 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
         }
       };
     });
-  }, [gameState.isPlaying, gameState.isPaused, maze]);
+  }, [gameState.isPlaying, gameState.isPaused]);
 
   const selectTool = useCallback((tool: Tool) => {
     if (!gameState.isPlaying) return;
@@ -363,6 +363,7 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
               onMove={movePlayer}
               onMonsterEncounter={handleMonsterEncounter}
               cameraPosition={cameraPosition}
+              maze={maze}
             />
           </div>
         </div>

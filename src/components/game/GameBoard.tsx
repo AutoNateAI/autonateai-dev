@@ -7,17 +7,11 @@ interface GameBoardProps {
   onMove: (direction: 'up' | 'down' | 'left' | 'right') => void;
   onMonsterEncounter: (monster: Monster) => void;
   cameraPosition: { x: number; y: number };
+  maze: MazeCell[][];
 }
 
-const GameBoard: React.FC<GameBoardProps> = ({ gameState, onMove, onMonsterEncounter, cameraPosition }) => {
-  const [maze, setMaze] = useState<MazeCell[][]>([]);
+const GameBoard: React.FC<GameBoardProps> = ({ gameState, onMove, onMonsterEncounter, cameraPosition, maze }) => {
   const [dragStart, setDragStart] = useState<Position | null>(null);
-
-  // Generate maze when level changes
-  useEffect(() => {
-    const newMaze = generateMaze(gameState.currentLevel);
-    setMaze(newMaze);
-  }, [gameState.currentLevel]);
 
   // Handle touch/mouse controls
   const handlePointerDown = (e: React.PointerEvent) => {
