@@ -9,7 +9,11 @@ import GameResults from './GameResults';
 import { generateMaze } from './mazeGenerator';
 import { GameState, Position, Tool, Monster, Portal, MazeCell } from './types';
 
-const AscensionGame: React.FC = () => {
+interface AscensionGameProps {
+  onGameStateChange?: (gameStarted: boolean) => void;
+}
+
+const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
   const [gameState, setGameState] = useState<GameState>({
     isPlaying: false,
     isCompleted: false,
@@ -80,6 +84,7 @@ const AscensionGame: React.FC = () => {
       }
     }));
     setGameStarted(true);
+    onGameStateChange?.(true);
   }, []);
 
   const pauseGame = useCallback(() => {
