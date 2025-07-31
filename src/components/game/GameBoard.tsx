@@ -68,8 +68,16 @@ const GameBoard: React.FC<GameBoardProps> = ({ gameState, onMove, onMonsterEncou
         cellContent = '';
         break;
       case 'coin':
-        cellClass += ' bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 border-yellow-300';
-        cellContent = '🪙';
+        // Check if this coin is currently collected
+        const coinKey = `${colIndex}-${rowIndex}`;
+        const isCollected = gameState.collectedData.collectedCoins?.includes(coinKey);
+        if (isCollected) {
+          cellClass += ' bg-background hover:bg-accent/20 border-border/50';
+          cellContent = '';
+        } else {
+          cellClass += ' bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 border-yellow-300';
+          cellContent = '🪙';
+        }
         break;
       case 'monster':
         cellClass += ' bg-red-100 dark:bg-red-900/30 text-red-600 border-red-300';

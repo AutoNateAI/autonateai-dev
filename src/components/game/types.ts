@@ -66,6 +66,7 @@ export interface GameData {
     timestamp: number;
   }>;
   timeSpent: number;
+  collectedCoins?: string[];
 }
 
 export interface GameState {

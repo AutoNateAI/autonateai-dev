@@ -26,13 +26,14 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
     timeRemaining: 600, // 10 minutes
     equippedTools: [],
     visibleArea: { startX: 0, startY: 0, endX: 10, endY: 10 },
-    collectedData: {
-      toolSelections: [],
-      pathChoices: [],
-      monsterEncounters: [],
-      portalUsage: [],
-      timeSpent: 0
-    }
+      collectedData: {
+        toolSelections: [],
+        pathChoices: [],
+        monsterEncounters: [],
+        portalUsage: [],
+        timeSpent: 0,
+        collectedCoins: []
+      }
   });
 
   const [cameraPosition, setCameraPosition] = useState({ x: 0, y: 0 });
@@ -80,7 +81,8 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
         pathChoices: [],
         monsterEncounters: [],
         portalUsage: [],
-        timeSpent: 0
+        timeSpent: 0,
+        collectedCoins: []
       }
     }));
     setGameStarted(true);
@@ -137,27 +139,27 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
       // Check for coin collection and win condition
       let newCoins = prev.coins;
       let newIsCompleted = prev.isCompleted;
+      let newCollectedCoins = [...prev.collectedData.collectedCoins || []];
+      
       if (maze.length > 0 && maze[newPosition.y] && maze[newPosition.y][newPosition.x]) {
         const targetCell = maze[newPosition.y][newPosition.x];
         if (targetCell.type === 'coin') {
-          newCoins += 1;
-          // Remove coin from maze temporarily
-          maze[newPosition.y][newPosition.x] = {
-            type: 'path',
-            position: { x: newPosition.x, y: newPosition.y },
-            isVisible: true
-          };
-          
-          // Respawn coin after 5 seconds
-          setTimeout(() => {
-            if (maze[newPosition.y] && maze[newPosition.y][newPosition.x]) {
-              maze[newPosition.y][newPosition.x] = {
-                type: 'coin',
-                position: { x: newPosition.x, y: newPosition.y },
-                isVisible: true
-              };
-            }
-          }, 5000);
+          const coinKey = `${newPosition.x}-${newPosition.y}`;
+          if (!newCollectedCoins.includes(coinKey)) {
+            newCoins += 1;
+            newCollectedCoins.push(coinKey);
+            
+            // Set coin to respawn after 5 seconds
+            setTimeout(() => {
+              setGameState(currentState => ({
+                ...currentState,
+                collectedData: {
+                  ...currentState.collectedData,
+                  collectedCoins: currentState.collectedData.collectedCoins?.filter(c => c !== coinKey) || []
+                }
+              }));
+            }, 5000);
+          }
         } else if (targetCell.type === 'portal') {
           // Player reached the exit portal - win condition
           newIsCompleted = true;
@@ -185,7 +187,8 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
         isPlaying: !newIsCompleted,
         collectedData: {
           ...prev.collectedData,
-          pathChoices: [...prev.collectedData.pathChoices, pathChoice]
+          pathChoices: [...prev.collectedData.pathChoices, pathChoice],
+          collectedCoins: newCollectedCoins
         }
       };
     });
