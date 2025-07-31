@@ -1,10 +1,492 @@
 import { MazeCell, Position } from './types';
 
+interface MazeTemplate {
+  id: number;
+  difficulty: 'easy' | 'medium' | 'hard' | 'expert';
+  name: string;
+  paths: number[][];
+  coins: Position[];
+  monsters: Array<{ pos: Position; type: 'paper_avalanche' | 'grant_gremlin' | 'data_beast' | 'deadline_dragon'; icon: string }>;
+  guides: Position[];
+  exit: Position;
+}
+
+const MAZE_TEMPLATES: MazeTemplate[] = [
+  // EASY MAZES (1-5) - Wide corridors, few obstacles
+  {
+    id: 1,
+    difficulty: 'easy',
+    name: 'Tutorial Path',
+    paths: [
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1],
+      [1,0,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,0,1],
+      [1,0,0,0,0,0,0,1,0,1,0,1,0,0,0,0,0,0,1],
+      [1,1,1,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1],
+      [1,0,0,0,0,0,0,1,0,1,0,1,0,0,0,0,0,0,1],
+      [1,0,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,0,1],
+      [1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    ],
+    coins: [{ x: 3, y: 2 }, { x: 9, y: 4 }, { x: 15, y: 6 }],
+    monsters: [{ pos: { x: 5, y: 3 }, type: 'paper_avalanche', icon: '📚' }],
+    guides: [{ x: 7, y: 5 }],
+    exit: { x: 17, y: 7 }
+  },
+  {
+    id: 2,
+    difficulty: 'easy',
+    name: 'Simple Spiral',
+    paths: [
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
+      [1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
+      [1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,0,1],
+      [1,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,1,0,1],
+      [1,0,1,0,1,0,1,1,1,1,1,1,1,0,1,0,1,0,1],
+      [1,0,1,0,1,0,1,0,0,0,0,0,1,0,1,0,1,0,1],
+      [1,0,0,0,1,0,1,0,1,1,1,0,1,0,1,0,0,0,1],
+      [1,1,1,1,1,0,1,0,0,0,0,0,1,0,1,1,1,1,1]
+    ],
+    coins: [{ x: 8, y: 2 }, { x: 12, y: 5 }, { x: 6, y: 8 }],
+    monsters: [{ pos: { x: 9, y: 7 }, type: 'grant_gremlin', icon: '📝' }],
+    guides: [{ x: 5, y: 3 }],
+    exit: { x: 11, y: 7 }
+  },
+  {
+    id: 3,
+    difficulty: 'easy',
+    name: 'Cross Roads',
+    paths: [
+      [1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,1],
+      [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1],
+      [1,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1],
+      [1,0,1,1,1,1,1,0,1,1,1,0,1,1,1,1,1,0,1],
+      [1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1],
+      [1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1],
+      [1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1],
+      [1,0,1,1,1,1,1,0,1,1,1,0,1,1,1,1,1,0,1],
+      [1,0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0,1]
+    ],
+    coins: [{ x: 2, y: 1 }, { x: 9, y: 4 }, { x: 16, y: 7 }],
+    monsters: [{ pos: { x: 7, y: 2 }, type: 'data_beast', icon: '📊' }],
+    guides: [{ x: 13, y: 5 }],
+    exit: { x: 17, y: 8 }
+  },
+  {
+    id: 4,
+    difficulty: 'easy',
+    name: 'Garden Path',
+    paths: [
+      [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1],
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,0,1,1,1],
+      [1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,1],
+      [1,0,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,0,1],
+      [1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1],
+      [1,1,1,1,1,1,1,0,1,1,1,0,1,1,1,1,1,1,1],
+      [1,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,1],
+      [1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1]
+    ],
+    coins: [{ x: 3, y: 1 }, { x: 11, y: 3 }, { x: 7, y: 7 }],
+    monsters: [{ pos: { x: 6, y: 5 }, type: 'deadline_dragon', icon: '⏰' }],
+    guides: [{ x: 15, y: 2 }],
+    exit: { x: 9, y: 8 }
+  },
+  {
+    id: 5,
+    difficulty: 'easy',
+    name: 'River Flow',
+    paths: [
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]
+    ],
+    coins: [{ x: 5, y: 0 }, { x: 10, y: 4 }, { x: 15, y: 8 }],
+    monsters: [{ pos: { x: 8, y: 2 }, type: 'paper_avalanche', icon: '📚' }],
+    guides: [{ x: 12, y: 6 }],
+    exit: { x: 17, y: 8 }
+  },
+
+  // MEDIUM MAZES (6-12) - More complex paths, multiple monsters
+  {
+    id: 6,
+    difficulty: 'medium',
+    name: 'Labyrinth Core',
+    paths: [
+      [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1],
+      [1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,1],
+      [1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,0,1,1,1],
+      [1,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,1],
+      [1,0,1,1,1,1,1,0,1,0,1,0,1,1,1,1,1,0,1],
+      [1,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,1],
+      [1,0,1,0,1,0,1,1,1,1,1,1,1,0,1,0,1,0,1],
+      [1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    ],
+    coins: [{ x: 2, y: 1 }, { x: 9, y: 3 }, { x: 16, y: 5 }, { x: 11, y: 7 }],
+    monsters: [
+      { pos: { x: 5, y: 2 }, type: 'grant_gremlin', icon: '📝' },
+      { pos: { x: 13, y: 4 }, type: 'data_beast', icon: '📊' }
+    ],
+    guides: [{ x: 7, y: 6 }],
+    exit: { x: 17, y: 7 }
+  },
+  {
+    id: 7,
+    difficulty: 'medium',
+    name: 'Spiral Descent',
+    paths: [
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
+      [1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
+      [1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,0,1],
+      [1,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,1,0,1],
+      [1,0,1,0,1,0,1,1,1,1,1,1,1,0,1,0,1,0,1],
+      [1,0,1,0,1,0,1,0,0,0,0,0,1,0,1,0,1,0,1],
+      [1,0,0,0,1,0,1,0,1,0,1,0,1,0,1,0,0,0,1]
+    ],
+    coins: [{ x: 8, y: 1 }, { x: 14, y: 3 }, { x: 10, y: 5 }, { x: 6, y: 7 }],
+    monsters: [
+      { pos: { x: 12, y: 2 }, type: 'deadline_dragon', icon: '⏰' },
+      { pos: { x: 8, y: 6 }, type: 'paper_avalanche', icon: '📚' }
+    ],
+    guides: [{ x: 4, y: 4 }],
+    exit: { x: 9, y: 8 }
+  },
+  {
+    id: 8,
+    difficulty: 'medium',
+    name: 'Chess Board',
+    paths: [
+      [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1]
+    ],
+    coins: [{ x: 4, y: 1 }, { x: 12, y: 3 }, { x: 8, y: 5 }, { x: 16, y: 7 }],
+    monsters: [
+      { pos: { x: 6, y: 1 }, type: 'grant_gremlin', icon: '📝' },
+      { pos: { x: 14, y: 5 }, type: 'data_beast', icon: '📊' }
+    ],
+    guides: [{ x: 10, y: 3 }],
+    exit: { x: 18, y: 8 }
+  },
+  {
+    id: 9,
+    difficulty: 'medium',
+    name: 'Branching Paths',
+    paths: [
+      [1,0,0,0,1,1,1,1,1,0,1,1,1,1,1,0,0,0,1],
+      [1,0,1,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,1],
+      [1,0,1,1,1,1,1,0,1,0,1,0,1,1,1,1,1,0,1],
+      [1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1],
+      [1,1,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,1,1],
+      [1,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,1],
+      [1,0,1,1,1,1,1,0,1,0,1,0,1,1,1,1,1,0,1],
+      [1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
+      [1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1]
+    ],
+    coins: [{ x: 3, y: 1 }, { x: 15, y: 1 }, { x: 9, y: 4 }, { x: 6, y: 7 }],
+    monsters: [
+      { pos: { x: 7, y: 2 }, type: 'deadline_dragon', icon: '⏰' },
+      { pos: { x: 11, y: 6 }, type: 'paper_avalanche', icon: '📚' }
+    ],
+    guides: [{ x: 13, y: 3 }],
+    exit: { x: 17, y: 8 }
+  },
+  {
+    id: 10,
+    difficulty: 'medium',
+    name: 'Maze Runner',
+    paths: [
+      [1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1],
+      [1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1],
+      [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1],
+      [1,0,0,0,1,0,0,0,1,0,1,0,0,0,1,0,0,0,1],
+      [1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1],
+      [1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1],
+      [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1],
+      [1,0,0,0,1,0,0,0,1,0,1,0,0,0,1,0,0,0,1],
+      [1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1]
+    ],
+    coins: [{ x: 5, y: 1 }, { x: 9, y: 2 }, { x: 13, y: 5 }, { x: 7, y: 7 }],
+    monsters: [
+      { pos: { x: 3, y: 3 }, type: 'grant_gremlin', icon: '📝' },
+      { pos: { x: 15, y: 4 }, type: 'data_beast', icon: '📊' }
+    ],
+    guides: [{ x: 11, y: 1 }],
+    exit: { x: 17, y: 8 }
+  },
+  {
+    id: 11,
+    difficulty: 'medium',
+    name: 'Winding River',
+    paths: [
+      [1,0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0,1],
+      [1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1],
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1],
+      [1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    ],
+    coins: [{ x: 2, y: 0 }, { x: 17, y: 2 }, { x: 8, y: 5 }, { x: 12, y: 7 }],
+    monsters: [
+      { pos: { x: 6, y: 1 }, type: 'deadline_dragon', icon: '⏰' },
+      { pos: { x: 14, y: 5 }, type: 'paper_avalanche', icon: '📚' }
+    ],
+    guides: [{ x: 10, y: 3 }],
+    exit: { x: 17, y: 7 }
+  },
+  {
+    id: 12,
+    difficulty: 'medium',
+    name: 'Double Helix',
+    paths: [
+      [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1],
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1,1],
+      [1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1],
+      [1,0,1,1,1,1,1,0,1,1,1,0,1,1,1,1,1,0,1],
+      [1,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,1],
+      [1,1,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,1,1],
+      [1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1],
+      [1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1]
+    ],
+    coins: [{ x: 4, y: 1 }, { x: 14, y: 1 }, { x: 9, y: 4 }, { x: 6, y: 7 }],
+    monsters: [
+      { pos: { x: 8, y: 2 }, type: 'grant_gremlin', icon: '📝' },
+      { pos: { x: 12, y: 5 }, type: 'data_beast', icon: '📊' }
+    ],
+    guides: [{ x: 16, y: 3 }],
+    exit: { x: 17, y: 8 }
+  },
+
+  // HARD MAZES (13-17) - Tight corridors, many obstacles
+  {
+    id: 13,
+    difficulty: 'hard',
+    name: 'The Gauntlet',
+    paths: [
+      [1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    ],
+    coins: [{ x: 4, y: 1 }, { x: 8, y: 3 }, { x: 12, y: 5 }, { x: 16, y: 7 }],
+    monsters: [
+      { pos: { x: 6, y: 1 }, type: 'paper_avalanche', icon: '📚' },
+      { pos: { x: 10, y: 3 }, type: 'grant_gremlin', icon: '📝' },
+      { pos: { x: 14, y: 5 }, type: 'data_beast', icon: '📊' }
+    ],
+    guides: [{ x: 2, y: 7 }],
+    exit: { x: 17, y: 6 }
+  },
+  {
+    id: 14,
+    difficulty: 'hard',
+    name: 'Fractal Maze',
+    paths: [
+      [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1]
+    ],
+    coins: [{ x: 3, y: 1 }, { x: 9, y: 3 }, { x: 15, y: 5 }, { x: 6, y: 7 }],
+    monsters: [
+      { pos: { x: 5, y: 1 }, type: 'deadline_dragon', icon: '⏰' },
+      { pos: { x: 11, y: 3 }, type: 'paper_avalanche', icon: '📚' },
+      { pos: { x: 17, y: 5 }, type: 'grant_gremlin', icon: '📝' }
+    ],
+    guides: [{ x: 13, y: 7 }],
+    exit: { x: 18, y: 8 }
+  },
+  {
+    id: 15,
+    difficulty: 'hard',
+    name: 'The Crucible',
+    paths: [
+      [1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1],
+      [1,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,1],
+      [1,0,1,1,1,1,1,0,1,0,1,0,1,1,1,1,1,0,1],
+      [1,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,1],
+      [1,0,1,0,1,0,1,1,1,0,1,1,1,0,1,0,1,0,1],
+      [1,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,1,0,1],
+      [1,0,1,0,1,1,1,1,1,0,1,1,1,1,1,0,1,0,1],
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    ],
+    coins: [{ x: 2, y: 1 }, { x: 16, y: 1 }, { x: 9, y: 3 }, { x: 5, y: 7 }],
+    monsters: [
+      { pos: { x: 4, y: 2 }, type: 'data_beast', icon: '📊' },
+      { pos: { x: 14, y: 2 }, type: 'deadline_dragon', icon: '⏰' },
+      { pos: { x: 7, y: 5 }, type: 'paper_avalanche', icon: '📚' }
+    ],
+    guides: [{ x: 11, y: 5 }],
+    exit: { x: 17, y: 7 }
+  },
+  {
+    id: 16,
+    difficulty: 'hard',
+    name: 'Serpentine Path',
+    paths: [
+      [1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    ],
+    coins: [{ x: 2, y: 0 }, { x: 8, y: 1 }, { x: 14, y: 3 }, { x: 6, y: 7 }],
+    monsters: [
+      { pos: { x: 5, y: 1 }, type: 'grant_gremlin', icon: '📝' },
+      { pos: { x: 11, y: 3 }, type: 'data_beast', icon: '📊' },
+      { pos: { x: 16, y: 5 }, type: 'deadline_dragon', icon: '⏰' }
+    ],
+    guides: [{ x: 10, y: 7 }],
+    exit: { x: 17, y: 6 }
+  },
+  {
+    id: 17,
+    difficulty: 'hard',
+    name: 'The Matrix',
+    paths: [
+      [1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1],
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1],
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1],
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1],
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1]
+    ],
+    coins: [{ x: 3, y: 1 }, { x: 9, y: 2 }, { x: 15, y: 4 }, { x: 7, y: 7 }],
+    monsters: [
+      { pos: { x: 6, y: 1 }, type: 'paper_avalanche', icon: '📚' },
+      { pos: { x: 12, y: 3 }, type: 'grant_gremlin', icon: '📝' },
+      { pos: { x: 18, y: 5 }, type: 'data_beast', icon: '📊' }
+    ],
+    guides: [{ x: 5, y: 5 }],
+    exit: { x: 17, y: 8 }
+  },
+
+  // EXPERT MAZES (18-20) - Extremely challenging
+  {
+    id: 18,
+    difficulty: 'expert',
+    name: 'Final Challenge',
+    paths: [
+      [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1]
+    ],
+    coins: [{ x: 2, y: 1 }, { x: 8, y: 3 }, { x: 14, y: 5 }, { x: 16, y: 7 }],
+    monsters: [
+      { pos: { x: 4, y: 1 }, type: 'deadline_dragon', icon: '⏰' },
+      { pos: { x: 10, y: 3 }, type: 'paper_avalanche', icon: '📚' },
+      { pos: { x: 16, y: 5 }, type: 'grant_gremlin', icon: '📝' },
+      { pos: { x: 6, y: 7 }, type: 'data_beast', icon: '📊' }
+    ],
+    guides: [{ x: 12, y: 1 }],
+    exit: { x: 18, y: 8 }
+  },
+  {
+    id: 19,
+    difficulty: 'expert',
+    name: 'The Labyrinth',
+    paths: [
+      [1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1],
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
+      [1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
+      [1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,0,1],
+      [1,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,1,0,1],
+      [1,0,1,0,1,0,1,1,1,1,1,1,1,0,1,0,1,0,1],
+      [1,0,1,0,1,0,1,0,0,0,0,0,1,0,1,0,1,0,1],
+      [1,0,0,0,1,0,1,0,1,1,1,0,1,0,1,0,0,0,1]
+    ],
+    coins: [{ x: 5, y: 1 }, { x: 15, y: 1 }, { x: 9, y: 4 }, { x: 7, y: 7 }],
+    monsters: [
+      { pos: { x: 8, y: 1 }, type: 'paper_avalanche', icon: '📚' },
+      { pos: { x: 12, y: 3 }, type: 'grant_gremlin', icon: '📝' },
+      { pos: { x: 6, y: 5 }, type: 'data_beast', icon: '📊' },
+      { pos: { x: 11, y: 7 }, type: 'deadline_dragon', icon: '⏰' }
+    ],
+    guides: [{ x: 3, y: 2 }],
+    exit: { x: 9, y: 8 }
+  },
+  {
+    id: 20,
+    difficulty: 'expert',
+    name: 'Omega Protocol',
+    paths: [
+      [1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,0,1,1,1],
+      [1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,1],
+      [1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1],
+      [1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1],
+      [1,1,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,1,1],
+      [1,0,0,0,1,0,0,0,1,0,1,0,0,0,1,0,0,0,1],
+      [1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1]
+    ],
+    coins: [{ x: 2, y: 1 }, { x: 16, y: 1 }, { x: 9, y: 3 }, { x: 5, y: 7 }],
+    monsters: [
+      { pos: { x: 6, y: 1 }, type: 'deadline_dragon', icon: '⏰' },
+      { pos: { x: 12, y: 1 }, type: 'paper_avalanche', icon: '📚' },
+      { pos: { x: 7, y: 4 }, type: 'grant_gremlin', icon: '📝' },
+      { pos: { x: 11, y: 4 }, type: 'data_beast', icon: '📊' }
+    ],
+    guides: [{ x: 13, y: 7 }],
+    exit: { x: 17, y: 8 }
+  }
+];
+
 export const generateMaze = (level: number): MazeCell[][] => {
   const size = 20;
   const maze: MazeCell[][] = [];
 
-  // Initialize maze with walls first
+  // Get template based on level (cycle through all 20)
+  const templateIndex = ((level - 1) % 20);
+  const template = MAZE_TEMPLATES[templateIndex];
+
+  // Initialize maze with walls
   for (let y = 0; y < size; y++) {
     maze[y] = [];
     for (let x = 0; x < size; x++) {
@@ -16,100 +498,88 @@ export const generateMaze = (level: number): MazeCell[][] => {
     }
   }
 
-  // Create paths to form a maze pattern
-  const createPath = (x: number, y: number) => {
-    if (x >= 0 && x < size && y >= 0 && y < size) {
-      maze[y][x] = {
-        type: 'path',
-        position: { x, y },
-        isVisible: true
-      };
+  // Create paths from template
+  for (let y = 0; y < Math.min(size, template.paths.length); y++) {
+    for (let x = 0; x < Math.min(size, template.paths[y].length); x++) {
+      if (template.paths[y][x] === 0) { // 0 = path, 1 = wall
+        maze[y][x] = {
+          type: 'path',
+          position: { x, y },
+          isVisible: true
+        };
+      }
     }
-  };
-
-  // Create a guaranteed path from start (1,1) to end (18,18)
-  // Main horizontal corridors
-  for (let x = 1; x <= 18; x++) {
-    createPath(x, 1); // Top corridor
-    createPath(x, 9); // Middle corridor  
-    createPath(x, 18); // Bottom corridor
   }
 
-  // Main vertical corridors
-  for (let y = 1; y <= 18; y++) {
-    createPath(1, y); // Left corridor
-    createPath(9, y); // Middle corridor
-    createPath(18, y); // Right corridor
-  }
-
-  // Additional cross paths to create maze complexity
-  const crossPaths = [
-    [5, 5], [5, 6], [5, 7], [5, 8], [5, 9],
-    [13, 5], [13, 6], [13, 7], [13, 8], [13, 9],
-    [3, 13], [4, 13], [5, 13], [6, 13], [7, 13], [8, 13], [9, 13],
-    [11, 13], [12, 13], [13, 13], [14, 13], [15, 13], [16, 13]
-  ];
-
-  crossPaths.forEach(([x, y]) => createPath(x, y));
-
-  // Ensure start and end positions are paths
-  createPath(1, 1); // Start position
-  createPath(18, 18); // End position
-
-  // Add exactly 3 coins in safe path spots
-  const coinSpots = [
-    { x: 3, y: 3 }, { x: 9, y: 7 }, { x: 15, y: 11 }
-  ];
-  coinSpots.forEach(pos => {
-    if (maze[pos.y][pos.x].type === 'path') {
-      maze[pos.y][pos.x].type = 'coin';
-    }
-  });
-
-  // Add exactly 1 guide
-  maze[7][7] = {
-    type: 'guide',
-    position: { x: 7, y: 7 },
+  // Ensure start position is always a path
+  maze[1][1] = {
+    type: 'path',
+    position: { x: 1, y: 1 },
     isVisible: true
   };
 
-  // Add exactly 2 monsters on path spots
-  const monsterSpots = [{ x: 5, y: 7 }, { x: 13, y: 15 }];
-  monsterSpots.forEach((pos, index) => {
-    if (maze[pos.y][pos.x].type === 'path') {
+  // Add coins from template
+  template.coins.forEach(pos => {
+    if (pos.x < size && pos.y < size) {
+      maze[pos.y][pos.x] = {
+        type: 'coin',
+        position: pos,
+        isVisible: true
+      };
+    }
+  });
+
+  // Add guides from template
+  template.guides.forEach(pos => {
+    if (pos.x < size && pos.y < size) {
+      maze[pos.y][pos.x] = {
+        type: 'guide',
+        position: pos,
+        isVisible: true
+      };
+    }
+  });
+
+  // Add monsters from template
+  template.monsters.forEach((monster, index) => {
+    const pos = monster.pos;
+    if (pos.x < size && pos.y < size) {
       maze[pos.y][pos.x] = {
         type: 'monster',
         position: pos,
         isVisible: true,
         content: {
-          id: `monster_${index}`,
+          id: `monster_${level}_${index}`,
           name: 'Research Obstacle',
-          type: index === 0 ? 'paper_avalanche' : 'data_beast',
+          type: monster.type,
           position: pos,
           health: 100,
           energyDrain: 30,
           description: 'A research challenge',
-          icon: index === 0 ? '📚' : '📊'
+          icon: monster.icon
         }
       };
     }
   });
 
-  // Add exactly 1 exit portal
-  maze[18][18] = {
-    type: 'portal',
-    position: { x: 18, y: 18 },
-    isVisible: true,
-    content: {
-      id: 'exit_portal',
-      name: 'Exit Portal',
-      type: 'regular',
-      position: { x: 18, y: 18 },
-      requiredMastery: 0,
+  // Add exit portal from template
+  const exitPos = template.exit;
+  if (exitPos.x < size && exitPos.y < size) {
+    maze[exitPos.y][exitPos.x] = {
+      type: 'portal',
+      position: exitPos,
       isVisible: true,
-      icon: '🌀'
-    }
-  };
+      content: {
+        id: `exit_portal_${level}`,
+        name: 'Exit Portal',
+        type: 'regular',
+        position: exitPos,
+        requiredMastery: 0,
+        isVisible: true,
+        icon: '🌀'
+      }
+    };
+  }
 
   return maze;
 };
