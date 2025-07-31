@@ -355,7 +355,7 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
     <div className="bg-gradient-to-br from-background/50 to-primary/5 relative h-full">
       <div className="flex gap-4 p-4 h-full">
         <div className="flex-1 flex items-start justify-center min-w-0">
-          <div className="w-full aspect-square max-h-[600px]">
+          <div className="w-full aspect-square max-w-[640px]">
             <GameBoard
               gameState={gameState}
               onMove={movePlayer}
@@ -442,7 +442,7 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
   return (
     <>
       {!isFullscreen ? (
-        <div className="h-[600px]">
+        <div className="min-h-[700px]">
           <GameContent />
         </div>
       ) : (
