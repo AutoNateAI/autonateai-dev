@@ -191,7 +191,7 @@ const ToolSelector: React.FC<ToolSelectorProps> = ({
         </div>
 
         {/* Tools List */}
-        <div className="space-y-2 max-h-96 overflow-y-auto">
+        <div className="space-y-2 max-h-96 overflow-y-scroll scrollbar-hide">
           {availableTools.map((tool) => {
             const affordable = canAfford(tool);
             const usable = canUse(tool);

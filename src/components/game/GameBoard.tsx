@@ -72,7 +72,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ gameState, onMove, onMonsterEncou
         cellContent = '🪙';
         break;
       case 'monster':
-        cellClass += ' bg-red-100 dark:bg-red-900/30 text-red-600 animate-pulse border-red-300';
+        cellClass += ' bg-red-100 dark:bg-red-900/30 text-red-600 border-red-300';
         if (cell.content) {
           const monster = cell.content as Monster;
           switch (monster.type) {
@@ -92,15 +92,15 @@ const GameBoard: React.FC<GameBoardProps> = ({ gameState, onMove, onMonsterEncou
         }
         break;
       case 'portal':
-        cellClass += ' bg-blue-100 dark:bg-blue-900/30 text-blue-600 animate-pulse border-blue-300';
-        cellContent = '🌀';
+        cellClass += ' bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 border-emerald-300';
+        cellContent = '🎯';
         break;
       case 'tool':
         cellClass += ' bg-green-100 dark:bg-green-900/30 text-green-600 border-green-300';
         cellContent = '🔧';
         break;
       case 'guide':
-        cellClass += ' bg-purple-100 dark:bg-purple-900/30 text-purple-600 animate-pulse border-purple-300';
+        cellClass += ' bg-purple-100 dark:bg-purple-900/30 text-purple-600 border-purple-300';
         cellContent = '🧙‍♂️';
         break;
     }

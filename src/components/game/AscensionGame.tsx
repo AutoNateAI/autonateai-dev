@@ -129,8 +129,9 @@ const AscensionGame: React.FC = () => {
         return prev; // No movement (hit boundary)
       }
 
-      // Check for coin collection
+      // Check for coin collection and win condition
       let newCoins = prev.coins;
+      let newIsCompleted = prev.isCompleted;
       if (maze.length > 0 && maze[newPosition.y] && maze[newPosition.y][newPosition.x]) {
         const targetCell = maze[newPosition.y][newPosition.x];
         if (targetCell.type === 'coin') {
@@ -141,6 +142,9 @@ const AscensionGame: React.FC = () => {
             position: { x: newPosition.x, y: newPosition.y },
             isVisible: true
           };
+        } else if (targetCell.type === 'portal') {
+          // Player reached the exit portal - win condition
+          newIsCompleted = true;
         }
       }
 
@@ -161,6 +165,8 @@ const AscensionGame: React.FC = () => {
         ...prev,
         playerPosition: newPosition,
         coins: newCoins,
+        isCompleted: newIsCompleted,
+        isPlaying: !newIsCompleted,
         collectedData: {
           ...prev.collectedData,
           pathChoices: [...prev.collectedData.pathChoices, pathChoice]
@@ -328,9 +334,9 @@ const AscensionGame: React.FC = () => {
 
   const GameContent = () => (
     <div className="bg-gradient-to-br from-background/50 to-primary/5 relative h-full">
-      {/* Stats HUD - Top Left Corner */}
-      <div className="absolute top-4 left-4 z-20 glass-card p-3 rounded-lg">
-        <div className="flex flex-col gap-2 text-sm">
+      {/* Stats HUD - Clean positioning */}
+      <div className="mb-4 w-fit glass-card p-3 rounded-lg">
+        <div className="flex gap-6 text-sm">
           <div className="flex items-center gap-2">
             <span>⚡</span>
             <span>{gameState.energy}/300</span>
@@ -350,8 +356,8 @@ const AscensionGame: React.FC = () => {
         </div>
       </div>
 
-      {/* Control Buttons - Top Right Corner */}
-      <div className="absolute top-4 right-4 z-20 flex gap-2">
+      {/* Control Buttons - Clean positioning */}
+      <div className="mb-4 flex gap-2 justify-end">
         {!isFullscreen && (
           <Button
             onClick={() => setIsFullscreen(true)}
@@ -373,7 +379,7 @@ const AscensionGame: React.FC = () => {
       </div>
 
       {/* Main Game Area */}
-      <div className="flex gap-4 p-4">
+      <div className="flex gap-4 px-4">
         {/* Game Board Container - Responsive width */}
         <div className="flex-1 flex items-center justify-center min-w-0">
           <div className="w-full aspect-square max-h-[600px]">

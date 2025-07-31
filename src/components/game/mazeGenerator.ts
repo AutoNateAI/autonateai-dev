@@ -27,32 +27,30 @@ export const generateMaze = (level: number): MazeCell[][] => {
     }
   };
 
-  // Create main pathways
-  // Horizontal paths
-  for (let x = 1; x < size - 1; x += 2) {
-    for (let y = 1; y < size; y += 4) {
-      createPath(x, y);
-      createPath(x, y + 1);
-    }
+  // Create a guaranteed path from start (1,1) to end (18,18)
+  // Main horizontal corridors
+  for (let x = 1; x <= 18; x++) {
+    createPath(x, 1); // Top corridor
+    createPath(x, 9); // Middle corridor  
+    createPath(x, 18); // Bottom corridor
   }
 
-  // Vertical paths
-  for (let y = 1; y < size - 1; y += 2) {
-    for (let x = 1; x < size; x += 4) {
-      createPath(x, y);
-      createPath(x + 1, y);
-    }
+  // Main vertical corridors
+  for (let y = 1; y <= 18; y++) {
+    createPath(1, y); // Left corridor
+    createPath(9, y); // Middle corridor
+    createPath(18, y); // Right corridor
   }
 
-  // Create connecting paths
-  const connections = [
-    [3, 3], [7, 3], [11, 3], [15, 3],
-    [1, 7], [5, 7], [9, 7], [13, 7], [17, 7],
-    [3, 11], [7, 11], [11, 11], [15, 11],
-    [1, 15], [5, 15], [9, 15], [13, 15], [17, 15]
+  // Additional cross paths to create maze complexity
+  const crossPaths = [
+    [5, 5], [5, 6], [5, 7], [5, 8], [5, 9],
+    [13, 5], [13, 6], [13, 7], [13, 8], [13, 9],
+    [3, 13], [4, 13], [5, 13], [6, 13], [7, 13], [8, 13], [9, 13],
+    [11, 13], [12, 13], [13, 13], [14, 13], [15, 13], [16, 13]
   ];
 
-  connections.forEach(([x, y]) => createPath(x, y));
+  crossPaths.forEach(([x, y]) => createPath(x, y));
 
   // Ensure start and end positions are paths
   createPath(1, 1); // Start position
