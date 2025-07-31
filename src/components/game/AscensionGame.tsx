@@ -33,6 +33,7 @@ const AscensionGame: React.FC = () => {
   const [cameraPosition, setCameraPosition] = useState({ x: 0, y: 0 });
 
   const [gameStarted, setGameStarted] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   // Game timer
   useEffect(() => {
@@ -249,29 +250,28 @@ const AscensionGame: React.FC = () => {
 
   if (!gameStarted) {
     return (
-      <div className="min-h-[600px] flex flex-col items-center justify-center p-8 text-center">
-        <div className="max-w-2xl mx-auto space-y-6">
-          <div className="text-6xl mb-4">🧬</div>
-          <h2 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+      <div className="h-[500px] flex flex-col items-center justify-center p-6 text-center">
+        <div className="max-w-xl mx-auto space-y-4">
+          <div className="text-4xl mb-3">🧬</div>
+          <h2 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
             Ready to Begin Your Ascension?
           </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            You're about to enter a research workflow simulation where every decision matters. 
+          <p className="text-sm text-muted-foreground leading-relaxed">
             Navigate through three themed areas: Literature Review, Grant Writing, and Data Analysis. 
             Use AI tools strategically to overcome obstacles and discover your optimal research workflow.
           </p>
           
-          <div className="grid md:grid-cols-2 gap-4 my-8">
-            <div className="glass-card p-4">
-              <h3 className="font-semibold mb-2">🎮 Controls</h3>
-              <p className="text-sm text-muted-foreground">
-                Use arrow keys or WASD to move. Click tools to equip them. Strategic thinking wins!
+          <div className="grid grid-cols-2 gap-3 my-6">
+            <div className="glass-card p-3">
+              <h3 className="font-semibold mb-1 text-sm">🎮 Controls</h3>
+              <p className="text-xs text-muted-foreground">
+                Arrow keys or WASD to move. Strategic thinking wins!
               </p>
             </div>
-            <div className="glass-card p-4">
-              <h3 className="font-semibold mb-2">⏱️ Time Limit</h3>
-              <p className="text-sm text-muted-foreground">
-                10 minutes to complete the challenge. Use AI tools to multiply your speed!
+            <div className="glass-card p-3">
+              <h3 className="font-semibold mb-1 text-sm">⏱️ Time Limit</h3>
+              <p className="text-xs text-muted-foreground">
+                10 minutes to complete the challenge!
               </p>
             </div>
           </div>
@@ -279,7 +279,7 @@ const AscensionGame: React.FC = () => {
           <Button 
             onClick={startGame} 
             size="lg" 
-            className="text-lg px-8 py-6 bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-primary/25"
+            className="text-base px-6 py-4 bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-primary/25"
           >
             🚀 Start Ascension Protocol
           </Button>
@@ -288,29 +288,68 @@ const AscensionGame: React.FC = () => {
     );
   }
 
-  return (
-    <div className="min-h-[600px] bg-gradient-to-br from-background/50 to-primary/5 relative">
-      {/* Game HUD */}
-      <GameHUD 
-        gameState={gameState}
-        onPause={pauseGame}
-        onToolSelect={selectTool}
-      />
+  const GameContent = () => (
+    <div className="bg-gradient-to-br from-background/50 to-primary/5 relative h-full">
+      {/* Stats HUD - Top Left Corner */}
+      <div className="absolute top-4 left-4 z-20 glass-card p-3 rounded-lg">
+        <div className="flex flex-col gap-2 text-sm">
+          <div className="flex items-center gap-2">
+            <span>⚡</span>
+            <span>{gameState.energy}/300</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span>🧠</span>
+            <span>{gameState.aiMastery}%</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span>🪙</span>
+            <span>{gameState.coins}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span>⏱️</span>
+            <span>{Math.floor(gameState.timeRemaining / 60)}:{(gameState.timeRemaining % 60).toString().padStart(2, '0')}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Control Buttons - Top Right Corner */}
+      <div className="absolute top-4 right-4 z-20 flex gap-2">
+        {!isFullscreen && (
+          <Button
+            onClick={() => setIsFullscreen(true)}
+            variant="outline"
+            size="sm"
+            className="glass-card"
+          >
+            🔍 Fullscreen
+          </Button>
+        )}
+        <Button
+          onClick={pauseGame}
+          variant="outline"
+          size="sm"
+          className="glass-card"
+        >
+          {gameState.isPaused ? '▶️' : '⏸️'}
+        </Button>
+      </div>
 
       {/* Main Game Area */}
-      <div className="flex flex-col lg:flex-row gap-4 p-4">
-        {/* Game Board */}
-        <div className="flex-1 min-h-[500px]">
-          <GameBoard
-            gameState={gameState}
-            onMove={movePlayer}
-            onMonsterEncounter={handleMonsterEncounter}
-            cameraPosition={cameraPosition}
-          />
+      <div className="flex gap-4 p-4 h-full">
+        {/* Game Board Container - Square aspect ratio */}
+        <div className="flex-1 flex items-center justify-center">
+          <div className="w-full max-w-[600px] aspect-square">
+            <GameBoard
+              gameState={gameState}
+              onMove={movePlayer}
+              onMonsterEncounter={handleMonsterEncounter}
+              cameraPosition={cameraPosition}
+            />
+          </div>
         </div>
 
-        {/* Tool Selector - Mobile: Below, Desktop: Right side */}
-        <div className="lg:w-80">
+        {/* Tool Selector - Right side */}
+        <div className="w-80 hidden lg:block">
           <ToolSelector
             equippedTools={gameState.equippedTools}
             onToolSelect={selectTool}
@@ -318,6 +357,16 @@ const AscensionGame: React.FC = () => {
             aiMastery={gameState.aiMastery}
           />
         </div>
+      </div>
+
+      {/* Mobile Tool Selector - Bottom */}
+      <div className="lg:hidden p-4">
+        <ToolSelector
+          equippedTools={gameState.equippedTools}
+          onToolSelect={selectTool}
+          coins={gameState.coins}
+          aiMastery={gameState.aiMastery}
+        />
       </div>
 
       {/* Pause Overlay */}
@@ -332,6 +381,32 @@ const AscensionGame: React.FC = () => {
         </div>
       )}
     </div>
+  );
+
+  return (
+    <>
+      {/* Normal View */}
+      {!isFullscreen ? (
+        <div className="h-[600px]">
+          <GameContent />
+        </div>
+      ) : (
+        /* Fullscreen Modal */
+        <div className="fixed inset-0 z-50 bg-background">
+          <div className="absolute top-4 right-4 z-60">
+            <Button
+              onClick={() => setIsFullscreen(false)}
+              variant="outline"
+              size="sm"
+              className="glass-card"
+            >
+              ❌ Exit Fullscreen
+            </Button>
+          </div>
+          <GameContent />
+        </div>
+      )}
+    </>
   );
 };
 

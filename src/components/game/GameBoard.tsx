@@ -129,15 +129,15 @@ const GameBoard: React.FC<GameBoardProps> = ({ gameState, onMove, onMonsterEncou
     const visibleEndY = Math.min(20, cameraPosition.y + 10);
 
     return (
-      <div className="w-full flex flex-col items-center space-y-4">
+      <div className="w-full h-full flex flex-col">
         {/* Game Board with Camera View */}
         <div 
-          className="w-full max-w-none glass-card p-2 rounded-xl bg-gradient-to-br from-background/80 to-primary/5 border border-primary/20"
+          className="flex-1 glass-card p-2 rounded-xl bg-gradient-to-br from-background/80 to-primary/5 border border-primary/20"
           onPointerDown={handlePointerDown}
           onPointerUp={handlePointerUp}
           style={{ touchAction: 'none' }}
         >
-          <div className="grid grid-cols-10 gap-0 border border-border/30 rounded-lg overflow-hidden w-full aspect-square">
+          <div className="grid grid-cols-10 gap-0 border border-border/30 rounded-lg overflow-hidden w-full h-full">
             {maze.slice(visibleStartY, visibleEndY).map((row, rowIndex) =>
               row.slice(visibleStartX, visibleEndX).map((cell, colIndex) => 
                 renderCell(cell, visibleStartY + rowIndex, visibleStartX + colIndex)
@@ -146,54 +146,54 @@ const GameBoard: React.FC<GameBoardProps> = ({ gameState, onMove, onMonsterEncou
           </div>
         </div>
 
-      {/* Movement Controls for Mobile */}
-      <div className="block md:hidden glass-card p-4 rounded-lg">
-        <div className="grid grid-cols-3 gap-2 w-32 mx-auto">
-          <div></div>
-          <button
-            onClick={() => onMove('up')}
-            className="h-10 w-10 glass-card hover:glass-glow flex items-center justify-center text-lg"
-            disabled={!gameState.isPlaying || gameState.isPaused}
-          >
-            ⬆️
-          </button>
-          <div></div>
-          <button
-            onClick={() => onMove('left')}
-            className="h-10 w-10 glass-card hover:glass-glow flex items-center justify-center text-lg"
-            disabled={!gameState.isPlaying || gameState.isPaused}
-          >
-            ⬅️
-          </button>
-          <div></div>
-          <button
-            onClick={() => onMove('right')}
-            className="h-10 w-10 glass-card hover:glass-glow flex items-center justify-center text-lg"
-            disabled={!gameState.isPlaying || gameState.isPaused}
-          >
-            ➡️
-          </button>
-          <div></div>
-          <button
-            onClick={() => onMove('down')}
-            className="h-10 w-10 glass-card hover:glass-glow flex items-center justify-center text-lg"
-            disabled={!gameState.isPlaying || gameState.isPaused}
-          >
-            ⬇️
-          </button>
-          <div></div>
+        {/* Movement Controls for Mobile */}
+        <div className="block md:hidden mt-4 glass-card p-4 rounded-lg">
+          <div className="grid grid-cols-3 gap-2 w-32 mx-auto">
+            <div></div>
+            <button
+              onClick={() => onMove('up')}
+              className="h-10 w-10 glass-card hover:glass-glow flex items-center justify-center text-lg"
+              disabled={!gameState.isPlaying || gameState.isPaused}
+            >
+              ⬆️
+            </button>
+            <div></div>
+            <button
+              onClick={() => onMove('left')}
+              className="h-10 w-10 glass-card hover:glass-glow flex items-center justify-center text-lg"
+              disabled={!gameState.isPlaying || gameState.isPaused}
+            >
+              ⬅️
+            </button>
+            <div></div>
+            <button
+              onClick={() => onMove('right')}
+              className="h-10 w-10 glass-card hover:glass-glow flex items-center justify-center text-lg"
+              disabled={!gameState.isPlaying || gameState.isPaused}
+            >
+              ➡️
+            </button>
+            <div></div>
+            <button
+              onClick={() => onMove('down')}
+              className="h-10 w-10 glass-card hover:glass-glow flex items-center justify-center text-lg"
+              disabled={!gameState.isPlaying || gameState.isPaused}
+            >
+              ⬇️
+            </button>
+            <div></div>
+          </div>
+          <p className="text-xs text-muted-foreground text-center mt-2">
+            Tap to move or swipe on the maze
+          </p>
         </div>
-        <p className="text-xs text-muted-foreground text-center mt-2">
-          Tap to move or swipe on the maze
-        </p>
-      </div>
 
-      {/* Desktop Controls Hint */}
-      <div className="hidden md:block text-sm text-muted-foreground text-center">
-        Use arrow keys or WASD to move • Click and drag for touch controls
+        {/* Desktop Controls Hint */}
+        <div className="hidden md:block text-sm text-muted-foreground text-center mt-2">
+          Use arrow keys or WASD to move • Click and drag for touch controls
+        </div>
       </div>
-    </div>
-  );
+    );
 };
 
 export default GameBoard;

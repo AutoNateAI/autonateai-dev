@@ -6,14 +6,14 @@ const AscensionProtocol = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
       <Navigation />
-      <main className="w-full px-2 py-1">
+      <main className="w-full px-4 pt-20 pb-4">
         <div className="w-full">
           {/* Game Header */}
-          <div className="text-center mb-4">
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">
-              Ascension Protocol
+          <div className="text-center mb-6">
+            <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-3">
+              🧬 Ascension Protocol
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
               Navigate the research workflow maze. Discover how AI tools can transform your productivity 
               and efficiency as you solve puzzles, overcome obstacles, and ascend to research mastery.
             </p>
