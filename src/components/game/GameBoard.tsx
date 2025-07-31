@@ -131,7 +131,7 @@ const GameBoard = React.memo<GameBoardProps>(({ gameState, onMove, onMonsterEnco
     const visibleEndY = Math.min(20, cameraPosition.y + 10);
 
     return (
-      <div className="w-full h-full flex flex-col">
+      <div className="w-full h-full flex flex-col gap-4">
         {/* Game Board with Camera View */}
         <div 
           className="flex-1 glass-card p-2 rounded-xl bg-gradient-to-br from-background/80 to-primary/5 border border-primary/20"
@@ -149,12 +149,12 @@ const GameBoard = React.memo<GameBoardProps>(({ gameState, onMove, onMonsterEnco
         </div>
 
         {/* Movement Controls for Mobile and Tablet */}
-        <div className="block xl:hidden mt-4 glass-card p-4 rounded-lg">
+        <div className="xl:hidden">
           <div className="grid grid-cols-3 gap-3 w-40 mx-auto">
             <div></div>
             <button
               onClick={() => onMove('up')}
-              className="h-12 w-12 glass-card hover:glass-glow flex items-center justify-center text-xl active:scale-95 transition-transform"
+              className="h-12 w-12 bg-primary/20 hover:bg-primary/30 border border-primary/40 rounded-lg flex items-center justify-center text-xl active:scale-95 transition-all backdrop-blur-sm"
               disabled={!gameState.isPlaying || gameState.isPaused}
             >
               ⬆️
@@ -162,7 +162,7 @@ const GameBoard = React.memo<GameBoardProps>(({ gameState, onMove, onMonsterEnco
             <div></div>
             <button
               onClick={() => onMove('left')}
-              className="h-12 w-12 glass-card hover:glass-glow flex items-center justify-center text-xl active:scale-95 transition-transform"
+              className="h-12 w-12 bg-primary/20 hover:bg-primary/30 border border-primary/40 rounded-lg flex items-center justify-center text-xl active:scale-95 transition-all backdrop-blur-sm"
               disabled={!gameState.isPlaying || gameState.isPaused}
             >
               ⬅️
@@ -170,7 +170,7 @@ const GameBoard = React.memo<GameBoardProps>(({ gameState, onMove, onMonsterEnco
             <div></div>
             <button
               onClick={() => onMove('right')}
-              className="h-12 w-12 glass-card hover:glass-glow flex items-center justify-center text-xl active:scale-95 transition-transform"
+              className="h-12 w-12 bg-primary/20 hover:bg-primary/30 border border-primary/40 rounded-lg flex items-center justify-center text-xl active:scale-95 transition-all backdrop-blur-sm"
               disabled={!gameState.isPlaying || gameState.isPaused}
             >
               ➡️
@@ -178,7 +178,7 @@ const GameBoard = React.memo<GameBoardProps>(({ gameState, onMove, onMonsterEnco
             <div></div>
             <button
               onClick={() => onMove('down')}
-              className="h-12 w-12 glass-card hover:glass-glow flex items-center justify-center text-xl active:scale-95 transition-transform"
+              className="h-12 w-12 bg-primary/20 hover:bg-primary/30 border border-primary/40 rounded-lg flex items-center justify-center text-xl active:scale-95 transition-all backdrop-blur-sm"
               disabled={!gameState.isPlaying || gameState.isPaused}
             >
               ⬇️
@@ -191,7 +191,7 @@ const GameBoard = React.memo<GameBoardProps>(({ gameState, onMove, onMonsterEnco
         </div>
 
         {/* Desktop Controls Hint */}
-        <div className="hidden xl:block text-sm text-muted-foreground text-center mt-2">
+        <div className="hidden xl:block text-sm text-muted-foreground text-center">
           Use arrow keys or WASD to move • Click and drag for touch controls
         </div>
       </div>
