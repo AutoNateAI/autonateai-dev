@@ -14,6 +14,8 @@ interface AscensionGameProps {
 }
 
 const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
+  // ALL HOOKS MUST BE CALLED BEFORE ANY CONDITIONAL LOGIC TO PREVENT HOOK ERRORS
+  
   // Separate timer state to prevent unnecessary re-renders
   const [timeRemaining, setTimeRemaining] = useState(600);
   
@@ -26,7 +28,7 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
     energy: 300,
     aiMastery: 0,
     coins: 0,
-    timeRemaining: 600, // This will be kept in sync with the separate timer
+    timeRemaining: 600,
     equippedTools: [],
     visibleArea: { startX: 0, startY: 0, endX: 10, endY: 10 },
       collectedData: {
@@ -40,9 +42,9 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
   });
 
   const [cameraPosition, setCameraPosition] = useState({ x: 0, y: 0 });
-
   const [gameStarted, setGameStarted] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [maze, setMaze] = useState<MazeCell[][]>([]);
 
   // Game timer - separate from main game state to prevent re-renders
   useEffect(() => {
@@ -69,8 +71,14 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
     return () => clearInterval(timer);
   }, [gameState.isPlaying, gameState.isPaused, timeRemaining]);
 
+  // Generate maze when level changes
+  useEffect(() => {
+    const newMaze = generateMaze(gameState.currentLevel);
+    setMaze(newMaze);
+  }, [gameState.currentLevel]);
+
   const startGame = useCallback(() => {
-    setTimeRemaining(600); // Reset separate timer state
+    setTimeRemaining(600);
     setGameState(prev => ({
       ...prev,
       isPlaying: true,
@@ -93,19 +101,11 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
     }));
     setGameStarted(true);
     onGameStateChange?.(true);
-  }, []);
+  }, [onGameStateChange]);
 
   const pauseGame = useCallback(() => {
     setGameState(prev => ({ ...prev, isPaused: !prev.isPaused }));
   }, []);
-
-  const [maze, setMaze] = useState<MazeCell[][]>([]);
-
-  // Generate maze when level changes - memoized to prevent unnecessary regeneration
-  useEffect(() => {
-    const newMaze = generateMaze(gameState.currentLevel);
-    setMaze(newMaze);
-  }, [gameState.currentLevel]);
 
   const movePlayer = useCallback((direction: 'up' | 'down' | 'left' | 'right') => {
     if (!gameState.isPlaying || gameState.isPaused) return;
@@ -113,7 +113,6 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
     setGameState(prev => {
       const newPosition = { ...prev.playerPosition };
       
-      // Calculate new position (tile-by-tile movement) - FIXED DIRECTIONS
       switch (direction) {
         case 'up':
           newPosition.y = Math.max(0, newPosition.y - 1);
@@ -129,20 +128,17 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
           break;
       }
 
-      // Check if new position is valid (not a wall)
       if (maze.length > 0 && maze[newPosition.y] && maze[newPosition.y][newPosition.x]) {
         const targetCell = maze[newPosition.y][newPosition.x];
         if (targetCell.type === 'wall') {
-          return prev; // Can't move into wall
+          return prev;
         }
       }
 
-      // Only move if position actually changed
       if (newPosition.x === prev.playerPosition.x && newPosition.y === prev.playerPosition.y) {
-        return prev; // No movement (hit boundary)
+        return prev;
       }
 
-      // Check for coin collection and win condition
       let newCoins = prev.coins;
       let newIsCompleted = prev.isCompleted;
       let newCollectedCoins = [...prev.collectedData.collectedCoins || []];
@@ -155,7 +151,6 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
             newCoins += 1;
             newCollectedCoins.push(coinKey);
             
-            // Set coin to respawn after 5 seconds
             setTimeout(() => {
               setGameState(currentState => ({
                 ...currentState,
@@ -167,18 +162,15 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
             }, 5000);
           }
         } else if (targetCell.type === 'portal') {
-          // Player reached the exit portal - win condition
           newIsCompleted = true;
         }
       }
 
-      // Update camera to follow player (keep player in center of view)
       setCameraPosition({
         x: Math.max(0, Math.min(10, newPosition.x - 5)),
         y: Math.max(0, Math.min(10, newPosition.y - 5))
       });
 
-      // Record path choice
       const pathChoice = {
         from: prev.playerPosition,
         to: newPosition,
@@ -206,19 +198,15 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
     setGameState(prev => {
       const newTools = [...prev.equippedTools];
       
-      // If tool is already equipped, remove it
       const existingIndex = newTools.findIndex(t => t.id === tool.id);
       if (existingIndex >= 0) {
         newTools.splice(existingIndex, 1);
       } else if (newTools.length < 3) {
-        // Add tool if there's space
         newTools.push(tool);
       } else {
-        // Replace the first tool if at capacity
         newTools[0] = tool;
       }
 
-      // Record tool selection
       const toolSelection = {
         toolId: tool.id,
         toolType: tool.type,
@@ -240,7 +228,6 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
   const handleMonsterEncounter = useCallback((monster: Monster) => {
     if (!gameState.isPlaying) return;
 
-    // Simple encounter resolution - can be expanded
     const effectiveness = gameState.equippedTools.reduce((acc, tool) => {
       return acc + (tool.effectiveness[monster.type] || 1);
     }, 1);
@@ -308,6 +295,14 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, [movePlayer, gameState.isPlaying, gameState.isPaused]);
 
+  // Memoize tool selector props to prevent re-renders
+  const toolSelectorProps = useMemo(() => ({
+    equippedTools: gameState.equippedTools,
+    coins: gameState.coins,
+    aiMastery: gameState.aiMastery
+  }), [gameState.equippedTools, gameState.coins, gameState.aiMastery]);
+
+  // CONDITIONAL RENDERING AFTER ALL HOOKS TO PREVENT HOOK RULE VIOLATIONS
   if (gameState.isCompleted) {
     return <GameResults gameData={gameState.collectedData} onRestart={startGame} />;
   }
@@ -316,7 +311,6 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
     return (
       <div className="h-[500px] flex flex-col items-center justify-center p-6 text-center">
         <div className="max-w-xl mx-auto space-y-4">
-          {/* Game Header */}
           <div className="text-4xl mb-3">🧬</div>
           <h2 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
             Ascension Protocol
@@ -357,18 +351,9 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
     );
   }
 
-  // Memoize tool selector props to prevent re-renders
-  const toolSelectorProps = useMemo(() => ({
-    equippedTools: gameState.equippedTools,
-    coins: gameState.coins,
-    aiMastery: gameState.aiMastery
-  }), [gameState.equippedTools, gameState.coins, gameState.aiMastery]);
-
   const GameContent = () => (
     <div className="bg-gradient-to-br from-background/50 to-primary/5 relative h-full">
-      {/* Main Game Area */}
       <div className="flex gap-4 p-4 h-full">
-        {/* Game Board Container - Responsive width */}
         <div className="flex-1 flex items-start justify-center min-w-0">
           <div className="w-full aspect-square max-h-[600px]">
             <GameBoard
@@ -381,9 +366,7 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
           </div>
         </div>
 
-        {/* Right Panel - HUD + Tool Shop */}
         <div className="w-80 hidden lg:flex flex-col gap-4 items-start">
-          {/* Stats HUD */}
           <div className="glass-card p-3 rounded-lg">
             <div className="flex flex-col gap-2 text-sm">
               <div className="flex items-center gap-2">
@@ -425,7 +408,6 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
             </div>
           </div>
 
-          {/* Tool Selector */}
           <ToolSelector
             equippedTools={toolSelectorProps.equippedTools}
             onToolSelect={selectTool}
@@ -435,7 +417,6 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
         </div>
       </div>
 
-      {/* Mobile Tool Selector - Bottom */}
       <div className="lg:hidden p-4">
         <ToolSelector
           equippedTools={toolSelectorProps.equippedTools}
@@ -445,7 +426,6 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
         />
       </div>
 
-      {/* Pause Overlay */}
       {gameState.isPaused && (
         <div className="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
           <div className="glass-card p-8 text-center">
@@ -461,13 +441,11 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
 
   return (
     <>
-      {/* Normal View */}
       {!isFullscreen ? (
         <div className="h-[600px]">
           <GameContent />
         </div>
       ) : (
-        /* Fullscreen Modal */
         <div className="fixed inset-0 z-50 bg-background">
           <div className="absolute top-4 right-4 z-60">
             <Button
