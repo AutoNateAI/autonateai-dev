@@ -6,7 +6,8 @@ import GameBoard from './GameBoard';
 import GameHUD from './GameHUD';
 import ToolSelector from './ToolSelector';
 import GameResults from './GameResults';
-import { GameState, Position, Tool, Monster, Portal } from './types';
+import { generateMaze } from './mazeGenerator';
+import { GameState, Position, Tool, Monster, Portal, MazeCell } from './types';
 
 const AscensionGame: React.FC = () => {
   const [gameState, setGameState] = useState<GameState>({
@@ -85,6 +86,14 @@ const AscensionGame: React.FC = () => {
     setGameState(prev => ({ ...prev, isPaused: !prev.isPaused }));
   }, []);
 
+  const [maze, setMaze] = useState<MazeCell[][]>([]);
+
+  // Generate maze when level changes
+  useEffect(() => {
+    const newMaze = generateMaze(gameState.currentLevel);
+    setMaze(newMaze);
+  }, [gameState.currentLevel]);
+
   const movePlayer = useCallback((direction: 'up' | 'down' | 'left' | 'right') => {
     if (!gameState.isPlaying || gameState.isPaused) return;
 
@@ -107,9 +116,32 @@ const AscensionGame: React.FC = () => {
           break;
       }
 
+      // Check if new position is valid (not a wall)
+      if (maze.length > 0 && maze[newPosition.y] && maze[newPosition.y][newPosition.x]) {
+        const targetCell = maze[newPosition.y][newPosition.x];
+        if (targetCell.type === 'wall') {
+          return prev; // Can't move into wall
+        }
+      }
+
       // Only move if position actually changed
       if (newPosition.x === prev.playerPosition.x && newPosition.y === prev.playerPosition.y) {
         return prev; // No movement (hit boundary)
+      }
+
+      // Check for coin collection
+      let newCoins = prev.coins;
+      if (maze.length > 0 && maze[newPosition.y] && maze[newPosition.y][newPosition.x]) {
+        const targetCell = maze[newPosition.y][newPosition.x];
+        if (targetCell.type === 'coin') {
+          newCoins += 1;
+          // Remove coin from maze
+          maze[newPosition.y][newPosition.x] = {
+            type: 'path',
+            position: { x: newPosition.x, y: newPosition.y },
+            isVisible: true
+          };
+        }
       }
 
       // Update camera to follow player
@@ -128,13 +160,14 @@ const AscensionGame: React.FC = () => {
       return {
         ...prev,
         playerPosition: newPosition,
+        coins: newCoins,
         collectedData: {
           ...prev.collectedData,
           pathChoices: [...prev.collectedData.pathChoices, pathChoice]
         }
       };
     });
-  }, [gameState.isPlaying, gameState.isPaused]);
+  }, [gameState.isPlaying, gameState.isPaused, maze]);
 
   const selectTool = useCallback((tool: Tool) => {
     if (!gameState.isPlaying) return;
@@ -341,9 +374,9 @@ const AscensionGame: React.FC = () => {
 
       {/* Main Game Area */}
       <div className="flex gap-4 p-4">
-        {/* Game Board Container - Square aspect ratio */}
-        <div className="flex-1 flex items-center justify-center">
-          <div className="w-full max-w-[600px] aspect-square">
+        {/* Game Board Container - Responsive width */}
+        <div className="flex-1 flex items-center justify-center min-w-0">
+          <div className="w-full aspect-square max-h-[600px]">
             <GameBoard
               gameState={gameState}
               onMove={movePlayer}
@@ -397,7 +430,7 @@ const AscensionGame: React.FC = () => {
         </div>
       ) : (
         /* Fullscreen Modal */
-        <div className="fixed inset-0 z-50 bg-background flex flex-col">
+        <div className="fixed inset-0 z-50 bg-background">
           <div className="absolute top-4 right-4 z-60">
             <Button
               onClick={() => setIsFullscreen(false)}
@@ -408,7 +441,7 @@ const AscensionGame: React.FC = () => {
               ❌ Exit Fullscreen
             </Button>
           </div>
-          <div className="flex-1">
+          <div className="h-full w-full">
             <GameContent />
           </div>
         </div>
