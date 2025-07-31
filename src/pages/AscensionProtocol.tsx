@@ -8,17 +8,6 @@ const AscensionProtocol = () => {
       <Navigation />
       <main className="w-full px-4 pt-20 pb-4">
         <div className="w-full">
-          {/* Game Header */}
-          <div className="text-center mb-6">
-            <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-3">
-              🧬 Ascension Protocol
-            </h1>
-            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-              Navigate the research workflow maze. Discover how AI tools can transform your productivity 
-              and efficiency as you solve puzzles, overcome obstacles, and ascend to research mastery.
-            </p>
-          </div>
-
           {/* Game Container */}
           <div className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl overflow-hidden shadow-2xl">
             <AscensionGame />

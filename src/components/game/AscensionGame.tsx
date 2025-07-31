@@ -252,10 +252,15 @@ const AscensionGame: React.FC = () => {
     return (
       <div className="h-[500px] flex flex-col items-center justify-center p-6 text-center">
         <div className="max-w-xl mx-auto space-y-4">
+          {/* Game Header */}
           <div className="text-4xl mb-3">🧬</div>
           <h2 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            Ready to Begin Your Ascension?
+            Ascension Protocol
           </h2>
+          <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+            Navigate the research workflow maze. Discover how AI tools can transform your productivity 
+            and efficiency as you solve puzzles, overcome obstacles, and ascend to research mastery.
+          </p>
           <p className="text-sm text-muted-foreground leading-relaxed">
             Navigate through three themed areas: Literature Review, Grant Writing, and Data Analysis. 
             Use AI tools strategically to overcome obstacles and discover your optimal research workflow.
@@ -392,7 +397,7 @@ const AscensionGame: React.FC = () => {
         </div>
       ) : (
         /* Fullscreen Modal */
-        <div className="fixed inset-0 z-50 bg-background">
+        <div className="fixed inset-0 z-50 bg-background flex flex-col">
           <div className="absolute top-4 right-4 z-60">
             <Button
               onClick={() => setIsFullscreen(false)}
@@ -403,7 +408,9 @@ const AscensionGame: React.FC = () => {
               ❌ Exit Fullscreen
             </Button>
           </div>
-          <GameContent />
+          <div className="flex-1">
+            <GameContent />
+          </div>
         </div>
       )}
     </>
