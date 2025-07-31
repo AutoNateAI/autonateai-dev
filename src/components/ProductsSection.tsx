@@ -7,7 +7,7 @@ const ProductsSection = () => {
       id: 'ai-grant-assistant',
       title: 'AI Grant Drafting Assistant',
       description: 'Win more grants with our AI-powered workflow for drafting compelling, fundable proposals.',
-      price: '$149',
+      price: '$497',
       icon: FileText,
       features: [
         'Complete Grant Writing Workflow Guide',
@@ -21,7 +21,7 @@ const ProductsSection = () => {
       id: 'lit-review-ai',
       title: 'Lit Review AI',
       description: 'Transform weeks of literature review chaos into organized, AI-powered research mastery.',
-      price: '$129',
+      price: '$297',
       icon: BookOpen,
       features: [
         '13-step comprehensive literature review workflow',
@@ -35,7 +35,7 @@ const ProductsSection = () => {
       id: 'data-pipeline-builder',
       title: 'Cloud Data Pipeline Builder',
       description: 'Convert chaotic research data practices into structured, reproducible pipelines.',
-      price: '$129',
+      price: '$597',
       icon: Database,
       features: [
         'Complete 8-Phase Workflow Management System',
