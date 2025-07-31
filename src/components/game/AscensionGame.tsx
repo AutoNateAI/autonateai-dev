@@ -340,9 +340,9 @@ const AscensionGame: React.FC = () => {
       </div>
 
       {/* Main Game Area */}
-      <div className="flex gap-4 p-4 h-full">
+      <div className="flex gap-4 p-4">
         {/* Game Board Container - Square aspect ratio */}
-        <div className="flex-1 flex items-start justify-center pt-12">
+        <div className="flex-1 flex items-center justify-center">
           <div className="w-full max-w-[600px] aspect-square">
             <GameBoard
               gameState={gameState}
