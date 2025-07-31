@@ -6,9 +6,10 @@ interface GameBoardProps {
   gameState: GameState;
   onMove: (direction: 'up' | 'down' | 'left' | 'right') => void;
   onMonsterEncounter: (monster: Monster) => void;
+  cameraPosition: { x: number; y: number };
 }
 
-const GameBoard: React.FC<GameBoardProps> = ({ gameState, onMove, onMonsterEncounter }) => {
+const GameBoard: React.FC<GameBoardProps> = ({ gameState, onMove, onMonsterEncounter, cameraPosition }) => {
   const [maze, setMaze] = useState<MazeCell[][]>([]);
   const [dragStart, setDragStart] = useState<Position | null>(null);
 
@@ -121,21 +122,29 @@ const GameBoard: React.FC<GameBoardProps> = ({ gameState, onMove, onMonsterEncou
     );
   };
 
-  return (
-    <div className="w-full flex flex-col items-center space-y-4">
-      {/* Game Board */}
-      <div 
-        className="w-full max-w-none glass-card p-2 rounded-xl bg-gradient-to-br from-background/80 to-primary/5 border border-primary/20"
-        onPointerDown={handlePointerDown}
-        onPointerUp={handlePointerUp}
-        style={{ touchAction: 'none' }}
-      >
-        <div className="grid grid-cols-20 gap-0 border border-border/30 rounded-lg overflow-hidden">
-          {maze.map((row, rowIndex) =>
-            row.map((cell, colIndex) => renderCell(cell, rowIndex, colIndex))
-          )}
+    // Calculate visible area (10x10 viewport)
+    const visibleStartX = cameraPosition.x;
+    const visibleEndX = Math.min(20, cameraPosition.x + 10);
+    const visibleStartY = cameraPosition.y;
+    const visibleEndY = Math.min(20, cameraPosition.y + 10);
+
+    return (
+      <div className="w-full flex flex-col items-center space-y-4">
+        {/* Game Board with Camera View */}
+        <div 
+          className="w-full max-w-none glass-card p-2 rounded-xl bg-gradient-to-br from-background/80 to-primary/5 border border-primary/20"
+          onPointerDown={handlePointerDown}
+          onPointerUp={handlePointerUp}
+          style={{ touchAction: 'none' }}
+        >
+          <div className="grid grid-cols-10 gap-0 border border-border/30 rounded-lg overflow-hidden w-full aspect-square">
+            {maze.slice(visibleStartY, visibleEndY).map((row, rowIndex) =>
+              row.slice(visibleStartX, visibleEndX).map((cell, colIndex) => 
+                renderCell(cell, visibleStartY + rowIndex, visibleStartX + colIndex)
+              )
+            )}
+          </div>
         </div>
-      </div>
 
       {/* Movement Controls for Mobile */}
       <div className="block md:hidden glass-card p-4 rounded-lg">

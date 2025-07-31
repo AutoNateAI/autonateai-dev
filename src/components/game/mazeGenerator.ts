@@ -4,7 +4,7 @@ export const generateMaze = (level: number): MazeCell[][] => {
   const size = 20;
   const maze: MazeCell[][] = [];
 
-  // Initialize maze with ALL PATHS (traversable tiles)
+  // Initialize maze with ALL PATHS (traversable tiles) - proper 2D array
   for (let y = 0; y < size; y++) {
     maze[y] = [];
     for (let x = 0; x < size; x++) {

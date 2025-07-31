@@ -30,6 +30,8 @@ const AscensionGame: React.FC = () => {
     }
   });
 
+  const [cameraPosition, setCameraPosition] = useState({ x: 0, y: 0 });
+
   const [gameStarted, setGameStarted] = useState(false);
 
   // Game timer
@@ -88,7 +90,7 @@ const AscensionGame: React.FC = () => {
     setGameState(prev => {
       const newPosition = { ...prev.playerPosition };
       
-      // Calculate new position (tile-by-tile movement)
+      // Calculate new position (tile-by-tile movement) - FIXED DIRECTIONS
       switch (direction) {
         case 'up':
           newPosition.y = Math.max(0, newPosition.y - 1);
@@ -104,10 +106,16 @@ const AscensionGame: React.FC = () => {
           break;
       }
 
-      // Only move if position actually changed (simple bounds check only)
+      // Only move if position actually changed
       if (newPosition.x === prev.playerPosition.x && newPosition.y === prev.playerPosition.y) {
         return prev; // No movement (hit boundary)
       }
+
+      // Update camera to follow player
+      setCameraPosition({
+        x: Math.max(0, Math.min(10, newPosition.x - 5)), // Keep camera centered on player
+        y: Math.max(0, Math.min(10, newPosition.y - 5))
+      });
 
       // Record path choice
       const pathChoice = {
@@ -203,24 +211,28 @@ const AscensionGame: React.FC = () => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (!gameState.isPlaying || gameState.isPaused) return;
 
-      switch (e.key.toLowerCase()) {
-        case 'arrowup':
+      switch (e.key) {
+        case 'ArrowUp':
         case 'w':
+        case 'W':
           e.preventDefault();
           movePlayer('up');
           break;
-        case 'arrowdown':
+        case 'ArrowDown':
         case 's':
+        case 'S':
           e.preventDefault();
           movePlayer('down');
           break;
-        case 'arrowleft':
+        case 'ArrowLeft':
         case 'a':
+        case 'A':
           e.preventDefault();
           movePlayer('left');
           break;
-        case 'arrowright':
+        case 'ArrowRight':
         case 'd':
+        case 'D':
           e.preventDefault();
           movePlayer('right');
           break;
@@ -293,6 +305,7 @@ const AscensionGame: React.FC = () => {
             gameState={gameState}
             onMove={movePlayer}
             onMonsterEncounter={handleMonsterEncounter}
+            cameraPosition={cameraPosition}
           />
         </div>
 
