@@ -128,7 +128,7 @@ const availableTools: Tool[] = [
   }
 ];
 
-const ToolSelector: React.FC<ToolSelectorProps> = ({ 
+const ToolSelector = React.memo<ToolSelectorProps>(({ 
   equippedTools, 
   onToolSelect, 
   coins, 
@@ -304,6 +304,6 @@ const ToolSelector: React.FC<ToolSelectorProps> = ({
       </CardContent>
     </Card>
   );
-};
+});
 
 export default ToolSelector;

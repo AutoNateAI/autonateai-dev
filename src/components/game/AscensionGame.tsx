@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
@@ -14,6 +14,9 @@ interface AscensionGameProps {
 }
 
 const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
+  // Separate timer state to prevent unnecessary re-renders
+  const [timeRemaining, setTimeRemaining] = useState(600);
+  
   const [gameState, setGameState] = useState<GameState>({
     isPlaying: false,
     isCompleted: false,
@@ -23,7 +26,7 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
     energy: 300,
     aiMastery: 0,
     coins: 0,
-    timeRemaining: 600, // 10 minutes
+    timeRemaining: 600, // This will be kept in sync with the separate timer
     equippedTools: [],
     visibleArea: { startX: 0, startY: 0, endX: 10, endY: 10 },
       collectedData: {
@@ -41,30 +44,33 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
   const [gameStarted, setGameStarted] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
-  // Game timer
+  // Game timer - separate from main game state to prevent re-renders
   useEffect(() => {
-    if (!gameState.isPlaying || gameState.isPaused || gameState.timeRemaining <= 0) return;
+    if (!gameState.isPlaying || gameState.isPaused || timeRemaining <= 0) return;
 
     const timer = setInterval(() => {
-      setGameState(prev => {
-        if (prev.timeRemaining <= 1) {
-          return { ...prev, timeRemaining: 0, isPlaying: false, isCompleted: true };
+      setTimeRemaining(prev => {
+        if (prev <= 1) {
+          setGameState(current => ({ ...current, isPlaying: false, isCompleted: true, timeRemaining: 0 }));
+          return 0;
         }
-        return { 
-          ...prev, 
-          timeRemaining: prev.timeRemaining - 1,
+        setGameState(current => ({
+          ...current,
+          timeRemaining: prev - 1,
           collectedData: {
-            ...prev.collectedData,
-            timeSpent: prev.collectedData.timeSpent + 1
+            ...current.collectedData,
+            timeSpent: current.collectedData.timeSpent + 1
           }
-        };
+        }));
+        return prev - 1;
       });
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [gameState.isPlaying, gameState.isPaused, gameState.timeRemaining]);
+  }, [gameState.isPlaying, gameState.isPaused, timeRemaining]);
 
   const startGame = useCallback(() => {
+    setTimeRemaining(600); // Reset separate timer state
     setGameState(prev => ({
       ...prev,
       isPlaying: true,
@@ -192,7 +198,7 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
         }
       };
     });
-  }, [gameState.isPlaying, gameState.isPaused]);
+  }, [gameState.isPlaying, gameState.isPaused, maze]);
 
   const selectTool = useCallback((tool: Tool) => {
     if (!gameState.isPlaying) return;
@@ -351,6 +357,13 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
     );
   }
 
+  // Memoize tool selector props to prevent re-renders
+  const toolSelectorProps = useMemo(() => ({
+    equippedTools: gameState.equippedTools,
+    coins: gameState.coins,
+    aiMastery: gameState.aiMastery
+  }), [gameState.equippedTools, gameState.coins, gameState.aiMastery]);
+
   const GameContent = () => (
     <div className="bg-gradient-to-br from-background/50 to-primary/5 relative h-full">
       {/* Main Game Area */}
@@ -387,7 +400,7 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
               </div>
               <div className="flex items-center gap-2">
                 <span>⏱️</span>
-                <span>{Math.floor(gameState.timeRemaining / 60)}:{(gameState.timeRemaining % 60).toString().padStart(2, '0')}</span>
+                <span>{Math.floor(timeRemaining / 60)}:{(timeRemaining % 60).toString().padStart(2, '0')}</span>
               </div>
               <div className="flex gap-2 pt-2">
                 {!isFullscreen && (
@@ -414,10 +427,10 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
 
           {/* Tool Selector */}
           <ToolSelector
-            equippedTools={gameState.equippedTools}
+            equippedTools={toolSelectorProps.equippedTools}
             onToolSelect={selectTool}
-            coins={gameState.coins}
-            aiMastery={gameState.aiMastery}
+            coins={toolSelectorProps.coins}
+            aiMastery={toolSelectorProps.aiMastery}
           />
         </div>
       </div>
@@ -425,10 +438,10 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
       {/* Mobile Tool Selector - Bottom */}
       <div className="lg:hidden p-4">
         <ToolSelector
-          equippedTools={gameState.equippedTools}
+          equippedTools={toolSelectorProps.equippedTools}
           onToolSelect={selectTool}
-          coins={gameState.coins}
-          aiMastery={gameState.aiMastery}
+          coins={toolSelectorProps.coins}
+          aiMastery={toolSelectorProps.aiMastery}
         />
       </div>
 

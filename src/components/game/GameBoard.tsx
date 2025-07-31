@@ -10,7 +10,7 @@ interface GameBoardProps {
   maze: MazeCell[][];
 }
 
-const GameBoard: React.FC<GameBoardProps> = ({ gameState, onMove, onMonsterEncounter, cameraPosition, maze }) => {
+const GameBoard = React.memo<GameBoardProps>(({ gameState, onMove, onMonsterEncounter, cameraPosition, maze }) => {
   const [dragStart, setDragStart] = useState<Position | null>(null);
 
   // Handle touch/mouse controls
@@ -196,6 +196,6 @@ const GameBoard: React.FC<GameBoardProps> = ({ gameState, onMove, onMonsterEncou
         </div>
       </div>
     );
-};
+});
 
 export default GameBoard;
