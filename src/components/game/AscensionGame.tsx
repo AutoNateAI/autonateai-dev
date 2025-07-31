@@ -148,9 +148,9 @@ const AscensionGame: React.FC = () => {
         }
       }
 
-      // Update camera to follow player
+      // Update camera to follow player (keep player in center of view)
       setCameraPosition({
-        x: Math.max(0, Math.min(10, newPosition.x - 5)), // Keep camera centered on player
+        x: Math.max(0, Math.min(10, newPosition.x - 5)),
         y: Math.max(0, Math.min(10, newPosition.y - 5))
       });
 
@@ -334,52 +334,8 @@ const AscensionGame: React.FC = () => {
 
   const GameContent = () => (
     <div className="bg-gradient-to-br from-background/50 to-primary/5 relative h-full">
-      {/* Stats HUD - Clean positioning */}
-      <div className="mb-4 w-fit glass-card p-3 rounded-lg">
-        <div className="flex gap-6 text-sm">
-          <div className="flex items-center gap-2">
-            <span>⚡</span>
-            <span>{gameState.energy}/300</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span>🧠</span>
-            <span>{gameState.aiMastery}%</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span>🪙</span>
-            <span>{gameState.coins}</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span>⏱️</span>
-            <span>{Math.floor(gameState.timeRemaining / 60)}:{(gameState.timeRemaining % 60).toString().padStart(2, '0')}</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Control Buttons - Clean positioning */}
-      <div className="mb-4 flex gap-2 justify-end">
-        {!isFullscreen && (
-          <Button
-            onClick={() => setIsFullscreen(true)}
-            variant="outline"
-            size="sm"
-            className="glass-card"
-          >
-            🔍 Fullscreen
-          </Button>
-        )}
-        <Button
-          onClick={pauseGame}
-          variant="outline"
-          size="sm"
-          className="glass-card"
-        >
-          {gameState.isPaused ? '▶️' : '⏸️'}
-        </Button>
-      </div>
-
       {/* Main Game Area */}
-      <div className="flex gap-4 px-4">
+      <div className="flex gap-4 p-4 h-full">
         {/* Game Board Container - Responsive width */}
         <div className="flex-1 flex items-center justify-center min-w-0">
           <div className="w-full aspect-square max-h-[600px]">
@@ -392,8 +348,51 @@ const AscensionGame: React.FC = () => {
           </div>
         </div>
 
-        {/* Tool Selector - Right side */}
-        <div className="w-80 hidden lg:block">
+        {/* Right Panel - HUD + Tool Shop */}
+        <div className="w-80 hidden lg:flex flex-col gap-4">
+          {/* Stats HUD */}
+          <div className="glass-card p-3 rounded-lg">
+            <div className="flex flex-col gap-2 text-sm">
+              <div className="flex items-center gap-2">
+                <span>⚡</span>
+                <span>{gameState.energy}/300</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span>🧠</span>
+                <span>{gameState.aiMastery}%</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span>🪙</span>
+                <span>{gameState.coins}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span>⏱️</span>
+                <span>{Math.floor(gameState.timeRemaining / 60)}:{(gameState.timeRemaining % 60).toString().padStart(2, '0')}</span>
+              </div>
+              <div className="flex gap-2 pt-2">
+                {!isFullscreen && (
+                  <Button
+                    onClick={() => setIsFullscreen(true)}
+                    variant="outline"
+                    size="sm"
+                    className="glass-card flex-1"
+                  >
+                    🔍 Fullscreen
+                  </Button>
+                )}
+                <Button
+                  onClick={pauseGame}
+                  variant="outline"
+                  size="sm"
+                  className="glass-card"
+                >
+                  {gameState.isPaused ? '▶️' : '⏸️'}
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          {/* Tool Selector */}
           <ToolSelector
             equippedTools={gameState.equippedTools}
             onToolSelect={selectTool}

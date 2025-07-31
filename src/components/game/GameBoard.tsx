@@ -55,7 +55,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ gameState, onMove, onMonsterEncou
     const isPlayer = gameState.playerPosition.x === colIndex && gameState.playerPosition.y === rowIndex;
     
     let cellContent = '';
-    let cellClass = 'w-6 h-6 border border-border/30 flex items-center justify-center text-xs font-bold relative transition-all duration-200';
+    let cellClass = 'w-6 h-6 border border-border/30 flex items-center justify-center text-xs font-bold relative';
 
     // Render all cells clearly
     switch (cell.type) {

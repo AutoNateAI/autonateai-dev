@@ -163,7 +163,7 @@ const ToolSelector: React.FC<ToolSelectorProps> = ({
   };
 
   return (
-    <Card className="glass-card h-fit">
+    <Card className="glass-card h-fit flex-1">
       <CardHeader className="pb-3">
         <CardTitle className="text-lg flex items-center gap-2">
           🛠️ Tool Shop
@@ -191,7 +191,10 @@ const ToolSelector: React.FC<ToolSelectorProps> = ({
         </div>
 
         {/* Tools List */}
-        <div className="space-y-2 max-h-96 overflow-y-scroll scrollbar-hide">
+        <div 
+          className="space-y-2 max-h-60 overflow-y-scroll scrollbar-hide"
+          onScroll={(e) => e.stopPropagation()}
+        >
           {availableTools.map((tool) => {
             const affordable = canAfford(tool);
             const usable = canUse(tool);
