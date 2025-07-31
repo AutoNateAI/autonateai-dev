@@ -6,7 +6,7 @@ const AscensionProtocol = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
       <Navigation />
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-2">
         <div className="max-w-6xl mx-auto">
           {/* Game Header */}
           <div className="text-center mb-8">

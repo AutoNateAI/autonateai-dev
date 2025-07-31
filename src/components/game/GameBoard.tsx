@@ -113,7 +113,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ gameState, onMove, onMonsterEncou
     }
 
     if (isPlayer) {
-      cellClass += ' ring-2 ring-primary bg-primary/30 animate-pulse';
+      cellClass += ' ring-2 ring-primary bg-primary/30 animate-pulse z-10 relative';
       cellContent = '🧑‍🔬';
     }
 

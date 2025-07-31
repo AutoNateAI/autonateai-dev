@@ -16,34 +16,30 @@ export const generateMaze = (level: number): MazeCell[][] => {
     }
   }
 
-  // Create basic paths
-  const createPath = (startX: number, startY: number, endX: number, endY: number) => {
-    for (let x = startX; x <= endX; x++) {
-      for (let y = startY; y <= endY; y++) {
-        if (x < size && y < size) {
-          maze[y][x] = {
-            type: 'path',
-            position: { x, y },
-            isVisible: false
-          };
-        }
-      }
+  // Create paths - single cell at a time for proper maze
+  const setPath = (x: number, y: number) => {
+    if (x >= 0 && x < size && y >= 0 && y < size) {
+      maze[y][x] = {
+        type: 'path',
+        position: { x, y },
+        isVisible: false
+      };
     }
   };
 
-  // Create main corridors
-  createPath(1, 1, 18, 1); // Top corridor
-  createPath(1, 1, 1, 18); // Left corridor
-  createPath(18, 1, 18, 18); // Right corridor
-  createPath(1, 18, 18, 18); // Bottom corridor
+  // Create main L-shaped corridor from spawn to exit
+  for (let x = 1; x <= 8; x++) setPath(x, 1); // Horizontal top
+  for (let y = 1; y <= 8; y++) setPath(8, y); // Vertical down
+  for (let x = 8; x <= 15; x++) setPath(x, 8); // Horizontal middle
+  for (let y = 8; y <= 15; y++) setPath(15, y); // Vertical down
+  for (let x = 15; x <= 18; x++) setPath(x, 15); // Horizontal bottom
 
-  // Create internal paths
-  createPath(5, 1, 5, 15);
-  createPath(10, 1, 10, 15);
-  createPath(15, 1, 15, 15);
-  createPath(1, 5, 15, 5);
-  createPath(1, 10, 15, 10);
-  createPath(1, 15, 15, 15);
+  // Create branching paths
+  for (let y = 3; y <= 6; y++) setPath(5, y); // Branch 1
+  for (let x = 5; x <= 12; x++) setPath(x, 6); // Connect
+  for (let y = 6; y <= 12; y++) setPath(12, y); // Branch 2
+  for (let x = 3; x <= 7; x++) setPath(x, 12); // Branch 3
+  for (let x = 10; x <= 17; x++) setPath(x, 3); // Branch 4
 
   // Add coins
   const coinPositions = [
