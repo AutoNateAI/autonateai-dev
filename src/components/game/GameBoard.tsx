@@ -52,17 +52,16 @@ const GameBoard: React.FC<GameBoardProps> = ({ gameState, onMove, onMonsterEncou
 
   const renderCell = (cell: MazeCell, rowIndex: number, colIndex: number) => {
     const isPlayer = gameState.playerPosition.x === colIndex && gameState.playerPosition.y === rowIndex;
-    const isVisible = isPlayer || (
-      Math.abs(gameState.playerPosition.x - colIndex) <= 2 && 
-      Math.abs(gameState.playerPosition.y - rowIndex) <= 2
-    );
+    
+    // Always show cells, but dim distant ones
+    const distance = Math.abs(gameState.playerPosition.x - colIndex) + Math.abs(gameState.playerPosition.y - rowIndex);
+    const isNearby = distance <= 3;
 
     let cellContent = '';
-    let cellClass = 'w-8 h-8 border border-border/20 flex items-center justify-center text-xs relative transition-all duration-300';
+    let cellClass = 'w-8 h-8 border border-border/20 flex items-center justify-center text-lg font-bold relative transition-all duration-200';
 
-    if (!isVisible) {
-      cellClass += ' bg-muted/50 text-muted-foreground/30';
-      cellContent = '▓';
+    if (!isNearby) {
+      cellClass += ' bg-muted/30 text-muted-foreground/50';
     } else {
       switch (cell.type) {
         case 'wall':
