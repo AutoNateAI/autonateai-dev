@@ -6,21 +6,18 @@ const TestimonialsSection = () => {
       quote: "AutoNate's literature review workflow cut my dissertation research time by more than half. The systematic approach he taught made organizing 200+ papers actually manageable.",
       author: "Graduate Student",
       role: "PhD Candidate",
-      department: "Social Sciences",
       rating: 5
     },
     {
       quote: "The data analytics workflow from AutoNate's coaching completely transformed how our lab handles research data. We went from chaos to a structured, reproducible pipeline.",
       author: "Research Team Lead",
-      role: "Lab Manager",
-      department: "Environmental Studies",
+      role: "Lab Manager", 
       rating: 5
     },
     {
       quote: "After working with AutoNate on literature workflows, I can now synthesize complex research findings in days instead of weeks. The framework is a game-changer.",
       author: "Academic Researcher",
       role: "Postdoctoral Fellow",
-      department: "Behavioral Psychology",
       rating: 5
     }
   ];
@@ -67,7 +64,7 @@ const TestimonialsSection = () => {
               <div className="border-t border-border/20 pt-6">
                 <div className="font-semibold text-primary">{testimonial.author}</div>
                 <div className="text-sm text-muted-foreground">
-                  {testimonial.role}, {testimonial.department}
+                  {testimonial.role}
                 </div>
               </div>
             </div>
