@@ -6,7 +6,7 @@ const ProductsSection = () => {
     id: 'lit-review-ai',
     title: 'Lit Review AI',
     description: 'Transform weeks of literature review chaos into organized, AI-powered research mastery with our comprehensive workflow system.',
-    price: '$297',
+    price: '$497',
     icon: BookOpen,
     features: [
       '13-step comprehensive literature review workflow with NotebookLM integration',
