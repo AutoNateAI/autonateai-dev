@@ -45,11 +45,12 @@ export const useProducts = () => {
     try {
       setLoading(true);
       
-      // Fetch products
+      // Fetch products - only lit-review-ai
       const { data: productsData, error: productsError } = await supabase
         .from('products')
         .select('*')
         .eq('is_active', true)
+        .eq('slug', 'lit-review-ai')
         .order('sort_order', { ascending: true });
 
       if (productsError) throw productsError;

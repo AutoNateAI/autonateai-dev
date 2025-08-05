@@ -48,12 +48,11 @@ const Products = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
-              Research Workflow{' '}
-              <span className="text-gradient">Solutions</span>
+              Literature Review{' '}
+              <span className="text-gradient">Mastery System</span>
             </h1>
-            <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-              Our premium digital workflow systems combine structured methodologies with AI integration 
-              to help researchers achieve better results in less time.
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Transform your literature review process with our comprehensive NotebookLM-powered workflow system that includes concept visualization and AI-guided research methodologies.
             </p>
           </div>
         </div>
@@ -254,62 +253,33 @@ const Products = () => {
         </div>
       </section>
 
-      {/* Feature Comparison */}
+      {/* Feature Highlights */}
       <section className="py-24 bg-muted/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-              Feature <span className="text-gradient">Comparison</span>
+              Key <span className="text-gradient">Features</span>
             </h2>
             <p className="text-xl text-muted-foreground">
-              Compare our workflow systems to find the perfect fit for your research needs.
+              Everything you need to master literature review with AI-powered workflows.
             </p>
           </div>
 
-          <div className="glass-card overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-border/20">
-                    <th className="text-left p-6 font-semibold">Feature</th>
-                    {products.map((product) => (
-                      <th key={product.id} className="text-center p-6 font-semibold">{product.title}</th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody className="text-sm">
-                  <tr className="border-b border-border/10">
-                    <td className="p-6 font-medium">One-time Price</td>
-                    {products.map((product) => (
-                      <td key={product.id} className="p-6 text-center text-primary font-bold">{product.price}</td>
-                    ))}
-                  </tr>
-                  <tr className="border-b border-border/10">
-                    <td className="p-6 font-medium">AI Prompts Included</td>
-                    <td className="p-6 text-center">25+</td>
-                    <td className="p-6 text-center">24</td>
-                    <td className="p-6 text-center">80+</td>
-                  </tr>
-                  <tr className="border-b border-border/10">
-                    <td className="p-6 font-medium">Workflow Phases</td>
-                    <td className="p-6 text-center">5</td>
-                    <td className="p-6 text-center">5</td>
-                    <td className="p-6 text-center">8</td>
-                  </tr>
-                  <tr className="border-b border-border/10">
-                    <td className="p-6 font-medium">Platform Compatibility</td>
-                    <td className="p-6 text-center">✓</td>
-                    <td className="p-6 text-center">✓</td>
-                    <td className="p-6 text-center">✓</td>
-                  </tr>
-                  <tr className="border-b border-border/10">
-                    <td className="p-6 font-medium">Time Savings</td>
-                    <td className="p-6 text-center">15-20 hours/grant</td>
-                    <td className="p-6 text-center">60-70% reduction</td>
-                    <td className="p-6 text-center">60-80% reduction</td>
-                  </tr>
-                </tbody>
-              </table>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="glass-card p-8 text-center">
+              <BookOpen className="w-12 h-12 text-primary mx-auto mb-4" />
+              <h3 className="text-xl font-bold mb-4">13-Step Workflow</h3>
+              <p className="text-muted-foreground">Comprehensive methodology that guides you through every phase of literature review</p>
+            </div>
+            <div className="glass-card p-8 text-center">
+              <Database className="w-12 h-12 text-green-400 mx-auto mb-4" />
+              <h3 className="text-xl font-bold mb-4">NotebookLM Integration</h3>
+              <p className="text-muted-foreground">Seamlessly work with Google's NotebookLM for powerful AI-assisted analysis</p>
+            </div>
+            <div className="glass-card p-8 text-center">
+              <FileText className="w-12 h-12 text-blue-400 mx-auto mb-4" />
+              <h3 className="text-xl font-bold mb-4">Concept Visualization</h3>
+              <p className="text-muted-foreground">Interactive graphs that track insights from sources to final conclusions</p>
             </div>
           </div>
         </div>
