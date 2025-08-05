@@ -32,45 +32,45 @@ const HeroSection = () => {
 
           {/* Main Headline */}
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 leading-tight">
-            Transform Your{' '}
-            <span className="text-gradient animate-gradient">Research Process</span>
+            Master Your{' '}
+            <span className="text-gradient animate-gradient">Literature Review</span>
             <br />
-            with AI-Augmented{' '}
-            <span className="text-gradient">Digital Guides</span>
+            with AI-Powered{' '}
+            <span className="text-gradient">Research Workflows</span>
           </h1>
 
           {/* Subtitle */}
           <p className="text-xl sm:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto leading-relaxed">
-            AutoNateAI provides cutting-edge workflow management systems that empower 
-            researchers to achieve better results in less time by integrating AI into 
-            established research methodologies.
+            Transform weeks of chaotic literature review into organized, AI-powered research mastery. 
+            Our comprehensive workflow system integrates NotebookLM with advanced visualization tools 
+            to accelerate your research process while maintaining academic rigor.
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <Link to="/products" className="btn-primary text-lg px-8 py-4 flex items-center">
-              Explore Our Solutions
+            <Link to="/products/lit-review-ai" className="btn-primary text-lg px-8 py-4 flex items-center">
+              Get Lit Review AI
               <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
             <Link to="/blog" className="btn-glass text-lg px-8 py-4 flex items-center gap-2">
               <BookOpen className="w-5 h-5" />
-              Read Our Blog
+              See How It Works
             </Link>
           </div>
 
           {/* Social Proof */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             <div className="glass-card p-6 text-center">
-              <div className="text-3xl font-bold text-primary mb-2">300+</div>
-              <div className="text-muted-foreground">Researchers Trained</div>
+              <div className="text-3xl font-bold text-primary mb-2">13-Step</div>
+              <div className="text-muted-foreground">Comprehensive Workflow</div>
             </div>
             <div className="glass-card p-6 text-center">
-              <div className="text-3xl font-bold text-primary mb-2">65%</div>
-              <div className="text-muted-foreground">Average Time Saved</div>
+              <div className="text-3xl font-bold text-primary mb-2">24+</div>
+              <div className="text-muted-foreground">Specialized AI Prompts</div>
             </div>
             <div className="glass-card p-6 text-center">
-              <div className="text-3xl font-bold text-glass-secondary mb-2">40%</div>
-              <div className="text-muted-foreground">Grant Success Increase</div>
+              <div className="text-3xl font-bold text-glass-secondary mb-2">75%</div>
+              <div className="text-muted-foreground">Time Reduction Achieved</div>
             </div>
           </div>
         </div>

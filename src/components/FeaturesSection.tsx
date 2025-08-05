@@ -1,41 +1,41 @@
-import { Clock, TrendingUp, Cpu, Award, CheckCircle, Users } from 'lucide-react';
+import { Clock, TrendingUp, Cpu, Award, CheckCircle, Users, BookOpen, Network, Brain } from 'lucide-react';
 
 const FeaturesSection = () => {
   const features = [
     {
       icon: Clock,
-      title: 'Save Valuable Time',
-      description: 'Reduce research tasks by 60-80% with our systematic AI-augmented workflows.',
+      title: 'End Literature Review Chaos',
+      description: 'Transform weeks of disorganized reading into structured, systematic research with our 13-step guided workflow.',
       color: 'text-blue-400'
     },
     {
-      icon: TrendingUp,
-      title: 'Increase Quality',
-      description: 'Produce more thorough, rigorous results with structured methodologies.',
-      color: 'text-green-400'
-    },
-    {
-      icon: Cpu,
-      title: 'AI-Platform Agnostic',
-      description: 'Works seamlessly with ChatGPT, Claude, NotebookLM, Windsurf and others.',
+      icon: Brain,
+      title: 'AI-Powered Insight Generation',
+      description: 'Extract concepts, identify knowledge gaps, and generate insights using 24+ specialized prompts designed for NotebookLM.',
       color: 'text-purple-400'
     },
     {
-      icon: Award,
-      title: 'Research-Validated',
-      description: 'Methodologies designed by experts in research methods and academic standards.',
+      icon: Network,
+      title: 'Visual Research Mapping',
+      description: 'See how your ideas connect with interactive concept graphs that trace insights back to their original sources.',
+      color: 'text-green-400'
+    },
+    {
+      icon: BookOpen,
+      title: 'NotebookLM Integration',
+      description: 'Seamlessly integrate with Google\'s NotebookLM for powerful AI-assisted literature analysis and synthesis.',
       color: 'text-orange-400'
     },
     {
-      icon: CheckCircle,
-      title: 'Complete Solutions',
-      description: 'Everything you need from start to finish, with comprehensive guides and resources.',
+      icon: TrendingUp,
+      title: 'Progress Tracking',
+      description: 'Monitor your literature review progress with analytics dashboard and completion tracking across all workflow phases.',
       color: 'text-teal-400'
     },
     {
       icon: Users,
-      title: 'Discord Community Support',
-      description: 'Join our exclusive Discord community for real-time help, Q&A, and collaboration with other researchers using our workflows.',
+      title: 'Expert-Designed Methodology',
+      description: 'Research methodologies created by PhD-level experts in academic research and validated by real researchers.',
       color: 'text-pink-400'
     }
   ];
@@ -46,12 +46,12 @@ const FeaturesSection = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
-            Why Researchers Choose{' '}
-            <span className="text-gradient">AutoNateAI</span>
+            Solve Your Literature Review{' '}
+            <span className="text-gradient">Pain Points</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Join thousands of researchers who have transformed their workflows 
-            with our AI-augmented research methodologies.
+            Stop drowning in papers, losing track of key insights, and struggling to connect ideas. 
+            Our AI-powered workflow transforms chaos into organized, trackable research progress.
           </p>
         </div>
 

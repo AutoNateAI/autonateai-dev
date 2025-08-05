@@ -82,57 +82,57 @@ const Coaching = () => {
 
   const individualServices = [
     {
-      title: 'AI Research Workflow Optimization',
+      title: 'Literature Review Foundation',
       price: '$299',
       duration: '90-minute session',
-      description: 'Perfect for graduate students, postdocs, and faculty members looking to optimize their research workflows with AI tools.',
+      description: 'Perfect for researchers starting their literature review journey or struggling with organization.',
       features: [
-        'Personal assessment of your current research workflow',
-        'Custom AI integration strategy for your specific research domain',
-        'Personalized prompt engineering for your research questions',
-        'Follow-up implementation plan and resource package',
+        'Assessment of your current literature review approach',
+        'Custom 13-step workflow setup for your research domain',
+        'NotebookLM integration and optimization strategy',
+        'Personalized prompt library for your research questions',
         'Access to exclusive Discord community channel'
       ]
     },
     {
-      title: 'Grant Strategy & Review',
-      price: '$499',
-      duration: 'per proposal',
-      description: 'Comprehensive review and strategic guidance for grant proposals.',
+      title: 'Advanced Concept Mapping',
+      price: '$399',
+      duration: '2-hour intensive session',
+      description: 'Master the art of connecting ideas and generating insights from your literature.',
       features: [
-        'In-depth review of your grant proposal draft',
-        'Strategic recommendations for strengthening your application',
-        'AI-augmented language optimization for reviewer engagement',
-        '90-minute consultation to address specific concerns',
+        'Interactive concept graph development training',
+        'Advanced visualization techniques for complex research',
+        'Insight generation strategies from multiple sources',
+        'Framework for tracking research evolution over time',
         'Access to exclusive Discord community channel'
       ]
     },
     {
       title: 'Literature Review Acceleration',
-      price: '$349',
-      duration: 'per session',
-      description: 'Structured methodology and AI integration for efficient literature reviews.',
+      price: '$449',
+      duration: '2.5-hour comprehensive session',
+      description: 'Complete literature review transformation with ongoing support.',
       features: [
-        'Structured methodology for your specific literature review',
-        'Custom AI prompt development for your research domain',
-        'Synthesis strategy for integrating diverse literature',
-        'Framework development for organizing complex findings',
+        'Complete workflow audit and optimization',
+        'Custom AI prompt development for all review phases',
+        'Advanced synthesis strategies for publication-ready insights',
+        '30-day follow-up support and troubleshooting',
         'Access to exclusive Discord community channel'
       ]
     }
   ];
 
   const teamService = {
-    title: 'Team Workflow Implementation',
-    price: '$1,499',
-    duration: 'up to 8 researchers',
-    description: 'Designed for lab groups, departments, and research teams looking to implement consistent AI-augmented workflows.',
+    title: 'Research Team Literature Review Implementation',
+    price: '$1,899',
+    duration: 'up to 10 researchers',
+    description: 'Designed for lab groups, departments, and research teams looking to implement consistent literature review workflows.',
     features: [
-      'Assessment of current team research practices',
-      'Custom workflow development for your team\'s needs',
-      'Group training session (3 hours virtual or in-person)',
-      'Implementation toolkit with templates and guides',
-      '30-day follow-up session to address challenges',
+      'Assessment of current team literature review practices',
+      'Custom NotebookLM workflow development for your research domain',
+      'Group training session (4 hours virtual or in-person)',
+      'Shared concept mapping and visualization setup',
+      '60-day follow-up support and optimization sessions',
       'Access to exclusive Discord community channel'
     ]
   };
@@ -154,14 +154,14 @@ const Coaching = () => {
       <section className="pt-32 pb-16 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
-              Private AI Research{' '}
-              <span className="text-gradient">Coaching</span>
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-              Maximize your research potential with one-on-one coaching from our team of 
-              experienced research methodology experts and AI integration specialists.
-            </p>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+            Literature Review{' '}
+            <span className="text-gradient">Coaching Services</span>
+          </h1>
+          <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+            Master your literature review process with personalized coaching that integrates 
+            NotebookLM workflows, concept visualization, and AI-powered research methodologies.
+          </p>
           </div>
         </div>
       </section>
@@ -171,10 +171,10 @@ const Coaching = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-              Individual <span className="text-gradient">Researcher Coaching</span>
+              Individual <span className="text-gradient">Literature Review Coaching</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Perfect for graduate students, postdocs, and faculty members looking to optimize their research workflows with AI tools.
+              Perfect for researchers looking to transform their literature review process with AI-powered workflows and advanced visualization techniques.
             </p>
           </div>
 
@@ -223,10 +223,10 @@ const Coaching = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-              Research Group <span className="text-gradient">Coaching</span>
+              Research Team <span className="text-gradient">Literature Review Training</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Designed for lab groups, departments, and research teams looking to implement consistent AI-augmented workflows.
+              Designed for lab groups, departments, and research teams looking to implement consistent literature review methodologies with NotebookLM integration.
             </p>
           </div>
 
@@ -373,10 +373,10 @@ const Coaching = () => {
                     className="w-full px-4 py-3 rounded-xl bg-background/50 border-2 border-primary/30 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 text-foreground transition-all duration-200"
                   >
                     <option value="">Select a service</option>
-                    <option value="workflow">AI Research Workflow Optimization</option>
-                    <option value="grant">Grant Strategy & Review</option>
-                    <option value="literature">Literature Review Acceleration</option>
-                    <option value="team">Team Workflow Implementation</option>
+                    <option value="foundation">Literature Review Foundation</option>
+                    <option value="advanced">Advanced Concept Mapping</option>
+                    <option value="acceleration">Literature Review Acceleration</option>
+                    <option value="team">Research Team Literature Review Implementation</option>
                     <option value="other">Other (please specify)</option>
                   </select>
                 </div>

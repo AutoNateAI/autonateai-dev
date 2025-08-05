@@ -100,10 +100,10 @@ const Workshops = () => {
           <div className="text-center mb-12">
             <Badge className="mb-4" variant="secondary">AI Research Workshops</Badge>
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-gradient">
-              Transform Your Institution's Research Capabilities
+              Literature Review Mastery Workshops
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-              Our specialized workshops train researchers in implementing AI-augmented workflows for grant writing, literature review, and data management at scale.
+              Transform your institution's literature review capabilities with comprehensive workshops that integrate NotebookLM workflows, concept visualization, and AI-powered research methodologies at scale.
             </p>
           </div>
         </div>
@@ -112,19 +112,19 @@ const Workshops = () => {
       {/* Available Workshops */}
       <section className="py-16 px-4">
         <div className="container mx-auto max-w-6xl">
-          <h2 className="text-3xl font-bold text-center mb-12">Available Workshops</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">Literature Review Workshop Options</h2>
           <div className="grid md:grid-cols-2 gap-8">
             <Card className="glass-card flex flex-col">
               <CardHeader>
                 <div className="flex justify-between items-start mb-4">
-                  <CardTitle className="text-xl">AI Grant Writing Mastery</CardTitle>
+                  <CardTitle className="text-xl">Literature Review Foundation</CardTitle>
                   <Badge variant="secondary">
                     <Clock className="w-3 h-3 mr-1" />
-                    6 hours
+                    4 hours
                   </Badge>
                 </div>
                 <CardDescription>
-                  Transform your institution's grant success rate with systematic AI-augmented grant writing strategies.
+                  Perfect for institutions looking to establish systematic literature review practices with NotebookLM integration.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4 flex flex-col flex-grow">
@@ -133,79 +133,19 @@ const Workshops = () => {
                   <ul className="space-y-1 text-sm">
                     <li className="flex items-center gap-2">
                       <CheckCircle className="w-3 h-3 text-primary" />
-                      <span>Structured approach to AI-assisted proposal development</span>
+                      <span>13-step comprehensive literature review workflow</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <CheckCircle className="w-3 h-3 text-primary" />
-                      <span>Funder-specific language optimization techniques</span>
+                      <span>NotebookLM setup and optimization techniques</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <CheckCircle className="w-3 h-3 text-primary" />
-                      <span>Collaborative grant writing with AI tools</span>
+                      <span>AI prompt library for literature analysis</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <CheckCircle className="w-3 h-3 text-primary" />
-                       <span>Strategic reviewer perspective analysis</span>
-                     </li>
-                     <li className="flex items-center gap-2">
-                       <CheckCircle className="w-3 h-3 text-primary" />
-                       <span>Access to exclusive Discord community channel</span>
-                     </li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-2">Ideal For:</h4>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="outline">University research offices</Badge>
-                    <Badge variant="outline">Academic departments</Badge>
-                    <Badge variant="outline">Research institutes</Badge>
-                  </div>
-                </div>
-                <div className="pt-4 border-t mt-auto">
-                  <p className="text-lg font-semibold text-primary">$3,499 per participant</p>
-                  <p className="text-sm text-muted-foreground">Up to 25 participants</p>
-                  <Button 
-                    onClick={() => handleRequestWorkshop('grant')}
-                    className="w-full mt-4"
-                  >
-                    Request Workshop
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="glass-card flex flex-col">
-              <CardHeader>
-                <div className="flex justify-between items-start mb-4">
-                  <CardTitle className="text-xl">Literature Review Revolution</CardTitle>
-                  <Badge variant="secondary">
-                    <Clock className="w-3 h-3 mr-1" />
-                    3 hours
-                  </Badge>
-                </div>
-                <CardDescription>
-                  Equip your researchers with systematic methods to accelerate literature reviews while improving quality.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4 flex flex-col flex-grow">
-                <div>
-                  <h4 className="font-semibold mb-2">Participants Will Learn:</h4>
-                  <ul className="space-y-1 text-sm">
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-3 h-3 text-primary" />
-                      <span>5-phase literature review methodology</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-3 h-3 text-primary" />
-                      <span>Multi-paper analysis techniques with AI</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-3 h-3 text-primary" />
-                      <span>Framework development for complex questions</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-3 h-3 text-primary" />
-                       <span>Publication-ready synthesis techniques</span>
+                       <span>Basic concept extraction and organization</span>
                      </li>
                      <li className="flex items-center gap-2">
                        <CheckCircle className="w-3 h-3 text-primary" />
@@ -222,70 +162,10 @@ const Workshops = () => {
                   </div>
                 </div>
                 <div className="pt-4 border-t mt-auto">
-                  <p className="text-lg font-semibold text-primary">$1,999 per participant</p>
+                  <p className="text-lg font-semibold text-primary">$2,299 per participant</p>
                   <p className="text-sm text-muted-foreground">Up to 30 participants</p>
                   <Button 
-                    onClick={() => handleRequestWorkshop('literature')}
-                    className="w-full mt-4"
-                  >
-                    Request Workshop
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="glass-card flex flex-col">
-              <CardHeader>
-                <div className="flex justify-between items-start mb-4">
-                  <CardTitle className="text-xl">Research Data Pipeline Implementation</CardTitle>
-                  <Badge variant="secondary">
-                    <Clock className="w-3 h-3 mr-1" />
-                    6 hours
-                  </Badge>
-                </div>
-                <CardDescription>
-                  Create standardized, reproducible data management practices across your research organization.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4 flex flex-col flex-grow">
-                <div>
-                  <h4 className="font-semibold mb-2">Participants Will Learn:</h4>
-                  <ul className="space-y-1 text-sm">
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-3 h-3 text-primary" />
-                      <span>8-phase data pipeline methodology</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-3 h-3 text-primary" />
-                      <span>AI-assisted data cleaning and transformation</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-3 h-3 text-primary" />
-                      <span>Documentation automation techniques</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-3 h-3 text-primary" />
-                       <span>FAIR principles implementation</span>
-                     </li>
-                     <li className="flex items-center gap-2">
-                       <CheckCircle className="w-3 h-3 text-primary" />
-                       <span>Access to exclusive Discord community channel</span>
-                     </li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-2">Ideal For:</h4>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="outline">Research laboratories</Badge>
-                    <Badge variant="outline">Data science teams</Badge>
-                    <Badge variant="outline">Clinical research orgs</Badge>
-                  </div>
-                </div>
-                <div className="pt-4 border-t mt-auto">
-                  <p className="text-lg font-semibold text-primary">$3,699 per participant</p>
-                  <p className="text-sm text-muted-foreground">Up to 25 participants</p>
-                  <Button 
-                    onClick={() => handleRequestWorkshop('data')}
+                    onClick={() => handleRequestWorkshop('foundation')}
                     className="w-full mt-4"
                   >
                     Request Workshop
@@ -297,35 +177,35 @@ const Workshops = () => {
             <Card className="glass-card border-primary/20 flex flex-col">
               <CardHeader>
                 <div className="flex justify-between items-start mb-4">
-                  <CardTitle className="text-xl">Custom AI Research Workflow Design</CardTitle>
+                  <CardTitle className="text-xl">Advanced Concept Visualization</CardTitle>
                   <Badge variant="secondary">
                     <Clock className="w-3 h-3 mr-1" />
-                    12 hours
+                    6 hours
                   </Badge>
                 </div>
                 <CardDescription>
-                  Develop custom AI-augmented workflows specifically designed for your organization's unique research needs.
+                  Master advanced literature review techniques with concept graphs, insight generation, and visual research mapping.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4 flex flex-col flex-grow">
                 <div>
-                  <h4 className="font-semibold mb-2">Workshop Includes:</h4>
+                  <h4 className="font-semibold mb-2">Participants Will Learn:</h4>
                   <ul className="space-y-1 text-sm">
                     <li className="flex items-center gap-2">
                       <CheckCircle className="w-3 h-3 text-primary" />
-                      <span>Pre-workshop needs assessment</span>
+                      <span>Interactive concept graph development</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <CheckCircle className="w-3 h-3 text-primary" />
-                      <span>Current workflow analysis and optimization</span>
+                      <span>Advanced insight generation from multiple sources</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <CheckCircle className="w-3 h-3 text-primary" />
-                      <span>Custom AI prompt development</span>
+                      <span>Visual tracking of research evolution</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <CheckCircle className="w-3 h-3 text-primary" />
-                       <span>30-day post-workshop support</span>
+                       <span>Publication-ready synthesis techniques</span>
                      </li>
                      <li className="flex items-center gap-2">
                        <CheckCircle className="w-3 h-3 text-primary" />
@@ -336,14 +216,134 @@ const Workshops = () => {
                 <div>
                   <h4 className="font-semibold mb-2">Ideal For:</h4>
                   <div className="flex flex-wrap gap-2">
-                    <Badge variant="outline">Specialized institutions</Badge>
-                    <Badge variant="outline">Complex workflows</Badge>
-                    <Badge variant="outline">Multi-disciplinary teams</Badge>
+                    <Badge variant="outline">Research institutes</Badge>
+                    <Badge variant="outline">PhD programs</Badge>
+                    <Badge variant="outline">Faculty development</Badge>
                   </div>
                 </div>
                 <div className="pt-4 border-t mt-auto">
-                  <p className="text-lg font-semibold text-primary">$6,999 per participant</p>
+                  <p className="text-lg font-semibold text-primary">$3,499 per participant</p>
+                  <p className="text-sm text-muted-foreground">Up to 25 participants</p>
+                  <Button 
+                    onClick={() => handleRequestWorkshop('advanced')}
+                    className="w-full mt-4"
+                  >
+                    Request Workshop
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="glass-card flex flex-col">
+              <CardHeader>
+                <div className="flex justify-between items-start mb-4">
+                  <CardTitle className="text-xl">Complete Literature Review Mastery</CardTitle>
+                  <Badge variant="secondary">
+                    <Clock className="w-3 h-3 mr-1" />
+                    8 hours
+                  </Badge>
+                </div>
+                <CardDescription>
+                  Comprehensive training covering all aspects of modern AI-powered literature review methodologies.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4 flex flex-col flex-grow">
+                <div>
+                  <h4 className="font-semibold mb-2">Participants Will Learn:</h4>
+                  <ul className="space-y-1 text-sm">
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="w-3 h-3 text-primary" />
+                      <span>Complete 13-step workflow implementation</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="w-3 h-3 text-primary" />
+                      <span>Advanced NotebookLM techniques and integrations</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="w-3 h-3 text-primary" />
+                      <span>Master concept graph visualization</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="w-3 h-3 text-primary" />
+                       <span>Advanced synthesis and publication strategies</span>
+                     </li>
+                     <li className="flex items-center gap-2">
+                       <CheckCircle className="w-3 h-3 text-primary" />
+                       <span>60-day post-workshop support included</span>
+                     </li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">Ideal For:</h4>
+                  <div className="flex flex-wrap gap-2">
+                    <Badge variant="outline">University departments</Badge>
+                    <Badge variant="outline">Research centers</Badge>
+                    <Badge variant="outline">Professional development</Badge>
+                  </div>
+                </div>
+                <div className="pt-4 border-t mt-auto">
+                  <p className="text-lg font-semibold text-primary">$4,999 per participant</p>
                   <p className="text-sm text-muted-foreground">Up to 20 participants</p>
+                  <Button 
+                    onClick={() => handleRequestWorkshop('complete')}
+                    className="w-full mt-4"
+                  >
+                    Request Workshop
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="glass-card border-primary/20 flex flex-col">
+              <CardHeader>
+                <div className="flex justify-between items-start mb-4">
+                  <CardTitle className="text-xl">Custom Literature Review Implementation</CardTitle>
+                  <Badge variant="secondary">
+                    <Clock className="w-3 h-3 mr-1" />
+                    12 hours
+                  </Badge>
+                </div>
+                <CardDescription>
+                  Tailored workshop designed specifically for your institution's unique literature review challenges and requirements.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4 flex flex-col flex-grow">
+                <div>
+                  <h4 className="font-semibold mb-2">Workshop Includes:</h4>
+                  <ul className="space-y-1 text-sm">
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="w-3 h-3 text-primary" />
+                      <span>Pre-workshop literature review practice assessment</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="w-3 h-3 text-primary" />
+                      <span>Custom workflow design for your research domain</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="w-3 h-3 text-primary" />
+                      <span>Domain-specific AI prompt development</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="w-3 h-3 text-primary" />
+                       <span>90-day implementation support</span>
+                     </li>
+                     <li className="flex items-center gap-2">
+                       <CheckCircle className="w-3 h-3 text-primary" />
+                       <span>Dedicated Discord support channel</span>
+                     </li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">Ideal For:</h4>
+                  <div className="flex flex-wrap gap-2">
+                    <Badge variant="outline">Specialized institutions</Badge>
+                    <Badge variant="outline">Multi-disciplinary teams</Badge>
+                    <Badge variant="outline">Large research organizations</Badge>
+                  </div>
+                </div>
+                <div className="pt-4 border-t mt-auto">
+                  <p className="text-lg font-semibold text-primary">$7,999 per participant</p>
+                  <p className="text-sm text-muted-foreground">Up to 15 participants</p>
                   <Button 
                     onClick={() => handleRequestWorkshop('custom')}
                     className="w-full mt-4"
@@ -504,13 +504,13 @@ const Workshops = () => {
                        <SelectTrigger>
                          <SelectValue placeholder="Select a workshop" />
                        </SelectTrigger>
-                       <SelectContent>
-                         <SelectItem value="grant">AI Grant Writing Mastery</SelectItem>
-                         <SelectItem value="literature">Literature Review Revolution</SelectItem>
-                         <SelectItem value="data">Research Data Pipeline Implementation</SelectItem>
-                         <SelectItem value="custom">Custom AI Research Workflow Design</SelectItem>
-                         <SelectItem value="multiple">Multiple Workshops</SelectItem>
-                       </SelectContent>
+                        <SelectContent>
+                          <SelectItem value="foundation">Literature Review Foundation</SelectItem>
+                          <SelectItem value="advanced">Advanced Concept Visualization</SelectItem>
+                          <SelectItem value="complete">Complete Literature Review Mastery</SelectItem>
+                          <SelectItem value="custom">Custom Literature Review Implementation</SelectItem>
+                          <SelectItem value="multiple">Multiple Workshops</SelectItem>
+                        </SelectContent>
                      </Select>
                    </div>
                   <div className="space-y-2">
