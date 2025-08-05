@@ -14,7 +14,7 @@ import Coaching from "./pages/Coaching";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
-import LitReviewAi from "./pages/LitReviewAi";
+
 import Workshops from "./pages/Workshops";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import AscensionProtocol from "./pages/AscensionProtocol";
@@ -32,7 +32,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/products" element={<Products />} />
-            <Route path="/products/lit-review-ai" element={<LitReviewAi />} />
+            
             <Route path="/products/:slug" element={<Product />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
