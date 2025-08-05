@@ -35,8 +35,7 @@ const HeroSection = () => {
             Master Your{' '}
             <span className="text-gradient animate-gradient">Literature Review</span>
             <br />
-            with AI-Powered{' '}
-            <span className="text-gradient">Research Workflows</span>
+            with AI
           </h1>
 
           {/* Subtitle */}
@@ -52,7 +51,7 @@ const HeroSection = () => {
             </Link>
             <Link to="/blog" className="btn-glass text-lg px-8 py-4 flex items-center gap-2">
               <BookOpen className="w-5 h-5" />
-              See How It Works
+              Our Lit Reviews
             </Link>
           </div>
 
