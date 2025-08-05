@@ -40,10 +40,8 @@ const HeroSection = () => {
           </h1>
 
           {/* Subtitle */}
-          <p className="text-xl sm:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto leading-relaxed">
-            Transform weeks of chaotic literature review into organized, AI-powered research mastery. 
-            Our comprehensive workflow system integrates NotebookLM with advanced visualization tools 
-            to accelerate your research process while maintaining academic rigor.
+          <p className="text-xl sm:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
+            Stop drowning in papers. Our NotebookLM-powered workflows turn literature review chaos into organized research mastery.
           </p>
 
           {/* CTA Buttons */}
