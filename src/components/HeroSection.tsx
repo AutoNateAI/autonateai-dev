@@ -26,48 +26,50 @@ const HeroSection = () => {
           <div className="inline-flex items-center gap-2 glass-card px-4 py-2 mb-8 animate-pulse-glow">
             <Sparkles className="w-4 h-4 text-primary" />
             <span className="text-sm font-medium text-muted-foreground">
-              AI-Powered Research Workflows
+              Next-Gen Critical Thinking with AI
             </span>
           </div>
 
           {/* Main Headline */}
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 leading-tight">
-            Master Your{' '}
-            <span className="text-gradient animate-gradient">Literature Review</span>
+            Become an{' '}
+            <span className="text-gradient animate-gradient">Unstoppable</span>
             <br />
-            with AI
+            Critical Thinker
           </h1>
 
           {/* Subtitle */}
           <p className="text-xl sm:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
-            Stop drowning in papers. Our NotebookLM-powered workflows turn literature review chaos into organized research mastery.
+            While others drown in information overload, you'll master AI-enhanced thinking tools, 
+            coaching, and graph theory concepts to process complexity at lightning speed. 
+            Our flagship Lit Review AI is just the beginning.
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
             <Link to="/products/lit-review-ai" className="btn-primary text-lg px-8 py-4 flex items-center">
-              Get Lit Review AI
+              Get Flagship Tool
               <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
-            <Link to="/blog" className="btn-glass text-lg px-8 py-4 flex items-center gap-2">
+            <Link to="/tutoring" className="btn-glass text-lg px-8 py-4 flex items-center gap-2">
               <BookOpen className="w-5 h-5" />
-              Our Lit Reviews
+              AI-Enhanced Tutoring
             </Link>
           </div>
 
           {/* Social Proof */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             <div className="glass-card p-6 text-center">
-              <div className="text-3xl font-bold text-primary mb-2">13-Step</div>
-              <div className="text-muted-foreground">Comprehensive Workflow</div>
+              <div className="text-3xl font-bold text-primary mb-2">AI Tools</div>
+              <div className="text-muted-foreground">Cognitive Enhancement</div>
             </div>
             <div className="glass-card p-6 text-center">
-              <div className="text-3xl font-bold text-primary mb-2">24+</div>
-              <div className="text-muted-foreground">Specialized AI Prompts</div>
+              <div className="text-3xl font-bold text-primary mb-2">1:1 Coaching</div>
+              <div className="text-muted-foreground">Graph Theory Mastery</div>
             </div>
             <div className="glass-card p-6 text-center">
-              <div className="text-3xl font-bold text-glass-secondary mb-2">75%</div>
-              <div className="text-muted-foreground">Time Reduction Achieved</div>
+              <div className="text-3xl font-bold text-glass-secondary mb-2">Future-Ready</div>
+              <div className="text-muted-foreground">Critical Thinking Skills</div>
             </div>
           </div>
         </div>
