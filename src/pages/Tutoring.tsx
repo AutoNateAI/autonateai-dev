@@ -7,35 +7,39 @@ const Tutoring = () => {
   const features = [
     {
       icon: Network,
-      title: "Graph Theory Mastery",
-      description: "Learn to visualize complex problems as networks of connected nodes and relationships"
+      title: "AI-Powered Mind Mapping",
+      description: "Your child will use ChatGPT, Claude, and NotebookLM to instantly visualize complex situations as connected data points - turning confusion into clarity in seconds"
     },
     {
       icon: Brain,
-      title: "Critical Thinking Skills",
-      description: "Develop advanced analytical abilities that apply to research, academics, and professional work"
+      title: "Next-Gen Critical Thinking",
+      description: "While peers get stuck overthinking, your child will harness AI to handle heavy cognitive processing and focus on creative breakthrough insights"
     },
     {
       icon: Target,
-      title: "Mental Models",
-      description: "Build powerful frameworks for understanding and navigating complex situations"
+      title: "Competitive Advantage Builder",
+      description: "Master techniques that create unfair advantages in school, sports, college applications, and future careers - your child will consistently outperform peers"
     },
     {
       icon: BookOpen,
-      title: "Research Excellence",
-      description: "Master the art of decomposing research problems into manageable, connected components"
+      title: "Creative Data Wizardry",
+      description: "Transform from passive information consumer to active insight creator - viewing problems from multiple angles to discover solutions others never consider"
     }
   ];
 
   const benefits = [
-    "Transform abstract problems into visual, manageable maps",
-    "Identify hidden relationships others miss",
-    "Navigate complex academic and professional challenges",
-    "Build mental models that enhance decision-making",
-    "Understand the 'empty space' between connections as valuable data",
-    "Develop researcher-level analytical thinking",
-    "Create multiple relational maps to find unique insights",
-    "Master traversal techniques for insight discovery"
+    "Zoom through homework while peers struggle for hours",
+    "Excel in extracurriculars with strategic thinking advantages",
+    "Use AI tools like ChatGPT and Claude as thinking amplifiers",
+    "Solve problems creatively by viewing data from multiple angles",
+    "Build mental models that make complex situations simple",
+    "Develop pattern recognition that reveals winning strategies",
+    "Think faster and deeper than age-group peers",
+    "Create competitive advantages in academics, sports, and social situations",
+    "Transform from information consumer to insight wizard",
+    "Master curated mind puzzles that build transferable core skills",
+    "Push personal intellect to levels that advance our nation's thinking capacity",
+    "Become the student others come to for breakthrough solutions"
   ];
 
   const sessions = [
@@ -72,16 +76,16 @@ const Tutoring = () => {
             </div>
             
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Think Like a{' '}
-              <span className="text-gradient animate-gradient">Master Researcher</span>
+              Transform Your Child Into a{' '}
+              <span className="text-gradient animate-gradient">Thinking Wizard</span>
               <br />
-              Through Graph Theory
+              With AI-Enhanced Critical Thinking
             </h1>
             
             <p className="text-xl sm:text-2xl text-muted-foreground mb-8 leading-relaxed">
-              Master the art of seeing the world as connected nodes and relationships. 
-              Develop the critical thinking skills that separate exceptional researchers, 
-              students, and professionals from the rest.
+              While peers struggle with homework, stress, and information overload, your child will 
+              zoom through challenges using AI-powered graph theory thinking. They'll become the 
+              student who finds creative solutions others miss - in academics, sports, and life.
             </p>
 
             {/* Pricing Card */}
@@ -135,13 +139,14 @@ const Tutoring = () => {
       {/* What You'll Learn */}
       <section className="py-24 bg-muted/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+            <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-              Transform How You <span className="text-gradient">Think & Analyze</span>
+              From Overwhelmed to <span className="text-gradient">Unstoppable</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Graph theory isn't just mathematics—it's a powerful lens for understanding 
-              relationships, patterns, and hidden connections in everything around us.
+              <strong>The Problem:</strong> Students today face information overload, slow analysis, and cookie-cutter thinking. 
+              <strong>Our Solution:</strong> AI-enhanced graph theory that turns your child into a creative problem-solving machine 
+              who processes complexity with ease and finds insights others completely miss.
             </p>
           </div>
 
@@ -156,7 +161,7 @@ const Tutoring = () => {
           </div>
 
           <div className="glass-card p-12 text-center">
-            <h3 className="text-2xl font-bold mb-8">Skills You'll Master</h3>
+            <h3 className="text-2xl font-bold mb-8">Your Child Will Become a Thinking Wizard Who Can:</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
               {benefits.map((benefit, index) => (
                 <div key={index} className="flex items-start gap-3 text-left">
@@ -184,13 +189,14 @@ const Tutoring = () => {
       {/* 10-Session Program */}
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+            <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-              10-Session <span className="text-gradient">Mastery Program</span>
+              10-Session <span className="text-gradient">Wizard Transformation</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              A comprehensive journey from basic graph concepts to advanced research-level thinking. 
-              Each session builds upon the previous, creating a solid foundation for critical analysis.
+              Each session includes curated mind puzzles using ChatGPT, NotebookLM, Claude, and Windsurf. 
+              Your child will master core techniques that create competitive advantages in every area of life 
+              while building thinking skills that push our nation's intellect forward.
             </p>
           </div>
 
@@ -239,44 +245,44 @@ const Tutoring = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-                Critical Thinking for the <span className="text-gradient">Modern World</span>
+                Why Parents Choose Our <span className="text-gradient">AI-Enhanced Program</span>
               </h2>
               <p className="text-xl text-muted-foreground mb-8">
-                Whether you're a student tackling complex subjects or a professional 
-                solving intricate problems, the ability to see connections and relationships 
-                is what separates good thinking from exceptional thinking.
+                Your child faces unprecedented information complexity. Traditional thinking methods 
+                create stress and overwhelm. Our program transforms them into confident problem-solvers 
+                who harness AI power while maintaining deep creative insights - the ultimate competitive advantage.
               </p>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
                   <Trophy className="w-6 h-6 text-primary mt-1" />
                   <div>
-                    <h4 className="font-bold mb-1">Academic Excellence</h4>
-                    <p className="text-muted-foreground">Approach any subject with structured, analytical thinking</p>
+                    <h4 className="font-bold mb-1">Academic Domination</h4>
+                    <p className="text-muted-foreground">Zoom through assignments while building deeper understanding - reduce homework stress forever</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <Brain className="w-6 h-6 text-primary mt-1" />
                   <div>
-                    <h4 className="font-bold mb-1">Professional Growth</h4>
-                    <p className="text-muted-foreground">Solve complex workplace challenges with systematic approaches</p>
+                    <h4 className="font-bold mb-1">Future-Proof Career Skills</h4>
+                    <p className="text-muted-foreground">Master AI-human collaboration now - become indispensable in tomorrow's workforce</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <Network className="w-6 h-6 text-primary mt-1" />
                   <div>
-                    <h4 className="font-bold mb-1">Research Mastery</h4>
-                    <p className="text-muted-foreground">Think like top researchers who see patterns others miss</p>
+                    <h4 className="font-bold mb-1">Life-Wide Competitive Edge</h4>
+                    <p className="text-muted-foreground">Excel in sports strategy, social dynamics, college applications - everywhere complex thinking matters</p>
                   </div>
                 </div>
               </div>
             </div>
             <div className="glass-card p-8 text-center">
               <Network className="w-16 h-16 text-primary mx-auto mb-6" />
-              <h3 className="text-2xl font-bold mb-4">Ready to Transform Your Thinking?</h3>
+              <h3 className="text-2xl font-bold mb-4">Ready to Give Your Child an Unfair Advantage?</h3>
               <p className="text-muted-foreground mb-8">
-                Join students and professionals who've already discovered the power 
-                of graph theory thinking. Your first session will change how you 
-                approach problems forever.
+                Join families who've discovered the power of AI-enhanced critical thinking. 
+                Your child's first session will reveal capabilities they never knew they had - 
+                transforming stress into confidence, complexity into clarity.
               </p>
               <a 
                 href="https://calendly.com/autonate-ai/graph-theory-tutoring" 

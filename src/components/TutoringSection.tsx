@@ -9,12 +9,13 @@ const TutoringSection = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
-            Master Critical Thinking Through{' '}
-            <span className="text-gradient">Graph Theory</span>
+            Next-Gen Critical Thinking with{' '}
+            <span className="text-gradient">AI-Enhanced Graph Theory</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Transform how you analyze problems, find hidden connections, and think like 
-            a master researcher. Perfect for middle school, high school, and undergraduate students.
+            While your peers struggle with information overload and slow analysis, your child will 
+            become a <strong>thinking wizard</strong> - using AI tools like ChatGPT, Claude, and NotebookLM 
+            to process complex data at lightning speed while maintaining deep, creative insights.
           </p>
         </div>
 
@@ -24,28 +25,28 @@ const TutoringSection = () => {
           <div className="space-y-8">
             <div className="glass-card p-6">
               <Network className="w-8 h-8 text-primary mb-3" />
-              <h3 className="text-xl font-bold mb-2">Relational Thinking</h3>
+              <h3 className="text-xl font-bold mb-2">AI-Powered Pattern Recognition</h3>
               <p className="text-muted-foreground">
-                Learn to see the world as connected nodes and relationships, 
-                revealing insights others miss.
+                While others get lost in complexity, your child will use AI tools to instantly 
+                map relationships and spot winning strategies in academics, sports, and life.
               </p>
             </div>
             
             <div className="glass-card p-6">
               <Brain className="w-8 h-8 text-green-400 mb-3" />
-              <h3 className="text-xl font-bold mb-2">Mental Models</h3>
+              <h3 className="text-xl font-bold mb-2">Creative Data Wizardry</h3>
               <p className="text-muted-foreground">
-                Build powerful frameworks for understanding complex situations 
-                and making better decisions.
+                Transform from information consumer to insight creator - viewing data from 
+                multiple angles to discover solutions peers never even consider.
               </p>
             </div>
             
             <div className="glass-card p-6">
               <Target className="w-8 h-8 text-blue-400 mb-3" />
-              <h3 className="text-xl font-bold mb-2">Research Excellence</h3>
+              <h3 className="text-xl font-bold mb-2">Competitive Edge Mastery</h3>
               <p className="text-muted-foreground">
-                Master the art of decomposing problems and finding paths to 
-                breakthrough insights.
+                Zoom through school assignments, excel in extracurriculars, and dominate 
+                future careers with thinking skills that put them years ahead.
               </p>
             </div>
           </div>
@@ -59,7 +60,7 @@ const TutoringSection = () => {
                 <Users className="w-8 h-8 text-primary" />
               </div>
               
-              <h3 className="text-2xl font-bold mb-4">1-on-1 Graph Theory Tutoring</h3>
+              <h3 className="text-2xl font-bold mb-4">AI-Enhanced Critical Thinking Mastery</h3>
               
               <div className="text-3xl font-bold text-primary mb-2">$1,500</div>
               <div className="text-lg text-muted-foreground mb-4">10 Sessions Total</div>
@@ -74,9 +75,9 @@ const TutoringSection = () => {
               </div>
               
               <p className="text-muted-foreground mb-8 leading-relaxed">
-                Personalized tutoring that teaches you to think in graph theory concepts, 
-                understand the "empty space" between connections, and build multiple 
-                relational maps to find unique insights.
+                Your child will master curated mind puzzles using ChatGPT, NotebookLM, Claude, 
+                and Windsurf - developing core techniques that create an unfair advantage in 
+                every area of life. They'll think faster, deeper, and more creatively than ever before.
               </p>
 
               <div className="space-y-4">
