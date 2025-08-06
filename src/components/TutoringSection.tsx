@@ -61,7 +61,17 @@ const TutoringSection = () => {
               
               <h3 className="text-2xl font-bold mb-4">1-on-1 Graph Theory Tutoring</h3>
               
-              <div className="text-lg text-primary font-bold mb-4">10 Sessions</div>
+              <div className="text-3xl font-bold text-primary mb-2">$1,500</div>
+              <div className="text-lg text-muted-foreground mb-4">10 Sessions Total</div>
+              
+              <div className="bg-muted/20 p-4 rounded-lg mb-6 text-sm">
+                <div className="font-medium mb-2">Flexible Payment Structure:</div>
+                <div className="space-y-1 text-left">
+                  <div>• Try the first session</div>
+                  <div>• Pay for first 5 sessions if you continue</div>
+                  <div>• Pay for remaining 5 sessions by session 6</div>
+                </div>
+              </div>
               
               <p className="text-muted-foreground mb-8 leading-relaxed">
                 Personalized tutoring that teaches you to think in graph theory concepts, 
@@ -77,7 +87,7 @@ const TutoringSection = () => {
                   className="btn-primary w-full text-lg py-4 flex items-center justify-center gap-2"
                 >
                   <Calendar className="w-5 h-5" />
-                  Schedule Session
+                  Schedule First Session
                 </a>
                 
                 <Link

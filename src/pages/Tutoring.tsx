@@ -1,7 +1,7 @@
 
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
-import { ArrowRight, BookOpen, Users, Target, Brain, Network, CheckCircle, Calendar, Clock, Trophy } from 'lucide-react';
+import { ArrowRight, BookOpen, Users, Target, Brain, Network, CheckCircle, Calendar, Clock, Trophy, DollarSign } from 'lucide-react';
 
 const Tutoring = () => {
   const features = [
@@ -78,11 +78,40 @@ const Tutoring = () => {
               Through Graph Theory
             </h1>
             
-            <p className="text-xl sm:text-2xl text-muted-foreground mb-12 leading-relaxed">
+            <p className="text-xl sm:text-2xl text-muted-foreground mb-8 leading-relaxed">
               Master the art of seeing the world as connected nodes and relationships. 
               Develop the critical thinking skills that separate exceptional researchers, 
               students, and professionals from the rest.
             </p>
+
+            {/* Pricing Card */}
+            <div className="glass-card p-8 max-w-2xl mx-auto mb-8">
+              <div className="flex items-center justify-center gap-4 mb-6">
+                <DollarSign className="w-8 h-8 text-primary" />
+                <div className="text-left">
+                  <div className="text-4xl font-bold text-primary">$1,500</div>
+                  <div className="text-lg text-muted-foreground">Complete 10-Session Program</div>
+                </div>
+              </div>
+              
+              <div className="bg-muted/20 p-6 rounded-lg mb-6">
+                <h4 className="font-bold text-lg mb-4">Flexible Payment Structure</h4>
+                <div className="space-y-3 text-left">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                    <span>Start with your first session to experience the value</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                    <span>Pay for first 5 sessions only after you decide to continue</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                    <span>Pay for remaining 5 sessions by the start of session 6</span>
+                  </div>
+                </div>
+              </div>
+            </div>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
               <a 
@@ -91,7 +120,7 @@ const Tutoring = () => {
                 rel="noopener noreferrer"
                 className="btn-primary text-lg px-8 py-4 flex items-center"
               >
-                Schedule Your Session
+                Schedule Your First Session
                 <ArrowRight className="ml-2 w-5 h-5" />
               </a>
               <div className="flex items-center gap-2 text-muted-foreground">
