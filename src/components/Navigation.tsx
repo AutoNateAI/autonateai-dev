@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Menu, X, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -32,6 +33,13 @@ const Navigation = () => {
               className="text-muted-foreground hover:text-primary transition-colors relative group"
             >
               Blog
+              <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+            </Link>
+            <Link 
+              to="/tutoring" 
+              className="text-muted-foreground hover:text-primary transition-colors relative group"
+            >
+              Tutoring
               <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
             </Link>
             <Link 
@@ -93,6 +101,13 @@ const Navigation = () => {
                 onClick={() => setIsOpen(false)}
               >
                 Blog
+              </Link>
+              <Link 
+                to="/tutoring" 
+                className="block text-muted-foreground hover:text-primary transition-colors py-2"
+                onClick={() => setIsOpen(false)}
+              >
+                Tutoring
               </Link>
               <Link 
                 to="/coaching" 
