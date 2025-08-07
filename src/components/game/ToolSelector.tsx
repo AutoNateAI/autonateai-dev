@@ -164,35 +164,35 @@ const ToolSelector = React.memo<ToolSelectorProps>(({
 
   return (
     <Card className="glass-card h-fit flex-1">
-      <CardHeader className="pb-3">
-        <CardTitle className="text-lg flex items-center gap-2">
+      <CardHeader className="pb-2 lg:pb-3">
+        <CardTitle className="text-base lg:text-lg flex items-center gap-2">
           🛠️ Tool Shop
         </CardTitle>
-        <CardDescription>
+        <CardDescription className="text-xs lg:text-sm">
           Select up to 3 tools to overcome research obstacles
         </CardDescription>
       </CardHeader>
       
-      <CardContent className="space-y-3">
-        {/* Tool Categories */}
-        <div className="grid grid-cols-3 gap-2 text-xs">
-          <div className="text-center p-2 bg-blue-500/10 rounded">
+      <CardContent className="space-y-2 lg:space-y-3">
+        {/* Tool Categories - Horizontal scroll on mobile */}
+        <div className="flex lg:grid lg:grid-cols-3 gap-2 text-xs overflow-x-auto lg:overflow-x-visible pb-2 lg:pb-0">
+          <div className="text-center p-2 bg-blue-500/10 rounded flex-shrink-0 min-w-[80px] lg:min-w-0">
             <div className="font-semibold text-blue-400">Legacy</div>
             <div className="text-muted-foreground">1x Speed</div>
           </div>
-          <div className="text-center p-2 bg-purple-500/10 rounded">
+          <div className="text-center p-2 bg-purple-500/10 rounded flex-shrink-0 min-w-[80px] lg:min-w-0">
             <div className="font-semibold text-purple-400">Hybrid</div>
             <div className="text-muted-foreground">2-3x Speed</div>
           </div>
-          <div className="text-center p-2 bg-yellow-500/10 rounded">
+          <div className="text-center p-2 bg-yellow-500/10 rounded flex-shrink-0 min-w-[80px] lg:min-w-0">
             <div className="font-semibold text-yellow-400">AI</div>
             <div className="text-muted-foreground">5x Speed</div>
           </div>
         </div>
 
-        {/* Tools List */}
+        {/* Tools List - Horizontal scroll on mobile, vertical on desktop */}
         <div 
-          className="space-y-2 max-h-60 overflow-y-auto pr-2"
+          className="flex lg:flex-col gap-2 lg:space-y-2 overflow-x-auto lg:overflow-x-visible lg:max-h-60 lg:overflow-y-auto pr-2 pb-2 lg:pb-0"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           onScroll={(e) => e.stopPropagation()}
         >
@@ -202,42 +202,42 @@ const ToolSelector = React.memo<ToolSelectorProps>(({
             const equipped = isEquipped(tool);
             const available = affordable && usable;
 
-            return (
-              <div
-                key={tool.id}
-                className={`
-                  p-3 rounded-lg border transition-all duration-200 cursor-pointer
-                  ${getToolColor(tool.type)}
-                  ${equipped ? 'ring-2 ring-primary' : ''}
-                  ${available ? 'hover:scale-105 hover:shadow-md' : 'opacity-50 cursor-not-allowed'}
-                `}
-                onClick={() => handleToolClick(tool)}
-                title={
-                  !affordable 
-                    ? `Need ${tool.cost} coins (have ${coins})` 
-                    : !usable 
-                    ? `Requires ${tool.type === 'ai' ? '30%' : '10%'} AI mastery (have ${aiMastery.toFixed(0)}%)`
-                    : tool.description
-                }
-              >
-                <div className="flex items-center justify-between mb-1">
-                  <div className="flex items-center gap-2">
-                    <span className="text-lg">{tool.icon}</span>
-                    <span className="font-medium text-sm">{tool.name}</span>
-                    {equipped && <Badge variant="secondary" className="text-xs">Equipped</Badge>}
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <span className="text-xs">🪙{tool.cost}</span>
-                    <span className="text-xs">⚡{tool.speedMultiplier}x</span>
-                  </div>
-                </div>
-                
-                <p className="text-xs text-muted-foreground leading-tight">
-                  {tool.description}
-                </p>
+             return (
+               <div
+                 key={tool.id}
+                 className={`
+                   p-2 lg:p-3 rounded-lg border transition-all duration-200 cursor-pointer flex-shrink-0 min-w-[200px] lg:min-w-0
+                   ${getToolColor(tool.type)}
+                   ${equipped ? 'ring-2 ring-primary' : ''}
+                   ${available ? 'hover:scale-105 hover:shadow-md' : 'opacity-50 cursor-not-allowed'}
+                 `}
+                 onClick={() => handleToolClick(tool)}
+                 title={
+                   !affordable 
+                     ? `Need ${tool.cost} coins (have ${coins})` 
+                     : !usable 
+                     ? `Requires ${tool.type === 'ai' ? '30%' : '10%'} AI mastery (have ${aiMastery.toFixed(0)}%)`
+                     : tool.description
+                 }
+               >
+                 <div className="flex items-center justify-between mb-1">
+                   <div className="flex items-center gap-2">
+                     <span className="text-base lg:text-lg">{tool.icon}</span>
+                     <span className="font-medium text-xs lg:text-sm">{tool.name}</span>
+                     {equipped && <Badge variant="secondary" className="text-xs">Equipped</Badge>}
+                   </div>
+                   <div className="flex items-center gap-1">
+                     <span className="text-xs">🪙{tool.cost}</span>
+                     <span className="text-xs">⚡{tool.speedMultiplier}x</span>
+                   </div>
+                 </div>
+                 
+                 <p className="text-xs text-muted-foreground leading-tight lg:block hidden">
+                   {tool.description}
+                 </p>
 
-                {/* Effectiveness Indicators */}
-                <div className="grid grid-cols-4 gap-1 mt-2">
+                 {/* Effectiveness Indicators - simplified on mobile */}
+                 <div className="grid grid-cols-4 gap-1 mt-2 lg:mt-2">
                   {Object.entries(tool.effectiveness).map(([monsterType, effectiveness]) => {
                     const getMonsterIcon = (type: string) => {
                       switch (type) {

@@ -353,19 +353,21 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
 
   const GameContent = () => (
     <div className="bg-gradient-to-br from-background/50 to-primary/5 relative h-full">
-      <div className="flex flex-col lg:flex-row gap-4 p-4 h-full">
-        {/* Mobile Tool Shop - positioned at top on mobile */}
-        <div className="lg:hidden order-first">
-          <ToolSelector
-            equippedTools={toolSelectorProps.equippedTools}
-            onToolSelect={selectTool}
-            coins={toolSelectorProps.coins}
-            aiMastery={toolSelectorProps.aiMastery}
-          />
+      <div className="flex flex-col lg:flex-row gap-2 lg:gap-4 p-2 lg:p-4 h-full">
+        {/* Mobile Tool Shop - compact version at top */}
+        <div className="lg:hidden">
+          <div className="glass-card p-2 rounded-lg">
+            <ToolSelector
+              equippedTools={toolSelectorProps.equippedTools}
+              onToolSelect={selectTool}
+              coins={toolSelectorProps.coins}
+              aiMastery={toolSelectorProps.aiMastery}
+            />
+          </div>
         </div>
 
         <div className="flex-1 flex items-start justify-center min-w-0">
-          <div className="w-full aspect-square max-w-[640px] mb-4 lg:mb-0">
+          <div className="w-full max-w-[640px] h-full flex flex-col">
             <GameBoard
               gameState={gameState}
               onMove={movePlayer}
