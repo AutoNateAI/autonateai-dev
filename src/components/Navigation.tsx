@@ -28,13 +28,13 @@ const Navigation = () => {
               Tutoring
               <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
             </Link>
-            <Link 
+            {/* <Link 
               to="/workshops" 
               className="text-muted-foreground hover:text-primary transition-colors relative group"
             >
               Workshops
               <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
-            </Link>
+            </Link> */}
             <Link 
               to="/blog" 
               className="text-muted-foreground hover:text-primary transition-colors relative group"
@@ -88,13 +88,13 @@ const Navigation = () => {
               >
                 Tutoring
               </Link>
-              <Link 
+              {/* <Link 
                 to="/workshops" 
                 className="block text-muted-foreground hover:text-primary transition-colors py-2"
                 onClick={() => setIsOpen(false)}
               >
                 Workshops
-              </Link>
+              </Link> */}
               <Link 
                 to="/blog" 
                 className="block text-muted-foreground hover:text-primary transition-colors py-2"
