@@ -129,7 +129,7 @@ const Contact = () => {
                 Schedule a 15-minute call to discuss your child's learning goals and how we can help.
               </p>
               <a 
-                href="https://calendly.com/autonateai" 
+                href="https://calendly.com/autonate-ai/graph-theory-tutoring" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:text-primary/80 font-medium"
