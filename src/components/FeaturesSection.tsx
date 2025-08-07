@@ -3,39 +3,39 @@ import { Clock, TrendingUp, Cpu, Award, CheckCircle, Users, BookOpen, Network, B
 const FeaturesSection = () => {
   const features = [
     {
-      icon: Clock,
-      title: 'End Literature Review Chaos',
-      description: 'Transform weeks of disorganized reading into structured, systematic research with our 13-step guided workflow.',
+      icon: Brain,
+      title: 'AI-Enhanced Learning',
+      description: 'Teach your child to harness AI tools like ChatGPT and Claude for complex problem-solving and analytical thinking.',
       color: 'text-blue-400'
     },
     {
-      icon: Brain,
-      title: 'AI-Powered Insight Generation',
-      description: 'Extract concepts, identify knowledge gaps, and generate insights using 24+ specialized prompts designed for NotebookLM.',
+      icon: Network,
+      title: 'Graph Theory Fundamentals',
+      description: 'Master the art of connecting ideas using graph theory concepts that successful entrepreneurs and innovators rely on.',
       color: 'text-purple-400'
     },
     {
-      icon: Network,
-      title: 'Visual Research Mapping',
-      description: 'See how your ideas connect with interactive concept graphs that trace insights back to their original sources.',
+      icon: TrendingUp,
+      title: 'Critical Thinking Skills',
+      description: 'Develop systematic approaches to analyze complex problems, evaluate evidence, and make logical decisions.',
       color: 'text-green-400'
     },
     {
-      icon: BookOpen,
-      title: 'NotebookLM Integration',
-      description: 'Seamlessly integrate with Google\'s NotebookLM for powerful AI-assisted literature analysis and synthesis.',
+      icon: Award,
+      title: 'Industry Expert Instruction',
+      description: 'Learn from a professional with Microsoft, Citibank, and Veterans United experience who understands real-world applications.',
       color: 'text-orange-400'
     },
     {
-      icon: TrendingUp,
-      title: 'Progress Tracking',
-      description: 'Monitor your literature review progress with analytics dashboard and completion tracking across all workflow phases.',
+      icon: BookOpen,
+      title: 'Personalized Learning Path',
+      description: 'Customized curriculum adapted to your child\'s grade level, interests, and learning style for maximum engagement.',
       color: 'text-teal-400'
     },
     {
-      icon: Users,
-      title: 'Expert-Designed Methodology',
-      description: 'Research methodologies created by PhD-level experts in academic research and validated by real researchers.',
+      icon: CheckCircle,
+      title: 'Future-Ready Skills',
+      description: 'Equip your child with mental models and thinking frameworks that will give them advantages in college and career.',
       color: 'text-pink-400'
     }
   ];
@@ -46,12 +46,12 @@ const FeaturesSection = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
-            Solve Your Literature Review{' '}
-            <span className="text-gradient">Pain Points</span>
+            Give Your Child a{' '}
+            <span className="text-gradient">Competitive Edge</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Stop drowning in papers, losing track of key insights, and struggling to connect ideas. 
-            Our AI-powered workflow transforms chaos into organized, trackable research progress.
+            While other students struggle with information overload, your child will master AI-enhanced 
+            critical thinking skills that successful professionals use in the real world.
           </p>
         </div>
 

@@ -22,20 +22,6 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
             <Link 
-              to="/products" 
-              className="text-muted-foreground hover:text-primary transition-colors relative group"
-            >
-              Products
-              <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
-            </Link>
-            <Link 
-              to="/blog" 
-              className="text-muted-foreground hover:text-primary transition-colors relative group"
-            >
-              Blog
-              <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
-            </Link>
-            <Link 
               to="/tutoring" 
               className="text-muted-foreground hover:text-primary transition-colors relative group"
             >
@@ -43,10 +29,17 @@ const Navigation = () => {
               <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
             </Link>
             <Link 
-              to="/coaching" 
+              to="/workshops" 
               className="text-muted-foreground hover:text-primary transition-colors relative group"
             >
-              Coaching
+              Workshops
+              <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+            </Link>
+            <Link 
+              to="/blog" 
+              className="text-muted-foreground hover:text-primary transition-colors relative group"
+            >
+              Blog
               <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
             </Link>
             <Link 
@@ -68,8 +61,8 @@ const Navigation = () => {
           {/* Theme Toggle & CTA */}
           <div className="hidden lg:flex items-center space-x-4">
             <ThemeToggle />
-            <Link to="/products" className="btn-primary">
-              Explore Solutions
+            <Link to="/tutoring" className="btn-primary">
+              Start Learning
             </Link>
           </div>
 
@@ -89,20 +82,6 @@ const Navigation = () => {
           <div className="lg:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-xl border-t border-border/10 shadow-lg">
             <div className="px-4 py-6 space-y-4">
               <Link 
-                to="/products" 
-                className="block text-muted-foreground hover:text-primary transition-colors py-2"
-                onClick={() => setIsOpen(false)}
-              >
-                Products
-              </Link>
-              <Link 
-                to="/blog" 
-                className="block text-muted-foreground hover:text-primary transition-colors py-2"
-                onClick={() => setIsOpen(false)}
-              >
-                Blog
-              </Link>
-              <Link 
                 to="/tutoring" 
                 className="block text-muted-foreground hover:text-primary transition-colors py-2"
                 onClick={() => setIsOpen(false)}
@@ -110,11 +89,18 @@ const Navigation = () => {
                 Tutoring
               </Link>
               <Link 
-                to="/coaching" 
+                to="/workshops" 
                 className="block text-muted-foreground hover:text-primary transition-colors py-2"
                 onClick={() => setIsOpen(false)}
               >
-                Coaching
+                Workshops
+              </Link>
+              <Link 
+                to="/blog" 
+                className="block text-muted-foreground hover:text-primary transition-colors py-2"
+                onClick={() => setIsOpen(false)}
+              >
+                Blog
               </Link>
               <Link 
                 to="/about" 
@@ -133,11 +119,11 @@ const Navigation = () => {
               <div className="flex items-center justify-between mt-4">
                 <ThemeToggle />
                 <Link 
-                  to="/products" 
+                  to="/tutoring" 
                   className="btn-primary"
                   onClick={() => setIsOpen(false)}
                 >
-                  Explore Solutions
+                  Start Learning
                 </Link>
               </div>
             </div>

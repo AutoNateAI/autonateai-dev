@@ -13,16 +13,53 @@ const About = () => {
           <div className="absolute inset-0 bg-gradient-subtle opacity-50" />
           <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-4xl md:text-6xl font-bold text-gradient mb-6">
-              About AutoNateAI
+              About AutoNateAI Tutoring
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Empowering researchers with AI-augmented workflows to accelerate discovery and innovation
+              Empowering the next generation with AI-enhanced critical thinking skills and real-world mental models
             </p>
           </div>
         </section>
 
-        {/* Founder Section */}
+        {/* Why Your Child Needs This */}
         <section className="py-20">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-foreground mb-6">Why Your Child Needs These Skills Now</h2>
+              <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
+                In today's rapidly changing world, traditional education isn't enough. Your child needs to master 
+                the thinking tools that top professionals use to succeed in the AI age.
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-8 mb-16">
+              <div className="glass-card p-6 text-center">
+                <div className="text-4xl mb-4">🚀</div>
+                <h3 className="text-xl font-semibold mb-3">Future-Proof Skills</h3>
+                <p className="text-muted-foreground">
+                  While AI changes every industry, critical thinking and systems reasoning become more valuable, not less.
+                </p>
+              </div>
+              <div className="glass-card p-6 text-center">
+                <div className="text-4xl mb-4">💡</div>
+                <h3 className="text-xl font-semibold mb-3">Early Advantage</h3>
+                <p className="text-muted-foreground">
+                  Students who master these concepts young develop superior problem-solving abilities that last a lifetime.
+                </p>
+              </div>
+              <div className="glass-card p-6 text-center">
+                <div className="text-4xl mb-4">🎯</div>
+                <h3 className="text-xl font-semibold mb-3">Real-World Application</h3>
+                <p className="text-muted-foreground">
+                  These aren't abstract concepts - they're the exact tools used by successful entrepreneurs and innovators.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Founder Section */}
+        <section className="py-20 bg-muted/5">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="glass-card p-8">
@@ -33,30 +70,30 @@ const About = () => {
                 </div>
                 <div className="text-center">
                   <h2 className="text-2xl font-bold text-foreground mb-2">AutoNate</h2>
-                  <p className="text-primary font-semibold">Founder & CEO</p>
+                  <p className="text-primary font-semibold">Founder & Lead Tutor</p>
                   <p className="text-muted-foreground mt-2">Computer Science, University of Michigan 2019</p>
                 </div>
               </div>
 
               <div className="space-y-6">
-                <h3 className="text-3xl font-bold text-foreground">Meet the Founder</h3>
+                <h3 className="text-3xl font-bold text-foreground">Meet Your Child's Future Mentor</h3>
                 
                 <div className="prose prose-lg max-w-none">
                   <p className="text-muted-foreground leading-relaxed">
-                    AutoNate is the visionary founder behind AutoNateAI, bringing a unique blend of industry experience 
-                    and academic expertise to the world of AI-augmented research workflows.
+                    AutoNate brings a unique combination of industry experience and teaching expertise to help 
+                    your child develop critical thinking skills that will serve them throughout their life.
                   </p>
                   
                   <p className="text-muted-foreground leading-relaxed">
-                    Most recently, Nate worked in research and development for Generative AI at Veterans United Home Loans, 
-                    a mortgage company specializing in veteran loans. This role deepened his understanding of how AI can 
-                    transform complex, document-heavy processes in regulated industries.
+                    Most recently working in AI research and development at Veterans United Home Loans, 
+                    Nate understands firsthand how AI is transforming every industry and what skills 
+                    students need to thrive in this new landscape.
                   </p>
                   
                   <p className="text-muted-foreground leading-relaxed">
-                    Prior to that, he spent two years as an entrepreneur building generative AI tools and conducting 
-                    prompt engineering to teach AI systems how to code better based on natural language inputs - 
-                    experience that directly informs AutoNateAI's approach to research workflow optimization.
+                    As a former University of Michigan Teaching Assistant for Computer Security and 
+                    Intro to Computer Science, Nate has experience making complex technical concepts 
+                    accessible and engaging for students at all levels.
                   </p>
                 </div>
               </div>
@@ -65,9 +102,9 @@ const About = () => {
         </section>
 
         {/* Professional Background */}
-        <section className="py-20 bg-muted/5">
+        <section className="py-20">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h3 className="text-3xl font-bold text-foreground text-center mb-12">Professional Journey</h3>
+            <h3 className="text-3xl font-bold text-foreground text-center mb-12">Industry Experience Your Child Will Benefit From</h3>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               <div className="glass-card p-6">
@@ -89,8 +126,8 @@ const About = () => {
                 <h4 className="text-xl font-semibold text-foreground mb-2">Citibank</h4>
                 <p className="text-primary font-medium mb-2">Fintech Engineer</p>
                 <p className="text-muted-foreground text-sm">
-                  Developed financial tools and front-end applications, gaining experience 
-                  in high-stakes, compliance-driven development environments.
+                  Developed financial tools and applications in high-stakes, 
+                  compliance-driven environments requiring precision and critical thinking.
                 </p>
               </div>
 
@@ -101,79 +138,117 @@ const About = () => {
                 <h4 className="text-xl font-semibold text-foreground mb-2">University of Michigan</h4>
                 <p className="text-primary font-medium mb-2">Teaching Assistant</p>
                 <p className="text-muted-foreground text-sm">
-                  TA for Computer Security (teaching Wi-Fi and website hacking) and 
-                  Intro to Computer Science for graduate students transitioning to coding.
+                  TA for Computer Security and Intro to Computer Science, 
+                  helping students transition from confusion to mastery.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Expertise Section */}
-        <section className="py-20">
+        {/* What Makes This Special */}
+        <section className="py-20 bg-muted/5">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h3 className="text-3xl font-bold text-foreground mb-4">Unique Expertise</h3>
+              <h3 className="text-3xl font-bold text-foreground mb-4">What Makes Our Tutoring Unique</h3>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                What makes AutoNate uniquely qualified to build AI-augmented research workflows
+                This isn't traditional tutoring - it's teaching your child the mental models 
+                that successful professionals use every day
               </p>
             </div>
 
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
                 <div className="glass-card p-6">
-                  <h4 className="text-xl font-semibold text-foreground mb-3">Graph Theory & Connections</h4>
+                  <h4 className="text-xl font-semibold text-foreground mb-3">Graph Theory & Systems Thinking</h4>
                   <p className="text-muted-foreground">
-                    Nate is a master of connections, leveraging graph theory and Neo4J to discover 
-                    innovative ways to connect ideas, concepts, and research findings. This systems 
-                    thinking approach enables unique insights into research workflow optimization.
+                    Your child will learn to see connections between ideas, understand complex systems, 
+                    and think in ways that give them massive advantages in problem-solving and creativity.
                   </p>
                 </div>
 
                 <div className="glass-card p-6">
-                  <h4 className="text-xl font-semibold text-foreground mb-3">AI Augmentation Philosophy</h4>
+                  <h4 className="text-xl font-semibold text-foreground mb-3">AI as a Thinking Partner</h4>
                   <p className="text-muted-foreground">
-                    Rather than replacing human intelligence, Nate focuses on using generative AI 
-                    to augment the cognitively intensive portions of research work, allowing 
-                    researchers to focus on higher-level thinking and creativity.
+                    Rather than fearing AI, your child will learn to use it as a powerful thinking tool, 
+                    developing skills that will be essential in their future career.
                   </p>
                 </div>
               </div>
 
               <div className="glass-card p-8 bg-gradient-subtle">
-                <h4 className="text-2xl font-bold text-foreground mb-4">Research & Development</h4>
+                <h4 className="text-2xl font-bold text-foreground mb-4">Real-World Mental Models</h4>
                 <p className="text-muted-foreground mb-4">
-                  Nate's extensive research in his free time, combined with his professional network 
-                  and hands-on experience with cutting-edge AI tools, positions him at the forefront 
-                  of AI-augmented research methodologies.
+                  From first principles thinking to systems analysis, your child will master the 
+                  cognitive frameworks used by top performers in every field.
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">AI Research</span>
-                  <span className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Prompt Engineering</span>
-                  <span className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Graph Theory</span>
-                  <span className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Systems Thinking</span>
+                  <span className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Critical Thinking</span>
+                  <span className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Systems Analysis</span>
+                  <span className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Pattern Recognition</span>
+                  <span className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Logical Reasoning</span>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Mission Section */}
+        {/* Parent Testimonials */}
+        <section className="py-20">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h3 className="text-3xl font-bold text-foreground text-center mb-12">What Parents Are Saying</h3>
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="glass-card p-8">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center mr-4">
+                    <span className="text-white font-bold">S</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">Sarah M.</h4>
+                    <p className="text-muted-foreground text-sm">Mother of High School Junior</p>
+                  </div>
+                </div>
+                <p className="text-muted-foreground italic">
+                  "My daughter went from struggling with complex problems to approaching them systematically. 
+                  The critical thinking skills she's learning are already showing up in her other classes."
+                </p>
+              </div>
+
+              <div className="glass-card p-8">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center mr-4">
+                    <span className="text-white font-bold">D</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">David L.</h4>
+                    <p className="text-muted-foreground text-sm">Father of Middle School Student</p>
+                  </div>
+                </div>
+                <p className="text-muted-foreground italic">
+                  "These aren't just academic skills - they're life skills. My son is more confident 
+                  tackling any challenge because he has these mental frameworks to rely on."
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Call to Action */}
         <section className="py-20 bg-muted/5">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h3 className="text-3xl font-bold text-foreground mb-6">Our Mission</h3>
+            <h3 className="text-3xl font-bold text-foreground mb-6">Give Your Child the Ultimate Advantage</h3>
             <p className="text-xl text-muted-foreground leading-relaxed mb-8">
-              AutoNateAI exists to bridge the gap between cutting-edge AI capabilities and practical 
-              research workflows. We believe that by systematically augmenting the most cognitively 
-              intensive aspects of research with AI, we can accelerate discovery while preserving 
-              the critical thinking and creativity that makes research truly valuable.
+              In a world where AI is changing everything, critical thinking and systems reasoning 
+              become more valuable than ever. Give your child the tools to succeed in any field 
+              they choose.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/products" className="btn-primary">
-                Explore Our Solutions
+              <Link to="/tutoring" className="btn-primary">
+                Start Their Journey Today
               </Link>
               <Link to="/contact" className="btn-secondary">
-                Get in Touch
+                Schedule a Consultation
               </Link>
             </div>
           </div>

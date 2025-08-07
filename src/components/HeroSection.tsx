@@ -40,36 +40,36 @@ const HeroSection = () => {
 
           {/* Subtitle */}
           <p className="text-xl sm:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
-            While others drown in information overload, you'll master AI-enhanced thinking tools, 
-            coaching, and graph theory concepts to process complexity at lightning speed. 
-            Our flagship Lit Review AI is just the beginning.
+            Give your child the competitive edge with AI-enhanced critical thinking skills. 
+            Our expert tutoring transforms middle school, high school, and undergraduate students 
+            into powerful analytical thinkers using real-world tools and mental models.
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <Link to="/products/lit-review-ai" className="btn-primary text-lg px-8 py-4 flex items-center">
-              Get Flagship Tool
+            <Link to="/tutoring" className="btn-primary text-lg px-8 py-4 flex items-center">
+              Start Your Child's Journey
               <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
-            <Link to="/tutoring" className="btn-glass text-lg px-8 py-4 flex items-center gap-2">
+            <Link to="/contact" className="btn-glass text-lg px-8 py-4 flex items-center gap-2">
               <BookOpen className="w-5 h-5" />
-              AI-Enhanced Tutoring
+              Schedule Consultation
             </Link>
           </div>
 
           {/* Social Proof */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             <div className="glass-card p-6 text-center">
-              <div className="text-3xl font-bold text-primary mb-2">AI Tools</div>
-              <div className="text-muted-foreground">Cognitive Enhancement</div>
+              <div className="text-3xl font-bold text-primary mb-2">Expert Tutoring</div>
+              <div className="text-muted-foreground">Industry Professional</div>
             </div>
             <div className="glass-card p-6 text-center">
-              <div className="text-3xl font-bold text-primary mb-2">1:1 Coaching</div>
-              <div className="text-muted-foreground">Graph Theory Mastery</div>
+              <div className="text-3xl font-bold text-primary mb-2">Real-World Skills</div>
+              <div className="text-muted-foreground">AI & Graph Theory</div>
             </div>
             <div className="glass-card p-6 text-center">
-              <div className="text-3xl font-bold text-glass-secondary mb-2">Future-Ready</div>
-              <div className="text-muted-foreground">Critical Thinking Skills</div>
+              <div className="text-3xl font-bold text-glass-secondary mb-2">Life Advantage</div>
+              <div className="text-muted-foreground">Critical Thinking Mastery</div>
             </div>
           </div>
         </div>
