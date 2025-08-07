@@ -15,8 +15,7 @@ const Footer = () => {
               <span className="text-xl font-bold text-gradient">AutoNateAI</span>
             </Link>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Transforming research processes with AI-augmented digital guides. 
-              Empowering researchers to achieve better results in less time.
+              Empowering students with critical thinking skills through graph theory fundamentals.
             </p>
             <div className="space-y-3">
               <div className="flex items-center gap-3 text-sm text-muted-foreground">
@@ -30,8 +29,8 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Products Column */}
-          <div>
+           {/* Products Column */}
+          {/* <div>
             <h3 className="font-semibold text-foreground mb-6">Products</h3>
             <div className="space-y-4">
               <Link to="/products/ai-grant-assistant" className="block text-muted-foreground hover:text-primary transition-colors">
@@ -47,18 +46,18 @@ const Footer = () => {
                 View All Products
               </Link>
             </div>
-          </div>
+          </div>   */}
 
           {/* Services Column */}
           <div>
-            <h3 className="font-semibold text-foreground mb-6">Services</h3>
-            <div className="space-y-4">
+            {/*<h3 className="font-semibold text-foreground mb-6">Services</h3>
+             <div className="space-y-4">
               <Link to="/coaching" className="block text-muted-foreground hover:text-primary transition-colors">
                 Private Coaching
               </Link>
               <Link to="/workshops" className="block text-muted-foreground hover:text-primary transition-colors">
                 Research Workshops
-              </Link>
+              </Link> */}
               <Link to="/blog" className="block text-muted-foreground hover:text-primary transition-colors">
                 Research Blog
               </Link>
@@ -69,7 +68,7 @@ const Footer = () => {
           </div>
 
           {/* Resources Column */}
-          <div>
+          {/* <div>
             <h3 className="font-semibold text-foreground mb-6">Resources</h3>
             <div className="space-y-4">
               <Link to="/blog/tutorials" className="block text-muted-foreground hover:text-primary transition-colors">
@@ -86,7 +85,7 @@ const Footer = () => {
               </Link>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Bottom Section */}
         <div className="border-t border-border/20 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
