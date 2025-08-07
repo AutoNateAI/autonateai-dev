@@ -482,9 +482,11 @@ export const generateMaze = (level: number): MazeCell[][] => {
   const size = 20;
   const maze: MazeCell[][] = [];
 
-  // Get template based on level (cycle through all 20)
-  const templateIndex = ((level - 1) % 20);
-  const template = MAZE_TEMPLATES[templateIndex];
+  // Add randomization - pick from multiple templates based on difficulty
+  const difficulty = level <= 5 ? 'easy' : level <= 12 ? 'medium' : level <= 17 ? 'hard' : 'expert';
+  const templatesForDifficulty = MAZE_TEMPLATES.filter(t => t.difficulty === difficulty);
+  const randomTemplate = templatesForDifficulty[Math.floor(Math.random() * templatesForDifficulty.length)];
+  const template = randomTemplate;
 
   // Initialize maze with walls
   for (let y = 0; y < size; y++) {
