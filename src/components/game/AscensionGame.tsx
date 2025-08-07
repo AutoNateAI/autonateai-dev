@@ -353,9 +353,19 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
 
   const GameContent = () => (
     <div className="bg-gradient-to-br from-background/50 to-primary/5 relative h-full">
-      <div className="flex gap-4 p-4 h-full">
+      <div className="flex flex-col lg:flex-row gap-4 p-4 h-full">
+        {/* Mobile Tool Shop - positioned at top on mobile */}
+        <div className="lg:hidden order-first">
+          <ToolSelector
+            equippedTools={toolSelectorProps.equippedTools}
+            onToolSelect={selectTool}
+            coins={toolSelectorProps.coins}
+            aiMastery={toolSelectorProps.aiMastery}
+          />
+        </div>
+
         <div className="flex-1 flex items-start justify-center min-w-0">
-          <div className="w-full aspect-square max-w-[640px]">
+          <div className="w-full aspect-square max-w-[640px] mb-4 lg:mb-0">
             <GameBoard
               gameState={gameState}
               onMove={movePlayer}
@@ -366,6 +376,7 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
           </div>
         </div>
 
+        {/* Desktop sidebar */}
         <div className="w-80 hidden lg:flex flex-col gap-4 items-start">
           <div className="glass-card p-3 rounded-lg">
             <div className="flex flex-col gap-2 text-sm">
@@ -415,15 +426,6 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
             aiMastery={toolSelectorProps.aiMastery}
           />
         </div>
-      </div>
-
-      <div className="lg:hidden p-4">
-        <ToolSelector
-          equippedTools={toolSelectorProps.equippedTools}
-          onToolSelect={selectTool}
-          coins={toolSelectorProps.coins}
-          aiMastery={toolSelectorProps.aiMastery}
-        />
       </div>
 
       {gameState.isPaused && (
