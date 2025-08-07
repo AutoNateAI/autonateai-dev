@@ -53,7 +53,7 @@ const HeroSection = () => {
             </Link>
             <Link to="/contact" className="btn-glass text-lg px-8 py-4 flex items-center gap-2">
               <BookOpen className="w-5 h-5" />
-              Schedule Consultation
+              Contact Us
             </Link>
           </div>
 
