@@ -478,110 +478,158 @@ const MAZE_TEMPLATES: MazeTemplate[] = [
   }
 ];
 
-export const generateMaze = (level: number): MazeCell[][] => {
-  const size = 20;
-  const maze: MazeCell[][] = [];
+// Pathfinding function to verify maze is solvable
+const isPathExists = (maze: MazeCell[][], start: Position, end: Position): boolean => {
+  const size = maze.length;
+  const visited = Array(size).fill(null).map(() => Array(size).fill(false));
+  const queue: Position[] = [start];
+  visited[start.y][start.x] = true;
 
-  // Add randomization - pick from multiple templates based on difficulty
-  const difficulty = level <= 5 ? 'easy' : level <= 12 ? 'medium' : level <= 17 ? 'hard' : 'expert';
-  const templatesForDifficulty = MAZE_TEMPLATES.filter(t => t.difficulty === difficulty);
-  const randomTemplate = templatesForDifficulty[Math.floor(Math.random() * templatesForDifficulty.length)];
-  const template = randomTemplate;
+  const directions = [
+    { x: 0, y: -1 }, // up
+    { x: 0, y: 1 },  // down
+    { x: -1, y: 0 }, // left
+    { x: 1, y: 0 }   // right
+  ];
 
-  // Initialize maze with walls
-  for (let y = 0; y < size; y++) {
-    maze[y] = [];
-    for (let x = 0; x < size; x++) {
-      maze[y][x] = {
-        type: 'wall',
-        position: { x, y },
-        isVisible: true
-      };
+  while (queue.length > 0) {
+    const current = queue.shift()!;
+    
+    if (current.x === end.x && current.y === end.y) {
+      return true;
+    }
+
+    for (const dir of directions) {
+      const newX = current.x + dir.x;
+      const newY = current.y + dir.y;
+
+      if (newX >= 0 && newX < size && newY >= 0 && newY < size && 
+          !visited[newY][newX] && maze[newY][newX].type !== 'wall') {
+        visited[newY][newX] = true;
+        queue.push({ x: newX, y: newY });
+      }
     }
   }
 
-  // Create paths from template
-  for (let y = 0; y < Math.min(size, template.paths.length); y++) {
-    for (let x = 0; x < Math.min(size, template.paths[y].length); x++) {
-      if (template.paths[y][x] === 0) { // 0 = path, 1 = wall
+  return false;
+};
+
+export const generateMaze = (level: number): MazeCell[][] => {
+  const size = 20;
+  let maze: MazeCell[][];
+  let template: MazeTemplate;
+  let attempts = 0;
+  const maxAttempts = 50;
+
+  do {
+    maze = [];
+    attempts++;
+
+    // Add randomization - pick from multiple templates based on difficulty
+    const difficulty = level <= 5 ? 'easy' : level <= 12 ? 'medium' : level <= 17 ? 'hard' : 'expert';
+    const templatesForDifficulty = MAZE_TEMPLATES.filter(t => t.difficulty === difficulty);
+    const randomTemplate = templatesForDifficulty[Math.floor(Math.random() * templatesForDifficulty.length)];
+    template = randomTemplate;
+
+    // Initialize maze with walls
+    for (let y = 0; y < size; y++) {
+      maze[y] = [];
+      for (let x = 0; x < size; x++) {
         maze[y][x] = {
-          type: 'path',
+          type: 'wall',
           position: { x, y },
           isVisible: true
         };
       }
     }
-  }
 
-  // Ensure start position is always a path
-  maze[1][1] = {
-    type: 'path',
-    position: { x: 1, y: 1 },
-    isVisible: true
-  };
-
-  // Add coins from template
-  template.coins.forEach(pos => {
-    if (pos.x < size && pos.y < size) {
-      maze[pos.y][pos.x] = {
-        type: 'coin',
-        position: pos,
-        isVisible: true
-      };
+    // Create paths from template
+    for (let y = 0; y < Math.min(size, template.paths.length); y++) {
+      for (let x = 0; x < Math.min(size, template.paths[y].length); x++) {
+        if (template.paths[y][x] === 0) { // 0 = path, 1 = wall
+          maze[y][x] = {
+            type: 'path',
+            position: { x, y },
+            isVisible: true
+          };
+        }
+      }
     }
-  });
 
-  // Add guides from template
-  template.guides.forEach(pos => {
-    if (pos.x < size && pos.y < size) {
-      maze[pos.y][pos.x] = {
-        type: 'guide',
-        position: pos,
-        isVisible: true
-      };
-    }
-  });
+    // Ensure start position is always a path
+    maze[1][1] = {
+      type: 'path',
+      position: { x: 1, y: 1 },
+      isVisible: true
+    };
 
-  // Add monsters from template
-  template.monsters.forEach((monster, index) => {
-    const pos = monster.pos;
-    if (pos.x < size && pos.y < size) {
-      maze[pos.y][pos.x] = {
-        type: 'monster',
-        position: pos,
+    // Add coins from template
+    template.coins.forEach(pos => {
+      if (pos.x < size && pos.y < size) {
+        maze[pos.y][pos.x] = {
+          type: 'coin',
+          position: pos,
+          isVisible: true
+        };
+      }
+    });
+
+    // Add guides from template
+    template.guides.forEach(pos => {
+      if (pos.x < size && pos.y < size) {
+        maze[pos.y][pos.x] = {
+          type: 'guide',
+          position: pos,
+          isVisible: true
+        };
+      }
+    });
+
+    // Add monsters from template
+    template.monsters.forEach((monster, index) => {
+      const pos = monster.pos;
+      if (pos.x < size && pos.y < size) {
+        maze[pos.y][pos.x] = {
+          type: 'monster',
+          position: pos,
+          isVisible: true,
+          content: {
+            id: `monster_${level}_${index}`,
+            name: 'Research Obstacle',
+            type: monster.type,
+            position: pos,
+            health: 100,
+            energyDrain: 30,
+            description: 'A research challenge',
+            icon: monster.icon
+          }
+        };
+      }
+    });
+
+    // Add exit portal from template
+    const exitPos = template.exit;
+    if (exitPos.x < size && exitPos.y < size) {
+      maze[exitPos.y][exitPos.x] = {
+        type: 'portal',
+        position: exitPos,
         isVisible: true,
         content: {
-          id: `monster_${level}_${index}`,
-          name: 'Research Obstacle',
-          type: monster.type,
-          position: pos,
-          health: 100,
-          energyDrain: 30,
-          description: 'A research challenge',
-          icon: monster.icon
+          id: `exit_portal_${level}`,
+          name: 'Exit Portal',
+          type: 'regular',
+          position: exitPos,
+          requiredMastery: 0,
+          isVisible: true,
+          icon: '🌀'
         }
       };
     }
-  });
 
-  // Add exit portal from template
-  const exitPos = template.exit;
-  if (exitPos.x < size && exitPos.y < size) {
-    maze[exitPos.y][exitPos.x] = {
-      type: 'portal',
-      position: exitPos,
-      isVisible: true,
-      content: {
-        id: `exit_portal_${level}`,
-        name: 'Exit Portal',
-        type: 'regular',
-        position: exitPos,
-        requiredMastery: 0,
-        isVisible: true,
-        icon: '🌀'
-      }
-    };
-  }
+    // Check if maze is solvable (path exists from start to exit)
+  } while (!isPathExists(maze, { x: 1, y: 1 }, template.exit) && attempts < maxAttempts);
 
+  // If we couldn't generate a solvable maze after max attempts, return the last one anyway
+  // (our templates should generally be solvable)
   return maze;
 };

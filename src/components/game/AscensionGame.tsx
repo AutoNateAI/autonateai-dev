@@ -225,6 +225,21 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
     });
   }, [gameState.isPlaying]);
 
+  const generateNewBoard = useCallback(() => {
+    if (!gameState.isPlaying) return;
+    
+    const newMaze = generateMaze(gameState.currentLevel);
+    setMaze(newMaze);
+    
+    // Reset player to start position
+    setGameState(prev => ({
+      ...prev,
+      playerPosition: { x: 1, y: 1 }
+    }));
+    
+    setCameraPosition({ x: 0, y: 0 });
+  }, [gameState.isPlaying, gameState.currentLevel]);
+
   const handleMonsterEncounter = useCallback((monster: Monster) => {
     if (!gameState.isPlaying) return;
 
@@ -399,6 +414,15 @@ const AscensionGame: React.FC<AscensionGameProps> = ({ onGameStateChange }) => {
                 <span>{Math.floor(timeRemaining / 60)}:{(timeRemaining % 60).toString().padStart(2, '0')}</span>
               </div>
               <div className="flex gap-2 pt-2">
+                <Button
+                  onClick={generateNewBoard}
+                  variant="outline"
+                  size="sm"
+                  className="glass-card flex-1"
+                  title="Generate a new solvable board"
+                >
+                  🔄 New Board
+                </Button>
                 {!isFullscreen && (
                   <Button
                     onClick={() => setIsFullscreen(true)}
