@@ -59,7 +59,7 @@ const Footer = () => {
                 Research Workshops
               </Link> */}
               <Link to="/blog" className="block text-muted-foreground hover:text-primary transition-colors">
-                Research Blog
+                Blog
               </Link>
               <Link to="/contact" className="block text-muted-foreground hover:text-primary transition-colors">
                 Contact Us
