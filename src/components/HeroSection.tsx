@@ -26,50 +26,49 @@ const HeroSection = () => {
           <div className="inline-flex items-center gap-2 glass-card px-4 py-2 mb-8 animate-pulse-glow">
             <Sparkles className="w-4 h-4 text-primary" />
             <span className="text-sm font-medium text-muted-foreground">
-              Next-Gen Critical Thinking with AI
+              Critical Thinking Meets Intelligent Software
             </span>
           </div>
 
           {/* Main Headline */}
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 leading-tight">
-            Become an{' '}
-            <span className="text-gradient animate-gradient">Unstoppable</span>
+            AutoNateAI is the bridge between{' '}
+            <span className="text-gradient animate-gradient">critical thinking</span>
             <br />
-            Critical Thinker
+            and intelligent software
           </h1>
 
           {/* Subtitle */}
-          <p className="text-xl sm:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
-            Give your child the competitive edge with AI-enhanced critical thinking skills. 
-            Our expert tutoring transforms middle school, high school, and undergraduate students 
-            into powerful analytical thinkers using real-world tools and mental models.
+          <p className="text-xl sm:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto leading-relaxed">
+            We take complex problems, apply advanced critical thinking models, and deliver 
+            custom AI-integrated software that makes businesses smarter, faster, and more adaptive.
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <Link to="/tutoring" className="btn-primary text-lg px-8 py-4 flex items-center">
-              Start Your Child's Journey
+            <Link to="/contact" className="btn-primary text-lg px-8 py-4 flex items-center">
+              Book a Discovery Call
               <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
-            <Link to="/contact" className="btn-glass text-lg px-8 py-4 flex items-center gap-2">
-              <BookOpen className="w-5 h-5" />
-              Contact Us
+            <Link to="/live-builds" className="btn-glass text-lg px-8 py-4 flex items-center gap-2">
+              <Play className="w-5 h-5" />
+              See Our Live Builds
             </Link>
           </div>
 
           {/* Social Proof */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             <div className="glass-card p-6 text-center">
-              <div className="text-3xl font-bold text-primary mb-2">Expert Tutoring</div>
-              <div className="text-muted-foreground">Industry Professional</div>
+              <div className="text-3xl font-bold text-primary mb-2">Think & Model</div>
+              <div className="text-muted-foreground">We don't just code. We solve.</div>
             </div>
             <div className="glass-card p-6 text-center">
-              <div className="text-3xl font-bold text-primary mb-2">Real-World Skills</div>
-              <div className="text-muted-foreground">AI & Graph Theory</div>
+              <div className="text-3xl font-bold text-primary mb-2">AI-Integrated</div>
+              <div className="text-muted-foreground">Custom software with intelligence</div>
             </div>
             <div className="glass-card p-6 text-center">
-              <div className="text-3xl font-bold text-glass-secondary mb-2">Life Advantage</div>
-              <div className="text-muted-foreground">Critical Thinking Mastery</div>
+              <div className="text-3xl font-bold text-glass-secondary mb-2">Transparent</div>
+              <div className="text-muted-foreground">Built in the open with Lovable.dev</div>
             </div>
           </div>
         </div>

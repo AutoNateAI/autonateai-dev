@@ -4,38 +4,38 @@ const FeaturesSection = () => {
   const features = [
     {
       icon: Brain,
-      title: 'AI-Enhanced Learning',
-      description: 'Teach your child to harness AI tools like ChatGPT and Claude for complex problem-solving and analytical thinking.',
+      title: 'Graph Theory Mindset',
+      description: 'We map your business like a network and expose hidden efficiencies that traditional approaches miss.',
       color: 'text-blue-400'
     },
     {
       icon: Network,
-      title: 'Graph Theory Fundamentals',
-      description: 'Master the art of connecting ideas using graph theory concepts that successful entrepreneurs and innovators rely on.',
+      title: 'Mental Models → Computer Models',
+      description: 'We turn proven decision frameworks into working software that thinks with your business.',
       color: 'text-purple-400'
     },
     {
       icon: TrendingUp,
-      title: 'Critical Thinking Skills',
-      description: 'Develop systematic approaches to analyze complex problems, evaluate evidence, and make logical decisions.',
+      title: 'Human-in-the-Loop AI',
+      description: 'AI does the heavy lifting, but humans stay in control. The perfect balance of automation and oversight.',
       color: 'text-green-400'
     },
     {
       icon: Award,
-      title: 'Industry Expert Instruction',
-      description: 'Learn from a professional with Microsoft, Citibank, and Veterans United experience who understands real-world applications.',
+      title: 'Deep Experience',
+      description: 'Our engineers have built at Microsoft, Citibank, Veterans United, and AI research labs.',
       color: 'text-orange-400'
     },
     {
       icon: BookOpen,
-      title: 'Personalized Learning Path',
-      description: 'Customized curriculum adapted to your child\'s grade level, interests, and learning style for maximum engagement.',
+      title: 'Transparency',
+      description: 'We use Lovable.dev to prototype quickly and show you exactly how it\'s done - no black boxes.',
       color: 'text-teal-400'
     },
     {
       icon: CheckCircle,
-      title: 'Future-Ready Skills',
-      description: 'Equip your child with mental models and thinking frameworks that will give them advantages in college and career.',
+      title: 'Workflow Automation',
+      description: 'Custom AI-integrated software that saves time, reduces costs, and unlocks new opportunities.',
       color: 'text-pink-400'
     }
   ];
@@ -46,12 +46,12 @@ const FeaturesSection = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
-            Give Your Child a{' '}
-            <span className="text-gradient">Competitive Edge</span>
+            Our{' '}
+            <span className="text-gradient">Edge</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            While other students struggle with information overload, your child will master AI-enhanced 
-            critical thinking skills that successful professionals use in the real world.
+            We don't just code. We think. We model. We solve. At AutoNateAI, we use critical thinking frameworks, 
+            graph theory, and prompt engineering to design intelligent software systems.
           </p>
         </div>
 

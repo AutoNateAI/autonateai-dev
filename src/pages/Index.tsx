@@ -1,10 +1,12 @@
 
 import Navigation from '../components/Navigation';
 import HeroSection from '../components/HeroSection';
-import ProductsSection from '../components/ProductsSection';
+import ServicesSection from '../components/ServicesSection';
 import FeaturesSection from '../components/FeaturesSection';
-import TutoringSection from '../components/TutoringSection';
-import TestimonialsSection from '../components/TestimonialsSection';
+import LiveBuildsSection from '../components/LiveBuildsSection';
+import ProcessSection from '../components/ProcessSection';
+import WhyChooseSection from '../components/WhyChooseSection';
+import ClosingSection from '../components/ClosingSection';
 import BlogSection from '../components/BlogSection';
 import NewsletterSection from '../components/NewsletterSection';
 import Footer from '../components/Footer';
@@ -18,9 +20,12 @@ const Index = () => {
     <div className="min-h-screen">
       <Navigation />
       <HeroSection />
+      <ServicesSection />
       <FeaturesSection />
-      <TutoringSection />
-      <TestimonialsSection />
+      <LiveBuildsSection />
+      <ProcessSection />
+      <WhyChooseSection />
+      <ClosingSection />
       <BlogSection />
       <NewsletterSection />
       <Footer />
