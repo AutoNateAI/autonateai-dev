@@ -11,6 +11,9 @@ import Products from "./pages/Products";
 import Product from "./pages/Product";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import Blogs from "./pages/Blogs";
+import LiveBuilds from "./pages/LiveBuilds";
+import LiveBuildDetail from "./pages/LiveBuildDetail";
 import Coaching from "./pages/Coaching";
 import Tutoring from "./pages/Tutoring";
 import Contact from "./pages/Contact";
@@ -33,14 +36,10 @@ const App = () => (
           <ScrollToTop />
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/products" element={<Products />} />
-            
-            <Route path="/products/:slug" element={<Product />} />
-            <Route path="/blog" element={<Blog />} />
+            <Route path="/blogs" element={<Blogs />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/coaching" element={<Coaching />} />
-            <Route path="/tutoring" element={<Tutoring />} />
-            <Route path="/workshops" element={<Workshops />} />
+            <Route path="/live-builds" element={<LiveBuilds />} />
+            <Route path="/live-builds/:id" element={<LiveBuildDetail />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/ascension-protocol" element={<AscensionProtocol />} />

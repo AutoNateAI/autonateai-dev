@@ -2,14 +2,15 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
-import { Mail, Phone, MapPin, Clock, MessageCircle, ArrowRight } from 'lucide-react';
+import { Mail, MessageCircle, Clock, ArrowRight, Building, Zap, Target } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
 interface FormData {
   name: string;
   email: string;
-  studentAge: string;
+  company: string;
+  inquiryType: string;
   message: string;
 }
 
@@ -18,7 +19,8 @@ const Contact = () => {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
-    studentAge: '',
+    company: '',
+    inquiryType: 'general',
     message: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -28,10 +30,10 @@ const Contact = () => {
   useEffect(() => {
     const service = searchParams.get('service');
     
-    if (service === 'tutoring') {
-      let message = 'I am interested in tutoring services for my child. ';
-      message += 'I would like to learn more about how your AI-enhanced critical thinking tutoring can help my student succeed.';
-      setFormData(prev => ({ ...prev, message }));
+    if (service === 'live-build') {
+      let message = 'I am interested in scheduling a custom live build session for our company. ';
+      message += 'I would like to learn more about how you can build AI-integrated software solutions for our specific business needs.';
+      setFormData(prev => ({ ...prev, message, inquiryType: 'custom-build' }));
       
       // Scroll to contact form
       setTimeout(() => {
@@ -55,19 +57,19 @@ const Contact = () => {
         .insert({
           name: formData.name.trim(),
           email: formData.email.trim(),
-          company: formData.studentAge.trim() || null,
-          inquiry_type: 'tutoring',
+          company: formData.company.trim() || null,
+          inquiry_type: formData.inquiryType,
           message: formData.message.trim()
         });
 
       if (error) throw error;
       
       setIsSubmitted(true);
-      setFormData({ name: '', email: '', studentAge: '', message: '' });
+      setFormData({ name: '', email: '', company: '', inquiryType: 'general', message: '' });
       
       toast({
         title: "Message sent!",
-        description: "We'll get back to you within 24 hours to discuss your child's tutoring needs.",
+        description: "We'll get back to you within 24 hours to discuss your business needs.",
       });
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -90,11 +92,11 @@ const Contact = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
-              Let's Discuss Your Child's <span className="text-gradient">Future</span>
+              Let's Discuss Your <span className="text-gradient">Business Needs</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-              Ready to give your middle school, high school, or college student the critical thinking 
-              skills that will set them apart? Let's talk about how our tutoring can help.
+              Ready to transform your business with AI-integrated software solutions? Let's explore how 
+              critical thinking + intelligent software can make your operations smarter and more efficient.
             </p>
           </div>
         </div>
@@ -110,7 +112,7 @@ const Contact = () => {
               </div>
               <h3 className="text-xl font-bold mb-4">Email Us</h3>
               <p className="text-muted-foreground mb-4">
-                Send us an email and we'll respond within 24 hours with information about our tutoring programs.
+                Send us an email and we'll respond within 24 hours with information about our software solutions.
               </p>
               <a 
                 href="mailto:autonate.ai@gmail.com" 
@@ -124,12 +126,12 @@ const Contact = () => {
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 mb-6">
                 <MessageCircle className="w-8 h-8 text-primary" />
               </div>
-              <h3 className="text-xl font-bold mb-4">Free Consultation</h3>
+              <h3 className="text-xl font-bold mb-4">Discovery Call</h3>
               <p className="text-muted-foreground mb-4">
-                Schedule a 15-minute call to discuss your child's learning goals and how we can help.
+                Schedule a 30-minute discovery call to discuss your business challenges and opportunities.
               </p>
               <a 
-                href="https://calendly.com/autonate-ai/graph-theory-tutoring" 
+                href="https://calendly.com/autonate-ai/discovery-call" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:text-primary/80 font-medium"
@@ -144,7 +146,7 @@ const Contact = () => {
               </div>
               <h3 className="text-xl font-bold mb-4">Quick Response</h3>
               <p className="text-muted-foreground mb-4">
-                We understand parents are busy. We respond to all inquiries within 24 hours.
+                We understand business moves fast. We respond to all inquiries within 24 hours.
               </p>
               <span className="text-primary font-medium">
                 Always here to help
@@ -161,10 +163,10 @@ const Contact = () => {
             {/* Contact Form */}
             <div>
               <h2 className="text-3xl font-bold mb-6">
-                Tell Us About Your <span className="text-gradient">Student</span>
+                Tell Us About Your <span className="text-gradient">Business</span>
               </h2>
               <p className="text-muted-foreground mb-8">
-                Help us understand your child's needs so we can provide the best tutoring experience.
+                Help us understand your business needs so we can provide the best software solution.
               </p>
 
               {!isSubmitted ? (
@@ -173,7 +175,7 @@ const Contact = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
                         <label htmlFor="name" className="block text-sm font-medium mb-2">
-                          Parent/Guardian Name *
+                          Full Name *
                         </label>
                         <input
                           type="text"
@@ -197,28 +199,48 @@ const Contact = () => {
                           value={formData.email}
                           onChange={(e) => setFormData({...formData, email: e.target.value})}
                           className="w-full px-4 py-3 rounded-xl bg-background/50 border-2 border-primary/30 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 text-foreground transition-all duration-200"
-                          placeholder="your.email@example.com"
+                          placeholder="your.email@company.com"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label htmlFor="studentAge" className="block text-sm font-medium mb-2">
-                        Student Grade Level/Age
+                      <label htmlFor="company" className="block text-sm font-medium mb-2">
+                        Company Name
                       </label>
                       <input
                         type="text"
-                        id="studentAge"
-                        value={formData.studentAge}
-                        onChange={(e) => setFormData({...formData, studentAge: e.target.value})}
+                        id="company"
+                        value={formData.company}
+                        onChange={(e) => setFormData({...formData, company: e.target.value})}
                         className="w-full px-4 py-3 rounded-xl bg-background/50 border-2 border-primary/30 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 text-foreground transition-all duration-200"
-                        placeholder="e.g., 8th grade, High School Junior, College Freshman"
+                        placeholder="Your company name"
                       />
                     </div>
 
                     <div>
+                      <label htmlFor="inquiryType" className="block text-sm font-medium mb-2">
+                        Inquiry Type *
+                      </label>
+                      <select
+                        id="inquiryType"
+                        required
+                        value={formData.inquiryType}
+                        onChange={(e) => setFormData({...formData, inquiryType: e.target.value})}
+                        className="w-full px-4 py-3 rounded-xl bg-background/50 border-2 border-primary/30 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 text-foreground transition-all duration-200"
+                      >
+                        <option value="general">General Inquiry</option>
+                        <option value="custom-build">Custom Software Build</option>
+                        <option value="workflow-automation">Workflow Automation</option>
+                        <option value="ai-copilot">AI Copilot Development</option>
+                        <option value="data-platform">Data Platform</option>
+                        <option value="integration">System Integration</option>
+                      </select>
+                    </div>
+
+                    <div>
                       <label htmlFor="message" className="block text-sm font-medium mb-2">
-                        Tell Us About Your Student *
+                        Project Details *
                       </label>
                       <textarea
                         id="message"
@@ -227,7 +249,7 @@ const Contact = () => {
                         value={formData.message}
                         onChange={(e) => setFormData({...formData, message: e.target.value})}
                         className="w-full px-4 py-3 rounded-xl bg-background/50 border-2 border-primary/30 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 text-foreground resize-none transition-all duration-200"
-                        placeholder="What are your child's learning goals? Any specific challenges or interests? What do you hope they'll gain from tutoring?"
+                        placeholder="Describe your business challenges, current workflows, and what you'd like to achieve. The more details you provide, the better we can help."
                       ></textarea>
                     </div>
 
@@ -246,8 +268,8 @@ const Contact = () => {
                   </div>
                   <h3 className="text-xl font-bold mb-4 text-green-500">Message Sent!</h3>
                   <p className="text-muted-foreground">
-                    Thank you for your interest in our tutoring services. We'll get back to you within 24 hours 
-                    to discuss how we can help your child develop critical thinking skills.
+                    Thank you for your interest in our software solutions. We'll get back to you within 24 hours 
+                    to discuss how we can help transform your business with AI-integrated software.
                   </p>
                 </div>
               )}
@@ -256,19 +278,19 @@ const Contact = () => {
             {/* Contact Information */}
             <div className="space-y-8">
               <div>
-                <h3 className="text-2xl font-bold mb-6">Why Parents Choose Us</h3>
+                <h3 className="text-2xl font-bold mb-6">Why Businesses Choose AutoNateAI</h3>
                 
                 <div className="space-y-6">
                   <div className="glass-card p-6">
                     <div className="flex items-start gap-4">
                       <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10">
-                        <span className="text-primary font-bold">🎯</span>
+                        <Target className="w-6 h-6 text-primary" />
                       </div>
                       <div>
                         <h4 className="font-semibold mb-2">Industry Experience</h4>
                         <p className="text-muted-foreground text-sm">
-                          Your child learns from someone who has worked at Microsoft, Citibank, 
-                          and Veterans United - bringing real-world perspective to education.
+                          Our team has built software at Microsoft, Citibank, and Veterans United - 
+                          bringing enterprise-level expertise to your business.
                         </p>
                       </div>
                     </div>
@@ -277,13 +299,13 @@ const Contact = () => {
                   <div className="glass-card p-6">
                     <div className="flex items-start gap-4">
                       <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10">
-                        <span className="text-primary font-bold">🧠</span>
+                        <Zap className="w-6 h-6 text-primary" />
                       </div>
                       <div>
-                        <h4 className="font-semibold mb-2">Future-Ready Skills</h4>
+                        <h4 className="font-semibold mb-2">AI-Integrated Solutions</h4>
                         <p className="text-muted-foreground text-sm">
-                          Critical thinking, systems reasoning, and AI literacy - the skills 
-                          that will matter most in your child's future career.
+                          We don't just add AI as an afterthought - we design intelligent systems 
+                          that think with your business from the ground up.
                         </p>
                       </div>
                     </div>
@@ -292,13 +314,13 @@ const Contact = () => {
                   <div className="glass-card p-6">
                     <div className="flex items-start gap-4">
                       <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10">
-                        <span className="text-primary font-bold">⚡</span>
+                        <Building className="w-6 h-6 text-primary" />
                       </div>
                       <div>
-                        <h4 className="font-semibold mb-2">Personalized Approach</h4>
+                        <h4 className="font-semibold mb-2">Transparent Process</h4>
                         <p className="text-muted-foreground text-sm">
-                          Every session is tailored to your child's grade level, interests, 
-                          and learning style for maximum engagement and growth.
+                          We build in the open with Lovable.dev, so you see exactly how your 
+                          software is created - no black boxes, no smoke and mirrors.
                         </p>
                       </div>
                     </div>
@@ -311,15 +333,19 @@ const Contact = () => {
                 <div className="space-y-3">
                   <div className="flex items-center gap-3">
                     <span className="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">1</span>
-                    <span className="text-muted-foreground">Fill out the form or schedule a consultation</span>
+                    <span className="text-muted-foreground">Fill out the form or schedule a discovery call</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <span className="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">2</span>
-                    <span className="text-muted-foreground">We'll discuss your child's needs and goals</span>
+                    <span className="text-muted-foreground">We'll analyze your workflows and identify opportunities</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <span className="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">3</span>
-                    <span className="text-muted-foreground">Start building critical thinking skills together</span>
+                    <span className="text-muted-foreground">Get a custom proposal with timeline and pricing</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">4</span>
+                    <span className="text-muted-foreground">Start building your AI-integrated solution</span>
                   </div>
                 </div>
               </div>
@@ -333,34 +359,34 @@ const Contact = () => {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-              Questions from <span className="text-gradient">Parents</span>
+              Questions from <span className="text-gradient">Business Leaders</span>
             </h2>
             <p className="text-xl text-muted-foreground">
-              Common questions about our tutoring approach and what to expect.
+              Common questions about our approach and what to expect.
             </p>
           </div>
 
           <div className="space-y-6">
             {[
               {
-                question: "What age groups do you work with?",
-                answer: "We work with middle school students (grades 6-8), high school students (grades 9-12), and undergraduates. Our approach is adapted to each student's developmental level and interests."
+                question: "What industries do you work with?",
+                answer: "We work across all industries - finance, real estate, hospitality, healthcare, manufacturing, and more. Our approach is industry-agnostic because we focus on core business processes and critical thinking frameworks that apply universally."
               },
               {
-                question: "How is this different from traditional tutoring?",
-                answer: "Instead of just helping with homework, we teach fundamental thinking skills that apply across all subjects. Students learn to use AI tools, understand systems thinking, and develop mental models used by successful professionals."
+                question: "How is this different from traditional software development?",
+                answer: "We don't just build software - we solve business problems. We apply critical thinking frameworks and graph theory to understand your business as a system, then create AI-integrated solutions that make your operations smarter, not just digital."
               },
               {
-                question: "Do you help with specific school subjects?",
-                answer: "While our focus is on critical thinking skills, these naturally enhance performance in all subjects. Many parents see improvements in math, science, and writing as students learn to approach problems more systematically."
+                question: "How quickly can you deliver results?",
+                answer: "Using Lovable.dev and advanced prompt engineering, we can often prototype working solutions in days or weeks rather than months. Complex systems may take longer, but you'll see progress from day one."
               },
               {
-                question: "How quickly will I see results?",
-                answer: "Most students show improved problem-solving confidence within the first few sessions. The deeper critical thinking skills develop over months, creating lasting advantages that benefit them throughout their education and career."
+                question: "Do you work with small businesses or just enterprises?",
+                answer: "We work with businesses of all sizes. Our approach scales from small teams needing workflow automation to large enterprises requiring complex AI-integrated systems. Every business deserves intelligent software."
               },
               {
-                question: "Is this appropriate for students who aren't interested in technology?",
-                answer: "Absolutely! While we use AI tools, the focus is on thinking skills that apply everywhere - from analyzing literature to understanding history to making personal decisions. Technology is just one tool among many."
+                question: "What if we're not tech-savvy?",
+                answer: "Perfect! We specialize in making complex technology simple. We handle all the technical complexity while keeping you involved in the business logic. You focus on your expertise, we handle the AI and software engineering."
               }
             ].map((faq, index) => (
               <div key={index} className="glass-card p-6">

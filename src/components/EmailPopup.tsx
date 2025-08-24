@@ -48,7 +48,7 @@ const EmailPopup: React.FC<EmailPopupProps> = ({ isOpen, onClose }) => {
 
       toast({
         title: "Success!",
-        description: "Thank you for subscribing! You'll receive our latest research insights.",
+        description: "Thank you for subscribing! You'll receive our latest software build insights.",
       });
 
       setEmail('');
@@ -94,10 +94,10 @@ const EmailPopup: React.FC<EmailPopupProps> = ({ isOpen, onClose }) => {
               <Mail className="w-8 h-8 text-primary" />
             </div>
             <h2 className="text-2xl font-bold text-foreground mb-2">
-              Stay Updated with Our Research
+              Stay Connected with Our Community
             </h2>
             <p className="text-muted-foreground">
-              Get the latest insights on AI-augmented research workflows and methodology breakthroughs delivered to your inbox.
+              Get the latest insights where we're building software solutions across different industries at the speed of light.
             </p>
           </div>
 

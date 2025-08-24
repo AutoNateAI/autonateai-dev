@@ -29,7 +29,7 @@ const Navigation = () => {
               <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
             </Link>
             <Link 
-              to="/blog" 
+              to="/blogs" 
               className="text-muted-foreground hover:text-primary transition-colors relative group"
             >
               Blog
@@ -82,7 +82,7 @@ const Navigation = () => {
                 Live Builds
               </Link>
               <Link 
-                to="/blog" 
+                to="/blogs" 
                 className="block text-muted-foreground hover:text-primary transition-colors py-2"
                 onClick={() => setIsOpen(false)}
               >
