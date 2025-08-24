@@ -70,30 +70,25 @@ const About = () => {
                 </div>
                 <div className="text-center">
                   <h2 className="text-2xl font-bold text-foreground mb-2">AutoNate</h2>
-                  <p className="text-primary font-semibold">Founder & Lead Tutor</p>
+                  <p className="text-primary font-semibold">Founder & CEO, AutoNateAI</p>
                   <p className="text-muted-foreground mt-2">Computer Science, University of Michigan 2019</p>
                 </div>
               </div>
 
               <div className="space-y-6">
-                <h3 className="text-3xl font-bold text-foreground">Meet Your Child's Future Mentor</h3>
+                <h3 className="text-3xl font-bold text-foreground">Visionary Leadership & Excellence</h3>
                 
                 <div className="prose prose-lg max-w-none">
                   <p className="text-muted-foreground leading-relaxed">
-                    AutoNate brings a unique combination of industry experience and teaching expertise to help 
-                    your child develop critical thinking skills that will serve them throughout their life.
+                    AutoNate is the founder of AutoNateAI, who has handpicked a distinguished team of industry leaders who excel in their respective fields. Together, they represent decades of combined expertise across AI development, education, and enterprise solutions.
                   </p>
                   
                   <p className="text-muted-foreground leading-relaxed">
-                    Most recently working in AI research and development at Veterans United Home Loans, 
-                    Nate understands firsthand how AI is transforming every industry and what skills 
-                    students need to thrive in this new landscape.
+                    Under AutoNate's leadership, our team combines cutting-edge AI research with proven educational methodologies to deliver transformative learning experiences that prepare the next generation for an AI-enhanced future.
                   </p>
                   
                   <p className="text-muted-foreground leading-relaxed">
-                    As a former University of Michigan Teaching Assistant for Computer Security and 
-                    Intro to Computer Science, Nate has experience making complex technical concepts 
-                    accessible and engaging for students at all levels.
+                    Our carefully curated team of experts brings real-world experience from leading technology companies, ensuring that every student receives instruction from professionals who understand both the technical landscape and the skills needed to thrive in tomorrow's economy.
                   </p>
                 </div>
               </div>
@@ -104,7 +99,7 @@ const About = () => {
         {/* Professional Background */}
         <section className="py-20">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h3 className="text-3xl font-bold text-foreground text-center mb-12">Industry Experience Your Child Will Benefit From</h3>
+            <h3 className="text-3xl font-bold text-foreground text-center mb-12">World-Class Team Expertise</h3>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               <div className="glass-card p-6">

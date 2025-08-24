@@ -19,6 +19,7 @@ import Tutoring from "./pages/Tutoring";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
+import Grants from "./pages/Grants";
 
 import Workshops from "./pages/Workshops";
 import PaymentSuccess from "./pages/PaymentSuccess";
@@ -42,6 +43,7 @@ const App = () => (
             <Route path="/live-builds/:id" element={<LiveBuildDetail />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/grants" element={<Grants />} />
             <Route path="/ascension-protocol" element={<AscensionProtocol />} />
             <Route path="/payment-success" element={<PaymentSuccess />} />
             <Route path="*" element={<NotFound />} />
