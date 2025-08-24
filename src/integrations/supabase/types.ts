@@ -7,7 +7,7 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instanciate createClient with right options
+  // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "12.2.3 (519615d)"
@@ -468,6 +468,66 @@ export type Database = {
           page_path?: string
           page_type?: string
           product_id?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      live_builds: {
+        Row: {
+          calendly_url: string | null
+          content: string | null
+          created_at: string
+          current_attendees: number | null
+          description: string
+          duration_minutes: number | null
+          id: string
+          image_url: string | null
+          is_published: boolean | null
+          max_attendees: number | null
+          replay_url: string | null
+          scheduled_date: string
+          short_description: string | null
+          status: string | null
+          tags: Json | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          calendly_url?: string | null
+          content?: string | null
+          created_at?: string
+          current_attendees?: number | null
+          description: string
+          duration_minutes?: number | null
+          id?: string
+          image_url?: string | null
+          is_published?: boolean | null
+          max_attendees?: number | null
+          replay_url?: string | null
+          scheduled_date: string
+          short_description?: string | null
+          status?: string | null
+          tags?: Json | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          calendly_url?: string | null
+          content?: string | null
+          created_at?: string
+          current_attendees?: number | null
+          description?: string
+          duration_minutes?: number | null
+          id?: string
+          image_url?: string | null
+          is_published?: boolean | null
+          max_attendees?: number | null
+          replay_url?: string | null
+          scheduled_date?: string
+          short_description?: string | null
+          status?: string | null
+          tags?: Json | null
           title?: string
           updated_at?: string
         }
