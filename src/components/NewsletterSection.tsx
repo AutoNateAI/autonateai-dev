@@ -31,7 +31,7 @@ const NewsletterSection = () => {
       
       toast({
         title: "Subscribed successfully!",
-        description: "You'll receive the latest research insights in your inbox.",
+        description: "You'll receive strategic insights and live build updates in your inbox.",
       });
       
       setTimeout(() => setIsSubmitted(false), 3000);
@@ -68,13 +68,13 @@ const NewsletterSection = () => {
             {/* Heading */}
             <h2 className="text-3xl sm:text-4xl font-bold mb-6">
               Stay Connected with Our{' '}
-              <span className="text-gradient">Research Community</span>
+              <span className="text-gradient">Business Community</span>
             </h2>
 
             {/* Description */}
             <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
-              Join our research community to receive the latest updates, tutorials, 
-              and research insights directly in your inbox. No spam, just valuable content for researchers.
+              Join our exclusive community to receive strategic insights, live build announcements, 
+              and business intelligence directly in your inbox. No spam, just valuable content for executives and directors.
             </p>
 
             {/* Newsletter Form */}
@@ -100,7 +100,7 @@ const NewsletterSection = () => {
               <div className="glass-card p-6 max-w-lg mx-auto border-primary/20">
                 <div className="text-primary font-semibold mb-2">Thank you for subscribing!</div>
                 <div className="text-muted-foreground">
-                  You'll receive our latest research insights and updates.
+                  You'll receive our latest strategic insights and live build updates.
                 </div>
               </div>
             )}
@@ -113,7 +113,7 @@ const NewsletterSection = () => {
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-blue-400"></div>
-                Weekly insights
+                Strategic insights
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-purple-400"></div>

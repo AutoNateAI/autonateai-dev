@@ -51,14 +51,37 @@ const Footer = () => {
             </div>
           </div>   */}
 
-          {/* Services Column */}
+          {/* Navigation Column */}
           <div>
+            <h3 className="font-semibold text-foreground mb-6">Navigation</h3>
             <div className="space-y-4">
+              <Link to="/live-builds" className="block text-muted-foreground hover:text-primary transition-colors">
+                Live Builds
+              </Link>
               <Link to="/blogs" className="block text-muted-foreground hover:text-primary transition-colors">
                 Blog
               </Link>
+              <Link to="/about" className="block text-muted-foreground hover:text-primary transition-colors">
+                About
+              </Link>
               <Link to="/contact" className="block text-muted-foreground hover:text-primary transition-colors">
                 Contact Us
+              </Link>
+            </div>
+          </div>
+          
+          {/* Support Column */}
+          <div>
+            <h3 className="font-semibold text-foreground mb-6">Support</h3>
+            <div className="space-y-4">
+              <Link to="/support" className="block text-muted-foreground hover:text-primary transition-colors">
+                Help Center
+              </Link>
+              <Link to="/terms" className="block text-muted-foreground hover:text-primary transition-colors">
+                Terms of Service
+              </Link>
+              <Link to="/privacy" className="block text-muted-foreground hover:text-primary transition-colors">
+                Privacy Policy
               </Link>
             </div>
           </div>
