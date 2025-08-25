@@ -15,7 +15,7 @@ const Footer = () => {
               <span className="text-xl font-bold text-gradient">AutoNateAI</span>
             </Link>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Empowering students with critical thinking skills through graph theory fundamentals.
+              The bridge between critical thinking and intelligent software. We solve complex problems with custom AI-integrated solutions.
             </p>
             <div className="space-y-3">
               <div className="flex items-center gap-3 text-sm text-muted-foreground">
