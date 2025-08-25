@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
+import { Cpu, Database, Workflow, Bot, BarChart3, Link2, Users, Target, Lightbulb, Zap } from 'lucide-react';
 
 const About = () => {
   return (
@@ -13,45 +14,121 @@ const About = () => {
           <div className="absolute inset-0 bg-gradient-subtle opacity-50" />
           <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-4xl md:text-6xl font-bold text-gradient mb-6">
-              About AutoNateAI Tutoring
+              About AutoNateAI
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Empowering the next generation with AI-enhanced critical thinking skills and real-world mental models
+              The bridge between critical thinking and intelligent software - building AI-integrated solutions that make businesses smarter, faster, and more adaptive.
             </p>
           </div>
         </section>
 
-        {/* Why Your Child Needs This */}
+        {/* Mission & Vision */}
         <section className="py-20">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-foreground mb-6">Why Your Child Needs These Skills Now</h2>
+              <h2 className="text-3xl font-bold text-foreground mb-6">Our Mission</h2>
               <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
-                In today's rapidly changing world, traditional education isn't enough. Your child needs to master 
-                the thinking tools that top professionals use to succeed in the AI age.
+                We don't just code. We think. We model. We solve. Using critical thinking frameworks, 
+                graph theory, and advanced prompt engineering, we design intelligent software systems 
+                that unlock new opportunities for businesses worldwide.
               </p>
             </div>
             
             <div className="grid md:grid-cols-3 gap-8 mb-16">
               <div className="glass-card p-6 text-center">
-                <div className="text-4xl mb-4">🚀</div>
-                <h3 className="text-xl font-semibold mb-3">Future-Proof Skills</h3>
+                <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <Lightbulb className="w-6 h-6 text-primary-foreground" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3">Think & Model</h3>
                 <p className="text-muted-foreground">
-                  While AI changes every industry, critical thinking and systems reasoning become more valuable, not less.
+                  We apply advanced critical thinking models to understand complex problems before building solutions.
                 </p>
               </div>
               <div className="glass-card p-6 text-center">
-                <div className="text-4xl mb-4">💡</div>
-                <h3 className="text-xl font-semibold mb-3">Early Advantage</h3>
+                <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <Zap className="w-6 h-6 text-primary-foreground" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3">AI-Integrated</h3>
                 <p className="text-muted-foreground">
-                  Students who master these concepts young develop superior problem-solving abilities that last a lifetime.
+                  Custom software infused with AI across workflows, creating intelligent business solutions.
                 </p>
               </div>
               <div className="glass-card p-6 text-center">
-                <div className="text-4xl mb-4">🎯</div>
-                <h3 className="text-xl font-semibold mb-3">Real-World Application</h3>
+                <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <Target className="w-6 h-6 text-primary-foreground" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3">Transparent</h3>
                 <p className="text-muted-foreground">
-                  These aren't abstract concepts - they're the exact tools used by successful entrepreneurs and innovators.
+                  Built in the open with modern tools like Lovable.dev, ensuring transparency and quality.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* What We Do */}
+        <section className="py-20 bg-muted/5">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h3 className="text-3xl font-bold text-foreground text-center mb-12">What We Build</h3>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="glass-card p-6">
+                <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center mb-4">
+                  <Workflow className="w-6 h-6 text-primary-foreground" />
+                </div>
+                <h4 className="text-xl font-semibold text-foreground mb-2">Workflow Automation</h4>
+                <p className="text-muted-foreground text-sm">
+                  Intelligent automation systems that save time and cost while improving accuracy and efficiency.
+                </p>
+              </div>
+
+              <div className="glass-card p-6">
+                <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center mb-4">
+                  <Bot className="w-6 h-6 text-primary-foreground" />
+                </div>
+                <h4 className="text-xl font-semibold text-foreground mb-2">AI Copilots</h4>
+                <p className="text-muted-foreground text-sm">
+                  Custom AI assistants tailored to your industry and specific business needs.
+                </p>
+              </div>
+
+              <div className="glass-card p-6">
+                <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center mb-4">
+                  <BarChart3 className="w-6 h-6 text-primary-foreground" />
+                </div>
+                <h4 className="text-xl font-semibold text-foreground mb-2">Intelligent Dashboards</h4>
+                <p className="text-muted-foreground text-sm">
+                  Data platforms and dashboards that provide actionable insights and real-time intelligence.
+                </p>
+              </div>
+
+              <div className="glass-card p-6">
+                <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center mb-4">
+                  <Link2 className="w-6 h-6 text-primary-foreground" />
+                </div>
+                <h4 className="text-xl font-semibold text-foreground mb-2">Cross-tool Integrations</h4>
+                <p className="text-muted-foreground text-sm">
+                  Seamless connections between your existing tools and systems, creating unified workflows.
+                </p>
+              </div>
+
+              <div className="glass-card p-6">
+                <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center mb-4">
+                  <Cpu className="w-6 h-6 text-primary-foreground" />
+                </div>
+                <h4 className="text-xl font-semibold text-foreground mb-2">Custom Software Builds</h4>
+                <p className="text-muted-foreground text-sm">
+                  Full-scale applications infused with AI across the entire workflow and user experience.
+                </p>
+              </div>
+
+              <div className="glass-card p-6">
+                <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center mb-4">
+                  <Database className="w-6 h-6 text-primary-foreground" />
+                </div>
+                <h4 className="text-xl font-semibold text-foreground mb-2">Data Pipeline Solutions</h4>
+                <p className="text-muted-foreground text-sm">
+                  Advanced data processing and pipeline systems that handle complex business intelligence needs.
                 </p>
               </div>
             </div>
@@ -59,7 +136,7 @@ const About = () => {
         </section>
 
         {/* Founder Section */}
-        <section className="py-20 bg-muted/5">
+        <section className="py-20">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="glass-card p-8">
@@ -83,15 +160,15 @@ const About = () => {
                 
                 <div className="prose prose-lg max-w-none">
                   <p className="text-muted-foreground leading-relaxed">
-                    From the beautiful islands of Hawaii, AutoNate founded AutoNateAI LLC with a vision to build world-class technology that impacts students globally. As a proud Hawaii-based company, we combine the innovative spirit of Silicon Valley with the collaborative aloha culture of the islands.
+                    From the beautiful islands of Hawaii, AutoNate founded AutoNateAI LLC with a vision to build world-class AI-integrated software that transforms how businesses operate. As a proud Hawaii-based company, we combine Silicon Valley innovation with the collaborative aloha spirit.
                   </p>
                   
                   <p className="text-muted-foreground leading-relaxed">
-                    AutoNate has strategically handpicked a distinguished team of industry leaders who excel in their respective fields - from Microsoft security engineers to Citibank fintech specialists. Together, they represent decades of combined expertise across AI development, education, and enterprise solutions.
+                    AutoNate has strategically handpicked a distinguished team of industry leaders - from Microsoft security engineers to Citibank fintech specialists. Together, they represent decades of combined expertise across AI development, software engineering, and enterprise solutions.
                   </p>
                   
                   <p className="text-muted-foreground leading-relaxed">
-                    Under AutoNate's leadership, our team combines cutting-edge AI research with proven educational methodologies to deliver transformative learning experiences. We're building the future of education from Hawaii, serving students worldwide with the technical excellence of top-tier companies and the personalized touch of island hospitality.
+                    Under AutoNate's leadership, our team applies critical thinking frameworks and advanced problem-solving methodologies to deliver intelligent software solutions. We're building the future of AI-integrated business software from Hawaii, serving clients worldwide with technical excellence and personalized service.
                   </p>
                   
                   <div className="mt-6 p-4 bg-gradient-subtle rounded-lg border border-primary/20">
@@ -103,8 +180,8 @@ const About = () => {
           </div>
         </section>
 
-        {/* Professional Background */}
-        <section className="py-20">
+        {/* Team Expertise */}
+        <section className="py-20 bg-muted/5">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <h3 className="text-3xl font-bold text-foreground text-center mb-12">World-Class Team Expertise</h3>
             
@@ -116,7 +193,7 @@ const About = () => {
                 <h4 className="text-xl font-semibold text-foreground mb-2">Microsoft</h4>
                 <p className="text-primary font-medium mb-2">Security Software Engineer</p>
                 <p className="text-muted-foreground text-sm">
-                  Built advanced security tools and infrastructure, developing expertise in 
+                  Advanced security tools and infrastructure development, with expertise in 
                   complex system design and cybersecurity applications.
                 </p>
               </div>
@@ -128,8 +205,8 @@ const About = () => {
                 <h4 className="text-xl font-semibold text-foreground mb-2">Citibank</h4>
                 <p className="text-primary font-medium mb-2">Fintech Engineer</p>
                 <p className="text-muted-foreground text-sm">
-                  Developed financial tools and applications in high-stakes, 
-                  compliance-driven environments requiring precision and critical thinking.
+                  Financial software development in high-stakes, compliance-driven environments 
+                  requiring precision and critical thinking.
                 </p>
               </div>
 
@@ -138,99 +215,65 @@ const About = () => {
                   <span className="text-white font-bold">UM</span>
                 </div>
                 <h4 className="text-xl font-semibold text-foreground mb-2">University of Michigan</h4>
-                <p className="text-primary font-medium mb-2">Teaching Assistant</p>
+                <p className="text-primary font-medium mb-2">Teaching & Research</p>
                 <p className="text-muted-foreground text-sm">
-                  TA for Computer Security and Intro to Computer Science, 
-                  helping students transition from confusion to mastery.
+                  Computer Security and Computer Science education, specializing in 
+                  complex problem solving and systems thinking.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* What Makes This Special */}
-        <section className="py-20 bg-muted/5">
+        {/* Why Choose Us */}
+        <section className="py-20">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h3 className="text-3xl font-bold text-foreground mb-4">What Makes Our Tutoring Unique</h3>
+              <h3 className="text-3xl font-bold text-foreground mb-4">Why Choose AutoNateAI</h3>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                This isn't traditional tutoring - it's teaching your child the mental models 
-                that successful professionals use every day
+                We're not just another software company - we're your thinking partners in building intelligent solutions.
               </p>
             </div>
 
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
                 <div className="glass-card p-6">
-                  <h4 className="text-xl font-semibold text-foreground mb-3">Graph Theory & Systems Thinking</h4>
+                  <h4 className="text-xl font-semibold text-foreground mb-3">Critical Thinking First</h4>
                   <p className="text-muted-foreground">
-                    Your child will learn to see connections between ideas, understand complex systems, 
-                    and think in ways that give them massive advantages in problem-solving and creativity.
+                    We apply graph theory, systems thinking, and advanced problem-solving frameworks 
+                    before writing a single line of code.
                   </p>
                 </div>
 
                 <div className="glass-card p-6">
-                  <h4 className="text-xl font-semibold text-foreground mb-3">AI as a Thinking Partner</h4>
+                  <h4 className="text-xl font-semibold text-foreground mb-3">AI-Native Development</h4>
                   <p className="text-muted-foreground">
-                    Rather than fearing AI, your child will learn to use it as a powerful thinking tool, 
-                    developing skills that will be essential in their future career.
+                    Every solution is designed from the ground up with AI integration, 
+                    not as an afterthought.
+                  </p>
+                </div>
+
+                <div className="glass-card p-6">
+                  <h4 className="text-xl font-semibold text-foreground mb-3">Transparent Process</h4>
+                  <p className="text-muted-foreground">
+                    Built in the open with modern tools, you can see exactly how we work 
+                    and what we deliver.
                   </p>
                 </div>
               </div>
 
               <div className="glass-card p-8 bg-gradient-subtle">
-                <h4 className="text-2xl font-bold text-foreground mb-4">Real-World Mental Models</h4>
+                <h4 className="text-2xl font-bold text-foreground mb-4">Real-World Impact</h4>
                 <p className="text-muted-foreground mb-4">
-                  From first principles thinking to systems analysis, your child will master the 
-                  cognitive frameworks used by top performers in every field.
+                  From workflow automation to intelligent dashboards, our solutions deliver 
+                  measurable business value through intelligent software design.
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Critical Thinking</span>
-                  <span className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Systems Analysis</span>
-                  <span className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Pattern Recognition</span>
-                  <span className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Logical Reasoning</span>
+                  <span className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">AI Integration</span>
+                  <span className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Systems Thinking</span>
+                  <span className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Custom Software</span>
+                  <span className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Business Intelligence</span>
                 </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Parent Testimonials */}
-        <section className="py-20">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h3 className="text-3xl font-bold text-foreground text-center mb-12">What Parents Are Saying</h3>
-            
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="glass-card p-8">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center mr-4">
-                    <span className="text-white font-bold">S</span>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold">Sarah M.</h4>
-                    <p className="text-muted-foreground text-sm">Mother of High School Junior</p>
-                  </div>
-                </div>
-                <p className="text-muted-foreground italic">
-                  "My daughter went from struggling with complex problems to approaching them systematically. 
-                  The critical thinking skills she's learning are already showing up in her other classes."
-                </p>
-              </div>
-
-              <div className="glass-card p-8">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center mr-4">
-                    <span className="text-white font-bold">D</span>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold">David L.</h4>
-                    <p className="text-muted-foreground text-sm">Father of Middle School Student</p>
-                  </div>
-                </div>
-                <p className="text-muted-foreground italic">
-                  "These aren't just academic skills - they're life skills. My son is more confident 
-                  tackling any challenge because he has these mental frameworks to rely on."
-                </p>
               </div>
             </div>
           </div>
@@ -239,18 +282,17 @@ const About = () => {
         {/* Call to Action */}
         <section className="py-20 bg-muted/5">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h3 className="text-3xl font-bold text-foreground mb-6">Give Your Child the Ultimate Advantage</h3>
+            <h3 className="text-3xl font-bold text-foreground mb-6">Ready to Build Intelligent Software?</h3>
             <p className="text-xl text-muted-foreground leading-relaxed mb-8">
-              In a world where AI is changing everything, critical thinking and systems reasoning 
-              become more valuable than ever. Give your child the tools to succeed in any field 
-              they choose.
+              Let's discuss how critical thinking and AI can transform your business operations. 
+              From concept to deployment, we're your partners in building smarter software.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/tutoring" className="btn-primary">
-                Start Their Journey Today
+              <Link to="/contact" className="btn-primary">
+                Book a Discovery Call
               </Link>
-              <Link to="/contact" className="btn-secondary">
-                Schedule a Consultation
+              <Link to="/live-builds" className="btn-secondary">
+                See Our Live Builds
               </Link>
             </div>
           </div>
