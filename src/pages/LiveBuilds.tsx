@@ -247,8 +247,19 @@ const LiveBuildCard = ({ build }: { build: LiveBuild }) => {
   const isUpcoming = buildDate > now;
   const isCompleted = buildDate <= now;
 
+  // Function to get stock image based on title
+  const getStockImage = (title: string) => {
+    if (title.includes('Real Estate')) return '/src/assets/real-estate-analysis.jpg';
+    if (title.includes('Finance') || title.includes('Copilot')) return '/src/assets/finance-ai-dashboard.jpg';
+    if (title.includes('Hospitality')) return '/src/assets/hospitality-optimizer.jpg';
+    return '/src/assets/real-estate-analysis.jpg'; // fallback
+  };
+
   return (
-    <div className="glass-card p-6 group hover:scale-105 transition-all duration-500">
+    <Link 
+      to={`/live-builds/${build.id}`} 
+      className="glass-card p-6 group hover:scale-105 transition-all duration-500 block"
+    >
       {/* Status Badge */}
       <div className="flex items-center justify-between mb-4">
         <span className={`px-3 py-1 rounded-full text-xs font-medium ${
@@ -264,15 +275,13 @@ const LiveBuildCard = ({ build }: { build: LiveBuild }) => {
       </div>
 
       {/* Image */}
-      {build.image_url && (
-        <div className="aspect-video mb-4 rounded-xl overflow-hidden">
-          <img 
-            src={build.image_url} 
-            alt={build.title}
-            className="w-full h-full object-cover"
-          />
-        </div>
-      )}
+      <div className="aspect-video mb-4 rounded-xl overflow-hidden">
+        <img 
+          src={build.image_url || getStockImage(build.title)} 
+          alt={build.title}
+          className="w-full h-full object-cover"
+        />
+      </div>
 
       {/* Content */}
       <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
@@ -309,14 +318,10 @@ const LiveBuildCard = ({ build }: { build: LiveBuild }) => {
       )}
 
       {/* Actions */}
-      <div className="flex gap-2">
-        <Link
-          to={`/live-builds/${build.id}`}
-          className="flex-1 btn-glass text-sm py-2 px-4 text-center"
-        >
-          View Details
-          <ArrowRight className="ml-2 w-4 h-4" />
-        </Link>
+      <div className="flex gap-2 mt-auto">
+        <div className="flex-1 btn-glass text-sm py-2 px-4 text-center inline-flex items-center justify-center">
+          View Details <ArrowRight className="ml-2 w-4 h-4" />
+        </div>
         
         {isUpcoming && build.calendly_url && (
           <a
@@ -324,6 +329,7 @@ const LiveBuildCard = ({ build }: { build: LiveBuild }) => {
             target="_blank"
             rel="noopener noreferrer"
             className="btn-primary text-sm py-2 px-4 flex items-center gap-2"
+            onClick={(e) => e.stopPropagation()}
           >
             Reserve Spot
             <ExternalLink className="w-4 h-4" />
@@ -336,13 +342,14 @@ const LiveBuildCard = ({ build }: { build: LiveBuild }) => {
             target="_blank"
             rel="noopener noreferrer"
             className="btn-primary text-sm py-2 px-4 flex items-center gap-2"
+            onClick={(e) => e.stopPropagation()}
           >
             Watch Replay
             <Play className="w-4 h-4" />
           </a>
         )}
       </div>
-    </div>
+    </Link>
   );
 };
 

@@ -102,6 +102,14 @@ const LiveBuildDetail = () => {
   const isUpcoming = buildDate > now;
   const isCompleted = buildDate <= now;
 
+  // Function to get stock image based on title
+  const getStockImage = (title: string) => {
+    if (title.includes('Real Estate')) return '/src/assets/real-estate-analysis.jpg';
+    if (title.includes('Finance') || title.includes('Copilot')) return '/src/assets/finance-ai-dashboard.jpg';
+    if (title.includes('Hospitality')) return '/src/assets/hospitality-optimizer.jpg';
+    return '/src/assets/real-estate-analysis.jpg'; // fallback
+  };
+
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -171,15 +179,13 @@ const LiveBuildDetail = () => {
           )}
 
           {/* Image */}
-          {liveBuild.image_url && (
-            <div className="aspect-video mb-8 rounded-2xl overflow-hidden">
-              <img 
-                src={liveBuild.image_url} 
-                alt={liveBuild.title}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          )}
+          <div className="aspect-video mb-8 rounded-2xl overflow-hidden">
+            <img 
+              src={liveBuild.image_url || getStockImage(liveBuild.title)} 
+              alt={liveBuild.title}
+              className="w-full h-full object-cover"
+            />
+          </div>
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 mb-12">
