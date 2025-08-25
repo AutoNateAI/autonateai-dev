@@ -202,7 +202,7 @@ const BlogPost = () => {
         <div className="container mx-auto px-6 py-24 text-center">
           <h1 className="text-4xl font-bold mb-4">Blog Post Not Found</h1>
           <p className="text-muted-foreground mb-8">The blog post you're looking for doesn't exist.</p>
-          <Link to="/blog">
+          <Link to="/blogs">
             <Button>
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Blog
@@ -221,7 +221,7 @@ const BlogPost = () => {
       {/* Article Header */}
       <div className="container mx-auto px-6 pt-24 pb-12">
         <div className="max-w-4xl mx-auto">
-          <Link to="/blog" className="inline-flex items-center text-primary hover:text-primary/80 mb-8 transition-colors">
+          <Link to="/blogs" className="inline-flex items-center text-primary hover:text-primary/80 mb-8 transition-colors">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Blog
           </Link>

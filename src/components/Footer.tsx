@@ -53,15 +53,8 @@ const Footer = () => {
 
           {/* Services Column */}
           <div>
-            {/*<h3 className="font-semibold text-foreground mb-6">Services</h3>
-             <div className="space-y-4">
-              <Link to="/coaching" className="block text-muted-foreground hover:text-primary transition-colors">
-                Private Coaching
-              </Link>
-              <Link to="/workshops" className="block text-muted-foreground hover:text-primary transition-colors">
-                Research Workshops
-              </Link> */}
-              <Link to="/blog" className="block text-muted-foreground hover:text-primary transition-colors">
+            <div className="space-y-4">
+              <Link to="/blogs" className="block text-muted-foreground hover:text-primary transition-colors">
                 Blog
               </Link>
               <Link to="/contact" className="block text-muted-foreground hover:text-primary transition-colors">
@@ -87,8 +80,8 @@ const Footer = () => {
                 Privacy Policy
               </Link>
             </div>
-          </div>
-        </div> */}
+          </div> */}
+        </div>
 
         {/* Bottom Section */}
         <div className="border-t border-border/20 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
