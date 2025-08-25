@@ -20,6 +20,9 @@ import Contact from "./pages/Contact";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import Grants from "./pages/Grants";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
+import Support from "./pages/Support";
 
 import Workshops from "./pages/Workshops";
 import PaymentSuccess from "./pages/PaymentSuccess";
@@ -44,6 +47,9 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/grants" element={<Grants />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/support" element={<Support />} />
             <Route path="/ascension-protocol" element={<AscensionProtocol />} />
             <Route path="/payment-success" element={<PaymentSuccess />} />
             <Route path="*" element={<NotFound />} />

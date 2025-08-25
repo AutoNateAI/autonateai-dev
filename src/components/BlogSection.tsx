@@ -1,36 +1,71 @@
 import { ArrowRight, Calendar, User, Tag } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+
+interface Blog {
+  id: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  author: string;
+  read_time: string;
+  slug: string;
+  created_at: string;
+}
 
 const BlogSection = () => {
-  const blogPosts = [
-    {
-      title: "How We Used Our Data Pipeline to Discover Novel Correlations in Climate Data",
-      excerpt: "A detailed walkthrough of how our workflow system enabled efficient analysis of complex climate datasets, leading to breakthrough discoveries.",
-      category: "Case Studies",
-      date: "July 18, 2025",
-      author: "Dr. Maria Santos",
-      readTime: "8 min read",
-      slug: "climate-data-correlations"
-    },
-    {
-      title: "5 Ways AI Can Enhance Your Literature Review Process",
-      excerpt: "Practical strategies to leverage AI tools for more efficient and thorough literature reviews without compromising academic rigor.",
-      category: "Tutorials", 
-      date: "July 15, 2025",
-      author: "Dr. James Wilson",
-      readTime: "6 min read",
-      slug: "ai-enhance-lit-review"
-    },
-    {
-      title: "Grant Writing Trends: What Funders Are Looking For in 2025",
-      excerpt: "Our analysis of recent grant awards reveals shifting priorities across major funding agencies and actionable insights for researchers.",
-      category: "Research",
-      date: "July 12, 2025", 
-      author: "Dr. Sarah Chen",
-      readTime: "10 min read",
-      slug: "grant-trends-2025"
-    }
-  ];
+  const [blogPosts, setBlogPosts] = useState<Blog[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchRecentBlogs = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('blogs')
+          .select('id, title, excerpt, category, author, read_time, slug, created_at')
+          .eq('published', true)
+          .order('created_at', { ascending: false })
+          .limit(3);
+
+        if (error) {
+          console.error('Error fetching blogs:', error);
+          return;
+        }
+
+        setBlogPosts(data || []);
+      } catch (error) {
+        console.error('Error fetching blogs:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRecentBlogs();
+  }, []);
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
+  if (loading) {
+    return (
+      <section className="py-24 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <div className="animate-pulse">
+              <div className="h-8 bg-muted rounded w-1/2 mx-auto mb-4"></div>
+              <div className="h-4 bg-muted rounded w-1/3 mx-auto"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-24 relative">
@@ -42,7 +77,7 @@ const BlogSection = () => {
             <span className="text-gradient">Research Blog</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Insights, strategies, and research for AI-augmented academic workflows.
+            Real insights from our team building AI-powered research tools. Learn how to accelerate your academic work with proven strategies and cutting-edge techniques.
           </p>
         </div>
 
@@ -75,7 +110,7 @@ const BlogSection = () => {
                 <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6">
                   <div className="flex items-center gap-1">
                     <Calendar className="w-4 h-4" />
-                    {post.date}
+                    {formatDate(post.created_at)}
                   </div>
                   <div className="flex items-center gap-1">
                     <User className="w-4 h-4" />
