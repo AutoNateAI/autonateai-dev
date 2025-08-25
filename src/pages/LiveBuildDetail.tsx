@@ -5,9 +5,6 @@ import Footer from '../components/Footer';
 import { Calendar, Clock, Users, ArrowLeft, ExternalLink, Play, Tag } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { format } from 'date-fns';
-import realEstateImg from '../assets/real-estate-analysis.jpg';
-import financeImg from '../assets/finance-ai-dashboard.jpg';
-import hospitalityImg from '../assets/hospitality-optimizer.jpg';
 
 interface LiveBuild {
   id: string;
@@ -105,13 +102,6 @@ const LiveBuildDetail = () => {
   const isUpcoming = buildDate > now;
   const isCompleted = buildDate <= now;
 
-  // Function to get stock image based on title
-  const getStockImage = (title: string) => {
-    if (title.includes('Real Estate')) return realEstateImg;
-    if (title.includes('Finance') || title.includes('Copilot')) return financeImg;
-    if (title.includes('Hospitality')) return hospitalityImg;
-    return realEstateImg; // fallback
-  };
 
   return (
     <div className="min-h-screen">
@@ -184,7 +174,7 @@ const LiveBuildDetail = () => {
           {/* Image */}
           <div className="aspect-video mb-8 rounded-2xl overflow-hidden">
             <img 
-              src={liveBuild.image_url || getStockImage(liveBuild.title)} 
+              src={liveBuild.image_url || '/placeholder.svg'} 
               alt={liveBuild.title}
               className="w-full h-full object-cover"
             />
