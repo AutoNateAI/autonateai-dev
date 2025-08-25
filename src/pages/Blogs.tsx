@@ -4,6 +4,15 @@ import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import { Clock, User, Tag, ArrowRight, Search } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 interface Blog {
   id: string;
@@ -22,6 +31,8 @@ interface Blog {
   updated_at: string;
 }
 
+const ITEMS_PER_PAGE = 6;
+
 const Blogs = () => {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [filteredBlogs, setFilteredBlogs] = useState<Blog[]>([]);
@@ -29,6 +40,7 @@ const Blogs = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [categories, setCategories] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     fetchBlogs();
@@ -36,6 +48,7 @@ const Blogs = () => {
 
   useEffect(() => {
     filterBlogs();
+    setCurrentPage(1); // Reset to first page when filters change
   }, [blogs, searchTerm, selectedCategory]);
 
   const fetchBlogs = async () => {
@@ -82,6 +95,13 @@ const Blogs = () => {
 
   const featuredBlogs = blogs.filter(blog => blog.featured).slice(0, 2);
   const regularBlogs = filteredBlogs.filter(blog => !blog.featured);
+
+  // Pagination
+  const totalPages = Math.ceil(regularBlogs.length / ITEMS_PER_PAGE);
+  const paginatedBlogs = regularBlogs.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
 
   if (loading) {
     return (
@@ -185,11 +205,57 @@ const Blogs = () => {
               <p className="text-xl text-muted-foreground">No articles found matching your criteria.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {regularBlogs.map((blog) => (
-                <BlogCard key={blog.id} blog={blog} />
-              ))}
-            </div>
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                {paginatedBlogs.map((blog) => (
+                  <BlogCard key={blog.id} blog={blog} />
+                ))}
+              </div>
+
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <Pagination>
+                  <PaginationContent>
+                    <PaginationItem>
+                      <PaginationPrevious 
+                        href="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          if (currentPage > 1) setCurrentPage(currentPage - 1);
+                        }}
+                        className={currentPage <= 1 ? 'pointer-events-none opacity-50' : ''}
+                      />
+                    </PaginationItem>
+                    
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                      <PaginationItem key={page}>
+                        <PaginationLink
+                          href="#"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setCurrentPage(page);
+                          }}
+                          isActive={currentPage === page}
+                        >
+                          {page}
+                        </PaginationLink>
+                      </PaginationItem>
+                    ))}
+                    
+                    <PaginationItem>
+                      <PaginationNext 
+                        href="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+                        }}
+                        className={currentPage >= totalPages ? 'pointer-events-none opacity-50' : ''}
+                      />
+                    </PaginationItem>
+                  </PaginationContent>
+                </Pagination>
+              )}
+            </>
           )}
         </div>
       </section>

@@ -2,9 +2,18 @@ import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
-import { Calendar, Clock, Users, Tag, ArrowRight, Play, ExternalLink } from 'lucide-react';
+import { Calendar, Clock, Users, Tag, ArrowRight, Play, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { format } from 'date-fns';
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 interface LiveBuild {
   id: string;
@@ -24,22 +33,19 @@ interface LiveBuild {
   created_at: string;
 }
 
+const ITEMS_PER_PAGE = 6;
+
 const LiveBuilds = () => {
   const [liveBuilds, setLiveBuilds] = useState<LiveBuild[]>([]);
-  const [filteredBuilds, setFilteredBuilds] = useState<LiveBuild[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [filterStatus, setFilterStatus] = useState<'all' | 'upcoming' | 'completed'>('all');
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [allTags, setAllTags] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     fetchLiveBuilds();
   }, []);
-
-  useEffect(() => {
-    filterBuilds();
-  }, [liveBuilds, searchTerm, filterStatus, selectedTags]);
 
   const fetchLiveBuilds = async () => {
     try {
@@ -73,8 +79,8 @@ const LiveBuilds = () => {
     }
   };
 
-  const filterBuilds = () => {
-    let filtered = [...liveBuilds];
+  const filterBuilds = (builds: LiveBuild[]) => {
+    let filtered = [...builds];
 
     // Search filter
     if (searchTerm) {
@@ -85,19 +91,6 @@ const LiveBuilds = () => {
       );
     }
 
-    // Status filter
-    if (filterStatus !== 'all') {
-      const now = new Date();
-      filtered = filtered.filter(build => {
-        const buildDate = new Date(build.scheduled_date);
-        if (filterStatus === 'upcoming') {
-          return buildDate > now;
-        } else {
-          return buildDate <= now;
-        }
-      });
-    }
-
     // Tags filter
     if (selectedTags.length > 0) {
       filtered = filtered.filter(build =>
@@ -105,8 +98,26 @@ const LiveBuilds = () => {
       );
     }
 
-    setFilteredBuilds(filtered);
+    return filtered;
   };
+
+  const now = new Date();
+  const filteredBuilds = filterBuilds(liveBuilds);
+  
+  const upcomingBuilds = filteredBuilds.filter(build => 
+    new Date(build.scheduled_date) > now
+  );
+  
+  const pastBuilds = filteredBuilds.filter(build => 
+    new Date(build.scheduled_date) <= now
+  );
+
+  // Pagination for past builds
+  const totalPastPages = Math.ceil(pastBuilds.length / ITEMS_PER_PAGE);
+  const paginatedPastBuilds = pastBuilds.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
 
   const toggleTag = (tag: string) => {
     setSelectedTags(prev =>
@@ -114,26 +125,6 @@ const LiveBuilds = () => {
         ? prev.filter(t => t !== tag)
         : [...prev, tag]
     );
-  };
-
-  const getStatusColor = (build: LiveBuild) => {
-    const now = new Date();
-    const buildDate = new Date(build.scheduled_date);
-    
-    if (buildDate > now) return 'text-blue-500';
-    if (build.status === 'live') return 'text-green-500';
-    if (build.status === 'completed') return 'text-gray-500';
-    return 'text-red-500';
-  };
-
-  const getStatusText = (build: LiveBuild) => {
-    const now = new Date();
-    const buildDate = new Date(build.scheduled_date);
-    
-    if (buildDate > now) return 'Upcoming';
-    if (build.status === 'live') return 'Live Now';
-    if (build.status === 'completed') return 'Completed';
-    return 'Cancelled';
   };
 
   if (loading) {
@@ -177,21 +168,6 @@ const LiveBuilds = () => {
                   className="w-full px-4 py-2 rounded-xl bg-background/50 border border-border focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
                 />
               </div>
-              <div className="flex gap-2">
-                {['all', 'upcoming', 'completed'].map((status) => (
-                  <button
-                    key={status}
-                    onClick={() => setFilterStatus(status as any)}
-                    className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-                      filterStatus === status
-                        ? 'bg-primary text-white'
-                        : 'bg-background/50 text-muted-foreground hover:bg-primary/10'
-                    }`}
-                  >
-                    {status.charAt(0).toUpperCase() + status.slice(1)}
-                  </button>
-                ))}
-              </div>
             </div>
 
             {/* Tags Filter */}
@@ -219,22 +195,97 @@ const LiveBuilds = () => {
         </div>
       </section>
 
-      {/* Live Builds Grid */}
-      <section className="pb-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {filteredBuilds.length === 0 ? (
-            <div className="text-center py-16">
-              <p className="text-xl text-muted-foreground">No live builds found matching your criteria.</p>
-            </div>
-          ) : (
+      {/* Upcoming Builds Section */}
+      {upcomingBuilds.length > 0 && (
+        <section className="pb-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-bold mb-8">Upcoming Live Builds</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredBuilds.map((build) => (
+              {upcomingBuilds.map((build) => (
                 <LiveBuildCard key={build.id} build={build} />
               ))}
             </div>
-          )}
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
+
+      {/* Past Builds Section */}
+      {pastBuilds.length > 0 && (
+        <section className="pb-24">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-bold mb-8">Past Live Builds</h2>
+            
+            {paginatedPastBuilds.length === 0 ? (
+              <div className="text-center py-16">
+                <p className="text-xl text-muted-foreground">No past builds found matching your criteria.</p>
+              </div>
+            ) : (
+              <>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                  {paginatedPastBuilds.map((build) => (
+                    <LiveBuildCard key={build.id} build={build} />
+                  ))}
+                </div>
+
+                {/* Pagination */}
+                {totalPastPages > 1 && (
+                  <Pagination>
+                    <PaginationContent>
+                      <PaginationItem>
+                        <PaginationPrevious 
+                          href="#"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            if (currentPage > 1) setCurrentPage(currentPage - 1);
+                          }}
+                          className={currentPage <= 1 ? 'pointer-events-none opacity-50' : ''}
+                        />
+                      </PaginationItem>
+                      
+                      {Array.from({ length: totalPastPages }, (_, i) => i + 1).map((page) => (
+                        <PaginationItem key={page}>
+                          <PaginationLink
+                            href="#"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setCurrentPage(page);
+                            }}
+                            isActive={currentPage === page}
+                          >
+                            {page}
+                          </PaginationLink>
+                        </PaginationItem>
+                      ))}
+                      
+                      <PaginationItem>
+                        <PaginationNext 
+                          href="#"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            if (currentPage < totalPastPages) setCurrentPage(currentPage + 1);
+                          }}
+                          className={currentPage >= totalPastPages ? 'pointer-events-none opacity-50' : ''}
+                        />
+                      </PaginationItem>
+                    </PaginationContent>
+                  </Pagination>
+                )}
+              </>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* No results message */}
+      {upcomingBuilds.length === 0 && pastBuilds.length === 0 && (
+        <section className="pb-24">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center py-16">
+              <p className="text-xl text-muted-foreground">No live builds found matching your criteria.</p>
+            </div>
+          </div>
+        </section>
+      )}
 
       <Footer />
     </div>
@@ -246,7 +297,6 @@ const LiveBuildCard = ({ build }: { build: LiveBuild }) => {
   const buildDate = new Date(build.scheduled_date);
   const isUpcoming = buildDate > now;
   const isCompleted = buildDate <= now;
-
 
   return (
     <Link 

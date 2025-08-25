@@ -1,4 +1,4 @@
-import { ArrowRight, Calendar, User, Tag } from 'lucide-react';
+import { ArrowRight, Calendar, User, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
@@ -85,60 +85,60 @@ const BlogSection = () => {
 
         {/* Blog Posts Grid */}
         <div className="block lg:hidden mb-16">
-          {/* Mobile Scrollable Row */}
-          <div className="flex gap-6 overflow-x-auto pb-4 px-4 -mx-4 snap-x snap-mandatory">
-            {blogPosts.map((post, index) => (
-              <Link
-                key={index}
-                to={`/blog/${post.slug}`}
-                className="flex-shrink-0 w-80 snap-start"
-              >
-                <article className="glass-card group hover:scale-105 transition-all duration-500 overflow-hidden h-full">
-                  {/* Blog Thumbnail */}
-                  {post.hero_image && (
-                    <div className="aspect-video overflow-hidden">
-                      <img 
-                        src={post.hero_image} 
-                        alt={post.hero_image_alt || post.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      />
-                    </div>
-                  )}
-                  
-                  {/* Category Badge */}
-                  <div className="p-6 pb-0">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
-                      <Tag className="w-3 h-3" />
-                      {post.category}
-                    </div>
+        {/* Mobile Scrollable Row */}
+        <div className="flex gap-6 overflow-x-auto pb-4 px-4 -mx-4 snap-x snap-mandatory">
+          {blogPosts.map((post, index) => (
+            <Link
+              key={index}
+              to={`/blog/${post.slug}`}
+              className="flex-shrink-0 w-80 snap-start group"
+            >
+              <article className="glass-card p-6 group-hover:scale-105 transition-all duration-500 h-full">
+                {/* Blog Thumbnail */}
+                {post.hero_image && (
+                  <div className="aspect-video mb-4 rounded-xl overflow-hidden">
+                    <img 
+                      src={post.hero_image} 
+                      alt={post.hero_image_alt || post.title}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-
-                  {/* Content */}
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors leading-tight">
-                      {post.title}
-                    </h3>
-                    
-                    <p className="text-muted-foreground mb-6 leading-relaxed">
-                      {post.excerpt}
-                    </p>
-
-                    {/* Meta Information */}
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                      <div className="flex items-center gap-1">
-                        <Calendar className="w-4 h-4" />
-                        {formatDate(post.created_at)}
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <User className="w-4 h-4" />
-                        {post.author}
-                      </div>
-                    </div>
+                )}
+                
+                {/* Meta Information Top */}
+                <div className="flex items-center gap-4 mb-4 text-sm text-muted-foreground">
+                  <span className="px-3 py-1 bg-primary/10 text-primary rounded-full">
+                    {post.category}
+                  </span>
+                  <div className="flex items-center gap-1">
+                    <Clock className="w-4 h-4" />
+                    {post.read_time}
                   </div>
-                </article>
-              </Link>
-            ))}
-          </div>
+                </div>
+
+                {/* Content */}
+                <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
+                  {post.title}
+                </h3>
+                
+                <p className="text-muted-foreground mb-4 line-clamp-3">
+                  {post.excerpt}
+                </p>
+
+                {/* Author and Arrow */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <User className="w-4 h-4" />
+                    {post.author}
+                  </div>
+                  <div className="text-primary group-hover:text-primary/80 transition-colors">
+                    <ArrowRight className="w-4 h-4" />
+                  </div>
+                </div>
+              </article>
+            </Link>
+          ))}
+        </div>
         </div>
 
         {/* Desktop Grid */}
@@ -147,48 +147,48 @@ const BlogSection = () => {
             <Link
               key={index}
               to={`/blog/${post.slug}`}
-              className="block"
+              className="group"
             >
-              <article className="glass-card group hover:scale-105 transition-all duration-500 overflow-hidden h-full">
+              <article className="glass-card p-6 group-hover:scale-105 transition-all duration-500">
                 {/* Blog Thumbnail */}
                 {post.hero_image && (
-                  <div className="aspect-video overflow-hidden">
+                  <div className="aspect-video mb-4 rounded-xl overflow-hidden">
                     <img 
                       src={post.hero_image} 
                       alt={post.hero_image_alt || post.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="w-full h-full object-cover"
                     />
                   </div>
                 )}
                 
-                {/* Category Badge */}
-                <div className="p-6 pb-0">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
-                    <Tag className="w-3 h-3" />
+                {/* Meta Information Top */}
+                <div className="flex items-center gap-4 mb-4 text-sm text-muted-foreground">
+                  <span className="px-3 py-1 bg-primary/10 text-primary rounded-full">
                     {post.category}
+                  </span>
+                  <div className="flex items-center gap-1">
+                    <Clock className="w-4 h-4" />
+                    {post.read_time}
                   </div>
                 </div>
 
                 {/* Content */}
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors leading-tight">
-                    {post.title}
-                  </h3>
-                  
-                  <p className="text-muted-foreground mb-6 leading-relaxed">
-                    {post.excerpt}
-                  </p>
+                <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
+                  {post.title}
+                </h3>
+                
+                <p className="text-muted-foreground mb-4 line-clamp-3">
+                  {post.excerpt}
+                </p>
 
-                  {/* Meta Information */}
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="w-4 h-4" />
-                      {formatDate(post.created_at)}
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <User className="w-4 h-4" />
-                      {post.author}
-                    </div>
+                {/* Author and Arrow */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <User className="w-4 h-4" />
+                    {post.author}
+                  </div>
+                  <div className="text-primary group-hover:text-primary/80 transition-colors">
+                    <ArrowRight className="w-4 h-4" />
                   </div>
                 </div>
               </article>
