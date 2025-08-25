@@ -22,9 +22,12 @@ const Footer = () => {
                 <Mail className="w-4 h-4 text-primary" />
                 autonate.ai@gmail.com
               </div>
-              <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                <MapPin className="w-4 h-4 text-primary" />
-                Honolulu, Hawaii
+              <div className="flex items-start gap-3 text-sm text-muted-foreground">
+                <MapPin className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                <div>
+                  1001 BISHOP ST., STE 2685A<br />
+                  HONOLULU, HI 96813 USA
+                </div>
               </div>
             </div>
           </div>

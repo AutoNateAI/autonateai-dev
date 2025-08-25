@@ -70,26 +70,33 @@ const About = () => {
                 </div>
                 <div className="text-center">
                   <h2 className="text-2xl font-bold text-foreground mb-2">AutoNate</h2>
-                  <p className="text-primary font-semibold">Founder & CEO, AutoNateAI</p>
+                  <p className="text-primary font-semibold">Founder & CEO, AutoNateAI LLC</p>
                   <p className="text-muted-foreground mt-2">Computer Science, University of Michigan 2019</p>
+                  <div className="mt-4 px-4 py-2 bg-primary/10 rounded-lg">
+                    <p className="text-xs text-primary font-medium">Hawaii-Based • Building Tech Globally</p>
+                  </div>
                 </div>
               </div>
 
               <div className="space-y-6">
-                <h3 className="text-3xl font-bold text-foreground">Visionary Leadership & Excellence</h3>
+                <h3 className="text-3xl font-bold text-foreground">Visionary Leadership from Paradise</h3>
                 
                 <div className="prose prose-lg max-w-none">
                   <p className="text-muted-foreground leading-relaxed">
-                    AutoNate is the founder of AutoNateAI, who has handpicked a distinguished team of industry leaders who excel in their respective fields. Together, they represent decades of combined expertise across AI development, education, and enterprise solutions.
+                    From the beautiful islands of Hawaii, AutoNate founded AutoNateAI LLC with a vision to build world-class technology that impacts students globally. As a proud Hawaii-based company, we combine the innovative spirit of Silicon Valley with the collaborative aloha culture of the islands.
                   </p>
                   
                   <p className="text-muted-foreground leading-relaxed">
-                    Under AutoNate's leadership, our team combines cutting-edge AI research with proven educational methodologies to deliver transformative learning experiences that prepare the next generation for an AI-enhanced future.
+                    AutoNate has strategically handpicked a distinguished team of industry leaders who excel in their respective fields - from Microsoft security engineers to Citibank fintech specialists. Together, they represent decades of combined expertise across AI development, education, and enterprise solutions.
                   </p>
                   
                   <p className="text-muted-foreground leading-relaxed">
-                    Our carefully curated team of experts brings real-world experience from leading technology companies, ensuring that every student receives instruction from professionals who understand both the technical landscape and the skills needed to thrive in tomorrow's economy.
+                    Under AutoNate's leadership, our team combines cutting-edge AI research with proven educational methodologies to deliver transformative learning experiences. We're building the future of education from Hawaii, serving students worldwide with the technical excellence of top-tier companies and the personalized touch of island hospitality.
                   </p>
+                  
+                  <div className="mt-6 p-4 bg-gradient-subtle rounded-lg border border-primary/20">
+                    <p className="text-sm text-foreground font-medium">🌺 Incorporated in Hawaii • Building Global Impact</p>
+                  </div>
                 </div>
               </div>
             </div>
