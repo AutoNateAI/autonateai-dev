@@ -23,6 +23,11 @@ import Grants from "./pages/Grants";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Support from "./pages/Support";
+import Services from "./pages/Services";
+import Foundations from "./pages/services/Foundations";
+import GrantRecipients from "./pages/services/GrantRecipients";
+import VentureCapital from "./pages/services/VentureCapital";
+import Startups from "./pages/services/Startups";
 
 import Workshops from "./pages/Workshops";
 import PaymentSuccess from "./pages/PaymentSuccess";
@@ -40,6 +45,11 @@ const App = () => (
           <ScrollToTop />
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/services/foundations" element={<Foundations />} />
+            <Route path="/services/grant-recipients" element={<GrantRecipients />} />
+            <Route path="/services/venture-capital" element={<VentureCapital />} />
+            <Route path="/services/startups" element={<Startups />} />
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/live-builds" element={<LiveBuilds />} />

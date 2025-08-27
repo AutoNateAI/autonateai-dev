@@ -22,6 +22,13 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
             <Link 
+              to="/services" 
+              className="text-muted-foreground hover:text-primary transition-colors relative group"
+            >
+              Services
+              <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+            </Link>
+            <Link 
               to="/live-builds" 
               className="text-muted-foreground hover:text-primary transition-colors relative group"
             >
@@ -74,6 +81,13 @@ const Navigation = () => {
         {isOpen && (
           <div className="lg:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-xl border-t border-border/10 shadow-lg">
             <div className="px-4 py-6 space-y-4">
+              <Link 
+                to="/services" 
+                className="block text-muted-foreground hover:text-primary transition-colors py-2"
+                onClick={() => setIsOpen(false)}
+              >
+                Services
+              </Link>
               <Link 
                 to="/live-builds" 
                 className="block text-muted-foreground hover:text-primary transition-colors py-2"
