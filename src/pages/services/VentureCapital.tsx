@@ -160,7 +160,10 @@ const VentureCapital = () => {
                 Let's discuss how our AI-powered dashboards can help you make better investment decisions 
                 and provide superior value to your LPs.
               </p>
-              <Link to="/contact" className="btn-primary text-lg px-8 py-4">
+              <Link 
+                to="/contact?demo=venture-capital" 
+                className="btn-primary text-lg px-4 py-3 sm:px-8 sm:py-4 inline-block text-center"
+              >
                 Book a VC Dashboard Demo
               </Link>
             </div>

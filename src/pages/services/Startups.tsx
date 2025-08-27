@@ -160,7 +160,10 @@ const Startups = () => {
                 Let's discuss how our unified dashboards can help you move faster, 
                 track everything, and scale efficiently with complete observability.
               </p>
-              <Link to="/contact" className="btn-primary text-lg px-8 py-4">
+              <Link 
+                to="/contact?demo=startup" 
+                className="btn-primary text-lg px-4 py-3 sm:px-8 sm:py-4 inline-block text-center"
+              >
                 Book a Startup Dashboard Demo
               </Link>
             </div>

@@ -160,7 +160,10 @@ const Foundations = () => {
                 Let's discuss how our custom dashboards can help you measure impact more effectively 
                 and streamline your grant management process.
               </p>
-              <Link to="/contact" className="btn-primary text-lg px-8 py-4">
+              <Link 
+                to="/contact?demo=foundation" 
+                className="btn-primary text-lg px-4 py-3 sm:px-8 sm:py-4 inline-block text-center"
+              >
                 Book a Foundation Dashboard Demo
               </Link>
             </div>

@@ -160,7 +160,10 @@ const GrantRecipients = () => {
                 Let's discuss how our dashboards can reduce reporting overhead and help you focus 
                 on what matters most — your research and impact.
               </p>
-              <Link to="/contact" className="btn-primary text-lg px-8 py-4">
+              <Link 
+                to="/contact?demo=grant-recipient" 
+                className="btn-primary text-lg px-4 py-3 sm:px-8 sm:py-4 inline-block text-center"
+              >
                 Book a Recipient Dashboard Demo
               </Link>
             </div>

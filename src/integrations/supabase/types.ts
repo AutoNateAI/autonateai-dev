@@ -159,6 +159,7 @@ export type Database = {
         Row: {
           author: string
           category: string
+          chatgpt_url: string | null
           content: string
           content_images: Json | null
           created_at: string
@@ -167,6 +168,7 @@ export type Database = {
           hero_image: string | null
           hero_image_alt: string | null
           id: string
+          notebook_lm_url: string | null
           published: boolean | null
           read_time: string
           slug: string
@@ -176,6 +178,7 @@ export type Database = {
         Insert: {
           author: string
           category: string
+          chatgpt_url?: string | null
           content: string
           content_images?: Json | null
           created_at?: string
@@ -184,6 +187,7 @@ export type Database = {
           hero_image?: string | null
           hero_image_alt?: string | null
           id?: string
+          notebook_lm_url?: string | null
           published?: boolean | null
           read_time: string
           slug: string
@@ -193,6 +197,7 @@ export type Database = {
         Update: {
           author?: string
           category?: string
+          chatgpt_url?: string | null
           content?: string
           content_images?: Json | null
           created_at?: string
@@ -201,6 +206,7 @@ export type Database = {
           hero_image?: string | null
           hero_image_alt?: string | null
           id?: string
+          notebook_lm_url?: string | null
           published?: boolean | null
           read_time?: string
           slug?: string
@@ -248,6 +254,54 @@ export type Database = {
         }
         Relationships: []
       }
+      companies: {
+        Row: {
+          chatgpt_links: Json | null
+          company_size: string | null
+          created_at: string
+          id: string
+          industry: string | null
+          linkedin_url: string | null
+          location: string | null
+          name: string
+          notebooklm_links: Json | null
+          tags: Json | null
+          targeting_notes: string | null
+          updated_at: string
+          website: string | null
+        }
+        Insert: {
+          chatgpt_links?: Json | null
+          company_size?: string | null
+          created_at?: string
+          id?: string
+          industry?: string | null
+          linkedin_url?: string | null
+          location?: string | null
+          name: string
+          notebooklm_links?: Json | null
+          tags?: Json | null
+          targeting_notes?: string | null
+          updated_at?: string
+          website?: string | null
+        }
+        Update: {
+          chatgpt_links?: Json | null
+          company_size?: string | null
+          created_at?: string
+          id?: string
+          industry?: string | null
+          linkedin_url?: string | null
+          location?: string | null
+          name?: string
+          notebooklm_links?: Json | null
+          tags?: Json | null
+          targeting_notes?: string | null
+          updated_at?: string
+          website?: string | null
+        }
+        Relationships: []
+      }
       contact_inquiries: {
         Row: {
           company: string | null
@@ -281,6 +335,54 @@ export type Database = {
         }
         Relationships: []
       }
+      demo_requests: {
+        Row: {
+          ai_features: Json | null
+          audience_type: string
+          budget_range: string | null
+          company: string | null
+          created_at: string
+          custom_feature_request: string | null
+          email: string
+          id: string
+          name: string
+          project_description: string
+          selected_features: Json | null
+          timeline: string | null
+          updated_at: string
+        }
+        Insert: {
+          ai_features?: Json | null
+          audience_type: string
+          budget_range?: string | null
+          company?: string | null
+          created_at?: string
+          custom_feature_request?: string | null
+          email: string
+          id?: string
+          name: string
+          project_description: string
+          selected_features?: Json | null
+          timeline?: string | null
+          updated_at?: string
+        }
+        Update: {
+          ai_features?: Json | null
+          audience_type?: string
+          budget_range?: string | null
+          company?: string | null
+          created_at?: string
+          custom_feature_request?: string | null
+          email?: string
+          id?: string
+          name?: string
+          project_description?: string
+          selected_features?: Json | null
+          timeline?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       email_popup_tracking: {
         Row: {
           browser_fingerprint: string
@@ -307,6 +409,129 @@ export type Database = {
           last_shown?: string
         }
         Relationships: []
+      }
+      event_connections: {
+        Row: {
+          connection_quality: string | null
+          created_at: string
+          discussion_topics: string | null
+          event_id: string
+          follow_up_needed: boolean | null
+          follow_up_notes: string | null
+          id: string
+          person_id: string
+          updated_at: string
+        }
+        Insert: {
+          connection_quality?: string | null
+          created_at?: string
+          discussion_topics?: string | null
+          event_id: string
+          follow_up_needed?: boolean | null
+          follow_up_notes?: string | null
+          id?: string
+          person_id: string
+          updated_at?: string
+        }
+        Update: {
+          connection_quality?: string | null
+          created_at?: string
+          discussion_topics?: string | null
+          event_id?: string
+          follow_up_needed?: boolean | null
+          follow_up_notes?: string | null
+          id?: string
+          person_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "event_connections_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "networking_events"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "event_connections_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      events: {
+        Row: {
+          company_id: string | null
+          created_at: string
+          current_attendees: number | null
+          date_time: string | null
+          description: string | null
+          event_type: string
+          id: string
+          location: string | null
+          max_attendees: number | null
+          notes: string | null
+          organizer_person_id: string | null
+          status: string
+          tags: Json | null
+          title: string
+          updated_at: string
+          virtual_link: string | null
+        }
+        Insert: {
+          company_id?: string | null
+          created_at?: string
+          current_attendees?: number | null
+          date_time?: string | null
+          description?: string | null
+          event_type?: string
+          id?: string
+          location?: string | null
+          max_attendees?: number | null
+          notes?: string | null
+          organizer_person_id?: string | null
+          status?: string
+          tags?: Json | null
+          title: string
+          updated_at?: string
+          virtual_link?: string | null
+        }
+        Update: {
+          company_id?: string | null
+          created_at?: string
+          current_attendees?: number | null
+          date_time?: string | null
+          description?: string | null
+          event_type?: string
+          id?: string
+          location?: string | null
+          max_attendees?: number | null
+          notes?: string | null
+          organizer_person_id?: string | null
+          status?: string
+          tags?: Json | null
+          title?: string
+          updated_at?: string
+          virtual_link?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "events_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "events_organizer_person_id_fkey"
+            columns: ["organizer_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       form_submissions: {
         Row: {
@@ -533,6 +758,142 @@ export type Database = {
         }
         Relationships: []
       }
+      networking_events: {
+        Row: {
+          created_at: string
+          description: string | null
+          event_date: string
+          event_type: string | null
+          id: string
+          location: string | null
+          notes: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          event_date: string
+          event_type?: string | null
+          id?: string
+          location?: string | null
+          notes?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          event_date?: string
+          event_type?: string | null
+          id?: string
+          location?: string | null
+          notes?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      people: {
+        Row: {
+          chatgpt_links: Json | null
+          company_id: string | null
+          created_at: string
+          email: string | null
+          id: string
+          lead_status: string | null
+          linkedin_url: string | null
+          location: string | null
+          name: string
+          notebooklm_links: Json | null
+          position: string | null
+          profile_image_url: string | null
+          tags: Json | null
+          targeting_notes: string | null
+          updated_at: string
+        }
+        Insert: {
+          chatgpt_links?: Json | null
+          company_id?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          lead_status?: string | null
+          linkedin_url?: string | null
+          location?: string | null
+          name: string
+          notebooklm_links?: Json | null
+          position?: string | null
+          profile_image_url?: string | null
+          tags?: Json | null
+          targeting_notes?: string | null
+          updated_at?: string
+        }
+        Update: {
+          chatgpt_links?: Json | null
+          company_id?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          lead_status?: string | null
+          linkedin_url?: string | null
+          location?: string | null
+          name?: string
+          notebooklm_links?: Json | null
+          position?: string | null
+          profile_image_url?: string | null
+          tags?: Json | null
+          targeting_notes?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "people_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      person_notes: {
+        Row: {
+          created_at: string
+          id: string
+          note_category: string | null
+          note_text: string
+          person_id: string
+          priority: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          note_category?: string | null
+          note_text: string
+          person_id: string
+          priority?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          note_category?: string | null
+          note_text?: string
+          person_id?: string
+          priority?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "person_notes_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       product_access: {
         Row: {
           access_url: string
@@ -608,6 +969,48 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "product_images_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      product_people: {
+        Row: {
+          created_at: string
+          id: string
+          notes: string | null
+          person_id: string
+          product_id: string
+          relationship_type: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          person_id: string
+          product_id: string
+          relationship_type: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          person_id?: string
+          product_id?: string
+          relationship_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_people_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "product_people_product_id_fkey"
             columns: ["product_id"]
             isOneToOne: false
             referencedRelation: "products"
@@ -701,6 +1104,7 @@ export type Database = {
           status: string | null
           stripe_session_id: string
           updated_at: string
+          user_id: string | null
         }
         Insert: {
           amount: number
@@ -712,6 +1116,7 @@ export type Database = {
           status?: string | null
           stripe_session_id: string
           updated_at?: string
+          user_id?: string | null
         }
         Update: {
           amount?: number
@@ -723,6 +1128,7 @@ export type Database = {
           status?: string | null
           stripe_session_id?: string
           updated_at?: string
+          user_id?: string | null
         }
         Relationships: [
           {
@@ -733,6 +1139,308 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      service_people: {
+        Row: {
+          created_at: string
+          id: string
+          notes: string | null
+          person_id: string
+          relationship_type: string
+          service_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          person_id: string
+          relationship_type: string
+          service_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          person_id?: string
+          relationship_type?: string
+          service_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "service_people_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "service_people_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      services: {
+        Row: {
+          company_id: string
+          created_at: string
+          description: string | null
+          id: string
+          is_active: boolean | null
+          name: string
+          notes: string | null
+          price_range: string | null
+          pricing_model: string | null
+          service_type: string | null
+          tags: Json | null
+          updated_at: string
+        }
+        Insert: {
+          company_id: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean | null
+          name: string
+          notes?: string | null
+          price_range?: string | null
+          pricing_model?: string | null
+          service_type?: string | null
+          tags?: Json | null
+          updated_at?: string
+        }
+        Update: {
+          company_id?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          notes?: string | null
+          price_range?: string | null
+          pricing_model?: string | null
+          service_type?: string | null
+          tags?: Json | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "services_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      social_interactions: {
+        Row: {
+          comment_text: string
+          commenter_name: string
+          commenter_profile_url: string | null
+          created_at: string
+          id: string
+          interaction_timestamp: string
+          interaction_type: string
+          parent_interaction_id: string | null
+          person_id: string | null
+          post_id: string
+          updated_at: string
+        }
+        Insert: {
+          comment_text: string
+          commenter_name: string
+          commenter_profile_url?: string | null
+          created_at?: string
+          id?: string
+          interaction_timestamp: string
+          interaction_type: string
+          parent_interaction_id?: string | null
+          person_id?: string | null
+          post_id: string
+          updated_at?: string
+        }
+        Update: {
+          comment_text?: string
+          commenter_name?: string
+          commenter_profile_url?: string | null
+          created_at?: string
+          id?: string
+          interaction_timestamp?: string
+          interaction_type?: string
+          parent_interaction_id?: string | null
+          person_id?: string | null
+          post_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "social_interactions_parent_interaction_id_fkey"
+            columns: ["parent_interaction_id"]
+            isOneToOne: false
+            referencedRelation: "social_interactions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "social_interactions_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "social_interactions_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "social_posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      social_media_images: {
+        Row: {
+          alt_text: string | null
+          carousel_index: number
+          created_at: string
+          id: string
+          image_index: number
+          image_prompt: string
+          image_url: string
+          post_id: string
+          updated_at: string
+        }
+        Insert: {
+          alt_text?: string | null
+          carousel_index: number
+          created_at?: string
+          id?: string
+          image_index: number
+          image_prompt: string
+          image_url: string
+          post_id: string
+          updated_at?: string
+        }
+        Update: {
+          alt_text?: string | null
+          carousel_index?: number
+          created_at?: string
+          id?: string
+          image_index?: number
+          image_prompt?: string
+          image_url?: string
+          post_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "social_media_images_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "social_media_posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      social_media_posts: {
+        Row: {
+          caption: string
+          context_direction: string | null
+          created_at: string
+          hashtags: string[]
+          id: string
+          image_seed_instructions: string | null
+          image_seed_url: string | null
+          is_published: boolean
+          platform: string
+          platform_type: string | null
+          source_items: Json
+          style: string
+          title: string
+          updated_at: string
+          voice: string
+        }
+        Insert: {
+          caption: string
+          context_direction?: string | null
+          created_at?: string
+          hashtags?: string[]
+          id?: string
+          image_seed_instructions?: string | null
+          image_seed_url?: string | null
+          is_published?: boolean
+          platform: string
+          platform_type?: string | null
+          source_items?: Json
+          style: string
+          title: string
+          updated_at?: string
+          voice: string
+        }
+        Update: {
+          caption?: string
+          context_direction?: string | null
+          created_at?: string
+          hashtags?: string[]
+          id?: string
+          image_seed_instructions?: string | null
+          image_seed_url?: string | null
+          is_published?: boolean
+          platform?: string
+          platform_type?: string | null
+          source_items?: Json
+          style?: string
+          title?: string
+          updated_at?: string
+          voice?: string
+        }
+        Relationships: []
+      }
+      social_posts: {
+        Row: {
+          created_at: string
+          id: string
+          media_urls: Json | null
+          my_comment_text: string | null
+          my_engagement_type: string | null
+          platform: string
+          post_author_name: string | null
+          post_author_profile_url: string | null
+          post_content: string | null
+          post_timestamp: string | null
+          post_url: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          media_urls?: Json | null
+          my_comment_text?: string | null
+          my_engagement_type?: string | null
+          platform: string
+          post_author_name?: string | null
+          post_author_profile_url?: string | null
+          post_content?: string | null
+          post_timestamp?: string | null
+          post_url: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          media_urls?: Json | null
+          my_comment_text?: string | null
+          my_engagement_type?: string | null
+          platform?: string
+          post_author_name?: string | null
+          post_author_profile_url?: string | null
+          post_content?: string | null
+          post_timestamp?: string | null
+          post_url?: string
+          updated_at?: string
+        }
+        Relationships: []
       }
       workshop_requests: {
         Row: {
@@ -778,6 +1486,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      is_admin: {
+        Args: { _user_id: string }
+        Returns: boolean
+      }
       rebuild_blog_content_images: {
         Args: { blog_id_param: string }
         Returns: Json

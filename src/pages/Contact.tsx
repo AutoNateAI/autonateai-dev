@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
+import DemoRequestForm from '../components/DemoRequestForm';
 import { Mail, MessageCircle, Clock, ArrowRight, Building, Zap, Target } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
@@ -27,10 +28,15 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
+  const [showDemoForm, setShowDemoForm] = useState(false);
+
   useEffect(() => {
     const service = searchParams.get('service');
+    const demo = searchParams.get('demo');
     
-    if (service === 'live-build') {
+    if (demo && ['foundation', 'grant-recipient', 'venture-capital', 'startup'].includes(demo)) {
+      setShowDemoForm(true);
+    } else if (service === 'live-build') {
       let message = 'I am interested in scheduling a custom live build session for our company. ';
       message += 'I would like to learn more about how you can build AI-integrated software solutions for our specific business needs.';
       setFormData(prev => ({ ...prev, message, inquiryType: 'custom-build' }));
@@ -162,116 +168,131 @@ const Contact = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             {/* Contact Form */}
             <div>
-              <h2 className="text-3xl font-bold mb-6">
-                Tell Us About Your <span className="text-gradient">Business</span>
-              </h2>
-              <p className="text-muted-foreground mb-8">
-                Help us understand your business needs so we can provide the best software solution.
-              </p>
-
-              {!isSubmitted ? (
-                <div id="contact-form" className="glass-card p-8">
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <label htmlFor="name" className="block text-sm font-medium mb-2">
-                          Full Name *
-                        </label>
-                        <input
-                          type="text"
-                          id="name"
-                          required
-                          value={formData.name}
-                          onChange={(e) => setFormData({...formData, name: e.target.value})}
-                          className="w-full px-4 py-3 rounded-xl bg-background/50 border-2 border-primary/30 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 text-foreground transition-all duration-200"
-                          placeholder="Your full name"
-                        />
-                      </div>
-
-                      <div>
-                        <label htmlFor="email" className="block text-sm font-medium mb-2">
-                          Email Address *
-                        </label>
-                        <input
-                          type="email"
-                          id="email"
-                          required
-                          value={formData.email}
-                          onChange={(e) => setFormData({...formData, email: e.target.value})}
-                          className="w-full px-4 py-3 rounded-xl bg-background/50 border-2 border-primary/30 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 text-foreground transition-all duration-200"
-                          placeholder="your.email@company.com"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label htmlFor="company" className="block text-sm font-medium mb-2">
-                        Company Name
-                      </label>
-                      <input
-                        type="text"
-                        id="company"
-                        value={formData.company}
-                        onChange={(e) => setFormData({...formData, company: e.target.value})}
-                        className="w-full px-4 py-3 rounded-xl bg-background/50 border-2 border-primary/30 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 text-foreground transition-all duration-200"
-                        placeholder="Your company name"
-                      />
-                    </div>
-
-                    <div>
-                      <label htmlFor="inquiryType" className="block text-sm font-medium mb-2">
-                        Inquiry Type *
-                      </label>
-                      <select
-                        id="inquiryType"
-                        required
-                        value={formData.inquiryType}
-                        onChange={(e) => setFormData({...formData, inquiryType: e.target.value})}
-                        className="w-full px-4 py-3 rounded-xl bg-background/50 border-2 border-primary/30 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 text-foreground transition-all duration-200"
-                      >
-                        <option value="general">General Inquiry</option>
-                        <option value="custom-build">Custom Software Build</option>
-                        <option value="workflow-automation">Workflow Automation</option>
-                        <option value="ai-copilot">AI Copilot Development</option>
-                        <option value="data-platform">Data Platform</option>
-                        <option value="integration">System Integration</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label htmlFor="message" className="block text-sm font-medium mb-2">
-                        Project Details *
-                      </label>
-                      <textarea
-                        id="message"
-                        rows={6}
-                        required
-                        value={formData.message}
-                        onChange={(e) => setFormData({...formData, message: e.target.value})}
-                        className="w-full px-4 py-3 rounded-xl bg-background/50 border-2 border-primary/30 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 text-foreground resize-none transition-all duration-200"
-                        placeholder="Describe your business challenges, current workflows, and what you'd like to achieve. The more details you provide, the better we can help."
-                      ></textarea>
-                    </div>
-
-                    <button type="submit" className="w-full btn-primary text-lg py-4" disabled={isSubmitting}>
-                      {isSubmitting ? 'Sending...' : 'Send Message'}
-                      <ArrowRight className="ml-2 w-5 h-5" />
-                    </button>
-                  </form>
-                </div>
-              ) : (
-                <div className="glass-card p-8 text-center">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-500/10 mb-6">
-                    <svg className="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-bold mb-4 text-green-500">Message Sent!</h3>
-                  <p className="text-muted-foreground">
-                    Thank you for your interest in our software solutions. We'll get back to you within 24 hours 
-                    to discuss how we can help transform your business with AI-integrated software.
+              {showDemoForm ? (
+                <>
+                  <h2 className="text-3xl font-bold mb-6">
+                    Schedule Your <span className="text-gradient">Dashboard Demo</span>
+                  </h2>
+                  <p className="text-muted-foreground mb-8">
+                    Let's discuss how our custom dashboards can transform your operations. 
+                    Select the features you're interested in and tell us about your specific needs.
                   </p>
-                </div>
+                  <DemoRequestForm />
+                </>
+              ) : (
+                <>
+                  <h2 className="text-3xl font-bold mb-6">
+                    Tell Us About Your <span className="text-gradient">Business</span>
+                  </h2>
+                  <p className="text-muted-foreground mb-8">
+                    Help us understand your business needs so we can provide the best software solution.
+                  </p>
+
+                  {!isSubmitted ? (
+                    <div id="contact-form" className="glass-card p-8">
+                      <form onSubmit={handleSubmit} className="space-y-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div>
+                            <label htmlFor="name" className="block text-sm font-medium mb-2">
+                              Full Name *
+                            </label>
+                            <input
+                              type="text"
+                              id="name"
+                              required
+                              value={formData.name}
+                              onChange={(e) => setFormData({...formData, name: e.target.value})}
+                              className="w-full px-4 py-3 rounded-xl bg-background/50 border-2 border-primary/30 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 text-foreground transition-all duration-200"
+                              placeholder="Your full name"
+                            />
+                          </div>
+
+                          <div>
+                            <label htmlFor="email" className="block text-sm font-medium mb-2">
+                              Email Address *
+                            </label>
+                            <input
+                              type="email"
+                              id="email"
+                              required
+                              value={formData.email}
+                              onChange={(e) => setFormData({...formData, email: e.target.value})}
+                              className="w-full px-4 py-3 rounded-xl bg-background/50 border-2 border-primary/30 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 text-foreground transition-all duration-200"
+                              placeholder="your.email@company.com"
+                            />
+                          </div>
+                        </div>
+
+                        <div>
+                          <label htmlFor="company" className="block text-sm font-medium mb-2">
+                            Company Name
+                          </label>
+                          <input
+                            type="text"
+                            id="company"
+                            value={formData.company}
+                            onChange={(e) => setFormData({...formData, company: e.target.value})}
+                            className="w-full px-4 py-3 rounded-xl bg-background/50 border-2 border-primary/30 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 text-foreground transition-all duration-200"
+                            placeholder="Your company name"
+                          />
+                        </div>
+
+                        <div>
+                          <label htmlFor="inquiryType" className="block text-sm font-medium mb-2">
+                            Inquiry Type *
+                          </label>
+                          <select
+                            id="inquiryType"
+                            required
+                            value={formData.inquiryType}
+                            onChange={(e) => setFormData({...formData, inquiryType: e.target.value})}
+                            className="w-full px-4 py-3 rounded-xl bg-background/50 border-2 border-primary/30 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 text-foreground transition-all duration-200"
+                          >
+                            <option value="general">General Inquiry</option>
+                            <option value="custom-build">Custom Software Build</option>
+                            <option value="workflow-automation">Workflow Automation</option>
+                            <option value="ai-copilot">AI Copilot Development</option>
+                            <option value="data-platform">Data Platform</option>
+                            <option value="integration">System Integration</option>
+                          </select>
+                        </div>
+
+                        <div>
+                          <label htmlFor="message" className="block text-sm font-medium mb-2">
+                            Project Details *
+                          </label>
+                          <textarea
+                            id="message"
+                            rows={6}
+                            required
+                            value={formData.message}
+                            onChange={(e) => setFormData({...formData, message: e.target.value})}
+                            className="w-full px-4 py-3 rounded-xl bg-background/50 border-2 border-primary/30 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 text-foreground resize-none transition-all duration-200"
+                            placeholder="Describe your business challenges, current workflows, and what you'd like to achieve. The more details you provide, the better we can help."
+                          ></textarea>
+                        </div>
+
+                        <button type="submit" className="w-full btn-primary text-lg py-4" disabled={isSubmitting}>
+                          {isSubmitting ? 'Sending...' : 'Send Message'}
+                          <ArrowRight className="ml-2 w-5 h-5" />
+                        </button>
+                      </form>
+                    </div>
+                  ) : (
+                    <div className="glass-card p-8 text-center">
+                      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-500/10 mb-6">
+                        <svg className="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <h3 className="text-xl font-bold mb-4 text-green-500">Message Sent!</h3>
+                      <p className="text-muted-foreground">
+                        Thank you for your interest in our software solutions. We'll get back to you within 24 hours 
+                        to discuss how we can help transform your business with AI-integrated software.
+                      </p>
+                    </div>
+                  )}
+                </>
               )}
             </div>
 
