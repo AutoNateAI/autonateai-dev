@@ -82,19 +82,30 @@ const Services = () => {
               foundations, grant recipients, venture capital firms, and startups.
             </p>
             
-            {/* Pricing Model */}
-            <div className="glass-card p-8 max-w-2xl mx-auto mb-12">
-              <h3 className="text-2xl font-bold mb-4">Feature Pricing Model</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Market Positioning */}
+            <div className="glass-card p-8 max-w-4xl mx-auto mb-12">
+              <h3 className="text-2xl font-bold mb-6 text-center">Enterprise-Level Customization at 20-35% of Legacy Costs</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-primary mb-2">$1,250</div>
-                  <div className="text-muted-foreground">per feature (standard)</div>
+                  <div className="text-2xl font-bold text-muted-foreground mb-2">Historic Spend</div>
+                  <div className="text-lg text-muted-foreground">$250K-$1M+ custom builds</div>
+                  <div className="text-lg text-muted-foreground">$50K-$300K/year SaaS</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-gradient mb-2">$1,850</div>
-                  <div className="text-muted-foreground">per feature with AI integration</div>
+                  <div className="text-2xl font-bold text-primary mb-2">AutoNateAI</div>
+                  <div className="text-lg">$20K-$200K depending on tier</div>
+                  <div className="text-sm text-muted-foreground">Modular, AI-ready, scalable</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-gradient mb-2">Advantage</div>
+                  <div className="text-lg">Sweet spot pricing</div>
+                  <div className="text-sm text-muted-foreground">Credible yet disruptive</div>
                 </div>
               </div>
+              <p className="text-center text-muted-foreground">
+                Historically, organizations faced bloated enterprise costs or rigid tools that never truly fit. 
+                AutoNateAI delivers bespoke solutions at a fraction of legacy costs.
+              </p>
             </div>
           </div>
 

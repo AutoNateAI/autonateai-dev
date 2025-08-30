@@ -109,34 +109,132 @@ const Startups = () => {
             </div>
           </div>
 
-          {/* Sample Features & Pricing */}
+          {/* Historic Context */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold text-center mb-12">Sample Features & Pricing</h2>
+            <h2 className="text-3xl font-bold text-center mb-12">Historic Startup Software Costs</h2>
             <div className="glass-card p-8">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div>
-                  <h3 className="text-xl font-bold mb-6">Standard Features ($1,250 each)</h3>
-                  <div className="space-y-4">
-                    {sampleFeatures.filter(f => f.standard).map((feature, index) => (
-                      <div key={index} className="flex items-center">
-                        <CheckCircle className="w-5 h-5 text-primary mr-3" />
-                        <span>{feature.name}</span>
-                      </div>
-                    ))}
-                  </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div className="text-center">
+                  <div className="text-xl font-bold text-muted-foreground mb-2">Early-Stage</div>
+                  <div className="text-2xl font-bold text-green-400 mb-2">$20K-$50K/year</div>
+                  <div className="text-sm text-muted-foreground">SaaS spend across 6-10 tools</div>
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-6">AI-Enhanced Features ($1,850 each)</h3>
-                  <div className="space-y-4">
-                    {sampleFeatures.filter(f => f.ai).map((feature, index) => (
-                      <div key={index} className="flex items-center">
-                        <Zap className="w-5 h-5 text-gradient mr-3" />
-                        <span>{feature.name}</span>
-                      </div>
-                    ))}
+                <div className="text-center">
+                  <div className="text-xl font-bold text-muted-foreground mb-2">Growth-Stage</div>
+                  <div className="text-2xl font-bold text-yellow-400 mb-2">$100K-$250K/year</div>
+                  <div className="text-sm text-muted-foreground">Fragmented across 10+ products</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-xl font-bold text-muted-foreground mb-2">Enterprise</div>
+                  <div className="text-2xl font-bold text-red-400 mb-2">$250K+ deployments</div>
+                  <div className="text-sm text-muted-foreground">Salesforce, Looker, Tableau</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Pricing Tiers */}
+          <div className="mb-16">
+            <h2 className="text-3xl font-bold text-center mb-12">AutoNateAI Pricing Tiers</h2>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div className="glass-card p-8">
+                <div className="text-center mb-6">
+                  <h3 className="text-xl font-bold mb-2">Entry</h3>
+                  <div className="text-sm text-muted-foreground mb-4">Pre-Seed/Seed</div>
+                  <div className="text-3xl font-bold text-primary">$15K-$30K</div>
+                </div>
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>3-4 features</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>Marketing attribution</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>Growth metrics</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>Basic CRM</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <Zap className="w-4 h-4 text-gradient mr-2" />
+                    <span>1 AI tool</span>
                   </div>
                 </div>
               </div>
+              
+              <div className="glass-card p-8 border-2 border-primary/30 relative">
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                  <span className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-medium">Most Popular</span>
+                </div>
+                <div className="text-center mb-6">
+                  <h3 className="text-xl font-bold mb-2">Growth</h3>
+                  <div className="text-sm text-muted-foreground mb-4">Series A-B</div>
+                  <div className="text-3xl font-bold text-primary">$50K-$90K</div>
+                </div>
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>6-8 features</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <Zap className="w-4 h-4 text-gradient mr-2" />
+                    <span>AI churn predictor</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <Zap className="w-4 h-4 text-gradient mr-2" />
+                    <span>Automated A/B optimizer</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>Advanced growth dashboards</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <Zap className="w-4 h-4 text-gradient mr-2" />
+                    <span>AI content generator</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="glass-card p-8">
+                <div className="text-center mb-6">
+                  <h3 className="text-xl font-bold mb-2">Enterprise</h3>
+                  <div className="text-sm text-muted-foreground mb-4">Scaling Unicorns</div>
+                  <div className="text-3xl font-bold text-primary">$120K-$200K</div>
+                </div>
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>10-12+ features</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <Zap className="w-4 h-4 text-gradient mr-2" />
+                    <span>Predictive product analytics</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>Full observability suite</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <Zap className="w-4 h-4 text-gradient mr-2" />
+                    <span>AI growth suite</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>Advanced integrations</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="text-center mt-8">
+              <p className="text-muted-foreground max-w-3xl mx-auto">
+                <strong>Market Advantage:</strong> Replace a fragmented SaaS stack with one unified growth dashboard 
+                for the cost of 1-2 SaaS contracts.
+              </p>
             </div>
           </div>
 

@@ -109,34 +109,132 @@ const GrantRecipients = () => {
             </div>
           </div>
 
-          {/* Sample Features & Pricing */}
+          {/* Historic Context */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold text-center mb-12">Sample Features & Pricing</h2>
+            <h2 className="text-3xl font-bold text-center mb-12">Historic Grant Management Costs</h2>
             <div className="glass-card p-8">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div>
-                  <h3 className="text-xl font-bold mb-6">Standard Features ($1,250 each)</h3>
-                  <div className="space-y-4">
-                    {sampleFeatures.filter(f => f.standard).map((feature, index) => (
-                      <div key={index} className="flex items-center">
-                        <CheckCircle className="w-5 h-5 text-primary mr-3" />
-                        <span>{feature.name}</span>
-                      </div>
-                    ))}
-                  </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div className="text-center">
+                  <div className="text-xl font-bold text-muted-foreground mb-2">Large Universities</div>
+                  <div className="text-2xl font-bold text-red-400 mb-2">$500K+ ERP modules</div>
+                  <div className="text-sm text-muted-foreground">Rigid, bloated systems</div>
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-6">AI-Enhanced Features ($1,850 each)</h3>
-                  <div className="space-y-4">
-                    {sampleFeatures.filter(f => f.ai).map((feature, index) => (
-                      <div key={index} className="flex items-center">
-                        <Zap className="w-5 h-5 text-gradient mr-3" />
-                        <span>{feature.name}</span>
-                      </div>
-                    ))}
+                <div className="text-center">
+                  <div className="text-xl font-bold text-muted-foreground mb-2">Mid-Size Nonprofits</div>
+                  <div className="text-2xl font-bold text-yellow-400 mb-2">$20K-$100K/year</div>
+                  <div className="text-sm text-muted-foreground">Platforms like Fluxx, SmartSimple</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-xl font-bold text-muted-foreground mb-2">Small Recipients</div>
+                  <div className="text-2xl font-bold text-orange-400 mb-2">Excel + Admin Time</div>
+                  <div className="text-sm text-muted-foreground">Overworked staff, manual processes</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Pricing Tiers */}
+          <div className="mb-16">
+            <h2 className="text-3xl font-bold text-center mb-12">AutoNateAI Pricing Tiers</h2>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div className="glass-card p-8">
+                <div className="text-center mb-6">
+                  <h3 className="text-xl font-bold mb-2">Entry</h3>
+                  <div className="text-sm text-muted-foreground mb-4">Small Nonprofits</div>
+                  <div className="text-3xl font-bold text-primary">$20K-$35K</div>
+                </div>
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>4-5 features</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>Progress tracker</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>Budget dashboard</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>Team portal</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <Zap className="w-4 h-4 text-gradient mr-2" />
+                    <span>1 AI report tool</span>
                   </div>
                 </div>
               </div>
+              
+              <div className="glass-card p-8 border-2 border-primary/30 relative">
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                  <span className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-medium">Most Popular</span>
+                </div>
+                <div className="text-center mb-6">
+                  <h3 className="text-xl font-bold mb-2">Growth</h3>
+                  <div className="text-sm text-muted-foreground mb-4">Universities/Research Teams</div>
+                  <div className="text-3xl font-bold text-primary">$50K-$85K</div>
+                </div>
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>8 features</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <Zap className="w-4 h-4 text-gradient mr-2" />
+                    <span>Predictive budget AI</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>Milestone dashboards</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>Collaboration portals</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <Zap className="w-4 h-4 text-gradient mr-2" />
+                    <span>Automated reports</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="glass-card p-8">
+                <div className="text-center mb-6">
+                  <h3 className="text-xl font-bold mb-2">Enterprise</h3>
+                  <div className="text-sm text-muted-foreground mb-4">Large Universities</div>
+                  <div className="text-3xl font-bold text-primary">$100K-$250K</div>
+                </div>
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>12+ features</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>Integrated research + grant systems</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <Zap className="w-4 h-4 text-gradient mr-2" />
+                    <span>Compliance automation</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <Zap className="w-4 h-4 text-gradient mr-2" />
+                    <span>AI copilots</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>Full observability suite</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="text-center mt-8">
+              <p className="text-muted-foreground max-w-3xl mx-auto">
+                <strong>Market Advantage:</strong> For less than the cost of one administrator's annual salary, 
+                recipients get automated compliance, AI reporting, and funder-ready dashboards.
+              </p>
             </div>
           </div>
 

@@ -109,34 +109,132 @@ const VentureCapital = () => {
             </div>
           </div>
 
-          {/* Sample Features & Pricing */}
+          {/* Historic Context */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold text-center mb-12">Sample Features & Pricing</h2>
+            <h2 className="text-3xl font-bold text-center mb-12">Historic VC Software Costs</h2>
             <div className="glass-card p-8">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div>
-                  <h3 className="text-xl font-bold mb-6">Standard Features ($1,250 each)</h3>
-                  <div className="space-y-4">
-                    {sampleFeatures.filter(f => f.standard).map((feature, index) => (
-                      <div key={index} className="flex items-center">
-                        <CheckCircle className="w-5 h-5 text-primary mr-3" />
-                        <span>{feature.name}</span>
-                      </div>
-                    ))}
-                  </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div className="text-center">
+                  <div className="text-xl font-bold text-muted-foreground mb-2">Top VCs</div>
+                  <div className="text-2xl font-bold text-red-400 mb-2">$250K+ annual</div>
+                  <div className="text-sm text-muted-foreground">DealCloud, Affinity + consultants</div>
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-6">AI-Enhanced Features ($1,850 each)</h3>
-                  <div className="space-y-4">
-                    {sampleFeatures.filter(f => f.ai).map((feature, index) => (
-                      <div key={index} className="flex items-center">
-                        <Zap className="w-5 h-5 text-gradient mr-3" />
-                        <span>{feature.name}</span>
-                      </div>
-                    ))}
+                <div className="text-center">
+                  <div className="text-xl font-bold text-muted-foreground mb-2">Mid-Tier VCs</div>
+                  <div className="text-2xl font-bold text-yellow-400 mb-2">$50K-$150K/year</div>
+                  <div className="text-sm text-muted-foreground">Salesforce-based setups</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-xl font-bold text-muted-foreground mb-2">Boutique VCs</div>
+                  <div className="text-2xl font-bold text-orange-400 mb-2">Airtable Hacks</div>
+                  <div className="text-sm text-muted-foreground">Notion, Excel makeshift solutions</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Pricing Tiers */}
+          <div className="mb-16">
+            <h2 className="text-3xl font-bold text-center mb-12">AutoNateAI Pricing Tiers</h2>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div className="glass-card p-8">
+                <div className="text-center mb-6">
+                  <h3 className="text-xl font-bold mb-2">Entry</h3>
+                  <div className="text-sm text-muted-foreground mb-4">Boutique Funds</div>
+                  <div className="text-3xl font-bold text-primary">$35K-$50K</div>
+                </div>
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>5-6 features</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>Portfolio dashboard</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>Deal flow tracker</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>LP portal</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <Zap className="w-4 h-4 text-gradient mr-2" />
+                    <span>1 AI analyzer</span>
                   </div>
                 </div>
               </div>
+              
+              <div className="glass-card p-8 border-2 border-primary/30 relative">
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                  <span className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-medium">Most Popular</span>
+                </div>
+                <div className="text-center mb-6">
+                  <h3 className="text-xl font-bold mb-2">Growth</h3>
+                  <div className="text-sm text-muted-foreground mb-4">Mid-Size Funds</div>
+                  <div className="text-3xl font-bold text-primary">$75K-$125K</div>
+                </div>
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>8-10 features</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <Zap className="w-4 h-4 text-gradient mr-2" />
+                    <span>AI pitch deck analyzer</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <Zap className="w-4 h-4 text-gradient mr-2" />
+                    <span>Risk assessment AI</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>Graph-based CRM</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <Zap className="w-4 h-4 text-gradient mr-2" />
+                    <span>Market copilot</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="glass-card p-8">
+                <div className="text-center mb-6">
+                  <h3 className="text-xl font-bold mb-2">Enterprise</h3>
+                  <div className="text-sm text-muted-foreground mb-4">Top-Tier Funds</div>
+                  <div className="text-3xl font-bold text-primary">$200K-$400K+</div>
+                </div>
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>12+ features</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>Full LP reporting suite</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <Zap className="w-4 h-4 text-gradient mr-2" />
+                    <span>Advanced AI due diligence</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <Zap className="w-4 h-4 text-gradient mr-2" />
+                    <span>Predictive deal flow engines</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>Strategic analytics</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="text-center mt-8">
+              <p className="text-muted-foreground max-w-3xl mx-auto">
+                <strong>Market Advantage:</strong> Instead of renting Salesforce consultants, VCs get a bespoke 
+                AI-native investment engine at half the cost.
+              </p>
             </div>
           </div>
 

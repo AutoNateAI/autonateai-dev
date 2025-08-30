@@ -109,34 +109,132 @@ const Foundations = () => {
             </div>
           </div>
 
-          {/* Sample Features & Pricing */}
+          {/* Historic Context */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold text-center mb-12">Sample Features & Pricing</h2>
+            <h2 className="text-3xl font-bold text-center mb-12">Historic Foundation Software Costs</h2>
             <div className="glass-card p-8">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div>
-                  <h3 className="text-xl font-bold mb-6">Standard Features ($1,250 each)</h3>
-                  <div className="space-y-4">
-                    {sampleFeatures.filter(f => f.standard).map((feature, index) => (
-                      <div key={index} className="flex items-center">
-                        <CheckCircle className="w-5 h-5 text-primary mr-3" />
-                        <span>{feature.name}</span>
-                      </div>
-                    ))}
-                  </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div className="text-center">
+                  <div className="text-xl font-bold text-muted-foreground mb-2">Custom Systems</div>
+                  <div className="text-2xl font-bold text-red-400 mb-2">$250K-$1M+</div>
+                  <div className="text-sm text-muted-foreground">12-24 months to build</div>
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-6">AI-Enhanced Features ($1,850 each)</h3>
-                  <div className="space-y-4">
-                    {sampleFeatures.filter(f => f.ai).map((feature, index) => (
-                      <div key={index} className="flex items-center">
-                        <Zap className="w-5 h-5 text-gradient mr-3" />
-                        <span>{feature.name}</span>
-                      </div>
-                    ))}
+                <div className="text-center">
+                  <div className="text-xl font-bold text-muted-foreground mb-2">SaaS Platforms</div>
+                  <div className="text-2xl font-bold text-yellow-400 mb-2">$50K-$300K/year</div>
+                  <div className="text-sm text-muted-foreground">Rigid feature sets</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-xl font-bold text-muted-foreground mb-2">Small Foundations</div>
+                  <div className="text-2xl font-bold text-orange-400 mb-2">Spreadsheets</div>
+                  <div className="text-sm text-muted-foreground">Priced out of solutions</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Pricing Tiers */}
+          <div className="mb-16">
+            <h2 className="text-3xl font-bold text-center mb-12">AutoNateAI Pricing Tiers</h2>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div className="glass-card p-8">
+                <div className="text-center mb-6">
+                  <h3 className="text-xl font-bold mb-2">Entry</h3>
+                  <div className="text-sm text-muted-foreground mb-4">Community Foundations</div>
+                  <div className="text-3xl font-bold text-primary">$25K-$40K</div>
+                </div>
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>5 features (mix of standard + 1 AI)</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>Campaign progress dashboards</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>Impact measurement tracker</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>Basic grantee portal</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <Zap className="w-4 h-4 text-gradient mr-2" />
+                    <span>AI report generator (light)</span>
                   </div>
                 </div>
               </div>
+              
+              <div className="glass-card p-8 border-2 border-primary/30 relative">
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                  <span className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-medium">Most Popular</span>
+                </div>
+                <div className="text-center mb-6">
+                  <h3 className="text-xl font-bold mb-2">Growth</h3>
+                  <div className="text-sm text-muted-foreground mb-4">Private & Family Foundations</div>
+                  <div className="text-3xl font-bold text-primary">$50K-$90K</div>
+                </div>
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>8 features (mix + 3 AI features)</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>Multi-campaign dashboards</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <Zap className="w-4 h-4 text-gradient mr-2" />
+                    <span>Predictive impact analysis</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <Zap className="w-4 h-4 text-gradient mr-2" />
+                    <span>Automated compliance monitoring</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <Zap className="w-4 h-4 text-gradient mr-2" />
+                    <span>Graph-structured analytics</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="glass-card p-8">
+                <div className="text-center mb-6">
+                  <h3 className="text-xl font-bold mb-2">Enterprise</h3>
+                  <div className="text-sm text-muted-foreground mb-4">Large Foundations</div>
+                  <div className="text-3xl font-bold text-primary">$120K-$250K+</div>
+                </div>
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>12+ features</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <Zap className="w-4 h-4 text-gradient mr-2" />
+                    <span>Full AI copilots</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>Multi-stakeholder portals</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>SLA-backed observability</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <CheckCircle className="w-4 h-4 text-primary mr-2" />
+                    <span>Strategic insights & leadership</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="text-center mt-8">
+              <p className="text-muted-foreground max-w-3xl mx-auto">
+                <strong>Market Advantage:</strong> Replace a year of SaaS subscriptions or a million-dollar custom build 
+                with a foundation-owned system that works exactly how your staff already works.
+              </p>
             </div>
           </div>
 
