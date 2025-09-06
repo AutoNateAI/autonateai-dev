@@ -22,10 +22,11 @@ const HeroSection = () => {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        {/* Main Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
           
           {/* Left Column - Text Content */}
-          <div className="space-y-8">
+          <div className="space-y-8 order-1 lg:order-1">
             {/* Hero Badge */}
             <div className="inline-flex items-center gap-2 glass-card px-4 py-2 animate-pulse-glow">
               <Sparkles className="w-4 h-4 text-primary" />
@@ -42,15 +43,15 @@ const HeroSection = () => {
                 {' '}and intelligent software
               </h1>
               
-              {/* Subtitle */}
-              <p className="text-xl text-muted-foreground leading-relaxed">
+              {/* Subtitle - Hidden on mobile, shown on desktop */}
+              <p className="hidden lg:block text-xl text-muted-foreground leading-relaxed">
                 We solve complex business problems by combining advanced critical thinking frameworks 
                 with custom AI-integrated software that makes organizations smarter, faster, and more adaptive.
               </p>
             </div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            {/* CTA Buttons - Hidden on mobile, shown on desktop */}
+            <div className="hidden lg:flex flex-col sm:flex-row gap-4">
               <Link to="/contact" className="btn-primary text-lg px-8 py-4 flex items-center justify-center">
                 Book a Discovery Call
                 <ArrowRight className="ml-2 w-5 h-5" />
@@ -60,31 +61,15 @@ const HeroSection = () => {
                 See Our Live Builds
               </Link>
             </div>
-
-            {/* Key Value Props */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-8">
-              <div className="glass-card p-4 text-center">
-                <div className="text-xl font-bold text-primary mb-1">Think & Model</div>
-                <div className="text-sm text-muted-foreground">We don't just code. We solve.</div>
-              </div>
-              <div className="glass-card p-4 text-center">
-                <div className="text-xl font-bold text-primary mb-1">AI-Integrated</div>
-                <div className="text-sm text-muted-foreground">Intelligence built in</div>
-              </div>
-              <div className="glass-card p-4 text-center">
-                <div className="text-xl font-bold text-glass-secondary mb-1">Transparent</div>
-                <div className="text-sm text-muted-foreground">Built openly with Lovable</div>
-              </div>
-            </div>
           </div>
 
           {/* Right Column - Hero Image */}
-          <div className="relative">
+          <div className="relative order-2 lg:order-2">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <img 
                 src={heroImage} 
                 alt="Critical thinking meets AI technology - visualization of neural networks and data flows"
-                className="w-full h-[600px] object-cover"
+                className="w-full h-[400px] lg:h-[600px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent"></div>
             </div>
@@ -93,7 +78,43 @@ const HeroSection = () => {
             <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-primary/20 blur-xl animate-pulse"></div>
             <div className="absolute -bottom-6 -left-6 w-32 h-32 rounded-full bg-glass-accent/30 blur-2xl animate-pulse"></div>
           </div>
+        </div>
 
+        {/* Mobile-only content below image */}
+        <div className="lg:hidden space-y-8 order-3">
+          {/* Subtitle on mobile */}
+          <p className="text-xl text-muted-foreground leading-relaxed">
+            We solve complex business problems by combining advanced critical thinking frameworks 
+            with custom AI-integrated software that makes organizations smarter, faster, and more adaptive.
+          </p>
+
+          {/* CTA Buttons on mobile */}
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Link to="/contact" className="btn-primary text-lg px-8 py-4 flex items-center justify-center">
+              Book a Discovery Call
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Link>
+            <Link to="/live-builds" className="btn-glass text-lg px-8 py-4 flex items-center justify-center gap-2">
+              <Play className="w-5 h-5" />
+              See Our Live Builds
+            </Link>
+          </div>
+        </div>
+
+        {/* Key Value Props - Full width row below everything */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-12 order-4">
+          <div className="glass-card p-4 text-center">
+            <div className="text-xl font-bold text-primary mb-1">Think & Model</div>
+            <div className="text-sm text-muted-foreground">We don't just code. We solve.</div>
+          </div>
+          <div className="glass-card p-4 text-center">
+            <div className="text-xl font-bold text-primary mb-1">AI-Integrated</div>
+            <div className="text-sm text-muted-foreground">Intelligence built in</div>
+          </div>
+          <div className="glass-card p-4 text-center">
+            <div className="text-xl font-bold text-glass-secondary mb-1">Transparent</div>
+            <div className="text-sm text-muted-foreground">Built openly with Lovable</div>
+          </div>
         </div>
       </div>
     </section>
