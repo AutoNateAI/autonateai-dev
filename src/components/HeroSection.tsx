@@ -37,7 +37,7 @@ const HeroSection = () => {
 
             {/* Main Headline */}
             <div>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-center lg:text-left">
                 The bridge between{' '}
                 <span className="text-gradient animate-gradient">critical thinking</span>
                 {' '}and intelligent software
