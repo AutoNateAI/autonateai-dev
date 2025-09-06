@@ -4,17 +4,7 @@ import heroImage from '../assets/hero-critical-thinking-ai.jpg';
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
-      {/* Hero Background Image */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          src={heroImage} 
-          alt="Critical thinking meets AI technology"
-          className="w-full h-full object-cover opacity-20"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background/80"></div>
-      </div>
-
+    <section className="relative min-h-screen flex items-center overflow-hidden pt-16">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 pointer-events-none z-[1]">
         <div className="floating-element absolute top-20 left-10 w-20 h-20 rounded-full bg-gradient-primary opacity-20 blur-xl"></div>
@@ -31,57 +21,79 @@ const HeroSection = () => {
         <Sparkles className="floating-element absolute bottom-40 right-16 w-12 h-12 text-primary opacity-20" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          {/* Hero Badge */}
-          <div className="inline-flex items-center gap-2 glass-card px-4 py-2 mb-8 animate-pulse-glow">
-            <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-muted-foreground">
-              Critical Thinking Meets Intelligent Software
-            </span>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
+          
+          {/* Left Column - Text Content */}
+          <div className="space-y-8">
+            {/* Hero Badge */}
+            <div className="inline-flex items-center gap-2 glass-card px-4 py-2 animate-pulse-glow">
+              <Sparkles className="w-4 h-4 text-primary" />
+              <span className="text-sm font-medium text-muted-foreground">
+                Critical Thinking Meets Intelligent Software
+              </span>
+            </div>
+
+            {/* Main Headline */}
+            <div>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                The bridge between{' '}
+                <span className="text-gradient animate-gradient">critical thinking</span>
+                {' '}and intelligent software
+              </h1>
+              
+              {/* Subtitle */}
+              <p className="text-xl text-muted-foreground leading-relaxed">
+                We solve complex business problems by combining advanced critical thinking frameworks 
+                with custom AI-integrated software that makes organizations smarter, faster, and more adaptive.
+              </p>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link to="/contact" className="btn-primary text-lg px-8 py-4 flex items-center justify-center">
+                Book a Discovery Call
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Link>
+              <Link to="/live-builds" className="btn-glass text-lg px-8 py-4 flex items-center justify-center gap-2">
+                <Play className="w-5 h-5" />
+                See Our Live Builds
+              </Link>
+            </div>
+
+            {/* Key Value Props */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-8">
+              <div className="glass-card p-4 text-center">
+                <div className="text-xl font-bold text-primary mb-1">Think & Model</div>
+                <div className="text-sm text-muted-foreground">We don't just code. We solve.</div>
+              </div>
+              <div className="glass-card p-4 text-center">
+                <div className="text-xl font-bold text-primary mb-1">AI-Integrated</div>
+                <div className="text-sm text-muted-foreground">Intelligence built in</div>
+              </div>
+              <div className="glass-card p-4 text-center">
+                <div className="text-xl font-bold text-glass-secondary mb-1">Transparent</div>
+                <div className="text-sm text-muted-foreground">Built openly with Lovable</div>
+              </div>
+            </div>
           </div>
 
-          {/* Main Headline */}
-          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 leading-tight">
-            AutoNateAI is the bridge between{' '}
-            <span className="text-gradient animate-gradient">critical thinking</span>
-            <br />
-            and intelligent software
-          </h1>
-
-          {/* Subtitle */}
-          <p className="text-xl sm:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto leading-relaxed">
-            We take complex problems, apply advanced critical thinking models, and deliver 
-            custom AI-integrated software that makes businesses smarter, faster, and more adaptive.
-          </p>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <Link to="/contact" className="btn-primary text-lg px-8 py-4 flex items-center">
-              Book a Discovery Call
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Link>
-            <Link to="/live-builds" className="btn-glass text-lg px-8 py-4 flex items-center gap-2">
-              <Play className="w-5 h-5" />
-              See Our Live Builds
-            </Link>
+          {/* Right Column - Hero Image */}
+          <div className="relative">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+              <img 
+                src={heroImage} 
+                alt="Critical thinking meets AI technology - visualization of neural networks and data flows"
+                className="w-full h-[600px] object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent"></div>
+            </div>
+            
+            {/* Floating accent elements */}
+            <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-primary/20 blur-xl animate-pulse"></div>
+            <div className="absolute -bottom-6 -left-6 w-32 h-32 rounded-full bg-glass-accent/30 blur-2xl animate-pulse"></div>
           </div>
 
-          {/* Social Proof */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <div className="glass-card p-6 text-center">
-              <div className="text-3xl font-bold text-primary mb-2">Think & Model</div>
-              <div className="text-muted-foreground">We don't just code. We solve.</div>
-            </div>
-            <div className="glass-card p-6 text-center">
-              <div className="text-3xl font-bold text-primary mb-2">AI-Integrated</div>
-              <div className="text-muted-foreground">Custom software with intelligence</div>
-            </div>
-            <div className="glass-card p-6 text-center">
-              <div className="text-3xl font-bold text-glass-secondary mb-2">Transparent</div>
-              <div className="text-muted-foreground">Built in the open with Lovable.dev</div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
