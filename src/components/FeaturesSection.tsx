@@ -1,4 +1,5 @@
 import { Clock, TrendingUp, Cpu, Award, CheckCircle, Users, BookOpen, Network, Brain } from 'lucide-react';
+import featuresImage from '../assets/features-dashboard-ai.jpg';
 
 const FeaturesSection = () => {
   const features = [
@@ -49,10 +50,19 @@ const FeaturesSection = () => {
             Our{' '}
             <span className="text-gradient">Edge</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
             We don't just code. We think. We model. We solve. At AutoNateAI, we use critical thinking frameworks, 
             graph theory, and prompt engineering to design intelligent software systems.
           </p>
+          
+          {/* Features Image */}
+          <div className="max-w-4xl mx-auto mb-12">
+            <img 
+              src={featuresImage} 
+              alt="AI-powered dashboard features"
+              className="w-full h-64 object-cover rounded-2xl shadow-2xl"
+            />
+          </div>
         </div>
 
         {/* Features Grid */}

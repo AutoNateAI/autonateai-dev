@@ -1,5 +1,6 @@
 import { Calendar, Eye, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import liveBuildsImage from '../assets/live-builds-development.jpg';
 
 const LiveBuildsSection = () => {
   return (
@@ -14,10 +15,19 @@ const LiveBuildsSection = () => {
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
             We build in the open.
           </p>
-          <p className="text-lg text-muted-foreground max-w-4xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-4xl mx-auto mb-8">
             Every week, we go live to show how AI + critical thinking can solve real business problems 
             in under an hour. From concept to working tool, we demonstrate what's possible — transparently.
           </p>
+          
+          {/* Live Builds Image */}
+          <div className="max-w-4xl mx-auto mb-12">
+            <img 
+              src={liveBuildsImage} 
+              alt="Live development sessions"
+              className="w-full h-64 object-cover rounded-2xl shadow-2xl"
+            />
+          </div>
         </div>
 
         {/* Live Builds Grid */}

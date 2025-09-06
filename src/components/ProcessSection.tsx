@@ -1,4 +1,5 @@
 import { Ear, Brain, Zap, Rocket } from 'lucide-react';
+import processImage from '../assets/process-workflow.jpg';
 
 const ProcessSection = () => {
   const steps = [
@@ -37,6 +38,15 @@ const ProcessSection = () => {
             How It{' '}
             <span className="text-gradient">Works</span>
           </h2>
+          
+          {/* Process Image */}
+          <div className="max-w-4xl mx-auto mb-12">
+            <img 
+              src={processImage} 
+              alt="Our workflow process"
+              className="w-full h-64 object-cover rounded-2xl shadow-2xl"
+            />
+          </div>
         </div>
 
         {/* Process Steps */}

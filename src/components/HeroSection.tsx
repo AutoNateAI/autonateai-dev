@@ -1,11 +1,22 @@
 import { ArrowRight, Play, Sparkles, Beaker, BookOpen, Database } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import heroImage from '../assets/hero-critical-thinking-ai.jpg';
 
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+      {/* Hero Background Image */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          src={heroImage} 
+          alt="Critical thinking meets AI technology"
+          className="w-full h-full object-cover opacity-20"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background/80"></div>
+      </div>
+
       {/* Animated Background Elements */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none z-[1]">
         <div className="floating-element absolute top-20 left-10 w-20 h-20 rounded-full bg-gradient-primary opacity-20 blur-xl"></div>
         <div className="floating-element absolute top-32 right-20 w-32 h-32 rounded-full bg-accent opacity-10 blur-2xl"></div>
         <div className="floating-element absolute bottom-40 left-1/4 w-16 h-16 rounded-full bg-glass-secondary opacity-30 blur-lg"></div>
@@ -13,7 +24,7 @@ const HeroSection = () => {
       </div>
 
       {/* Animated SVG Icons */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none z-[1]">
         <Beaker className="floating-element absolute top-40 left-16 w-8 h-8 text-glass-primary opacity-30" />
         <BookOpen className="floating-element absolute top-60 right-24 w-10 h-10 text-glass-secondary opacity-25" />
         <Database className="floating-element absolute bottom-60 left-20 w-6 h-6 text-glass-accent opacity-35" />

@@ -1,4 +1,5 @@
 import { CheckCircle } from 'lucide-react';
+import partnershipImage from '../assets/why-choose-partnership.jpg';
 
 const WhyChooseSection = () => {
   const benefits = [
@@ -17,6 +18,15 @@ const WhyChooseSection = () => {
             Why Businesses Choose{' '}
             <span className="text-gradient">AutoNateAI</span>
           </h2>
+          
+          {/* Partnership Image */}
+          <div className="max-w-4xl mx-auto mb-12">
+            <img 
+              src={partnershipImage} 
+              alt="Partnership and transparency"
+              className="w-full h-64 object-cover rounded-2xl shadow-2xl"
+            />
+          </div>
         </div>
 
         {/* Benefits List */}

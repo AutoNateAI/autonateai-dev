@@ -1,4 +1,5 @@
 import { Cpu, Database, Workflow, Bot, BarChart3, Link2 } from 'lucide-react';
+import servicesImage from '../assets/services-four-sectors.jpg';
 
 const ServicesSection = () => {
   const services = [
@@ -41,10 +42,19 @@ const ServicesSection = () => {
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
             We don't just code. We think. We model. We solve.
           </p>
-          <p className="text-lg text-muted-foreground max-w-4xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-4xl mx-auto mb-8">
             At AutoNateAI, we use critical thinking frameworks, graph theory, and prompt engineering 
             to design intelligent software systems that unlock new opportunities for your business.
           </p>
+          
+          {/* Services Image */}
+          <div className="max-w-4xl mx-auto mb-12">
+            <img 
+              src={servicesImage} 
+              alt="Four business sectors we serve"
+              className="w-full h-64 object-cover rounded-2xl shadow-2xl"
+            />
+          </div>
         </div>
 
         {/* Services Grid */}
